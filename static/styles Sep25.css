@@ -1,0 +1,204 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #E8F5FD; /* Light blue background similar to Twitter */
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #1DA1F2; /* Twitter blue for headings */
+    margin-top: 20px;
+}
+
+/* Form styles */
+form {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px; /* Increased max-width for a larger area */
+}
+
+/* Checkbox table styles */
+#topics {
+    width: 100%;
+    margin-top: 10px;
+    border-collapse: collapse; /* Remove space between table cells */
+}
+
+#topics td {
+    padding: 10px;
+    vertical-align: middle; /* Align the checkbox and label in the middle */
+    text-align: left; /* Align the text to the left */
+}
+
+#topics input[type="checkbox"] {
+    transform: scale(1.5); /* Increase the size of the checkboxes */
+    margin-right: 10px;
+}
+
+#topics label {
+    font-size: 18px;
+    line-height: 1.5;
+    white-space: nowrap; /* Prevent text from wrapping unless necessary */
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button, input[type="submit"] {
+    background-color: #1DA1F2; /* Twitter blue */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #0d8dd7;
+}
+
+/* Note form styles */
+#noteForm textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+#responseMessage {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #1DA1F2; /* Twitter blue */
+}
+
+/* Clearfix for form alignment */
+.clear-fix {
+    clear: both;
+}
+
+/* PDF container styles */
+.pdf-container {
+    display: flex;
+    justify-content: space-between; /* Ensures spacing between the frames */
+    margin-bottom: 20px; /* Adds space below the PDF container */
+}
+
+.pdf-frame {
+    width: 100%; /* Each iframe takes up 48% of the container width */
+    height: 600px; /* Adjust the height to your needs */
+    border: 1px solid #ccc; /* Optional: Add a border to each iframe */
+}
+
+.pdf-container > div {
+    flex: 1; /* Each container div takes equal space */
+    margin-right: 10px; /* Optional: Add space between frames */
+}
+
+.pdf-container > div:last-child {
+    margin-right: 0; /* No margin on the last frame */
+}
+
+/* Warning box styles */
+.warning-box {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 400px;
+    background-color: #ffffff;
+    border: 1px solid #84c6e9;
+    border-radius: 8px;
+    padding: 15px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    animation: fadeIn 0.7s;
+}
+
+.warning-box p {
+    color: #72aec2;
+    margin: 0;
+    padding-right: 20px;
+}
+
+.close-btn {
+    color: #856404;
+    float: right;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #533f03;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Custom alert styles */
+.custom-alert {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+.alert-content {
+    background-color: #ffffff;
+    border: 1px solid #1DA1F2;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 400px;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.alert-content p {
+    color: #000000;  /* Yellow color for the text */
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.alert-content button {
+    background-color: #1DA1F2;  /* Twitter blue */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+.alert-content button:hover {
+    background-color: #0d8dd7;  /* Darker shade of Twitter blue for hover */
+}

@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ bank_label }} Question Maker · Paper Cuts</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body
+    class="page page--builder"
+    data-bank-id="{{ bank_id }}"
+    data-bank-label="{{ bank_label }}"
+    data-image-base="{{ image_base_url }}"
+    data-questions-base="{{ questions_api_base }}"
+    data-search-url="{{ search_url }}"
+    data-notes-url="{{ notes_url }}"
+  >
+    <div class="page__glow"></div>
+    <div class="page__glow page__glow--right"></div>
+
+    <div class="shell">
+      <div class="top-panel">
+        <header class="hero">
+          <div class="hero__eyebrow">Paper Cuts</div>
+          <h1 class="hero__title">{{ bank_label }}</h1>
+          <p class="hero__subtitle">
+            You can create your paper manually, search by keywords to find
+            questions, or use the random selector. Create polished workbooks,
+            worksheets, and test papers in minutes.
+          </p>
+          <div class="hero__cta">
+            <button
+              type="button"
+              class="btn btn--primary"
+              onclick="activateManualTab()"
+            >
+              Start creating
+            </button>
+            <script>
+              function activateManualTab() {
+                const manualTabButton = document.querySelector(
+                  '[data-tab="manualTab"]'
+                );
+                const manualTabPanel = document.getElementById("manualTab");
+                if (!manualTabButton || !manualTabPanel) {
+                  return;
+                }
+                manualTabButton.click();
+                manualTabPanel.scrollIntoView({ behavior: "smooth" });
+              }
+            </script>
+            <button
+              type="button"
+              class="btn btn--ghost"
+              onclick="activateRandomTab()"
+            >
+              Random generator
+            </button>
+
+            <script>
+              function activateRandomTab() {
+                const randomTabButton = document.querySelector(
+                  '[data-tab="randomTab"]'
+                );
+                const randomTabPanel = document.getElementById("randomTab");
+                if (!randomTabButton || !randomTabPanel) {
+                  return;
+                }
+                randomTabButton.click();
+                randomTabPanel.scrollIntoView({ behavior: "smooth" });
+              }
+            </script>
+          </div>
+        </header>
+
+        <nav class="bank-switcher" aria-label="Select question bank">
+          <span class="bank-switcher__label">Switch bank</span>
+          <div class="bank-switcher__options">
+            {% for bank in available_banks %}
+            <a
+              href="{{ url_for('bank_home', bank_id=bank.id) }}"
+              class="bank-switcher__option {% if bank.id == bank_id %}is-active{% endif %}"
+              aria-current="{{ 'page' if bank.id == bank_id }}"
+            >
+              {{ bank.label }}
+            </a>
+            {% endfor %}
+          </div>
+          <a class="bank-switcher__landing" href="{{ url_for('index') }}"
+            >Back to bank overview</a
+          >
+        </nav>
+
+        {% set topic_list = topics | list %}
+        <aside class="stats-card glass" aria-label="Available points by topic">
+          <h2 class="stats-card__title">Key totals</h2>
+          <p class="stats-card__hint">Six busiest topics at a glance.</p>
+          <div class="stats-card__grid">
+            {% for topic in topic_list[:6] %}
+            <div class="stats-card__item">
+              <span class="stats-card__topic">{{ topic }}</span>
+              <span class="stats-card__points"
+                >{{ topic_points[topic] }} pts</span
+              >
+            </div>
+            {% endfor %}
+          </div>
+          {% if topic_list|length > 6 %}
+          <a class="stats-card__more" href="#manualTotals"
+            >View full breakdown →</a
+          >
+          {% endif %}
+        </aside>
+      </div>
+
+      <main class="workspace">
+        <section class="module glass">
+          <div class="module__header">
+            <div class="module__label">Question builder</div>
+            <h2 class="module__title">
+              Choose how you want to assemble a paper.
+            </h2>
+          </div>
+
+          <div class="tab-container">
+            <div class="tab-buttons" role="tablist">
+              <button
+                type="button"
+                class="tab-button active"
+                data-tab="manualTab"
+                role="tab"
+                aria-controls="manualTab"
+                aria-selected="true"
+              >
+                Manual selection
+              </button>
+              <button
+                type="button"
+                class="tab-button"
+                data-tab="randomTab"
+                role="tab"
+                aria-controls="randomTab"
+                aria-selected="false"
+              >
+                Smart randomiser
+              </button>
+            </div>
+
+            <!-- Manual Selection Tab -->
+            <div
+              id="manualTab"
+              class="tab-panel active"
+              role="tabpanel"
+              aria-labelledby="Manual selection"
+            >
+              <form
+                action="{{ generate_pdf_url }}"
+                method="post"
+                id="customQuestionForm"
+                class="form form--manual"
+              >
+                <div id="manualTotals" class="manual-totals">
+                  <details>
+                    <summary>Complete point breakdown</summary>
+                    <ul class="manual-totals__list">
+                      {% for topic in topics %}
+                      <li>
+                        <span>{{ topic }}</span>
+                        <span>{{ topic_points[topic] }} pts</span>
+                      </li>
+                      {% endfor %}
+                    </ul>
+                  </details>
+                </div>
+
+                <div class="manual-search">
+                  <label for="questionSearch" class="label"
+                    >Instant search</label
+                  >
+                  <input
+                    type="text"
+                    id="questionSearch"
+                    class="input"
+                    placeholder="{{ search_placeholder }}"
+                    autocomplete="off"
+                  />
+                  {% if search_suggestions %}
+                  <div
+                    id="searchHints"
+                    class="search-hints"
+                    aria-label="Suggested searches"
+                  >
+                    <span class="search-hints__label">Try:</span>
+                    <div class="search-hints__chips">
+                      {% for hint in search_suggestions %}
+                      <button
+                        type="button"
+                        class="search-hint"
+                        data-term="{{ hint }}"
+                      >
+                        {{ hint }}
+                      </button>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  {% endif %}
+                  <div
+                    id="searchResults"
+                    class="search-results"
+                    aria-live="polite"
+                  ></div>
+                </div>
+
+                {% for topic in topics %}
+                <input type="hidden" name="topics" value="{{ topic }}" />
+                {% endfor %}
+                <input type="hidden" name="points" value="100" />
+                <input type="hidden" name="custom_selection" value="true" />
+
+                <div class="topic-selector">
+                  <h3>Select topics</h3>
+                  <div id="topicCheckboxes" class="topic-selector__list">
+                    {% for topic in topics %}
+                    <div class="topic-checkbox">
+                      <input
+                        type="checkbox"
+                        id="topic_{{ topic }}"
+                        value="{{ topic }}"
+                        onchange="loadQuestionsForTopic(this)"
+                      />
+                      <label for="topic_{{ topic }}"
+                        >{{ topic }}
+                        <span>({{ topic_points[topic] }} pts)</span></label
+                      >
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+
+                <div
+                  id="selectedPointsBar"
+                  class="points-bar"
+                  aria-live="polite"
+                >
+                  <div class="points-bar__left">
+                    <strong id="selectedPoints">Selected: 0 pts</strong>
+                    <span id="selectedGroups" class="points-meta"
+                      >— 0 groups</span
+                    >
+                  </div>
+                  <div class="points-bar__right"></div>
+                </div>
+
+                <div id="allQuestionGroups" class="all-question-groups"></div>
+
+                <div
+                  class="form-actions"
+                  id="generateCustomButton"
+                  style="display: none"
+                >
+                  <input
+                    type="submit"
+                    value="Generate custom PDF"
+                    class="btn btn--primary"
+                  />
+                </div>
+              </form>
+            </div>
+
+            <!-- Random Tab -->
+            <div
+              id="randomTab"
+              class="tab-panel"
+              role="tabpanel"
+              aria-labelledby="Smart randomiser"
+            >
+              <form
+                action="{{ generate_pdf_url }}"
+                method="post"
+                id="questionForm"
+                class="form"
+              >
+                <div class="section-heading">
+                  <h3>Choose up to 5 topics</h3>
+                  <p class="section-heading__hint">
+                    We’ll rotate through them and hit your target points.
+                  </p>
+                </div>
+
+                <div class="topic-grid topic-grid--compact" id="randomTopics">
+                  {% for topic in topics %}
+                  <label class="topic-chip" for="{{ topic }}_random">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name="topics"
+                      value="{{ topic }}"
+                      id="{{ topic }}_random"
+                      {%
+                      if
+                      selected_topics
+                      and
+                      topic
+                      in
+                      selected_topics
+                      %}checked{%
+                      endif
+                      %}
+                    />
+                    <span class="topic-chip__label">{{ topic }}</span>
+                    <span class="topic-chip__meta"
+                      >{{ topic_points[topic] }} pts</span
+                    >
+                  </label>
+                  {% endfor %}
+                </div>
+
+                <label for="points" class="label">Target points</label>
+                <input
+                  type="number"
+                  id="points"
+                  name="points"
+                  class="input"
+                  required
+                />
+
+                <label class="checkbox">
+                  <input
+                    type="checkbox"
+                    id="exclude_unrelated"
+                    name="exclude_unrelated"
+                  />
+                  <span>Exclude unrelated questions</span>
+                </label>
+
+                <div class="form-actions">
+                  <input
+                    type="submit"
+                    value="Generate PDF"
+                    class="btn btn--primary"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="module glass {% if not (question_pdf_url and answer_pdf_url) %}is-hidden{% endif %}"
+          id="previewSection"
+        >
+          <div class="module__header">
+            <div class="module__label">Preview & Export</div>
+            <div class="module__title-row">
+              <h2 class="module__title">
+                Review the paper and the answer key side by side.
+              </h2>
+              <p class="module__meta" id="previewMeta">
+                {% if total_points %}Total: {{ total_points }} pts{% endif %}
+              </p>
+            </div>
+          </div>
+          <div class="pdf-container" aria-live="polite">
+            <div class="pdf-card">
+              <h3 class="pdf-card__title">Question paper</h3>
+              <iframe
+                id="questionPdfFrame"
+                src="{{ question_pdf_url or '' }}"
+                class="pdf-frame"
+                title="Question paper preview"
+              ></iframe>
+            </div>
+            <div class="pdf-card">
+              <h3 class="pdf-card__title">Answer key</h3>
+              <iframe
+                id="answerPdfFrame"
+                src="{{ answer_pdf_url or '' }}"
+                class="pdf-frame"
+                title="Answer key preview"
+              ></iframe>
+            </div>
+          </div>
+        </section>
+
+        <section class="module glass">
+          <div class="module__header">
+            <div class="module__label">Feedback loop</div>
+            <h2 class="module__title">Log any issues or improvement ideas.</h2>
+            <p class="module__caption">
+              Notes help keep the bank sharp for future cohorts.
+            </p>
+          </div>
+          <form id="noteForm" class="form form--stacked">
+            <label for="note" class="label">Your note</label>
+            <textarea name="note" id="note" rows="4" required></textarea>
+            <button
+              type="button"
+              class="btn btn--primary"
+              onclick="submitNote()"
+            >
+              Submit note
+            </button>
+          </form>
+          <div id="responseMessage" class="response"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <script>
+      document.querySelectorAll(".tab-button").forEach((button) => {
+        button.addEventListener("click", () => {
+          const target = button.getAttribute("data-tab");
+
+          document.querySelectorAll(".tab-button").forEach((btn) => {
+            const isActive = btn === button;
+            btn.classList.toggle("active", isActive);
+            btn.setAttribute("aria-selected", isActive ? "true" : "false");
+          });
+
+          document.querySelectorAll(".tab-panel").forEach((panel) => {
+            panel.classList.toggle("active", panel.id === target);
+          });
+        });
+      });
+
+      const maxSelection = 5;
+      const randomTab = document.getElementById("randomTab");
+      const randomCheckboxes = randomTab.querySelectorAll(
+        'input[name="topics"]'
+      );
+
+      randomCheckboxes.forEach((checkbox) => {
+        checkbox.addEventListener("change", function () {
+          const checkedCheckboxes = randomTab.querySelectorAll(
+            'input[name="topics"]:checked'
+          );
+          if (checkedCheckboxes.length > maxSelection) {
+            alert(`You can select up to ${maxSelection} topics only.`);
+            this.checked = false;
+          }
+        });
+      });
+    </script>
+
+    <script>
+      const customAlert = document.getElementById("customAlert");
+      const alertMessage = document.getElementById("alertMessage");
+      const closeAlert = document.getElementById("closeAlert");
+
+      window.showCustomAlert = function (message) {
+        if (!customAlert || !alertMessage) {
+          return;
+        }
+        alertMessage.textContent = message;
+        customAlert.style.display = "block";
+      };
+
+      if (closeAlert) {
+        closeAlert.addEventListener("click", function () {
+          if (customAlert) {
+            customAlert.style.display = "none";
+          }
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        var warningMessage = "{{ warning_message|safe }}";
+
+        if (
+          warningMessage &&
+          warningMessage !== "None" &&
+          warningMessage.trim() !== ""
+        ) {
+          window.addEventListener("load", function () {
+            setTimeout(function () {
+              window.showCustomAlert(warningMessage);
+            }, 500);
+          });
+        }
+      });
+    </script>
+
+    <script>
+      let selectedTopics = new Set();
+      let searchTimeout = null;
+      const bankData = {
+        id: document.body?.dataset.bankId || "",
+        imageBase: document.body?.dataset.imageBase || "",
+        questionsBase: document.body?.dataset.questionsBase || "",
+        searchUrl: document.body?.dataset.searchUrl || "",
+      };
+      const questionsBase = bankData.questionsBase
+        ? bankData.questionsBase.endsWith("/")
+          ? bankData.questionsBase
+          : `${bankData.questionsBase}/`
+        : "/get_questions/";
+
+      function hasAnyGroupSelected() {
+        return (
+          document.querySelectorAll(".question-checkbox:checked").length > 0
+        );
+      }
+
+      function updateGenerateVisibility() {
+        const generateButton = document.getElementById("generateCustomButton");
+        if (generateButton) {
+          generateButton.style.display =
+            selectedTopics.size > 0 || hasAnyGroupSelected() ? "flex" : "none";
+        }
+      }
+
+      window.updateManualGenerate = updateGenerateVisibility;
+
+      async function loadQuestionsForTopic(checkbox) {
+        const topic = checkbox.value;
+        const allQuestionGroups = document.getElementById("allQuestionGroups");
+
+        if (checkbox.checked) {
+          selectedTopics.add(topic);
+          const existing = document.getElementById(`topic_questions_${topic}`);
+          if (existing) {
+            existing.classList.remove("topic-hidden");
+            existing.style.display = "";
+            updateSelectedPoints();
+            updateGenerateVisibility();
+            return;
+          }
+        } else {
+          selectedTopics.delete(topic);
+          const topicDiv = document.getElementById(`topic_questions_${topic}`);
+          if (topicDiv) {
+            topicDiv.classList.add("topic-hidden");
+            topicDiv.style.display = "none";
+            document
+              .querySelectorAll(`.gallery-popover[data-topic="${topic}"]`)
+              .forEach((pop) => {
+                pop.dispatchEvent(new Event("gallery-force-close"));
+                pop.remove();
+              });
+            updateSelectedPoints();
+          }
+          if (window.__galleryState && window.__galleryState.openCount === 0) {
+            document.body.classList.remove("gallery-open");
+          }
+          updateGenerateVisibility();
+          return;
+        }
+
+        try {
+          const response = await fetch(
+            `${questionsBase}${encodeURIComponent(topic)}`
+          );
+          const groups = await response.json();
+
+          const topicDiv = document.createElement("div");
+          topicDiv.id = `topic_questions_${topic}`;
+          topicDiv.className = "topic-questions";
+
+          const topicHeader = document.createElement("div");
+          topicHeader.className = "topic-header";
+          topicHeader.innerHTML = `
+            <div class="topic-title-row">
+              <h3>${topic}</h3>
+              <button type="button" class="collapse-button" onclick="toggleTopicQuestions('${topic}')">
+                Collapse ▼
+              </button>
+            </div>
+          `;
+          topicDiv.appendChild(topicHeader);
+
+          const questionsContainer = document.createElement("div");
+          questionsContainer.id = `${topic}_questions_container`;
+          questionsContainer.className = "questions-container";
+
+          groups.forEach((group, groupIndex) => {
+            const groupDiv = document.createElement("div");
+            groupDiv.className = "question-group";
+
+            const questionCheckbox = document.createElement("input");
+            questionCheckbox.type = "checkbox";
+            questionCheckbox.name = "selected_questions";
+            questionCheckbox.value = `${topic}|${groupIndex}`;
+            questionCheckbox.id = `${topic}_group_${groupIndex}`;
+            questionCheckbox.className = "question-checkbox";
+            questionCheckbox.dataset.points = group.total_points || 0;
+
+            const label = document.createElement("label");
+            label.htmlFor = `${topic}_group_${groupIndex}`;
+            label.innerHTML = `
+              <div class="question-header">
+                <span class="question-title">Question ${groupIndex + 1}</span>
+                <span class="question-points">(${group.total_points} pts)</span>
+                ${
+                  group.tags && group.tags.length
+                    ? group.tags
+                        .map((tag) => `<span class=\"tag\">${tag}</span>`)
+                        .join("")
+                    : ""
+                }
+              </div>
+              <div class="question-parts">
+                ${(group.questions || [])
+                  .map(
+                    (q) =>
+                      `<span class=\"question-part\">${q.question_id} (${q.points} pts)</span>`
+                  )
+                  .join("")}
+              </div>
+            `;
+
+            const galleryTrigger = document.createElement("button");
+            galleryTrigger.type = "button";
+            galleryTrigger.className = "gallery-trigger";
+            galleryTrigger.title = "Preview question images";
+            galleryTrigger.setAttribute("aria-haspopup", "dialog");
+            galleryTrigger.setAttribute("aria-expanded", "false");
+            galleryTrigger.dataset.topic = topic;
+            galleryTrigger.dataset.group = groupIndex;
+            galleryTrigger.dataset.images = JSON.stringify(
+              (group.questions || []).flatMap((q) => q.images || [])
+            );
+            galleryTrigger.textContent = "🖼";
+
+            document
+              .querySelectorAll(
+                `.gallery-popover[data-topic="${topic}"][data-group="${groupIndex}"]`
+              )
+              .forEach((pop) => {
+                pop.dispatchEvent(new Event("gallery-force-close"));
+                pop.remove();
+              });
+
+            const pop = document.createElement("div");
+            pop.className = "gallery-popover";
+            pop.setAttribute("role", "dialog");
+            pop.setAttribute("aria-hidden", "true");
+            pop.dataset.topic = topic;
+            pop.dataset.group = groupIndex;
+            pop.innerHTML = `
+              <div class="gallery-header">
+                <div class="gallery-title">Preview: ${
+                  group.group_id || `Group ${groupIndex + 1}`
+                }</div>
+                <button type="button" class="gallery-close" aria-label="Close">✕</button>
+              </div>
+              <div class="gallery-body"><div class="gallery-grid"></div></div>
+            `;
+
+            groupDiv.appendChild(questionCheckbox);
+            groupDiv.appendChild(label);
+            groupDiv.appendChild(galleryTrigger);
+            groupDiv.appendChild(pop);
+
+            if (window.wireGalleryTrigger) {
+              window.wireGalleryTrigger(galleryTrigger);
+            }
+
+            questionsContainer.appendChild(groupDiv);
+          });
+
+          topicDiv.appendChild(questionsContainer);
+          allQuestionGroups.appendChild(topicDiv);
+        } catch (error) {
+          console.error("Error loading questions:", error);
+        }
+
+        updateSelectedPoints();
+        updateGenerateVisibility();
+      }
+
+      function focusOnGroup(topic, groupIndex) {
+        const targetId = `${topic}_group_${groupIndex}`;
+        let attempts = 0;
+
+        const tryHighlight = () => {
+          const checkbox = document.getElementById(targetId);
+          if (checkbox) {
+            const groupDiv = checkbox.closest(".question-group");
+            if (groupDiv) {
+              groupDiv.classList.add("highlight");
+              groupDiv.scrollIntoView({ behavior: "smooth", block: "start" });
+              setTimeout(() => groupDiv.classList.remove("highlight"), 4000);
+            }
+            return;
+          }
+          attempts += 1;
+          if (attempts < 10) {
+            setTimeout(tryHighlight, 150);
+          }
+        };
+
+        tryHighlight();
+      }
+
+      async function ensureTopicLoaded(topic) {
+        const topicCheckbox = document.getElementById(`topic_${topic}`);
+        if (!topicCheckbox) {
+          return;
+        }
+
+        if (!topicCheckbox.checked) {
+          topicCheckbox.checked = true;
+          await loadQuestionsForTopic(topicCheckbox);
+        } else if (!document.getElementById(`topic_questions_${topic}`)) {
+          await loadQuestionsForTopic(topicCheckbox);
+        }
+      }
+
+      async function performQuestionSearch(term) {
+        const container = document.getElementById("searchResults");
+
+        if (!term || term.length < 2) {
+          container.classList.remove("active");
+          container.innerHTML = "";
+          return;
+        }
+
+        try {
+          const searchEndpoint = bankData.searchUrl || "/search_questions";
+          const response = await fetch(
+            `${searchEndpoint}?q=${encodeURIComponent(term)}`
+          );
+          const results = await response.json();
+
+          if (!Array.isArray(results) || results.length === 0) {
+            container.classList.remove("active");
+            container.innerHTML = "";
+            return;
+          }
+
+          container.innerHTML = "";
+          container.classList.add("active");
+
+          results.forEach((result) => {
+            const resultEl = document.createElement("div");
+            resultEl.className = "search-result";
+
+            const info = document.createElement("div");
+            info.className = "search-result-info";
+            const topicLine = document.createElement("strong");
+            topicLine.textContent = result.topic;
+            const titleLine = document.createElement("span");
+            titleLine.textContent = result.group_title;
+            const summaryLine = document.createElement("span");
+            summaryLine.textContent = result.summary;
+
+            info.appendChild(topicLine);
+            info.appendChild(titleLine);
+            info.appendChild(summaryLine);
+
+            const button = document.createElement("button");
+            button.type = "button";
+            button.textContent = "View";
+            button.addEventListener("click", async () => {
+              await ensureTopicLoaded(result.topic);
+              focusOnGroup(result.topic, result.group_index);
+            });
+
+            resultEl.appendChild(info);
+            resultEl.appendChild(button);
+            container.appendChild(resultEl);
+          });
+        } catch (error) {
+          console.error("Search failed", error);
+          container.classList.remove("active");
+          container.innerHTML = "";
+        }
+      }
+
+      const searchInput = document.getElementById("questionSearch");
+      if (searchInput) {
+        searchInput.addEventListener("input", (event) => {
+          const term = event.target.value.trim();
+          if (searchTimeout) {
+            clearTimeout(searchTimeout);
+          }
+          searchTimeout = setTimeout(() => performQuestionSearch(term), 250);
+        });
+      }
+
+      document.querySelectorAll(".search-hint").forEach((hint) => {
+        hint.addEventListener("click", () => {
+          if (!searchInput) {
+            return;
+          }
+          const term = (hint.dataset.term || hint.textContent || "").trim();
+          if (!term) {
+            return;
+          }
+          searchInput.value = term;
+          performQuestionSearch(term);
+          searchInput.focus({ preventScroll: false });
+        });
+      });
+
+      function toggleTopicQuestions(topic) {
+        const container = document.getElementById(
+          `${topic}_questions_container`
+        );
+        const button =
+          container.previousElementSibling.querySelector(".collapse-button");
+
+        if (container.style.display === "none") {
+          container.style.display = "flex";
+          button.innerHTML = "Collapse ▼";
+        } else {
+          container.style.display = "none";
+          button.innerHTML = "Expand ▲";
+        }
+      }
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const forms = [
+          document.getElementById("questionForm"),
+          document.getElementById("customQuestionForm"),
+        ];
+        const previewSection = document.getElementById("previewSection");
+        const questionFrame = document.getElementById("questionPdfFrame");
+        const answerFrame = document.getElementById("answerPdfFrame");
+        const previewMeta = document.getElementById("previewMeta");
+        const overlay = document.getElementById("loadingOverlay");
+        const overlayMessage = document.getElementById("loadingMessage");
+        const defaultOverlayText = "Generating your paper…";
+
+        const toggleOverlay = (show, message) => {
+          if (!overlay) {
+            return;
+          }
+          if (show) {
+            overlay.classList.add("visible");
+            overlay.setAttribute("aria-hidden", "false");
+            overlay.setAttribute("aria-busy", "true");
+            if (overlayMessage) {
+              overlayMessage.textContent = message || defaultOverlayText;
+            }
+          } else {
+            overlay.classList.remove("visible");
+            overlay.setAttribute("aria-hidden", "true");
+            overlay.removeAttribute("aria-busy");
+            if (overlayMessage) {
+              overlayMessage.textContent = defaultOverlayText;
+            }
+          }
+        };
+
+        const updatePreview = (data) => {
+          if (!previewSection || !questionFrame || !answerFrame) {
+            return;
+          }
+
+          questionFrame.src = data.question_pdf_url || "";
+          answerFrame.src = data.answer_pdf_url || "";
+
+          if (previewMeta) {
+            if (data.total_points) {
+              previewMeta.textContent = `Total: ${data.total_points} pts`;
+            } else {
+              previewMeta.textContent = "";
+            }
+          }
+
+          previewSection.classList.remove("is-hidden");
+          previewSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        };
+
+        const handleSubmit = async (event) => {
+          event.preventDefault();
+          const form = event.target;
+
+          if (form.dataset.submitting === "true") {
+            return;
+          }
+
+          const isCustom = form.id === "customQuestionForm";
+          const loadingText = isCustom
+            ? "Building your custom paper…"
+            : defaultOverlayText;
+
+          form.dataset.submitting = "true";
+          toggleOverlay(true, loadingText);
+
+          const formData = new FormData(form);
+
+          try {
+            const response = await fetch(form.action, {
+              method: form.method || "POST",
+              body: formData,
+              headers: { "X-Requested-With": "XMLHttpRequest" },
+            });
+
+            let data;
+            try {
+              data = await response.json();
+            } catch (parseError) {
+              throw new Error("Unexpected server response. Please try again.");
+            }
+
+            if (!response.ok || !data.success) {
+              throw new Error(
+                (data && data.error) ||
+                  "Something went wrong while generating the paper."
+              );
+            }
+
+            updatePreview(data);
+
+            if (data.warning_message && data.warning_message.trim()) {
+              window.showCustomAlert(data.warning_message);
+            }
+          } catch (error) {
+            console.error("Paper generation failed", error);
+            window.showCustomAlert(
+              error && error.message
+                ? error.message
+                : "Paper generation failed. Please try again."
+            );
+          } finally {
+            toggleOverlay(false);
+            delete form.dataset.submitting;
+          }
+        };
+
+        forms.forEach((form) => {
+          if (form) {
+            form.addEventListener("submit", handleSubmit);
+          }
+        });
+      });
+    </script>
+
+    <div
+      id="loadingOverlay"
+      class="loading-overlay"
+      aria-hidden="true"
+      role="status"
+    >
+      <div class="loading-overlay__inner">
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <p id="loadingMessage">Generating your paper…</p>
+      </div>
+    </div>
+
+    <div id="customAlert" class="custom-alert">
+      <div class="alert-content">
+        <p id="alertMessage"></p>
+        <button id="closeAlert" class="btn btn--primary">Close</button>
+      </div>
+    </div>
+  </body>
+</html>

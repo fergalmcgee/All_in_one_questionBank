@@ -1,0 +1,2321 @@
+{
+  "subject": "Physics",
+  "topics": {
+    "Gravitational fields": [
+      {
+        "group_id": "GF_S23_51_1a",
+        "tags": [
+          "Gravitational fields",
+          "Summer 2023",
+          "Paper 51",
+          "Planning/Analysis"
+        ],
+        "questions": [
+          {
+            "question_id": "GF_S23_51_1a",
+            "question_text": "A wooden cube of mass A is placed on an inclined plane and attached by a string over a pulley to a hanging cylinder of mass B. The plane makes an angle θ to the horizontal. The cylinder is released and the time t to fall a distance d is measured. It is suggested that 2d/t^2 = −(A H sinθ)/(A + B) − (A K)/(A + B), where H and K are constants. Plan a laboratory experiment to test the relationship between t and θ. Draw a diagram of the arrangement, explain the procedure, measurements, control of variables, data analysis to determine H and K, and any safety precautions.",
+            "images": [
+              "images/questions23/GF_S23_51_1a.png",
+              "images/questions23/GF_S23_51_1a2.png",
+              "images/questions23/GF_S23_51_1a3.png",
+              "images/questions23/GF_S23_51_1a4.png"
+            ],
+            "answer_images": [
+              "images/answers23/GF_S23_51_1aA.png",
+              "images/answers23/GF_S23_51_1aA2.png",
+              "images/answers23/GF_S23_51_1aA3.png"
+            ],
+            "points": 15,
+            "paper": "Summer 2023",
+            "component": 51,
+            "difficulty": "hard",
+            "tags": [
+              "Experiment design",
+              "Pulley system",
+              "Inclined plane",
+              "Data analysis"
+            ]
+          }
+        ]
+      },
+      {
+        "group_id": "GF_FM23_42_1",
+        "tags": ["Gravitational fields", "February/March 2023", "Paper 42"],
+        "questions": [
+          {
+            "question_id": "GF_FM23_42_1a",
+            "question_text": "Define gravitational potential at a point.",
+            "images": ["images/questions23/GF_FM23_42_1a.png"],
+            "answer_images": ["images/answers23/GF_FM23_42_1aA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a", "Definition"]
+          },
+          {
+            "question_id": "GF_FM23_42_1bi",
+            "question_text": "Artemis is a spherical isolated planet. From Fig. 1.1 (φ vs distance x), the radius is 4800 km. Determine the value of φ on the surface of Artemis.",
+            "images": [
+              "images/questions23/GF_FM23_42_1bi.png",
+              "images/questions23/GF_FM23_42_1bi2.png"
+            ],
+            "answer_images": ["images/answers23/GF_FM23_42_1biA.png"],
+            "points": 1,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part b(i)", "Reading graph"]
+          },
+          {
+            "question_id": "GF_FM23_42_1bii",
+            "question_text": "Show that the mass of Artemis is 2.55 × 10^24 kg.",
+            "images": ["images/questions23/GF_FM23_42_1bii.png"],
+            "answer_images": ["images/answers23/GF_FM23_42_1biiA.png"],
+            "points": 1,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b(ii)", "Derivation", "Planet mass"]
+          },
+          {
+            "question_id": "GF_FM23_42_1biii",
+            "question_text": "Calculate the gravitational field strength g on the surface of Artemis.",
+            "images": ["images/questions23/GF_FM23_42_1biii.png"],
+            "answer_images": ["images/answers23/GF_FM23_42_1biiiA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b(iii)", "Surface gravity"]
+          },
+          {
+            "question_id": "GF_FM23_42_1biv",
+            "question_text": "A satellite is in an equatorial orbit above Artemis at a height where φ = −0.65 × 10^7 J kg^−1. Calculate the period, in hours, of rotation of Artemis.",
+            "images": ["images/questions23/GF_FM23_42_1biv.png"],
+            "answer_images": ["images/answers23/GF_FM23_42_1bivA.png"],
+            "points": 4,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "hard",
+            "tags": ["Part b(iv)", "Synchronous orbit", "Period"]
+          },
+          {
+            "question_id": "GF_FM23_42_1c",
+            "question_text": "State one similarity and one difference between gravitational potential due to a point mass and electric potential due to a point charge.",
+            "images": ["images/questions23/GF_FM23_42_1c.png"],
+            "answer_images": ["images/answers23/GF_FM23_42_1cA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part c", "Comparison"]
+          }
+        ]
+      },
+      {
+        "group_id": "GF_S23_42_1",
+        "tags": ["Gravitational fields", "Summer 2023", "Paper 42"],
+        "questions": [
+          {
+            "question_id": "GF_S23_42_1a",
+            "question_text": "State Newton’s law of gravitation.",
+            "images": ["images/questions23/GF_S23_42_1a.png"],
+            "answer_images": ["images/answers23/GF_S23_42_1aA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a", "Definition", "Gravitational fields"]
+          },
+          {
+            "question_id": "GF_S23_42_1b",
+            "question_text": "A satellite is in a circular orbit around a planet of mass M (uniform sphere). The orbital radius is R and the period is T. Use Newton’s law of gravitation to show that 4π^2 R^3 = G M T^2.",
+            "images": ["images/questions23/GF_S23_42_1b.png"],
+            "answer_images": ["images/answers23/GF_S23_42_1bA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b", "Derivation", "Orbital motion"]
+          },
+          {
+            "question_id": "GF_S23_42_1c",
+            "question_text": "The Earth is a uniform sphere of mass 5.98 × 10^24 kg and radius 6.37 × 10^6 m. A geostationary satellite orbits the Earth. Use the expression in (b) to determine the height of the satellite above the Earth’s surface.",
+            "images": ["images/questions23/GF_S23_42_1c.png"],
+            "answer_images": ["images/answers23/GF_S23_42_1cA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part c", "Calculation", "Geostationary orbit"]
+          },
+          {
+            "question_id": "GF_S23_42_1di",
+            "question_text": "Another satellite has the same orbital radius and period as in (c). Calculate the angular speed of the satellite. Give a unit with your answer.",
+            "images": ["images/questions23/GF_S23_42_1di.png"],
+            "answer_images": ["images/answers23/GF_S23_42_1diA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part d(i)", "Angular speed"]
+          },
+          {
+            "question_id": "GF_S23_42_1dii",
+            "question_text": "Despite having the same period, the orbit is not geostationary. Suggest two ways the orbit could differ from that in (c).",
+            "images": ["images/questions23/GF_S23_42_1dii.png"],
+            "answer_images": ["images/answers23/GF_S23_42_1diiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part d(ii)", "Qualitative", "Satellite orbits"]
+          }
+        ]
+      },
+      {
+        "group_id": "GF_S23_41_1",
+        "tags": ["Gravitational fields", "Summer 2023", "Paper 41"],
+        "questions": [
+          {
+            "question_id": "GF_S23_41_1a",
+            "question_text": "Define gravitational field.",
+            "images": ["images/questions23/GF_S23_41_1a.png"],
+            "answer_images": ["images/answers23/GF_S23_41_1aA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part a(i)", "Definition", "Gravitational fields"]
+          },
+          {
+            "question_id": "GF_S23_41_1aii",
+            "question_text": "Define electric field.",
+            "images": ["images/questions23/GF_S23_41_1aii.png"],
+            "answer_images": ["images/answers23/GF_S23_41_1aiiA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part a(ii)", "Definition", "Electric fields"]
+          },
+          {
+            "question_id": "GF_S23_41_1aiii",
+            "question_text": "State one similarity and one difference between the gravitational potential due to a point mass and the electric potential due to a point charge.",
+            "images": ["images/questions23/GF_S23_41_1aiii.png"],
+            "answer_images": ["images/answers23/GF_S23_41_1aiiiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part a(iii)", "Potential", "Comparison"]
+          },
+          {
+            "question_id": "GF_S23_41_1bi",
+            "question_text": "An isolated uniform conducting sphere has mass M and charge Q. The gravitational field strength at the surface is g and the electric field strength is E. Show that M/Q = α gE, where α is a constant.",
+            "images": ["images/questions23/GF_S23_41_1bi.png"],
+            "answer_images": ["images/answers23/GF_S23_41_1biA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part b(i)", "Derivation", "Fields on a sphere"]
+          },
+          {
+            "question_id": "GF_S23_41_1bii",
+            "question_text": "Show that the numerical value of α is 1.35 × 10^20 kg^2 C–2.",
+            "images": ["images/questions23/GF_S23_41_1bii.png"],
+            "answer_images": ["images/answers23/GF_S23_41_1biiA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part b(ii)", "Numerical evaluation"]
+          },
+          {
+            "question_id": "GF_S23_41_1ci",
+            "question_text": "Assuming the Earth is a uniform conducting sphere of mass 5.98 × 10^24 kg and carries a charge of –4.80 × 10^5 C evenly distributed on the surface, use (b) to determine the electric field strength at the Earth’s surface. Give a unit with your answer.",
+            "images": ["images/questions23/GF_S23_41_1ci.png"],
+            "answer_images": ["images/answers23/GF_S23_41_1ciA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part c(i)", "Calculation", "Earth field"]
+          },
+          {
+            "question_id": "GF_S23_41_1cii",
+            "question_text": "State how the direction of the electric field at the Earth’s surface compares with the direction of the gravitational field.",
+            "images": ["images/questions23/GF_S23_41_1cii.png"],
+            "answer_images": ["images/answers23/GF_S23_41_1ciiA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part c(ii)", "Field direction"]
+          }
+        ]
+      }
+    ],
+    "Motion in a circle": [
+      {
+        "group_id": "MC_S23_41_2",
+        "tags": ["Motion in a circle", "Summer 2023", "Paper 41"],
+        "questions": [
+          {
+            "question_id": "MC_S23_41_2a",
+            "question_text": "A 0.29 kg steel sphere hangs from a vertical spring. In equilibrium the centre is 8.5 cm below the top. The sphere is then moved so it describes a horizontal circle; the distance from the centre to the top is now 10.8 cm. Explain, with reference to the forces on the sphere, why the spring is longer in circular motion.",
+            "images": [
+              "images/questions23/MC_S23_41_2a.png",
+              "images/questions23/MC_S23_41_2a2.png"
+            ],
+            "answer_images": ["images/answers23/MC_S23_41_2aA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part a", "Forces", "Conical pendulum"]
+          },
+          {
+            "question_id": "MC_S23_41_2bi",
+            "question_text": "The angle between the spring and the vertical is 27°. Show that the radius r of the circle is 4.9 cm.",
+            "images": ["images/questions23/MC_S23_41_2bi.png"],
+            "answer_images": ["images/answers23/MC_S23_41_2biA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part b(i)", "Geometry"]
+          },
+          {
+            "question_id": "MC_S23_41_2bii",
+            "question_text": "Show that the tension in the spring is 3.2 N.",
+            "images": ["images/questions23/MC_S23_41_2bii.png"],
+            "answer_images": ["images/answers23/MC_S23_41_2biiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part b(ii)", "Dynamics"]
+          },
+          {
+            "question_id": "MC_S23_41_2biii",
+            "question_text": "The spring obeys Hooke’s law. Calculate the spring constant, in N cm–1.",
+            "images": ["images/questions23/MC_S23_41_2biii.png"],
+            "answer_images": ["images/answers23/MC_S23_41_2biiiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part b(iii)", "Hooke’s law"]
+          },
+          {
+            "question_id": "MC_S23_41_2ci",
+            "question_text": "Use your values to determine the centripetal acceleration of the sphere.",
+            "images": ["images/questions23/MC_S23_41_2ci.png"],
+            "answer_images": ["images/answers23/MC_S23_41_2ciA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part c(i)", "Centripetal acceleration"]
+          },
+          {
+            "question_id": "MC_S23_41_2cii",
+            "question_text": "Calculate the period of the circular motion of the sphere.",
+            "images": ["images/questions23/MC_S23_41_2cii.png"],
+            "answer_images": ["images/answers23/MC_S23_41_2ciiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part c(ii)", "Period"]
+          }
+        ]
+      }
+    ],
+    "Temperature": [
+      {
+        "group_id": "TMP_S23_41_3",
+        "tags": ["Temperature", "Summer 2023", "Paper 41"],
+        "questions": [
+          {
+            "question_id": "TMP_S23_41_3a",
+            "question_text": "State the reason why two objects that are at the same temperature are described as being in thermal equilibrium.",
+            "images": ["images/questions23/TMP_S23_41_3a.png"],
+            "answer_images": ["images/answers23/TMP_S23_41_3aA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part a", "Thermal equilibrium"]
+          },
+          {
+            "question_id": "TMP_S23_41_3bi",
+            "question_text": "Using Fig. 3.1 (density vs temperature), suggest why mercury is suitable for measuring temperature between 0 °C and 100 °C.",
+            "images": ["images/questions23/TMP_S23_41_3bi.png"],
+            "answer_images": ["images/answers23/TMP_S23_41_3biA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part b(i)", "Thermometry"]
+          },
+          {
+            "question_id": "TMP_S23_41_3bii",
+            "question_text": "Suggest why water is not suitable for measuring temperature over this range using density variation.",
+            "images": ["images/questions23/TMP_S23_41_3bii.png"],
+            "answer_images": ["images/answers23/TMP_S23_41_3biiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part b(ii)", "Thermometry"]
+          },
+          {
+            "question_id": "TMP_S23_41_3ci",
+            "question_text": "A 120 g liquid in a 42 g beaker (c = 0.84 J g–1 K–1) is heated at 810 W. From Fig. 3.2 (temperature vs time), state the boiling temperature of the liquid.",
+            "images": [
+              "images/questions23/TMP_S23_41_3ci.png",
+              "images/questions23/TMP_S23_41_3ci2.png"
+            ],
+            "answer_images": ["images/answers23/TMP_S23_41_3ciA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part c(i)", "Boiling point"]
+          },
+          {
+            "question_id": "TMP_S23_41_3cii",
+            "question_text": "Determine the specific heat capacity of the liquid in J g–1 K–1, using Fig. 3.2 and the given data.",
+            "images": ["images/questions23/TMP_S23_41_3cii.png"],
+            "answer_images": ["images/answers23/TMP_S23_41_3ciiA.png"],
+            "points": 4,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "hard",
+            "tags": ["Part c(ii)", "Specific heat capacity", "Graph reading"]
+          },
+          {
+            "question_id": "TMP_S23_41_3d",
+            "question_text": "The experiment is repeated with water (same mass and power). The specific heat capacity of water is approximately twice that of the liquid and its boiling temperature is 100 °C. On Fig. 3.2, sketch the temperature–time graph for water between t = 0 and 60 s.",
+            "images": ["images/questions23/TMP_S23_41_3d.png"],
+            "answer_images": ["images/answers23/TMP_S23_41_3dA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part d", "Sketch", "Heating curve"]
+          }
+        ]
+      }
+    ],
+    "Ideal gases": [
+      {
+        "group_id": "IG_S23_52_2",
+        "tags": [
+          "Ideal gases",
+          "Summer 2023",
+          "Paper 52",
+          "Analysis & Evaluation"
+        ],
+        "questions": [
+          {
+            "question_id": "IG_S23_52_2a",
+            "question_text": "Air is trapped in a transparent cylinder of diameter d with a movable piston. The distance from the base to the piston is h. The cylinder is placed in water at temperature θ. After the piston stops moving, h is measured and the trapped air volume is V = (π d^2 h) / 4. It is suggested that pV = Y k (θ + Z), where p is atmospheric pressure and k is the Boltzmann constant. A graph of V (y-axis) against θ (x-axis) is plotted. Determine expressions for the gradient and the y-intercept.",
+            "images": ["images/questions23/IG_S23_52_2a.png"],
+            "answer_images": ["images/answers23/IG_S23_52_2aA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 52,
+            "difficulty": "easy",
+            "tags": ["Part a", "Graph interpretation", "Kinetic theory"]
+          },
+          {
+            "question_id": "IG_S23_52_2b",
+            "question_text": "Given θ and h in Table 2.1 and d = (27.9 ± 0.1) mm, calculate and record V / 10^–5 m^3 for each row using V = (π d^2 h)/4. Include absolute uncertainties in V.",
+            "images": ["images/questions23/IG_S23_52_2b.png"],
+            "answer_images": ["images/answers23/IG_S23_52_2bA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 52,
+            "difficulty": "medium",
+            "tags": ["Part b", "Table completion", "Uncertainty"]
+          },
+          {
+            "question_id": "IG_S23_52_2ci",
+            "question_text": "Plot a graph of V / 10^–5 m^3 (y-axis) against θ / °C (x-axis). Include error bars for V.",
+            "images": ["images/questions23/IG_S23_52_2ci.png"],
+            "answer_images": ["images/answers23/IG_S23_52_2ciA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 52,
+            "difficulty": "easy",
+            "tags": ["Part c(i)", "Graphing", "Error bars"]
+          },
+          {
+            "question_id": "IG_S23_52_2cii",
+            "question_text": "Draw the straight line of best fit and a worst acceptable straight line on your graph. Label both lines.",
+            "images": ["images/questions23/IG_S23_52_2cii.png"],
+            "answer_images": ["images/answers23/IG_S23_52_2ciiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 52,
+            "difficulty": "medium",
+            "tags": ["Part c(ii)", "Best/worst fit"]
+          },
+          {
+            "question_id": "IG_S23_52_2ciii",
+            "question_text": "Determine the gradient of the line of best fit. Include the absolute uncertainty in your answer.",
+            "images": [
+              "images/questions23/IG_S23_52_2ciii.png",
+              "images/questions23/IG_S23_52_2ciii3.png"
+            ],
+            "answer_images": ["images/answers23/IG_S23_52_2ciiiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 52,
+            "difficulty": "medium",
+            "tags": ["Part c(iii)", "Gradient", "Uncertainty"]
+          },
+          {
+            "question_id": "IG_S23_52_2civ",
+            "question_text": "Determine the y-intercept of the line of best fit. Include the absolute uncertainty in your answer.",
+            "images": ["images/questions23/IG_S23_52_2civ.png"],
+            "answer_images": ["images/answers23/IG_S23_52_2civA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 52,
+            "difficulty": "medium",
+            "tags": ["Part c(iv)", "Intercept", "Uncertainty"]
+          },
+          {
+            "question_id": "IG_S23_52_2di",
+            "question_text": "Using your answers to (a), (c)(iii) and (c)(iv), determine values of Y and Z. Include appropriate units. Data: p = (1.01 ± 0.01) × 10^5 Pa; k = 1.38 × 10^–23 J K^–1.",
+            "images": ["images/questions23/IG_S23_52_2di.png"],
+            "answer_images": ["images/answers23/IG_S23_52_2diA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 52,
+            "difficulty": "medium",
+            "tags": ["Part d(i)", "Parameter extraction", "Units"]
+          },
+          {
+            "question_id": "IG_S23_52_2dii",
+            "question_text": "Determine the percentage uncertainty in Y.",
+            "images": ["images/questions23/IG_S23_52_2dii.png"],
+            "answer_images": ["images/answers23/IG_S23_52_2diiA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 52,
+            "difficulty": "easy",
+            "tags": ["Part d(ii)", "Percentage uncertainty"]
+          },
+          {
+            "question_id": "IG_S23_52_2e",
+            "question_text": "The experiment is repeated. Determine the temperature θ that gives a value of h = 60.0 mm.",
+            "images": ["images/questions23/IG_S23_52_2e.png"],
+            "answer_images": ["images/answers23/IG_S23_52_2eA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 52,
+            "difficulty": "easy",
+            "tags": ["Part e", "Prediction from graph"]
+          }
+        ]
+      },
+      {
+        "group_id": "IG_S23_42_2",
+        "tags": ["Ideal gases", "Summer 2023", "Paper 42"],
+        "questions": [
+          {
+            "question_id": "IG_S23_42_2ai",
+            "question_text": "State what is meant by an ideal gas.",
+            "images": ["images/questions23/IG_S23_42_2ai.png"],
+            "answer_images": ["images/answers23/IG_S23_42_2aiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a(i)", "Definition", "Kinetic theory"]
+          },
+          {
+            "question_id": "IG_S23_42_2aii",
+            "question_text": "State the temperature, in degrees Celsius, of absolute zero.",
+            "images": ["images/questions23/IG_S23_42_2aii.png"],
+            "answer_images": ["images/answers23/IG_S23_42_2aiiA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a(ii)", "Absolute zero"]
+          },
+          {
+            "question_id": "IG_S23_42_2bi",
+            "question_text": "A sealed vessel contains 0.0424 kg of an ideal gas at 227 °C. The pressure is 1.37 × 10^5 Pa and the volume is 0.640 m^3. Calculate the number of molecules in the vessel.",
+            "images": ["images/questions23/IG_S23_42_2bi.png"],
+            "answer_images": ["images/answers23/IG_S23_42_2biA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b(i)", "Molecules", "nN_A"]
+          },
+          {
+            "question_id": "IG_S23_42_2bii",
+            "question_text": "Calculate the mass of one molecule of the gas.",
+            "images": ["images/questions23/IG_S23_42_2bii.png"],
+            "answer_images": ["images/answers23/IG_S23_42_2biiA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part b(ii)", "Molecular mass"]
+          },
+          {
+            "question_id": "IG_S23_42_2biii",
+            "question_text": "Calculate the root-mean-square (r.m.s.) speed v of the molecules.",
+            "images": ["images/questions23/IG_S23_42_2biii.png"],
+            "answer_images": ["images/answers23/IG_S23_42_2biiiA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b(iii)", "r.m.s. speed", "Kinetic theory"]
+          },
+          {
+            "question_id": "IG_S23_42_2c",
+            "question_text": "The gas is cooled gradually to absolute zero. On a T–axis from 0 to 500 K, sketch the variation of the r.m.s. speed with thermodynamic temperature T.",
+            "images": ["images/questions23/IG_S23_42_2c.png"],
+            "answer_images": ["images/answers23/IG_S23_42_2cA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part c", "Graph sketch", "v_rms vs T"]
+          }
+        ]
+      },
+      {
+        "group_id": "IG_S23_41_4",
+        "tags": ["Ideal gases", "Summer 2023", "Paper 41"],
+        "questions": [
+          {
+            "question_id": "IG_S23_41_4a",
+            "question_text": "State two of the basic assumptions of the kinetic theory of gases.",
+            "images": ["images/questions23/IG_S23_41_4a.png"],
+            "answer_images": ["images/answers23/IG_S23_41_4aA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part a", "Kinetic theory"]
+          },
+          {
+            "question_id": "IG_S23_41_4bi",
+            "question_text": "An ideal gas (amount n) is initially at state X (pressure 2p, volume V). It is cooled at constant volume to Y (pressure p), then heated at constant pressure to Z (volume 2V), and finally returns isothermally to X. Determine an expression for the temperature T at X in terms of n, p and V (identify any additional symbols).",
+            "images": ["images/questions23/IG_S23_41_4bi.png"],
+            "answer_images": ["images/answers23/IG_S23_41_4biA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part b(i)", "pVnRT"]
+          },
+          {
+            "question_id": "IG_S23_41_4bii",
+            "question_text": "On Fig. 4.1, sketch the p–V variation for the three changes. Label Y and Z (X is given).",
+            "images": ["images/questions23/IG_S23_41_4bii.png"],
+            "answer_images": ["images/answers23/IG_S23_41_4biiA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part b(ii)", "p–V diagram"]
+          },
+          {
+            "question_id": "IG_S23_41_4biii",
+            "question_text": "During Y→Z the increase in internal energy is U. During Z→X the work done on the gas is W. Complete Table 4.1 to give, for each change, the increase in internal energy, the thermal energy transferred to the gas and the work done on the gas in terms of p, V, U and W.",
+            "images": ["images/questions23/IG_S23_41_4biii.png"],
+            "answer_images": ["images/answers23/IG_S23_41_4biiiA.png"],
+            "points": 5,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "hard",
+            "tags": ["Part b(iii)", "First law", "Tables"]
+          }
+        ]
+      }
+    ],
+    "Alternating currents": [
+      {
+        "group_id": "AC_S23_42_7",
+        "tags": ["Alternating currents", "Summer 2023", "Paper 42"],
+        "questions": [
+          {
+            "question_id": "AC_S23_42_7ai",
+            "question_text": "Four diodes in a bridge rectifier produce rectification of a sinusoidal input VIN. (i) State the name of the type of rectification produced by a bridge rectifier.",
+            "images": ["images/questions23/AC_S23_42_7ai.png"],
+            "answer_images": ["images/answers23/AC_S23_42_7aiA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a(i)", "Rectification type"]
+          },
+          {
+            "question_id": "AC_S23_42_7aii",
+            "question_text": "(ii) Complete the circuit diagram by adding the three missing diodes, correctly connected.",
+            "images": ["images/questions23/AC_S23_42_7aii.png"],
+            "answer_images": ["images/answers23/AC_S23_42_7aiiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a(ii)", "Circuit drawing"]
+          },
+          {
+            "question_id": "AC_S23_42_7aiii",
+            "question_text": "(iii) Indicate with an arrow the direction of current in the load resistor R.",
+            "images": ["images/questions23/AC_S23_42_7aiii.png"],
+            "answer_images": ["images/answers23/AC_S23_42_7aiiiA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a(iii)", "Conventional current"]
+          },
+          {
+            "question_id": "AC_S23_42_7bi",
+            "question_text": "VIN has amplitude V0 and period T. On the provided axes, sketch VOUT vs t for 0 ≤ t ≤ 2.0T.",
+            "images": [
+              "images/questions23/AC_S23_42_7bi.png",
+              "images/questions23/AC_S23_42_7bi2.png"
+            ],
+            "answer_images": ["images/answers23/AC_S23_42_7biA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b(i)", "Output waveform"]
+          },
+          {
+            "question_id": "AC_S23_42_7bii",
+            "question_text": "On axes of P vs t, sketch the power dissipated in R between t = 0 and t = 2.0T.",
+            "images": ["images/questions23/AC_S23_42_7bii.png"],
+            "answer_images": ["images/answers23/AC_S23_42_7biiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part b(ii)", "Power waveform"]
+          },
+          {
+            "question_id": "AC_S23_42_7biii",
+            "question_text": "Suggest, with a reason, how the r.m.s. value of VOUT compares with the r.m.s. value of VIN.",
+            "images": ["images/questions23/AC_S23_42_7biii.png"],
+            "answer_images": ["images/answers23/AC_S23_42_7biiiA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b(iii)", "RMS comparison"]
+          }
+        ]
+      },
+      {
+        "group_id": "AC_S23_41_5",
+        "tags": ["Alternating currents", "Summer 2023", "Paper 41"],
+        "questions": [
+          {
+            "question_id": "AC_S23_41_5a",
+            "question_text": "In the half-wave rectifier circuit of Fig. 5.1 producing VOUT across a 14 kΩ resistor, add the correct symbol and connection for the missing component.",
+            "images": ["images/questions23/AC_S23_41_5a.png"],
+            "answer_images": ["images/answers23/AC_S23_41_5aA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part a(i)", "Rectification", "Circuit symbol"]
+          },
+          {
+            "question_id": "AC_S23_41_5aii",
+            "question_text": "State the effect on VOUT of including capacitor C in the circuit.",
+            "images": ["images/questions23/AC_S23_41_5aii.png"],
+            "answer_images": ["images/answers23/AC_S23_41_5aiiA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part a(ii)", "Smoothing", "RC"]
+          },
+          {
+            "question_id": "AC_S23_41_5bi",
+            "question_text": "Using Fig. 5.2 for VIN(t), determine the frequency of VIN.",
+            "images": ["images/questions23/AC_S23_41_5bi.png"],
+            "answer_images": ["images/answers23/AC_S23_41_5biA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part b(i)", "Frequency from graph"]
+          },
+          {
+            "question_id": "AC_S23_41_5bii",
+            "question_text": "Show that the time constant τ for the discharge of C through 14 kΩ is 0.038 s.",
+            "images": ["images/questions23/AC_S23_41_5bii.png"],
+            "answer_images": ["images/answers23/AC_S23_41_5biiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part b(ii)", "RC time constant"]
+          },
+          {
+            "question_id": "AC_S23_41_5biii",
+            "question_text": "Calculate the capacitance of C. Give a unit with your answer.",
+            "images": ["images/questions23/AC_S23_41_5biii.png"],
+            "answer_images": ["images/answers23/AC_S23_41_5biiiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part b(iii)", "Capacitance"]
+          },
+          {
+            "question_id": "AC_S23_41_5c",
+            "question_text": "The circuit is modified for full-wave rectification. Suggest, with a reason, how VOUT now varies with time when VIN is as in Fig. 5.2.",
+            "images": ["images/questions23/AC_S23_41_5c.png"],
+            "answer_images": ["images/answers23/AC_S23_41_5cA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part c", "Full-wave rectification"]
+          }
+        ]
+      }
+    ],
+    "Thermodynamics": [
+      {
+        "group_id": "TH_M23_52_1",
+        "tags": [
+          "Thermodynamics",
+          "February/March 2023",
+          "Paper 52",
+          "Planning/Analysis"
+        ],
+        "questions": [
+          {
+            "question_id": "TH_M23_52_1a",
+            "question_text": "An electric pump is placed in a container of liquid. A model wind turbine is connected to the pump by a cable, as shown in Fig. 1.1. The turbine is placed in moving air. As the turbine blades turn, electricity is generated and the pump pushes liquid through a vertical pipe. The frequency of rotation of the turbine blades is f. The height the liquid moves is h. The mass per unit time of the liquid leaving the top of the pipe is Q. It is suggested that Q is related to f by the relationship Q g h = C + D f^3, where g is the acceleration of free fall, and C and D are constants. Plan a laboratory experiment to test the relationship between Q and f. Draw a diagram showing the arrangement of your equipment. Explain how the results could be used to determine values for C and D. In your plan you should include: the procedure to be followed; the measurements to be taken; the control of variables; the analysis of the data; any safety precautions to be taken.",
+            "images": [
+              "images/questions23/TH_M23_52_1a.png",
+              "images/questions23/TH_M23_52_1a2.png",
+              "images/questions23/TH_M23_52_1a3.png"
+            ],
+            "answer_images": [
+              "images/answers23/TH_M23_52_1aA.png",
+              "images/answers23/TH_M23_52_1aA2.png",
+              "images/answers23/TH_M23_52_1aA3.png"
+            ],
+            "points": 15,
+            "paper": "February/March 2023",
+            "component": 52,
+            "difficulty": "hard",
+            "tags": ["Planning task", "Energy transfer", "Fluid flow"]
+          }
+        ]
+      },
+      {
+        "group_id": "TD_FM23_42_2",
+        "tags": ["Thermodynamics", "February/March 2023", "Paper 42"],
+        "questions": [
+          {
+            "question_id": "TD_FM23_42_2a",
+            "question_text": "State what is meant by an ideal gas.",
+            "images": ["images/questions23/TD_FM23_42_2a.png"],
+            "answer_images": ["images/answers23/TD_FM23_42_2aA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a", "Definition"]
+          },
+          {
+            "question_id": "TD_FM23_42_2bi",
+            "question_text": "A fixed amount of helium is rapidly compressed from 1.10 × 10^5 Pa, 540 cm^3 at 27 °C to 6.70 × 10^6 Pa, 30.0 cm^3 at 742 °C (no thermal energy exchange), as in Fig. 2.1. Show that the gas behaves as an ideal gas.",
+            "images": ["images/questions23/TD_FM23_42_2bi.png"],
+            "answer_images": ["images/answers23/TD_FM23_42_2biA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b(i)", "State equation check"]
+          },
+          {
+            "question_id": "TD_FM23_42_2bii",
+            "question_text": "Using ΔU = q + W, explain why the temperature increases.",
+            "images": ["images/questions23/TD_FM23_42_2bii.png"],
+            "answer_images": ["images/answers23/TD_FM23_42_2biiA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part b(ii)", "First law"]
+          },
+          {
+            "question_id": "TD_FM23_42_2biii",
+            "question_text": "EK = 3/2 kT. Calculate the change in total kinetic energy of the helium molecules.",
+            "images": ["images/questions23/TD_FM23_42_2biii.png"],
+            "answer_images": ["images/answers23/TD_FM23_42_2biiiA.png"],
+            "points": 3,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b(iii)", "Molecular kinetic energy"]
+          },
+          {
+            "question_id": "TD_FM23_42_2c",
+            "question_text": "24.0 g of nitrogen gas at 27 °C is cooled to −196 °C and assumed to fully liquefy. Given c_gas = 1.04 kJ kg^−1 K^−1 and L_v = 199 kJ kg^−1, determine the thermal energy removed, in kJ.",
+            "images": ["images/questions23/TD_FM23_42_2c.png"],
+            "answer_images": ["images/answers23/TD_FM23_42_2cA.png"],
+            "points": 3,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part c", "Cooling and condensation"]
+          }
+        ]
+      },
+      {
+        "group_id": "TD_S23_42_3",
+        "tags": ["Thermodynamics", "Summer 2023", "Paper 42"],
+        "questions": [
+          {
+            "question_id": "TD_S23_42_3a",
+            "question_text": "State the first law of thermodynamics and identify the meaning of any symbols used.",
+            "images": ["images/questions23/TD_S23_42_3a.png"],
+            "answer_images": ["images/answers23/TD_S23_42_3aA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a", "First law"]
+          },
+          {
+            "question_id": "TD_S23_42_3bi",
+            "question_text": "An ideal-gas cycle ABCDA is shown on a p–V diagram. Complete a table for changes A→B and B→C by indicating: change in internal energy (decrease/no change/increase) and work done on gas (negative/zero/positive).",
+            "images": ["images/questions23/TD_S23_42_3bi.png"],
+            "answer_images": ["images/answers23/TD_S23_42_3biA.png"],
+            "points": 4,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b(i)", "Cycle analysis", "p–V diagram"]
+          },
+          {
+            "question_id": "TD_S23_42_3bii",
+            "question_text": "Using the first law, describe and explain the energy transfers for one complete cycle ABCDA.",
+            "images": ["images/questions23/TD_S23_42_3bii.png"],
+            "answer_images": ["images/answers23/TD_S23_42_3biiA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b(ii)", "Energy transfers", "Cyclic process"]
+          }
+        ]
+      }
+    ],
+    "Oscillations": [
+      {
+        "group_id": "OSC_FM23_42_3",
+        "tags": ["Oscillations", "February/March 2023", "Paper 42"],
+        "questions": [
+          {
+            "question_id": "OSC_FM23_42_3a",
+            "question_text": "An object on a vertical spring oscillates in SHM. Fig. 3.2 shows E vs displacement x with lines P, Q, R. State which energy each of P, Q and R represents.",
+            "images": [
+              "images/questions23/OSC_FM23_42_3a.png",
+              "images/questions23/OSC_FM23_42_3a2.png",
+              "images/questions23/OSC_FM23_42_3a3.png"
+            ],
+            "answer_images": ["images/answers23/OSC_FM23_42_3aA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a", "Identify energies"]
+          },
+          {
+            "question_id": "OSC_FM23_42_3b",
+            "question_text": "The object has mass 130 g. Determine the period of the oscillations.",
+            "images": ["images/questions23/OSC_FM23_42_3b.png"],
+            "answer_images": ["images/answers23/OSC_FM23_42_3bA.png"],
+            "points": 4,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b", "Period from energy graph"]
+          },
+          {
+            "question_id": "OSC_FM23_42_3ci",
+            "question_text": "State the cause of damping.",
+            "images": ["images/questions23/OSC_FM23_42_3ci.png"],
+            "answer_images": ["images/answers23/OSC_FM23_42_3ciA.png"],
+            "points": 1,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part c(i)", "Damping cause"]
+          },
+          {
+            "question_id": "OSC_FM23_42_3cii",
+            "question_text": "A light card is attached. With the same initial amplitude, the total energy decreases by 8.0% each cycle. Determine the decrease in total energy, in mJ, by the end of the first 6 complete oscillations.",
+            "images": ["images/questions23/OSC_FM23_42_3cii.png"],
+            "answer_images": ["images/answers23/OSC_FM23_42_3ciiA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part c(ii)", "Energy decay"]
+          },
+          {
+            "question_id": "OSC_FM23_42_3ciii",
+            "question_text": "State, with a reason, the type of damping introduced by the card.",
+            "images": ["images/questions23/OSC_FM23_42_3ciii.png"],
+            "answer_images": ["images/answers23/OSC_FM23_42_3ciiiA.png"],
+            "points": 1,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part c(iii)", "Damping type"]
+          }
+        ]
+      },
+      {
+        "group_id": "OSC_S23_42_4",
+        "tags": ["Oscillations", "Summer 2023", "Paper 42"],
+        "questions": [
+          {
+            "question_id": "OSC_S23_42_4ai",
+            "question_text": "A steel sphere oscillates vertically on a spring. Its velocity v (cm s–1) varies with displacement x (cm) as v = ± 9.7 (11.6 − x^2)^{1/2}. Calculate the frequency of the oscillations.",
+            "images": ["images/questions23/OSC_S23_42_4ai.png"],
+            "answer_images": ["images/answers23/OSC_S23_42_4aiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part a(i)", "Frequency", "SHM"]
+          },
+          {
+            "question_id": "OSC_S23_42_4aii",
+            "question_text": "Show that the amplitude of the oscillations is 3.4 cm.",
+            "images": ["images/questions23/OSC_S23_42_4aii.png"],
+            "answer_images": ["images/answers23/OSC_S23_42_4aiiA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a(ii)", "Amplitude", "SHM"]
+          },
+          {
+            "question_id": "OSC_S23_42_4aiii",
+            "question_text": "Calculate the maximum acceleration a0 of the sphere.",
+            "images": ["images/questions23/OSC_S23_42_4aiii.png"],
+            "answer_images": ["images/answers23/OSC_S23_42_4aiiiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part a(iii)", "Max acceleration"]
+          },
+          {
+            "question_id": "OSC_S23_42_4b",
+            "question_text": "On axes of a vs x, sketch the variation of the acceleration a with displacement x (scales indicated).",
+            "images": ["images/questions23/OSC_S23_42_4b.png"],
+            "answer_images": ["images/answers23/OSC_S23_42_4bA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part b", "Graph sketch", "a–x in SHM"]
+          },
+          {
+            "question_id": "OSC_S23_42_4c",
+            "question_text": "Describe, without calculation, the interchange between potential and kinetic energy during the oscillations.",
+            "images": ["images/questions23/OSC_S23_42_4c.png"],
+            "answer_images": ["images/answers23/OSC_S23_42_4cA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part c", "Energy transfer", "Qualitative"]
+          }
+        ]
+      }
+    ],
+    "Electric fields": [
+      {
+        "group_id": "EF_FM23_42_4",
+        "tags": ["Electric fields", "February/March 2023", "Paper 42"],
+        "questions": [
+          {
+            "question_id": "EF_FM23_42_4a",
+            "question_text": "State Coulomb’s law.",
+            "images": ["images/questions23/EF_FM23_42_4a.png"],
+            "answer_images": ["images/answers23/EF_FM23_42_4aA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a", "Definition"]
+          },
+          {
+            "question_id": "EF_FM23_42_4bi",
+            "question_text": "Two charged spheres: X (+96 nC) on a stand; Y (+64 nC) suspended by a 1.2 m thread. Centres are 0.080 m apart horizontally (Fig. 4.1). On Fig. 4.2, draw and label all forces on Y.",
+            "images": [
+              "images/questions23/EF_FM23_42_4bi.png",
+              "images/questions23/EF_FM23_42_4bi2.png"
+            ],
+            "answer_images": ["images/answers23/EF_FM23_42_4biA.png"],
+            "points": 1,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part b(i)", "Free-body diagram"]
+          },
+          {
+            "question_id": "EF_FM23_42_4bii",
+            "question_text": "Determine the mass of sphere Y.",
+            "images": ["images/questions23/EF_FM23_42_4bii.png"],
+            "answer_images": ["images/answers23/EF_FM23_42_4biiA.png"],
+            "points": 4,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "hard",
+            "tags": ["Part b(ii)", "Equilibrium", "Coulomb force"]
+          },
+          {
+            "question_id": "EF_FM23_42_4biii",
+            "question_text": "Calculate the total electric potential energy between X and Y.",
+            "images": ["images/questions23/EF_FM23_42_4biii.png"],
+            "answer_images": ["images/answers23/EF_FM23_42_4biiiA.png"],
+            "points": 1,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b(iii)", "Potential energy"]
+          },
+          {
+            "question_id": "EF_FM23_42_4ci",
+            "question_text": "Between parallel plates P and Q (separation 18 mm) with 250 V across them, state the direction of the electric force on an electron entering the region.",
+            "images": ["images/questions23/EF_FM23_42_4ci.png"],
+            "answer_images": ["images/answers23/EF_FM23_42_4ciA.png"],
+            "points": 1,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part c(i)", "Force direction"]
+          },
+          {
+            "question_id": "EF_FM23_42_4cii",
+            "question_text": "Determine the magnitude of the electric force on the electron.",
+            "images": ["images/questions23/EF_FM23_42_4cii.png"],
+            "answer_images": ["images/answers23/EF_FM23_42_4ciiA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part c(ii)", "F = qE"]
+          },
+          {
+            "question_id": "EF_FM23_42_4ciii",
+            "question_text": "Explain why the electron does not follow a circular path.",
+            "images": ["images/questions23/EF_FM23_42_4ciii.png"],
+            "answer_images": ["images/answers23/EF_FM23_42_4ciiiA.png"],
+            "points": 1,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part c(iii)", "Uniform electric field"]
+          }
+        ]
+      }
+    ],
+    "Capacitance": [
+      {
+        "group_id": "CAP_S23_51_2",
+        "tags": [
+          "Capacitance",
+          "Summer 2023",
+          "Paper 51",
+          "Analysis & Evaluation"
+        ],
+        "questions": [
+          {
+            "question_id": "CAP_S23_51_2a",
+            "question_text": "In the circuit of two capacitors CP and CQ discharging through resistor R, it is suggested that ln(V/V0) = −T/(CR). A graph of T (y-axis) against C (x-axis) is plotted. Determine an expression for the gradient.",
+            "images": ["images/questions23/CAP_S23_51_2a.png"],
+            "answer_images": ["images/answers23/CAP_S23_51_2aA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 51,
+            "difficulty": "easy",
+            "tags": ["Graph gradient", "RC discharge"]
+          },
+          {
+            "question_id": "CAP_S23_51_2b",
+            "question_text": "Given CP, CQ and two measurements of t in Table 2.1 and that the combined capacitance is C = (CP CQ)/(CP + CQ), calculate and record C / 10^−4 F and the mean time T / s for each row. Include absolute uncertainties in T.",
+            "images": ["images/questions23/CAP_S23_51_2b.png"],
+            "answer_images": ["images/answers23/CAP_S23_51_2bA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 51,
+            "difficulty": "medium",
+            "tags": ["Table completion", "Uncertainty"]
+          },
+          {
+            "question_id": "CAP_S23_51_2ci",
+            "question_text": "Plot a graph of T / s (y-axis) against C / 10^−4 F (x-axis). Include error bars for T.",
+            "images": ["images/questions23/CAP_S23_51_2ci.png"],
+            "answer_images": ["images/answers23/CAP_S23_51_2ciA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 51,
+            "difficulty": "easy",
+            "tags": ["Graphing", "Error bars"]
+          },
+          {
+            "question_id": "CAP_S23_51_2cii",
+            "question_text": "Draw the straight line of best fit and a worst acceptable straight line on your graph. Label both lines.",
+            "images": ["images/questions23/CAP_S23_51_2cii.png"],
+            "answer_images": ["images/answers23/CAP_S23_51_2ciiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 51,
+            "difficulty": "medium",
+            "tags": ["Best fit line", "Worst fit"]
+          },
+          {
+            "question_id": "CAP_S23_51_2ciii",
+            "question_text": "Determine the gradient of the line of best fit. Include the absolute uncertainty in your answer.",
+            "images": [
+              "images/questions23/CAP_S23_51_2ciii.png",
+              "images/questions23/CAP_S23_51_2ciii2.png"
+            ],
+            "answer_images": ["images/answers23/CAP_S23_51_2ciiiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 51,
+            "difficulty": "medium",
+            "tags": ["Gradient", "Uncertainty"]
+          },
+          {
+            "question_id": "CAP_S23_51_2d",
+            "question_text": "Given V0 = (4.8 ± 0.1) V and V = (2.4 ± 0.1) V, calculate ln(V/V0). Include the absolute uncertainty.",
+            "images": ["images/questions23/CAP_S23_51_2d.png"],
+            "answer_images": ["images/answers23/CAP_S23_51_2dA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 51,
+            "difficulty": "easy",
+            "tags": ["Log calculation", "Uncertainty"]
+          },
+          {
+            "question_id": "CAP_S23_51_2ei",
+            "question_text": "Using your answers to (a), (c)(iii) and (d), determine the value of R. Include an appropriate unit.",
+            "images": ["images/questions23/CAP_S23_51_2ei.png"],
+            "answer_images": ["images/answers23/CAP_S23_51_2eiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 51,
+            "difficulty": "medium",
+            "tags": ["Resistance from slope", "RC analysis"]
+          },
+          {
+            "question_id": "CAP_S23_51_2eii",
+            "question_text": "Determine the percentage uncertainty in R.",
+            "images": ["images/questions23/CAP_S23_51_2eii.png"],
+            "answer_images": ["images/answers23/CAP_S23_51_2eiiA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 51,
+            "difficulty": "easy",
+            "tags": ["Percentage uncertainty"]
+          },
+          {
+            "question_id": "CAP_S23_51_2f",
+            "question_text": "The experiment is repeated. Determine the value of C that gives T = 60.0 s. Include the absolute uncertainty.",
+            "images": ["images/questions23/CAP_S23_51_2f.png"],
+            "answer_images": ["images/answers23/CAP_S23_51_2fA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 51,
+            "difficulty": "medium",
+            "tags": ["Prediction from graph", "Uncertainty"]
+          }
+        ]
+      },
+      {
+        "group_id": "CAP_FM23_42_5",
+        "tags": ["Capacitance", "February/March 2023", "Paper 42"],
+        "questions": [
+          {
+            "question_id": "CAP_FM23_42_5a",
+            "question_text": "Circuit of Fig. 5.1 charges a capacitor (12 V source, resistor R, two-way switch). From the graph of ln(Q/μC) vs t (Fig. 5.2), show that the capacitance is 1.5 μF.",
+            "images": [
+              "images/questions23/CAP_FM23_42_5a.png",
+              "images/questions23/CAP_FM23_42_5a2.png"
+            ],
+            "answer_images": ["images/answers23/CAP_FM23_42_5aA.png"],
+            "points": 3,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part a", "Exponential discharge"]
+          },
+          {
+            "question_id": "CAP_FM23_42_5b",
+            "question_text": "Determine the resistance R.",
+            "images": ["images/questions23/CAP_FM23_42_5b.png"],
+            "answer_images": ["images/answers23/CAP_FM23_42_5bA.png"],
+            "points": 3,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b", "Time constant"]
+          },
+          {
+            "question_id": "CAP_FM23_42_5c",
+            "question_text": "Calculate the energy stored in the capacitor at t = 0.",
+            "images": ["images/questions23/CAP_FM23_42_5c.png"],
+            "answer_images": ["images/answers23/CAP_FM23_42_5cA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part c", "Energy of capacitor"]
+          },
+          {
+            "question_id": "CAP_FM23_42_5d",
+            "question_text": "A second identical resistor is connected in parallel with R. On Fig. 5.2, sketch ln(Q/μC) vs t for 0 ≤ t ≤ 5.0 s for the new discharge.",
+            "images": ["images/questions23/CAP_FM23_42_5d.png"],
+            "answer_images": ["images/answers23/CAP_FM23_42_5dA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part d", "Sketch", "Changed τ"]
+          }
+        ]
+      },
+      {
+        "group_id": "CAP_S23_42_5",
+        "tags": ["Capacitance", "Summer 2023", "Paper 42"],
+        "questions": [
+          {
+            "question_id": "CAP_S23_42_5ai",
+            "question_text": "Two capacitors A (C) and B (3C) with a two-way switch S and e.m.f. V are arranged as shown. With S at X, B is uncharged. State expressions, in terms of V and C, for: (i) the initial charge QA on A,",
+            "images": ["images/questions23/CAP_S23_42_5ai.png"],
+            "answer_images": ["images/answers23/CAP_S23_42_5aiA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a(i)", "Charge on capacitor"]
+          },
+          {
+            "question_id": "CAP_S23_42_5aii",
+            "question_text": "(ii) the initial energy EA stored in A.",
+            "images": ["images/questions23/CAP_S23_42_5aii.png"],
+            "answer_images": ["images/answers23/CAP_S23_42_5aiiA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a(ii)", "Energy on capacitor"]
+          },
+          {
+            "question_id": "CAP_S23_42_5bi",
+            "question_text": "S is moved to Y. State and explain what happens to the charge that was initially on the plates of capacitor A.",
+            "images": ["images/questions23/CAP_S23_42_5bi.png"],
+            "answer_images": ["images/answers23/CAP_S23_42_5biA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b(i)", "Charge redistribution"]
+          },
+          {
+            "question_id": "CAP_S23_42_5bii",
+            "question_text": "Show that the final p.d. VB across B is VB = V/4. Explain your reasoning.",
+            "images": ["images/questions23/CAP_S23_42_5bii.png"],
+            "answer_images": ["images/answers23/CAP_S23_42_5biiA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b(ii)", "Voltage sharing"]
+          },
+          {
+            "question_id": "CAP_S23_42_5biii",
+            "question_text": "Determine an expression, in terms of V and C, for the decrease ΔE in the total energy stored in the capacitors after the switch is moved.",
+            "images": ["images/questions23/CAP_S23_42_5biii.png"],
+            "answer_images": ["images/answers23/CAP_S23_42_5biiiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "hard",
+            "tags": ["Part b(iii)", "Energy loss"]
+          }
+        ]
+      }
+    ],
+    "Magnetic fields": [
+      {
+        "group_id": "MF_S23_52_1",
+        "tags": [
+          "Magnetic fields",
+          "Summer 2023",
+          "Paper 52",
+          "Planning/Analysis"
+        ],
+        "questions": [
+          {
+            "question_id": "MF_S23_52_1a",
+            "question_text": "Two coils P and Q are placed close together. Coil P is in series with a resistor of resistance R and has an applied alternating magnetic flux of frequency f. An e.m.f. E is induced across the terminals of coil Q. It is suggested that E = 2π f M (V / (R + k)), where V is the potential difference across the resistor and coil P, and k and M are constants. Plan a laboratory experiment to test the relationship between E and R. Draw a diagram of the arrangement, describe the procedure, measurements, control of variables, analysis to determine k and M, and state any safety precautions.",
+            "images": [
+              "images/questions23/MF_S23_52_1a.png",
+              "images/questions23/MF_S23_52_1a2.png",
+              "images/questions23/MF_S23_52_1a3.png"
+            ],
+            "answer_images": [
+              "images/answers23/MF_S23_52_1aA.png",
+              "images/answers23/MF_S23_52_1aA2.png",
+              "images/answers23/MF_S23_52_1aA3.png"
+            ],
+            "points": 15,
+            "paper": "Summer 2023",
+            "component": 52,
+            "difficulty": "hard",
+            "tags": [
+              "Experiment design",
+              "Mutual induction",
+              "AC circuits",
+              "Planning"
+            ]
+          }
+        ]
+      },
+      {
+        "group_id": "MF_FM23_42_6",
+        "tags": ["Magnetic fields", "February/March 2023", "Paper 42"],
+        "questions": [
+          {
+            "question_id": "MF_FM23_42_6a",
+            "question_text": "A Hall probe gives zero Hall voltage in one orientation but maximum when rotated. Explain these observations.",
+            "images": ["images/questions23/MF_FM23_42_6a.png"],
+            "answer_images": ["images/answers23/MF_FM23_42_6aA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a", "Hall effect geometry"]
+          },
+          {
+            "question_id": "MF_FM23_42_6bi",
+            "question_text": "In VH = BI/(ntq), state the meaning of n.",
+            "images": ["images/questions23/MF_FM23_42_6bi.png"],
+            "answer_images": ["images/answers23/MF_FM23_42_6biA.png"],
+            "points": 1,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part b(i)", "Charge carrier density"]
+          },
+          {
+            "question_id": "MF_FM23_42_6bii",
+            "question_text": "Explain why a Hall probe is made from silicon rather than copper.",
+            "images": ["images/questions23/MF_FM23_42_6bii.png"],
+            "answer_images": ["images/answers23/MF_FM23_42_6biiA.png"],
+            "points": 1,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part b(ii)", "Material choice"]
+          },
+          {
+            "question_id": "MF_FM23_42_6c",
+            "question_text": "The probe reads 24 mV in B = 32 mT at a fixed angle. In a varying field (same angle), VH vs t is given in Fig. 6.1 (0–8.6 s). A coil with 780 turns and diameter 3.6 cm has its plane ⟂ field lines. Calculate the magnitude of the maximum e.m.f. induced in the coil between t = 0 and 8.6 s.",
+            "images": ["images/questions23/MF_FM23_42_6c.png"],
+            "answer_images": ["images/answers23/MF_FM23_42_6cA.png"],
+            "points": 4,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "hard",
+            "tags": ["Part c", "Faraday’s law", "Coil e.m.f."]
+          }
+        ]
+      },
+      {
+        "group_id": "MF_S23_42_6",
+        "tags": ["Magnetic fields", "Summer 2023", "Paper 42"],
+        "questions": [
+          {
+            "question_id": "MF_S23_42_6ai",
+            "question_text": "A heavy aluminium disc (radius 0.36 m) rotates with a vehicle wheel. A uniform magnetic field of flux density 0.17 T is switched on, perpendicular to the disc. (i) Define magnetic flux.",
+            "images": ["images/questions23/MF_S23_42_6ai.png"],
+            "answer_images": ["images/answers23/MF_S23_42_6aiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a(i)", "Definition", "Magnetic flux"]
+          },
+          {
+            "question_id": "MF_S23_42_6aii",
+            "question_text": "(ii) Calculate the magnetic flux through the disc. Give a unit with your answer.",
+            "images": ["images/questions23/MF_S23_42_6aii.png"],
+            "answer_images": ["images/answers23/MF_S23_42_6aiiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part a(ii)", "Φ = BA"]
+          },
+          {
+            "question_id": "MF_S23_42_6b",
+            "question_text": "The disc rotates at 25 rev s–1. Calculate the magnitude of the e.m.f. induced between axle and rim.",
+            "images": ["images/questions23/MF_S23_42_6b.png"],
+            "answer_images": ["images/answers23/MF_S23_42_6bA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b", "Unipolar generator", "Induced e.m.f."]
+          },
+          {
+            "question_id": "MF_S23_42_6c",
+            "question_text": "The axle and rim are connected to an external circuit that stores rotational energy for future use. Using Lenz’s law, determine whether the current in the disc is from rim to axle or axle to rim, and explain.",
+            "images": ["images/questions23/MF_S23_42_6c.png"],
+            "answer_images": ["images/answers23/MF_S23_42_6cA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "hard",
+            "tags": ["Part c", "Lenz’s law", "Direction of current"]
+          }
+        ]
+      },
+      {
+        "group_id": "MF_S23_41_6",
+        "tags": ["Magnetic fields", "Summer 2023", "Paper 41"],
+        "questions": [
+          {
+            "question_id": "MF_S23_41_6a",
+            "question_text": "State what is meant by a magnetic field.",
+            "images": ["images/questions23/MF_S23_41_6a.png"],
+            "answer_images": ["images/answers23/MF_S23_41_6aA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part a", "Definition"]
+          },
+          {
+            "question_id": "MF_S23_41_6b",
+            "question_text": "A long straight wire P carries current into the page. On Fig. 6.1, draw four field lines representing the magnetic field around P due to the current.",
+            "images": ["images/questions23/MF_S23_41_6b.png"],
+            "answer_images": ["images/answers23/MF_S23_41_6bA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part b", "Field lines", "Right-hand rule"]
+          },
+          {
+            "question_id": "MF_S23_41_6ci",
+            "question_text": "A parallel wire Q (5.0 A) carries current out of the page. The flux density at Q due to P is 2.6 mT. Calculate the magnetic force per unit length on Q due to P.",
+            "images": ["images/questions23/MF_S23_41_6ci.png"],
+            "answer_images": ["images/answers23/MF_S23_41_6ciA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part c(i)", "Force on current", "BIL"]
+          },
+          {
+            "question_id": "MF_S23_41_6cii",
+            "question_text": "State the direction of the force exerted on wire Q by wire P.",
+            "images": ["images/questions23/MF_S23_41_6cii.png"],
+            "answer_images": ["images/answers23/MF_S23_41_6ciiA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part c(ii)", "Direction"]
+          },
+          {
+            "question_id": "MF_S23_41_6ciii",
+            "question_text": "The flux density at P due to Q is 1.5 mT. Determine the magnitude of the current in P and explain your reasoning.",
+            "images": ["images/questions23/MF_S23_41_6ciii.png"],
+            "answer_images": ["images/answers23/MF_S23_41_6ciiiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part c(iii)", "Mutual forces", "Current from B"]
+          }
+        ]
+      }
+    ],
+    "Quantum physics": [
+      {
+        "group_id": "QP_FM23_42_7",
+        "tags": ["Quantum physics", "February/March 2023", "Paper 42"],
+        "questions": [
+          {
+            "question_id": "QP_FM23_42_7a",
+            "question_text": "White light passes through a cloud of cool gas; the transmitted spectrum shows dark lines. Explain why these dark lines occur.",
+            "images": ["images/questions23/QP_FM23_42_7a.png"],
+            "answer_images": ["images/answers23/QP_FM23_42_7aA.png"],
+            "points": 4,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part a", "Absorption spectrum"]
+          },
+          {
+            "question_id": "QP_FM23_42_7b",
+            "question_text": "For an isolated hydrogen atom, wavelengths for transitions to n = 2 are 412, 435, 488, 658 nm; E2 = −3.40 eV. Calculate the energy, in J, of level n = 3.",
+            "images": [
+              "images/questions23/QP_FM23_42_7b.png",
+              "images/questions23/QP_FM23_42_7b2.png"
+            ],
+            "answer_images": ["images/answers23/QP_FM23_42_7bA.png"],
+            "points": 3,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b", "Energy levels", "Hydrogen"]
+          }
+        ]
+      },
+      {
+        "group_id": "QP_S23_42_8",
+        "tags": ["Quantum physics", "Summer 2023", "Paper 42"],
+        "questions": [
+          {
+            "question_id": "QP_S23_42_8a",
+            "question_text": "The lowest four energy levels of an isolated atom are shown. Explain, with reference to photons, why each transition corresponds to a single frequency of electromagnetic radiation.",
+            "images": [
+              "images/questions23/QP_S23_42_8a.png",
+              "images/questions23/QP_S23_42_8a2.png"
+            ],
+            "answer_images": ["images/answers23/QP_S23_42_8aA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a", "Photon energy", "Spectral lines"]
+          },
+          {
+            "question_id": "QP_S23_42_8bi",
+            "question_text": "On the emission spectrum axis, draw and label line A for the transition n = 2 → n = 1.",
+            "images": ["images/questions23/QP_S23_42_8bi.png"],
+            "answer_images": ["images/answers23/QP_S23_42_8biA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part b(i)", "Line placement"]
+          },
+          {
+            "question_id": "QP_S23_42_8bii",
+            "question_text": "On the same axis, draw and label line B for the transition n = 3 → n = 2.",
+            "images": ["images/questions23/QP_S23_42_8bii.png"],
+            "answer_images": ["images/answers23/QP_S23_42_8biiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part b(ii)", "Line placement"]
+          },
+          {
+            "question_id": "QP_S23_42_8c",
+            "question_text": "The frequency of line A is fA and of line B is fB. The ground-state energy is E1. Determine an expression, in terms of fA, fB, E1 and Planck’s constant h, for the energy E3 of the level n = 3.",
+            "images": ["images/questions23/QP_S23_42_8c.png"],
+            "answer_images": ["images/answers23/QP_S23_42_8cA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part c", "Energy levels", "hf relations"]
+          }
+        ]
+      },
+      {
+        "group_id": "QP_S23_41_7",
+        "tags": ["Quantum physics", "Summer 2023", "Paper 41"],
+        "questions": [
+          {
+            "question_id": "QP_S23_41_7a",
+            "question_text": "State what is meant by the de Broglie wavelength.",
+            "images": ["images/questions23/QP_S23_41_7a.png"],
+            "answer_images": ["images/answers23/QP_S23_41_7aA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part a", "Definition", "Wave–particle"]
+          },
+          {
+            "question_id": "QP_S23_41_7bi",
+            "question_text": "Electrons accelerated to a graphite crystal form a pattern on a fluorescent screen (Fig. 7.2). State the name of the phenomenon demonstrated by the pattern.",
+            "images": [
+              "images/questions23/QP_S23_41_7bi.png",
+              "images/questions23/QP_S23_41_7bi2.png",
+              "images/questions23/QP_S23_41_7bi3.png"
+            ],
+            "answer_images": ["images/answers23/QP_S23_41_7biA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part b(i)", "Diffraction"]
+          },
+          {
+            "question_id": "QP_S23_41_7bii",
+            "question_text": "Explain what can be concluded from the pattern about the nature of electrons.",
+            "images": ["images/questions23/QP_S23_41_7bii.png"],
+            "answer_images": ["images/answers23/QP_S23_41_7biiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part b(ii)", "Wave–particle duality"]
+          },
+          {
+            "question_id": "QP_S23_41_7ci",
+            "question_text": "The accelerating p.d. is increased. On Fig. 7.3, sketch the new pattern seen on the screen.",
+            "images": ["images/questions23/QP_S23_41_7ci.png"],
+            "answer_images": ["images/answers23/QP_S23_41_7ciA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part c(i)", "Sketch", "Electron diffraction"]
+          },
+          {
+            "question_id": "QP_S23_41_7cii",
+            "question_text": "Explain, with reference to the de Broglie wavelength, the change in the pattern when the accelerating p.d. is increased.",
+            "images": ["images/questions23/QP_S23_41_7cii.png"],
+            "answer_images": ["images/answers23/QP_S23_41_7ciiA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part c(ii)", "λ = h/p", "Accelerating voltage"]
+          }
+        ]
+      }
+    ],
+    "Medical physics": [
+      {
+        "group_id": "MED_M23_52_2",
+        "tags": [
+          "Medical physics",
+          "February/March 2023",
+          "Paper 52",
+          "Analysis & Evaluation"
+        ],
+        "questions": [
+          {
+            "question_id": "MED_M23_52_2a",
+            "question_text": "A student investigates standing waves in water using the arrangement in Fig. 2.1. It is suggested that f and d are related by v/f = 4(d + k), where v is the speed of sound in water and k is a constant. A graph is plotted of d on the y-axis against 1/f on the x-axis. Determine expressions for the gradient and the y-intercept.",
+            "images": [
+              "images/questions23/MED_M23_52_2a.png",
+              "images/questions23/MED_M23_52_2a2.png"
+            ],
+            "answer_images": ["images/answers23/MED_M23_52_2aA.png"],
+            "points": 1,
+            "paper": "February/March 2023",
+            "component": 52,
+            "difficulty": "easy",
+            "tags": ["Part a", "Graph interpretation", "Standing waves"],
+            "paper_reference": "Fig. 2.1"
+          },
+          {
+            "question_id": "MED_M23_52_2b",
+            "question_text": "Values of f, d1 and d2 are given in Table 2.1. Calculate and record values of 1/f / 10^–3 Hz^–1 and d / cm in Table 2.1. Include the absolute uncertainties in d.",
+            "images": ["images/questions23/MED_M23_52_2b.png"],
+            "answer_images": ["images/answers23/MED_M23_52_2bA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 52,
+            "difficulty": "medium",
+            "tags": ["Part b", "Table completion", "Uncertainty handling"]
+          },
+          {
+            "question_id": "MED_M23_52_2ci",
+            "question_text": "Plot a graph of d / cm against 1/f / 10^–3 Hz^–1. Include error bars for d.",
+            "images": ["images/questions23/MED_M23_52_2ci.png"],
+            "answer_images": ["images/answers23/MED_M23_52_2ciA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 52,
+            "difficulty": "easy",
+            "tags": ["Part c(i)", "Graphing", "Error bars"]
+          },
+          {
+            "question_id": "MED_M23_52_2cii",
+            "question_text": "Draw the straight line of best fit and a worst acceptable straight line on your graph. Label both lines.",
+            "images": ["images/questions23/MED_M23_52_2cii.png"],
+            "answer_images": ["images/answers23/MED_M23_52_2ciiA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 52,
+            "difficulty": "medium",
+            "tags": ["Part c(ii)", "Best/worst fit"]
+          },
+          {
+            "question_id": "MED_M23_52_2ciii",
+            "question_text": "Determine the gradient of the line of best fit. Include the absolute uncertainty in your answer.",
+            "images": [
+              "images/questions23/MED_M23_52_2ciii.png",
+              "images/questions23/MED_M23_52_2ciii2.png"
+            ],
+            "answer_images": ["images/answers23/MED_M23_52_2ciiiA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 52,
+            "difficulty": "medium",
+            "tags": ["Part c(iii)", "Gradient", "Uncertainty"]
+          },
+          {
+            "question_id": "MED_M23_52_2civ",
+            "question_text": "Determine the y-intercept of the line of best fit. Include the absolute uncertainty in your answer.",
+            "images": ["images/questions23/MED_M23_52_2civ.png"],
+            "answer_images": ["images/answers23/MED_M23_52_2civA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 52,
+            "difficulty": "medium",
+            "tags": ["Part c(iv)", "Intercept", "Uncertainty"]
+          },
+          {
+            "question_id": "MED_M23_52_2di",
+            "question_text": "Using your answers to (a), (c)(iii) and (c)(iv), determine the values of v and k. Include appropriate units and include the absolute uncertainties in your answers.",
+            "images": ["images/questions23/MED_M23_52_2di.png"],
+            "answer_images": ["images/answers23/MED_M23_52_2diA.png"],
+            "points": 3,
+            "paper": "February/March 2023",
+            "component": 52,
+            "difficulty": "medium",
+            "tags": [
+              "Part d(i)",
+              "Parameter extraction",
+              "Units & uncertainties"
+            ]
+          },
+          {
+            "question_id": "MED_M23_52_2dii",
+            "question_text": "Determine the frequency f that gives a value of d of 30.0 cm.",
+            "images": ["images/questions23/MED_M23_52_2dii.png"],
+            "answer_images": ["images/answers23/MED_M23_52_2diiA.png"],
+            "points": 1,
+            "paper": "February/March 2023",
+            "component": 52,
+            "difficulty": "easy",
+            "tags": ["Part e", "Prediction from graph"]
+          }
+        ]
+      },
+      {
+        "group_id": "MED_FM23_42_9",
+        "tags": ["Medical physics", "February/March 2023", "Paper 42"],
+        "questions": [
+          {
+            "question_id": "MED_FM23_42_9a",
+            "question_text": "Explain how ultrasound waves are detected.",
+            "images": ["images/questions23/MED_FM23_42_9a.png"],
+            "answer_images": ["images/answers23/MED_FM23_42_9aA.png"],
+            "points": 3,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part a", "Piezoelectric detection"]
+          },
+          {
+            "question_id": "MED_FM23_42_9bi",
+            "question_text": "An applied voltage V = V0 sin(ωt) drives a probe. The r.m.s. voltage is 66 V and the ultrasound frequency is 4.3 MHz. Determine V0.",
+            "images": ["images/questions23/MED_FM23_42_9bi.png"],
+            "answer_images": ["images/answers23/MED_FM23_42_9biA.png"],
+            "points": 1,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part b(i)", "Vrms–V0"]
+          },
+          {
+            "question_id": "MED_FM23_42_9bii",
+            "question_text": "Determine ω.",
+            "images": ["images/questions23/MED_FM23_42_9bii.png"],
+            "answer_images": ["images/answers23/MED_FM23_42_9biiA.png"],
+            "points": 1,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part b(ii)", "Angular frequency"]
+          },
+          {
+            "question_id": "MED_FM23_42_9ci",
+            "question_text": "Table 9.1 lists density, speed and specific acoustic impedance for air and soft tissue (one column blank). Determine the unit for specific acoustic impedance values.",
+            "images": ["images/questions23/MED_FM23_42_9ci.png"],
+            "answer_images": ["images/answers23/MED_FM23_42_9ciA.png"],
+            "points": 1,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part c(i)", "Units"]
+          },
+          {
+            "question_id": "MED_FM23_42_9cii",
+            "question_text": "Calculate the density of soft tissue.",
+            "images": ["images/questions23/MED_FM23_42_9cii.png"],
+            "answer_images": ["images/answers23/MED_FM23_42_9ciiA.png"],
+            "points": 1,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part c(ii)", "Impedance relation"]
+          },
+          {
+            "question_id": "MED_FM23_42_9ciii",
+            "question_text": "Use Table 9.1 to explain why ultrasound cannot produce an image inside an air-filled cavity such as the lungs.",
+            "images": ["images/questions23/MED_FM23_42_9ciii.png"],
+            "answer_images": ["images/answers23/MED_FM23_42_9ciiiA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part c(iii)", "Impedance mismatch"]
+          }
+        ]
+      },
+      {
+        "group_id": "MED_S23_42_10",
+        "tags": ["Medical physics", "Summer 2023", "Paper 42"],
+        "questions": [
+          {
+            "question_id": "MED_S23_42_10ai",
+            "question_text": "In an X-ray tube for medical diagnosis, charged particles are accelerated towards a metal target by an applied p.d. (i) State the charged particles that are accelerated.",
+            "images": ["images/questions23/MED_S23_42_10ai.png"],
+            "answer_images": ["images/answers23/MED_S23_42_10aiA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a(i)", "X-ray tube", "Electrons"]
+          },
+          {
+            "question_id": "MED_S23_42_10aii",
+            "question_text": "(ii) Explain how X-rays are produced at the metal target.",
+            "images": ["images/questions23/MED_S23_42_10aii.png"],
+            "answer_images": ["images/answers23/MED_S23_42_10aiiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a(ii)", "Bremsstrahlung", "Characteristic X-rays"]
+          },
+          {
+            "question_id": "MED_S23_42_10aiii",
+            "question_text": "(iii) Calculate the minimum wavelength of X-rays produced when the applied p.d. is 5.80 kV.",
+            "images": ["images/questions23/MED_S23_42_10aiii.png"],
+            "answer_images": ["images/answers23/MED_S23_42_10aiiiA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part a(iii)", "Cut-off wavelength"]
+          },
+          {
+            "question_id": "MED_S23_42_10b",
+            "question_text": "X-rays pass through a medium with attenuation coefficient 1.4 cm^–1. Calculate the percentage of X-ray energy absorbed by a 2.8 cm thickness of the medium.",
+            "images": ["images/questions23/MED_S23_42_10b.png"],
+            "answer_images": ["images/answers23/MED_S23_42_10bA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b", "Exponential attenuation"]
+          }
+        ]
+      },
+      {
+        "group_id": "MED_S23_41_8",
+        "tags": ["Medical physics", "Summer 2023", "Paper 41"],
+        "questions": [
+          {
+            "question_id": "MED_S23_41_8a",
+            "question_text": "Table 8.1 lists density and speed of sound for air, gel and tissue. Show that the specific acoustic impedance of gel is 1.68 × 10^6 kg m–2 s–1.",
+            "images": ["images/questions23/MED_S23_41_8a.png"],
+            "answer_images": ["images/answers23/MED_S23_41_8aA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part a(i)", "Impedance Z = ρc"]
+          },
+          {
+            "question_id": "MED_S23_41_8aii",
+            "question_text": "Complete Table 8.1 by calculating the missing values to three significant figures.",
+            "images": ["images/questions23/MED_S23_41_8aii.png"],
+            "answer_images": ["images/answers23/MED_S23_41_8aiiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part a(ii)", "Table completion"]
+          },
+          {
+            "question_id": "MED_S23_41_8bi",
+            "question_text": "Calculate the intensity reflection coefficient at an air–tissue boundary.",
+            "images": ["images/questions23/MED_S23_41_8bi.png"],
+            "answer_images": ["images/answers23/MED_S23_41_8biA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part b(i)", "Reflection coefficient"]
+          },
+          {
+            "question_id": "MED_S23_41_8bii",
+            "question_text": "Calculate the intensity reflection coefficient at a gel–tissue boundary.",
+            "images": ["images/questions23/MED_S23_41_8bii.png"],
+            "answer_images": ["images/answers23/MED_S23_41_8biiA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part b(ii)", "Reflection coefficient"]
+          },
+          {
+            "question_id": "MED_S23_41_8c",
+            "question_text": "Use your answers in (b) to explain why gel is applied to the skin during ultrasound scanning.",
+            "images": ["images/questions23/MED_S23_41_8c.png"],
+            "answer_images": ["images/answers23/MED_S23_41_8cA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part c", "Ultrasound coupling"]
+          }
+        ]
+      }
+    ],
+    "Nuclear physics": [
+      {
+        "group_id": "NP_FM23_42_8",
+        "tags": ["Nuclear physics", "February/March 2023", "Paper 42"],
+        "questions": [
+          {
+            "question_id": "NP_FM23_42_8a",
+            "question_text": "Plutonium-238 undergoes α-decay. Complete: ²³⁸₉₄Pu → ______ + ______α.",
+            "images": ["images/questions23/NP_FM23_42_8a.png"],
+            "answer_images": ["images/answers23/NP_FM23_42_8aA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a", "Nuclear equation"]
+          },
+          {
+            "question_id": "NP_FM23_42_8bi",
+            "question_text": "A space-probe power source contains 0.874 kg of ²³⁸Pu. Each decay releases 5.59 MeV; half-life = 87.7 years. Calculate the initial number N₀ of nuclei.",
+            "images": ["images/questions23/NP_FM23_42_8bi.png"],
+            "answer_images": ["images/answers23/NP_FM23_42_8biA.png"],
+            "points": 1,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part b(i)", "Nuclei count"]
+          },
+          {
+            "question_id": "NP_FM23_42_8bii",
+            "question_text": "Determine the initial activity of the source. Give a unit with your answer.",
+            "images": ["images/questions23/NP_FM23_42_8bii.png"],
+            "answer_images": ["images/answers23/NP_FM23_42_8biiA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b(ii)", "Activity"]
+          },
+          {
+            "question_id": "NP_FM23_42_8biii",
+            "question_text": "Use (b)(ii) and 5.59 MeV per decay to determine the initial power output.",
+            "images": ["images/questions23/NP_FM23_42_8biii.png"],
+            "answer_images": ["images/answers23/NP_FM23_42_8biiiA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b(iii)", "Power from activity"]
+          },
+          {
+            "question_id": "NP_FM23_42_8biv",
+            "question_text": "The probe functions until power falls to 65.3% of the initial value. Calculate the operating time in years.",
+            "images": ["images/questions23/NP_FM23_42_8biv.png"],
+            "answer_images": ["images/answers23/NP_FM23_42_8bivA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b(iv)", "Exponential decay time"]
+          },
+          {
+            "question_id": "NP_FM23_42_8c",
+            "question_text": "An alternative is ²¹⁰Po (half-life 0.378 years). For the same initial power, mass needed is 3.37 g. Suggest one advantage and one disadvantage of using ²¹⁰Po.",
+            "images": ["images/questions23/NP_FM23_42_8c.png"],
+            "answer_images": ["images/answers23/NP_FM23_42_8cA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part c", "Pros and cons"]
+          }
+        ]
+      },
+      {
+        "group_id": "NP_S23_42_9",
+        "tags": ["Nuclear physics", "Summer 2023", "Paper 42"],
+        "questions": [
+          {
+            "question_id": "NP_S23_42_9a",
+            "question_text": "Define mass defect.",
+            "images": ["images/questions23/NP_S23_42_9a.png"],
+            "answer_images": ["images/answers23/NP_S23_42_9aA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a", "Definition", "Binding energy"]
+          },
+          {
+            "question_id": "NP_S23_42_9bi",
+            "question_text": "Given mass defects for ²¹H, ³¹H and ⁴₂He, a stellar fusion process is ²¹H + ³¹H → ⁴₂He + X where X has no mass defect. (i) State the name of particle X.",
+            "images": ["images/questions23/NP_S23_42_9bi.png"],
+            "answer_images": ["images/answers23/NP_S23_42_9biA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part b(i)", "Fusion product"]
+          },
+          {
+            "question_id": "NP_S23_42_9bii",
+            "question_text": "(ii) Show that the energy released when one nucleus of ⁴₂He is formed in this reaction is 2.8 × 10^−12 J.",
+            "images": ["images/questions23/NP_S23_42_9bii.png"],
+            "answer_images": ["images/answers23/NP_S23_42_9biiA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part b(ii)", "Energy from mass defect"]
+          },
+          {
+            "question_id": "NP_S23_42_9ci",
+            "question_text": "A star has radius 2.3 × 10^9 m and luminosity 1.4 × 10^28 W. Assume all radiated energy comes from formation of ⁴₂He. Determine the mass of ⁴₂He produced per unit time.",
+            "images": ["images/questions23/NP_S23_42_9ci.png"],
+            "answer_images": ["images/answers23/NP_S23_42_9ciA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "hard",
+            "tags": ["Part c(i)", "Stellar power", "Mass rate"]
+          },
+          {
+            "question_id": "NP_S23_42_9cii",
+            "question_text": "(ii) Determine the surface temperature of the star.",
+            "images": ["images/questions23/NP_S23_42_9cii.png"],
+            "answer_images": ["images/answers23/NP_S23_42_9ciiA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part c(ii)", "Stefan–Boltzmann law"]
+          }
+        ]
+      },
+      {
+        "group_id": "NP_S23_41_9",
+        "tags": ["Nuclear physics", "Summer 2023", "Paper 41"],
+        "questions": [
+          {
+            "question_id": "NP_S23_41_9a",
+            "question_text": "Define half-life.",
+            "images": ["images/questions23/NP_S23_41_9a.png"],
+            "answer_images": ["images/answers23/NP_S23_41_9aA.png"],
+            "points": 1,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part a", "Definition", "Radioactivity"]
+          },
+          {
+            "question_id": "NP_S23_41_9b",
+            "question_text": "A sample contains N0 nuclei of carbon-11 and no other nuclei at t = 0. On Fig. 9.1, sketch the variation with t of the number of boron-11 nuclei in the sample.",
+            "images": ["images/questions23/NP_S23_41_9b.png"],
+            "answer_images": ["images/answers23/NP_S23_41_9bA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part b", "Growth of daughter nuclei", "Sketch"]
+          },
+          {
+            "question_id": "NP_S23_41_9ci",
+            "question_text": "Explain, with reference to the random nature of radioactive decay, why the activity of the carbon-11 sample decreases with time.",
+            "images": ["images/questions23/NP_S23_41_9ci.png"],
+            "answer_images": ["images/answers23/NP_S23_41_9ciA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part c(i)", "Activity vs time"]
+          },
+          {
+            "question_id": "NP_S23_41_9cii",
+            "question_text": "State, with reasons, whether a detector placed near the sample indicates a measured count rate that is less than, the same as, or greater than the activity of the sample.",
+            "images": ["images/questions23/NP_S23_41_9cii.png"],
+            "answer_images": ["images/answers23/NP_S23_41_9ciiA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part c(ii)", "Count rate vs activity"]
+          }
+        ]
+      }
+    ],
+    "Astronomy and cosmology": [
+      {
+        "group_id": "AST_FM23_42_10",
+        "tags": ["Astronomy and cosmology", "February/March 2023", "Paper 42"],
+        "questions": [
+          {
+            "question_id": "AST_FM23_42_10a",
+            "question_text": "Give two reasons why some stars appear brighter than others.",
+            "images": ["images/questions23/AST_FM23_42_10a.png"],
+            "answer_images": ["images/answers23/AST_FM23_42_10aA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part a", "Apparent brightness"]
+          },
+          {
+            "question_id": "AST_FM23_42_10b",
+            "question_text": "State what is meant by a standard candle.",
+            "images": ["images/questions23/AST_FM23_42_10b.png"],
+            "answer_images": ["images/answers23/AST_FM23_42_10bA.png"],
+            "points": 1,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part b", "Definition"]
+          },
+          {
+            "question_id": "AST_FM23_42_10ci",
+            "question_text": "A spectral line from a star is observed at 660.9 nm (laboratory value 656.3 nm). Show that the speed relative to Earth is 2.1 × 10^6 m s^−1.",
+            "images": ["images/questions23/AST_FM23_42_10ci.png"],
+            "answer_images": ["images/answers23/AST_FM23_42_10ciA.png"],
+            "points": 1,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "easy",
+            "tags": ["Part c(i)", "Redshift speed"]
+          },
+          {
+            "question_id": "AST_FM23_42_10cii",
+            "question_text": "Using H0 = 2.3 × 10^−18 s^−1, calculate the distance to the star.",
+            "images": ["images/questions23/AST_FM23_42_10cii.png"],
+            "answer_images": ["images/answers23/AST_FM23_42_10ciiA.png"],
+            "points": 2,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part c(ii)", "Hubble law"]
+          },
+          {
+            "question_id": "AST_FM23_42_10ciii",
+            "question_text": "State and explain what can be concluded about the Universe based on this change in observed wavelength.",
+            "images": ["images/questions23/AST_FM23_42_10ciii.png"],
+            "answer_images": ["images/answers23/AST_FM23_42_10ciiiA.png"],
+            "points": 3,
+            "paper": "February/March 2023",
+            "component": 42,
+            "difficulty": "medium",
+            "tags": ["Part c(iii)", "Expansion of the Universe"]
+          }
+        ]
+      },
+      {
+        "group_id": "AST_S23_41_10",
+        "tags": ["Astronomy and cosmology", "Summer 2023", "Paper 41"],
+        "questions": [
+          {
+            "question_id": "AST_S23_41_10a",
+            "question_text": "State Hubble’s law and identify any symbols used.",
+            "images": ["images/questions23/AST_S23_41_10a.png"],
+            "answer_images": ["images/answers23/AST_S23_41_10aA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part a", "Hubble’s law"]
+          },
+          {
+            "question_id": "AST_S23_41_10b",
+            "question_text": "A star of luminosity 3.8 × 10^31 W is at a distance of 1.8 × 10^24 m from Earth. Calculate the radiant flux intensity at the Earth.",
+            "images": ["images/questions23/AST_S23_41_10b.png"],
+            "answer_images": ["images/answers23/AST_S23_41_10bA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part b", "Inverse square law", "Flux"]
+          },
+          {
+            "question_id": "AST_S23_41_10ci",
+            "question_text": "A spectral line from the galaxy has rest wavelength 486 nm, observed at 492 nm on Earth. Explain why the observed wavelength differs from the emitted wavelength.",
+            "images": ["images/questions23/AST_S23_41_10ci.png"],
+            "answer_images": ["images/answers23/AST_S23_41_10ciA.png"],
+            "points": 2,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "easy",
+            "tags": ["Part c(i)", "Redshift", "Cosmological expansion"]
+          },
+          {
+            "question_id": "AST_S23_41_10cii",
+            "question_text": "Determine a value for the Hubble constant H0.",
+            "images": ["images/questions23/AST_S23_41_10cii.png"],
+            "answer_images": ["images/answers23/AST_S23_41_10ciiA.png"],
+            "points": 3,
+            "paper": "Summer 2023",
+            "component": 41,
+            "difficulty": "medium",
+            "tags": ["Part c(ii)", "H0 calculation"]
+          }
+        ]
+      }
+    ]
+  }
+}

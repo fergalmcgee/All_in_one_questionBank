@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A2 Computer Science Question Maker</title>
+    <link rel="stylesheet" href="static/styles.css" />
+    <style>
+      .points-summary {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        max-width: 250px;
+      }
+
+      .points-summary h3 {
+        margin-top: 0;
+        font-size: 0.5em;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 5px;
+      }
+
+      .points-summary ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 0.4em;
+      }
+
+      .points-summary li {
+        margin: 5px 0;
+      }
+
+      .topic-selector {
+        margin: 20px 0;
+      }
+
+      .question-groups {
+        margin: 20px 0;
+      }
+
+      .question-group {
+        margin: 15px 0;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      .question-item {
+        margin: 10px 0;
+      }
+
+      .question-item label {
+        margin-left: 10px;
+      }
+
+      .form-actions {
+        margin: 20px 0;
+      }
+
+      select {
+        padding: 8px;
+        font-size: 16px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+      }
+
+      .group-header {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .group-questions {
+        margin-left: 20px;
+      }
+
+      .question-item {
+        margin: 5px 0;
+      }
+
+      .topic-selector {
+        margin: 20px 0;
+      }
+
+      .topic-checkbox {
+        margin: 5px 0;
+      }
+
+      .all-question-groups {
+        margin: 20px 0;
+      }
+
+      .topic-questions {
+        margin: 20px 0;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      .topic-questions h3 {
+        margin-top: 0;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .question-group {
+        margin: 15px 0;
+        padding: 15px;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+      }
+
+      .group-header {
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .group-questions {
+        margin-left: 20px;
+      }
+
+      .question-item {
+        margin: 5px 0;
+      }
+
+      #generateCustomButton {
+        margin-top: 20px;
+      }
+
+      .tag {
+        display: inline-block;
+        background-color: #e9ecef;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.85em;
+        margin: 0 4px;
+        color: #495057;
+      }
+
+      .group-header label {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .group-title {
+        font-weight: bold;
+      }
+
+      .group-points {
+        color: #666;
+      }
+
+      .question-item label {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .question-id {
+        min-width: 50px;
+      }
+
+      .question-points {
+        color: #666;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+
+      .question-group {
+        margin: 15px 0;
+        padding: 15px;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        border: 1px solid #dee2e6;
+      }
+
+      .group-questions {
+        margin-left: 20px;
+        padding-top: 10px;
+      }
+
+      .question-item {
+        margin: 8px 0;
+        padding: 5px;
+        border-radius: 4px;
+        background-color: white;
+      }
+
+      .question-item:hover {
+        background-color: #f1f3f5;
+      }
+
+      .question-group {
+        margin: 15px 0;
+        padding: 15px;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        border: 1px solid #dee2e6;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .question-group:hover {
+        background-color: #f1f3f5;
+      }
+
+      .question-checkbox {
+        margin-top: 4px;
+      }
+
+      .question-header {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+
+      .question-title {
+        font-weight: bold;
+        font-size: 1.1em;
+      }
+
+      .question-points {
+        color: #666;
+      }
+
+      .question-parts {
+        color: #495057;
+        font-size: 0.9em;
+      }
+
+      .question-part {
+        background-color: #e9ecef;
+        padding: 2px 6px;
+        border-radius: 4px;
+        margin-right: 4px;
+      }
+
+      .tag {
+        display: inline-block;
+        background-color: #e7f5ff;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.85em;
+        color: #1971c2;
+      }
+
+      .topic-questions {
+        margin: 20px 0;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      .topic-questions h3 {
+        margin-top: 0;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ddd;
+        color: #343a40;
+      }
+
+      #generateCustomButton {
+        margin-top: 20px;
+      }
+
+      .topic-header {
+        background-color: #f0f0f0;
+        padding: 10px;
+        border-radius: 5px 5px 0 0;
+      }
+
+      .topic-title-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .collapse-button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+
+      .collapse-button:hover {
+        background-color: #0056b3;
+      }
+
+      .questions-container {
+        transition: display 0.3s ease;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-top: none;
+        border-radius: 0 0 5px 5px;
+      }
+
+      .topic-questions {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="points-summary">
+      <h3>Available Points by Topic</h3>
+      <ul>
+        {% for topic in topics %}
+        <li>{{ topic }}: {{ topic_points[topic] }} pts</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <h1>A2 Computer Science Question Bank</h1>
+
+    <form
+      action="{{ url_for('generate_pdf') }}"
+      method="post"
+      id="questionForm"
+    >
+      <h2 for="topics">Choose up to 5 topics:</h2>
+      <table id="topics">
+        <tr>
+          {% for topic in topics %}
+          <td>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name="topics"
+                value="{{ topic }}"
+                id="{{ topic }}"
+                {%
+                if
+                topic
+                in
+                selected_topics
+                %}checked{%
+                endif
+                %}
+              />
+              <label class="form-check-label" for="{{ topic }}">
+                {{ topic }}
+              </label>
+            </div>
+          </td>
+          {% if loop.index % 3 == 0 %}
+        </tr>
+        <tr>
+          {% endif %} {% endfor %}
+        </tr>
+        <tr>
+          {% for topic in topics %} {% if loop.index % 3 == 0 %}
+        </tr>
+        <tr>
+          {% endif %} {% endfor %}
+        </tr>
+      </table>
+      <br />
+      <br />
+      <label for="points"><h3>Enter required points:</h3></label>
+      <input type="number" id="points" name="points" required />
+      <input type="submit" value="Generate PDF" />
+      <div>
+        <input
+          type="checkbox"
+          id="exclude_unrelated"
+          name="exclude_unrelated"
+        />
+        <label for="exclude_unrelated">Exclude unrelated questions</label>
+      </div>
+    </form>
+
+    <script>
+      // JavaScript to limit the number of selected checkboxes to 5
+      const maxSelection = 5;
+      const checkboxes = document.querySelectorAll('input[name="topics"]');
+
+      checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener("change", function () {
+          const checkedCheckboxes = document.querySelectorAll(
+            'input[name="topics"]:checked'
+          );
+          if (checkedCheckboxes.length > maxSelection) {
+            alert(`You can select up to ${maxSelection} topics only.`);
+            this.checked = false; // Uncheck the last checked box
+          }
+        });
+      });
+    </script>
+
+    {% if question_pdf_url and answer_pdf_url %}
+    <div class="pdf-container">
+      <div>
+        <h2>Question Paper</h2>
+        <iframe src="{{ question_pdf_url }}" class="pdf-frame"></iframe>
+      </div>
+      <div>
+        <h2>Answer Key</h2>
+        <iframe src="{{ answer_pdf_url }}" class="pdf-frame"></iframe>
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="clear-fix"></div>
+
+    <h1>Submit Problem Notes</h1>
+    <form id="noteForm">
+      <label for="note"><h3>Your Note:</h3></label>
+      <textarea name="note" id="note" rows="4" cols="50" required></textarea>
+      <br />
+      <button type="button" onclick="submitNote()">Submit Note</button>
+    </form>
+    <div id="responseMessage"></div>
+
+    <script src="static/scripts.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var warningMessage = "{{ warning_message|safe }}";
+        var customAlert = document.getElementById("customAlert");
+        var alertMessage = document.getElementById("alertMessage");
+        var closeAlert = document.getElementById("closeAlert");
+
+        console.log("Warning message:", warningMessage);
+
+        function showCustomAlert(message) {
+          alertMessage.textContent = message;
+          customAlert.style.display = "block";
+        }
+
+        if (
+          warningMessage &&
+          warningMessage !== "None" &&
+          warningMessage.trim() !== ""
+        ) {
+          console.log("Preparing to show warning");
+          window.addEventListener("load", function () {
+            setTimeout(function () {
+              console.log("Showing warning");
+              showCustomAlert(warningMessage);
+            }, 500);
+          });
+        } else {
+          console.log("No warning to show");
+        }
+
+        closeAlert.addEventListener("click", function () {
+          customAlert.style.display = "none";
+        });
+      });
+    </script>
+
+    <div class="clear-fix"></div>
+
+    <h1>Manual Question Selection</h1>
+    <form
+      action="{{ url_for('generate_pdf') }}"
+      method="post"
+      id="customQuestionForm"
+    >
+      <div class="topic-selector">
+        {% for topic in topics %}
+        <input type="hidden" name="topics" value="{{ topic }}" />
+        {% endfor %}
+
+        <h2>Select Topics:</h2>
+        <div id="topicCheckboxes">
+          {% for topic in topics %}
+          <div class="topic-checkbox">
+            <input
+              type="checkbox"
+              id="topic_{{ topic }}"
+              value="{{ topic }}"
+              onchange="loadQuestionsForTopic(this)"
+            />
+            <label for="topic_{{ topic }}"
+              >{{ topic }} ({{ topic_points[topic] }} points)</label
+            >
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <input type="hidden" name="points" value="100" />
+      <input type="hidden" name="custom_selection" value="true" />
+
+      <div id="allQuestionGroups" class="all-question-groups">
+        <!-- Questions from all selected topics will be displayed here -->
+      </div>
+
+      <div class="form-actions" style="display: none" id="generateCustomButton">
+        <input type="submit" value="Generate Custom PDF" />
+      </div>
+    </form>
+
+    <script>
+      let selectedTopics = new Set();
+
+      async function loadQuestionsForTopic(checkbox) {
+        const topic = checkbox.value;
+        const allQuestionGroups = document.getElementById("allQuestionGroups");
+        const generateButton = document.getElementById("generateCustomButton");
+
+        if (checkbox.checked) {
+          selectedTopics.add(topic);
+        } else {
+          selectedTopics.delete(topic);
+          const topicDiv = document.getElementById(`topic_questions_${topic}`);
+          if (topicDiv) {
+            topicDiv.remove();
+          }
+        }
+
+        if (checkbox.checked) {
+          try {
+            const response = await fetch(`/get_questions/${topic}`);
+            const groups = await response.json();
+
+            const topicDiv = document.createElement("div");
+            topicDiv.id = `topic_questions_${topic}`;
+            topicDiv.className = "topic-questions";
+
+            const topicHeader = document.createElement("div");
+            topicHeader.className = "topic-header";
+            topicHeader.innerHTML = `
+                    <div class="topic-title-row">
+                        <h3>${topic}</h3>
+                        <button type="button" class="collapse-button" onclick="toggleTopicQuestions('${topic}')">
+                            Collapse ▼
+                        </button>
+                    </div>
+                `;
+            topicDiv.appendChild(topicHeader);
+
+            const questionsContainer = document.createElement("div");
+            questionsContainer.id = `${topic}_questions_container`;
+            questionsContainer.className = "questions-container";
+
+            groups.forEach((group, groupIndex) => {
+              const groupDiv = document.createElement("div");
+              groupDiv.className = "question-group";
+
+              const questionCheckbox = document.createElement("input");
+              questionCheckbox.type = "checkbox";
+              questionCheckbox.name = "selected_questions";
+              questionCheckbox.value = `${topic}|${groupIndex}`;
+              questionCheckbox.id = `${topic}_group_${groupIndex}`;
+              questionCheckbox.className = "question-checkbox";
+
+              const questionLabel = document.createElement("label");
+              questionLabel.htmlFor = `${topic}_group_${groupIndex}`;
+              questionLabel.innerHTML = `
+                        <div class="question-header">
+                            <span class="question-title">Question ${
+                              groupIndex + 1
+                            }</span>
+                            <span class="question-points">(${
+                              group.total_points
+                            } points total)</span>
+                            ${
+                              group.tags.length > 0
+                                ? `<span class="tags">${group.tags
+                                    .map(
+                                      (tag) => `<span class="tag">${tag}</span>`
+                                    )
+                                    .join("")}</span>`
+                                : ""
+                            }
+                        </div>
+                        <div class="question-parts">
+                            Parts: ${group.questions
+                              .map(
+                                (q) =>
+                                  `<span class="question-part">${q.question_id} (${q.points} pts)</span>`
+                              )
+                              .join(", ")}
+                        </div>
+                    `;
+
+              groupDiv.appendChild(questionCheckbox);
+              groupDiv.appendChild(questionLabel);
+              questionsContainer.appendChild(groupDiv);
+            });
+
+            topicDiv.appendChild(questionsContainer);
+            allQuestionGroups.appendChild(topicDiv);
+          } catch (error) {
+            console.error("Error loading questions:", error);
+          }
+        }
+
+        generateButton.style.display =
+          selectedTopics.size > 0 ? "block" : "none";
+      }
+
+      function toggleTopicQuestions(topic) {
+        const container = document.getElementById(
+          `${topic}_questions_container`
+        );
+        const button =
+          container.previousElementSibling.querySelector(".collapse-button");
+
+        if (container.style.display === "none") {
+          container.style.display = "block";
+          button.innerHTML = "Collapse ▼";
+        } else {
+          container.style.display = "none";
+          button.innerHTML = "Expand ▲";
+        }
+      }
+    </script>
+  </body>
+</html>
+
+<div id="customAlert" class="custom-alert">
+  <div class="alert-content">
+    <p id="alertMessage"></p>
+    <button id="closeAlert">Close</button>
+  </div>
+</div>

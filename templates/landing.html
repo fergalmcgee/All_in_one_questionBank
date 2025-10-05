@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Question Banks · Paper Cuts</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body class="page page--landing">
+    <div class="page__glow"></div>
+    <div class="page__glow page__glow--right"></div>
+
+    <div class="shell landing-shell">
+      <header class="hero hero--landing">
+        <div class="hero__eyebrow">Paper Cuts</div>
+        <h1 class="hero__title">Choose a question bank</h1>
+        <p class="hero__subtitle">
+          Select a subject to dive into its question library, manage notes, and
+          generate tailored papers on the fly.
+        </p>
+      </header>
+
+      <section class="bank-grid" aria-label="Available question banks">
+        {% for bank in banks %}
+        <a
+          class="bank-card glass"
+          href="{{ url_for('bank_home', bank_id=bank.id) }}"
+        >
+          <span class="bank-card__label">{{ bank.label }}</span>
+          <span class="bank-card__cta">Open bank →</span>
+        </a>
+        {% endfor %}
+      </section>
+    </div>
+  </body>
+</html>
