@@ -1,0 +1,231 @@
+{
+  "bank_id": "CSAS",
+  "updated_at": "2025-10-11T15:38:27.304699Z",
+  "groups": {
+    "1. Information and media::0": {
+      "topic": "1. Information and media",
+      "group_index": 0,
+      "group_id": "IMG_S24_13_2",
+      "label": "IMG_S24_13_2",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:36:50.360774Z"
+    },
+    "1. Information and media::1": {
+      "topic": "1. Information and media",
+      "group_index": 1,
+      "group_id": "DR_S24_13_1",
+      "label": "DR_S24_13_1",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:36:51.488007Z"
+    },
+    "1. Information and media::2": {
+      "topic": "1. Information and media",
+      "group_index": 2,
+      "group_id": "DR_S24_12_7",
+      "label": "DR_S24_12_7",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:36:51.943170Z"
+    },
+    "1. Information and media::3": {
+      "topic": "1. Information and media",
+      "group_index": 3,
+      "group_id": "BA_S24_11_7",
+      "label": "BA_S24_11_7",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:36:52.300985Z"
+    },
+    "1. Information and media::4": {
+      "topic": "1. Information and media",
+      "group_index": 4,
+      "group_id": "NET_W23_13_2",
+      "label": "NET_W23_13_2",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:36:57.115507Z"
+    },
+    "1. Information and media::5": {
+      "topic": "1. Information and media",
+      "group_index": 5,
+      "group_id": "VB_W21_12_5",
+      "label": "VB_W21_12_5",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:36:58.357260Z"
+    },
+    "1. Information and media::6": {
+      "topic": "1. Information and media",
+      "group_index": 6,
+      "group_id": "BA_W21_12_4",
+      "label": "BA_W21_12_4",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:36:58.933341Z"
+    },
+    "1. Information and media::7": {
+      "topic": "1. Information and media",
+      "group_index": 7,
+      "group_id": "SP_W21_11_7",
+      "label": "SP_W21_11_7",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:36:59.325636Z"
+    },
+    "1. Information and media::8": {
+      "topic": "1. Information and media",
+      "group_index": 8,
+      "group_id": "DR_W21_11_1",
+      "label": "DR_W21_11_1",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:36:59.717030Z"
+    },
+    "1. Information and media::9": {
+      "topic": "1. Information and media",
+      "group_index": 9,
+      "group_id": "CE_S21_12_6",
+      "label": "CE_S21_12_6",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:37:00.439074Z"
+    },
+    "1. Information and media::10": {
+      "topic": "1. Information and media",
+      "group_index": 10,
+      "group_id": "DR_S21_11_1",
+      "label": "DR_S21_11_1",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:37:00.809637Z"
+    },
+    "1. Information and media::11": {
+      "topic": "1. Information and media",
+      "group_index": 11,
+      "group_id": "NS_W22_13_9",
+      "label": "NS_W22_13_9",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:37:01.628579Z"
+    },
+    "1. Information and media::12": {
+      "topic": "1. Information and media",
+      "group_index": 12,
+      "group_id": "DAR_W22_13_1",
+      "label": "DAR_W22_13_1",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:37:02.289063Z"
+    },
+    "1. Information and media::13": {
+      "topic": "1. Information and media",
+      "group_index": 13,
+      "group_id": "IP_W22_12_8",
+      "label": "IP_W22_12_8",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:37:03.234959Z"
+    },
+    "1. Information and media::14": {
+      "topic": "1. Information and media",
+      "group_index": 14,
+      "group_id": "BA_W22_12_2",
+      "label": "BA_W22_12_2",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:37:05.396821Z"
+    },
+    "1. Information and media::15": {
+      "topic": "1. Information and media",
+      "group_index": 15,
+      "group_id": "BOCS_W22_11_1",
+      "label": "BOCS_W22_11_1",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:37:06.207840Z"
+    },
+    "1. Information and media::16": {
+      "topic": "1. Information and media",
+      "group_index": 16,
+      "group_id": "DR_S22_13_1",
+      "label": "DR_S22_13_1",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:37:07.280103Z"
+    },
+    "1. Information and media::17": {
+      "topic": "1. Information and media",
+      "group_index": 17,
+      "group_id": "IR_S22_12_1",
+      "label": "IR_S22_12_1",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:37:07.890754Z"
+    },
+    "1. Information and media::18": {
+      "topic": "1. Information and media",
+      "group_index": 18,
+      "group_id": "DR_S22_11_1",
+      "label": "DR_S22_11_1",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:37:08.371054Z"
+    },
+    "1. Information and media::19": {
+      "topic": "1. Information and media",
+      "group_index": 19,
+      "group_id": "DR_W23_13_1",
+      "label": "DR_W23_13_1",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:37:11.137002Z"
+    },
+    "1. Information and media::20": {
+      "topic": "1. Information and media",
+      "group_index": 20,
+      "group_id": "DC_W23_12_6",
+      "label": "DC_W23_12_6",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:37:14.816473Z"
+    },
+    "1. Information and media::21": {
+      "topic": "1. Information and media",
+      "group_index": 21,
+      "group_id": "DR_W23_12_3",
+      "label": "DR_W23_12_3",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:37:15.655664Z"
+    },
+    "1. Information and media::22": {
+      "topic": "1. Information and media",
+      "group_index": 22,
+      "group_id": "VG_S23_11_1",
+      "label": "VG_S23_11_1",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:37:59.251522Z"
+    },
+    "1. Information and media::23": {
+      "topic": "1. Information and media",
+      "group_index": 23,
+      "group_id": "BDR_S23_12_4",
+      "label": "BDR_S23_12_4",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:38:01.369313Z"
+    },
+    "1. Information and media::24": {
+      "topic": "1. Information and media",
+      "group_index": 24,
+      "group_id": "IC_S23_11_1",
+      "label": "IC_S23_11_1",
+      "status": "missing",
+      "notes": "Something wrong with this one",
+      "updated_at": "2025-10-11T15:38:27.304627Z"
+    }
+  }
+}

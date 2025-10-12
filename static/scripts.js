@@ -124,13 +124,13 @@ document.addEventListener("change", (e) => {
     return `/${rel}`;
   }
 
-  function buildGrid(container, paths) {
+  function buildGrid(container, paths, altPrefix = "Image", emptyMessage) {
     container.textContent = ""; // clear
     const frag = document.createDocumentFragment();
 
     if (!paths || !paths.length) {
       const empty = document.createElement("div");
-      empty.textContent = "No images found for this group.";
+      empty.textContent = emptyMessage || "No images found for this group.";
       empty.style.padding = ".6rem";
       empty.style.color = "#666";
       container.appendChild(empty);
@@ -143,7 +143,7 @@ document.addEventListener("change", (e) => {
 
       const img = document.createElement("img");
       img.loading = "lazy";
-      img.alt = `Question image ${i + 1}`;
+      img.alt = `${altPrefix} ${i + 1}`;
       img.src = resolveImg(p);
 
       const cap = document.createElement("span");
@@ -211,31 +211,114 @@ document.addEventListener("change", (e) => {
 
     const grid = pop.querySelector(".gallery-grid");
     const btnClose = pop.querySelector(".gallery-close");
-    const imgs = JSON.parse(trigger.dataset.images || "[]");
-    let built = false;
+    const questionImages = JSON.parse(trigger.dataset.images || "[]");
+    const answerImages = JSON.parse(trigger.dataset.answers || "[]");
+    const tabContainer = pop.querySelector(".gallery-tabs");
+    const tabButtons = tabContainer
+      ? Array.from(tabContainer.querySelectorAll("[data-gallery-tab]"))
+      : [];
+    const questionTab = tabButtons.find(
+      (btn) => btn.dataset.galleryTab === "questions"
+    );
+    const answerTab = tabButtons.find(
+      (btn) => btn.dataset.galleryTab === "answers"
+    );
+
+    if (!questionImages.length && questionTab) {
+      questionTab.setAttribute("hidden", "true");
+      questionTab.setAttribute("aria-hidden", "true");
+    }
+    if (!answerImages.length && answerTab) {
+      answerTab.setAttribute("hidden", "true");
+      answerTab.setAttribute("aria-hidden", "true");
+    }
+
+    const visibleTabs = tabButtons.filter(
+      (btn) => btn && !btn.hasAttribute("hidden")
+    );
+    if (tabContainer && visibleTabs.length <= 1) {
+      tabContainer.classList.add("is-hidden");
+    }
+
+    let activeTab = questionImages.length ? "questions" : "answers";
+    if (activeTab === "answers" && !answerImages.length) {
+      activeTab = questionImages.length ? "questions" : "answers";
+    }
+    if (!questionImages.length && !answerImages.length) {
+      activeTab = "questions";
+    }
     let hoverTimer;
     let removeOutsideCloser = null;
     let lastFocus = null;
 
     const isOpen = () => pop.classList.contains("open");
 
-    function open() {
-      if (!built) {
-        buildGrid(grid, imgs);
-        built = true;
+    function setActiveTab(tab) {
+      if (tab === "answers" && !answerImages.length) {
+        tab = "questions";
       }
+      if (tab === "questions" && !questionImages.length) {
+        tab = answerImages.length ? "answers" : "questions";
+      }
+      activeTab = tab;
+
+      tabButtons.forEach((btn) => {
+        if (!btn || btn.hasAttribute("hidden")) return;
+        const isActive = btn.dataset.galleryTab === tab;
+        btn.classList.toggle("is-active", isActive);
+        btn.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
+      const paths =
+        tab === "answers" ? answerImages : questionImages;
+      const prefix = tab === "answers" ? "Answer image" : "Question image";
+      const emptyMessage =
+        tab === "answers"
+          ? "No answer images for this group."
+          : "No images found for this group.";
+      buildGrid(grid, paths, prefix, emptyMessage);
+    }
+
+    visibleTabs.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (btn.dataset.galleryTab) {
+          setActiveTab(btn.dataset.galleryTab);
+        }
+      });
+    });
+
+    if (btnClose) {
+      btnClose.addEventListener("click", (event) => {
+        event.preventDefault();
+        close();
+      });
+    }
+
+    function open() {
+      const alreadyOpen = isOpen();
+      setActiveTab(activeTab);
       if (pop.parentElement !== document.body) {
         document.body.appendChild(pop);
       }
-      const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      const viewportWidth =
+        window.innerWidth || document.documentElement.clientWidth;
+      const viewportHeight =
+        window.innerHeight || document.documentElement.clientHeight;
       const popWidth = Math.min(
         Math.max(viewportWidth * 0.86, 640),
         Math.max(640, viewportWidth - 24)
       );
       pop.style.width = `${Math.round(popWidth)}px`;
-      const popMaxHeight = Math.min(Math.max(viewportHeight * 0.9, 480), viewportHeight - 24);
+      const popMaxHeight = Math.min(
+        Math.max(viewportHeight * 0.9, 480),
+        viewportHeight - 24
+      );
       pop.style.maxHeight = `${Math.round(popMaxHeight)}px`;
+
+      if (alreadyOpen) {
+        positionPopover(trigger, pop);
+        return;
+      }
 
       pop.classList.add("open");
       trigger.setAttribute("aria-expanded", "true");

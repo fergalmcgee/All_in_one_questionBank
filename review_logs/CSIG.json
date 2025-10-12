@@ -1,0 +1,348 @@
+{
+  "bank_id": "CSIG",
+  "updated_at": "2025-10-11T15:17:47.110190Z",
+  "groups": {
+    "Algorithms & Errors::0": {
+      "topic": "Algorithms & Errors",
+      "group_index": 0,
+      "group_id": "APL_W24_23_9",
+      "label": "APL_W24_23_9",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:18.528326Z"
+    },
+    "Algorithms & Errors::1": {
+      "topic": "Algorithms & Errors",
+      "group_index": 1,
+      "group_id": "APL_S25_23_3",
+      "label": "APL_S25_23_3",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:19.194269Z"
+    },
+    "Algorithms & Errors::2": {
+      "topic": "Algorithms & Errors",
+      "group_index": 2,
+      "group_id": "APL_S25_23_1",
+      "label": "APL_S25_23_1",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:19.695218Z"
+    },
+    "Algorithms & Errors::3": {
+      "topic": "Algorithms & Errors",
+      "group_index": 3,
+      "group_id": "APL_S25_22_7",
+      "label": "APL_S25_22_7",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:20.110914Z"
+    },
+    "Algorithms & Errors::4": {
+      "topic": "Algorithms & Errors",
+      "group_index": 4,
+      "group_id": "APL_S25_22_1",
+      "label": "APL_S25_22_1",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:20.528181Z"
+    },
+    "Algorithms & Errors::5": {
+      "topic": "Algorithms & Errors",
+      "group_index": 5,
+      "group_id": "APL_S25_21_10",
+      "label": "APL_S25_21_10",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:20.911102Z"
+    },
+    "Algorithms & Errors::6": {
+      "topic": "Algorithms & Errors",
+      "group_index": 6,
+      "group_id": "APL_W24_23_6",
+      "label": "APL_W24_23_6",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:21.194137Z"
+    },
+    "Algorithms & Errors::7": {
+      "topic": "Algorithms & Errors",
+      "group_index": 7,
+      "group_id": "APL_M25_22_6",
+      "label": "APL_M25_22_6",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:21.427444Z"
+    },
+    "Algorithms & Errors::8": {
+      "topic": "Algorithms & Errors",
+      "group_index": 8,
+      "group_id": "APL_W24_22_4",
+      "label": "APL_W24_22_4",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:21.646872Z"
+    },
+    "Algorithms & Errors::9": {
+      "topic": "Algorithms & Errors",
+      "group_index": 9,
+      "group_id": "PC_W24_21_9",
+      "label": "PC_W24_21_9",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:23.478562Z"
+    },
+    "Algorithms & Errors::10": {
+      "topic": "Algorithms & Errors",
+      "group_index": 10,
+      "group_id": "AD_S23_21_5",
+      "label": "AD_S23_21_5",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:24.028273Z"
+    },
+    "Algorithms & Errors::11": {
+      "topic": "Algorithms & Errors",
+      "group_index": 11,
+      "group_id": "AFH_S24_23_4",
+      "label": "AFH_S24_23_4",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:24.548112Z"
+    },
+    "Algorithms & Errors::12": {
+      "topic": "Algorithms & Errors",
+      "group_index": 12,
+      "group_id": "AL_W23_22_4",
+      "label": "AL_W23_22_4",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:30.744692Z"
+    },
+    "Algorithms & Errors::13": {
+      "topic": "Algorithms & Errors",
+      "group_index": 13,
+      "group_id": "APL_S24_22_6",
+      "label": "APL_S24_22_6",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:31.143326Z"
+    },
+    "Algorithms & Errors::14": {
+      "topic": "Algorithms & Errors",
+      "group_index": 14,
+      "group_id": "APL_S24_21_4",
+      "label": "APL_S24_21_4",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:31.811330Z"
+    },
+    "Algorithms & Errors::15": {
+      "topic": "Algorithms & Errors",
+      "group_index": 15,
+      "group_id": "APL_S24_22_7",
+      "label": "APL_S24_22_7",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:32.110601Z"
+    },
+    "Algorithms & Errors::16": {
+      "topic": "Algorithms & Errors",
+      "group_index": 16,
+      "group_id": "PC_M24_22_6",
+      "label": "PC_M24_22_6",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:32.359745Z"
+    },
+    "Algorithms & Errors::17": {
+      "topic": "Algorithms & Errors",
+      "group_index": 17,
+      "group_id": "APL_M24_22_3",
+      "label": "APL_M24_22_3",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:32.960587Z"
+    },
+    "Algorithms & Errors::18": {
+      "topic": "Algorithms & Errors",
+      "group_index": 18,
+      "group_id": "APL_M24_22_10",
+      "label": "APL_M24_22_10",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:33.494068Z"
+    },
+    "Algorithms & Errors::19": {
+      "topic": "Algorithms & Errors",
+      "group_index": 19,
+      "group_id": "AL_W23_21_6",
+      "label": "AL_W23_21_6",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:33.710216Z"
+    },
+    "Algorithms & Errors::20": {
+      "topic": "Algorithms & Errors",
+      "group_index": 20,
+      "group_id": "AL_W23_21_8",
+      "label": "AL_W23_21_8",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:33.944408Z"
+    },
+    "Algorithms & Errors::21": {
+      "topic": "Algorithms & Errors",
+      "group_index": 21,
+      "group_id": "AL_W23_22_3",
+      "label": "AL_W23_22_3",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:34.610152Z"
+    },
+    "Algorithms & Errors::22": {
+      "topic": "Algorithms & Errors",
+      "group_index": 22,
+      "group_id": "AD_W23_23_5",
+      "label": "AD_W23_23_5",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:34.860274Z"
+    },
+    "Algorithms & Errors::23": {
+      "topic": "Algorithms & Errors",
+      "group_index": 23,
+      "group_id": "AD_S23_22_7",
+      "label": "AD_S23_22_7",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:35.898622Z"
+    },
+    "Algorithms & Errors::24": {
+      "topic": "Algorithms & Errors",
+      "group_index": 24,
+      "group_id": "AD_S23_23_6",
+      "label": "AD_S23_23_6",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:36.560632Z"
+    },
+    "Artificial Inteligence::0": {
+      "topic": "Artificial Inteligence",
+      "group_index": 0,
+      "group_id": "AET_M25_12_6",
+      "label": "AET_M25_12_6",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:38.060318Z"
+    },
+    "Artificial Inteligence::1": {
+      "topic": "Artificial Inteligence",
+      "group_index": 1,
+      "group_id": "AET_W24_11_9",
+      "label": "AET_W24_11_9",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:38.342520Z"
+    },
+    "Artificial Inteligence::2": {
+      "topic": "Artificial Inteligence",
+      "group_index": 2,
+      "group_id": "AI_S24_12_10",
+      "label": "AI_S24_12_10",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:38.610671Z"
+    },
+    "Artificial Inteligence::3": {
+      "topic": "Artificial Inteligence",
+      "group_index": 3,
+      "group_id": "AI_W23_12_10",
+      "label": "AI_W23_12_10",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:38.842847Z"
+    },
+    "Artificial Inteligence::4": {
+      "topic": "Artificial Inteligence",
+      "group_index": 4,
+      "group_id": "AI_W23_13_10",
+      "label": "AI_W23_13_10",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:39.393430Z"
+    },
+    "Automation::0": {
+      "topic": "Automation",
+      "group_index": 0,
+      "group_id": "AET_S25_13_6",
+      "label": "AET_S25_13_6",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:41.677433Z"
+    },
+    "Automation::1": {
+      "topic": "Automation",
+      "group_index": 1,
+      "group_id": "AET_S25_11_8",
+      "label": "AET_S25_11_8",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:41.926167Z"
+    },
+    "Automation::2": {
+      "topic": "Automation",
+      "group_index": 2,
+      "group_id": "AET_M25_12_4",
+      "label": "AET_M25_12_4",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:42.142834Z"
+    },
+    "Automation::3": {
+      "topic": "Automation",
+      "group_index": 3,
+      "group_id": "AET_W24_13_5",
+      "label": "AET_W24_13_5",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:42.429985Z"
+    },
+    "Automation::4": {
+      "topic": "Automation",
+      "group_index": 4,
+      "group_id": "AET_S24_13_6",
+      "label": "AET_S24_13_6",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:42.709392Z"
+    },
+    "Automation::5": {
+      "topic": "Automation",
+      "group_index": 5,
+      "group_id": "AET_S24_11_8",
+      "label": "AET_S24_11_8",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:43.009120Z"
+    },
+    "Automation::6": {
+      "topic": "Automation",
+      "group_index": 6,
+      "group_id": "AET_M24_12_6",
+      "label": "AET_M24_12_6",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:45.561861Z"
+    },
+    "Automation::7": {
+      "topic": "Automation",
+      "group_index": 7,
+      "group_id": "AUT_W23_12_11",
+      "label": "AUT_W23_12_11",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-11T15:17:47.110138Z"
+    }
+  }
+}

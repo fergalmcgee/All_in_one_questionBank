@@ -3755,8 +3755,8 @@
           {
             "question_id": "DS_W23_31_10b",
             "question_text": "Complete the pseudocode function Pop() to pop an item from the stack.",
-            "images": ["images/DS_W23_31_10b.png"],
-            "answer_images": ["images/answers23/DS_W23_31_10b.png"],
+            "images": ["images/questions23/DS_W23_31_10b.png"],
+            "answer_images": ["images/answers23/DS_W23_31_10bA.png"],
             "points": 5,
             "paper": "Winter 2023",
             "component": 31,
@@ -7864,7 +7864,10 @@
             "question_id": "LL_S21_41_1b",
             "question_text": "Write program code for the main program to declare a 1D array of type node with the identifier linkedList, and initialise it with the data shown.",
             "images": ["images/questions21/LL_S21_41_1b.png"],
-            "answer_images": ["images/answers21/LL_S21_41_1bA.png"],
+            "answer_images": [
+              "images/answers21/LL_S21_41_1bA.png",
+              "images/answers21/LL_S21_41_1b2A.png"
+            ],
             "points": 4,
             "paper": "May/June 2021",
             "component": 41,

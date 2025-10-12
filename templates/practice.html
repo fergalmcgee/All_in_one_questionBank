@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ bank_label }} Practice</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0f1729;
+        --panel: rgba(18, 26, 42, 0.9);
+        --accent: #60a5fa;
+        --accent-soft: rgba(96, 165, 250, 0.2);
+        --text-main: #f9fbff;
+        --text-subtle: #bac4d6;
+        --border: rgba(96, 165, 250, 0.2);
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+      }
+      body {
+        margin: 0;
+        background: radial-gradient(circle at top, rgba(96, 165, 250, 0.1), transparent 45%),
+          linear-gradient(180deg, #0b1220, #0c1324);
+        color: var(--text-main);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        padding: 32px 16px 64px;
+      }
+      .app {
+        width: min(960px, 100%);
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+      header {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        padding: 24px;
+        border-radius: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      header h1 {
+        margin: 0;
+        font-size: clamp(1.8rem, 4vw, 2.4rem);
+      }
+      .bank-switch {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .bank-switch a {
+        text-decoration: none;
+        color: var(--text-subtle);
+        border: 1px solid var(--border);
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-size: 0.9rem;
+      }
+      .bank-switch a.is-active {
+        background: var(--accent-soft);
+        color: var(--text-main);
+        border-color: rgba(96, 165, 250, 0.5);
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        align-items: center;
+      }
+      select,
+      input,
+      textarea,
+      button {
+        font: inherit;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: rgba(14, 20, 32, 0.9);
+        color: var(--text-main);
+      }
+      select,
+      input {
+        padding: 10px 12px;
+      }
+      button {
+        cursor: pointer;
+        padding: 10px 18px;
+        background: linear-gradient(135deg, #60a5fa, #6366f1);
+        border: none;
+        font-weight: 600;
+      }
+      button.secondary {
+        background: rgba(96, 165, 250, 0.15);
+        border: 1px solid rgba(96, 165, 250, 0.3);
+      }
+      button.badge {
+        border-radius: 999px;
+        padding: 10px 16px;
+        border: 1px solid transparent;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      button.badge.correct {
+        background: rgba(34, 197, 94, 0.2);
+        border-color: rgba(34, 197, 94, 0.4);
+      }
+      button.badge.partial {
+        background: rgba(251, 191, 36, 0.2);
+        border-color: rgba(251, 191, 36, 0.4);
+      }
+      button.badge.wrong {
+        background: rgba(248, 113, 113, 0.2);
+        border-color: rgba(248, 113, 113, 0.4);
+      }
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        padding: 24px;
+        border-radius: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .question-images,
+      .answer-images {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .question-images img,
+      .answer-images img {
+        width: 100%;
+        max-height: 480px;
+        object-fit: contain;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(0, 0, 0, 0.2);
+      }
+      textarea {
+        min-height: 160px;
+        padding: 12px;
+        resize: vertical;
+      }
+      .progress {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.95rem;
+        color: var(--text-subtle);
+      }
+      .summary-list {
+        display: grid;
+        gap: 16px;
+      }
+      .summary-item {
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 16px;
+        background: rgba(14, 20, 32, 0.9);
+      }
+      .badge-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-size: 0.85rem;
+      }
+      .badge-indicator.correct { background: rgba(34, 197, 94, 0.18); }
+      .badge-indicator.partial { background: rgba(251, 191, 36, 0.18); }
+      .badge-indicator.wrong { background: rgba(248, 113, 113, 0.18); }
+      .hidden { display: none; }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <header>
+        <div>
+          <h1>{{ bank_label }} Practice</h1>
+          <p style="margin: 0; color: var(--text-subtle);">
+            Work through real questions. Reveal the mark scheme when you are ready and record whether you got it correct, partially correct, or need to revisit.
+          </p>
+        </div>
+        <div class="bank-switch">
+          {% for bank in available_banks %}
+          <a
+            href="{{ url_for('practice_home', bank_id=bank.id) }}"
+            class="{{ 'is-active' if bank.id == bank_id }}"
+            >{{ bank.label }}</a
+          >
+          {% endfor %}
+        </div>
+        <div class="controls">
+          <label>
+            Topic
+            <select id="topicSelect">
+              <option value="">All topics</option>
+              {% for topic in topics %}
+              <option value="{{ topic }}">{{ topic }}</option>
+              {% endfor %}
+            </select>
+          </label>
+          <label>
+            Questions
+            <input id="countInput" type="number" min="1" max="30" value="8" />
+          </label>
+          <button id="startBtn">Start practice</button>
+          <button id="restartBtn" class="secondary hidden">Start over</button>
+        </div>
+      </header>
+
+      <section id="sessionPanel" class="panel hidden">
+        <div class="progress" id="progressBar"></div>
+        <div class="question-images" id="questionImages"></div>
+        <textarea id="answerBox" placeholder="Write your answer here…"></textarea>
+        <div>
+          <button id="revealBtn" class="secondary">Reveal answer</button>
+        </div>
+        <div id="answerSection" class="hidden">
+          <h3 style="margin: 0;">Mark scheme</h3>
+          <div class="answer-images" id="answerImages"></div>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
+            <label for="answerUpload" style="font-size: 0.9rem; color: var(--text-subtle);">
+              Upload work (optional)
+            </label>
+            <input
+              type="file"
+              id="answerUpload"
+              accept="image/*,.pdf"
+              style="color: var(--text-subtle);"
+            />
+            <p style="margin: 0; font-size: 0.8rem; color: var(--text-subtle);">
+              Attach a photo or scan if you drew a diagram or wrote calculations.
+            </p>
+          </div>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button class="badge correct" data-rating="correct">✅ I was correct</button>
+            <button class="badge partial" data-rating="partial">🟠 Partially correct</button>
+            <button class="badge wrong" data-rating="wrong">❌ Need more work</button>
+          </div>
+          <p id="responseStatus" style="margin: 6px 0 0; font-size: 0.85rem; color: var(--text-subtle);"></p>
+        </div>
+      </section>
+
+      <section id="summaryPanel" class="panel hidden">
+        <h2 style="margin: 0;">Session summary</h2>
+        <p id="summaryStats" style="color: var(--text-subtle);"></p>
+        <div class="summary-list" id="summaryList"></div>
+      </section>
+
+      <section id="historyPanel" class="panel">
+        <h2 style="margin: 0 0 6px;">Saved History (This Device)</h2>
+        <p style="margin: 0 0 12px; font-size: 0.85rem; color: var(--text-subtle);">
+          These entries stay inside this browser. Retry practice instantly or organise by topic without finishing a session.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 12px;">
+          <label style="font-size: 0.9rem; color: var(--text-subtle); display: flex; gap: 6px; align-items: center;">
+            <span>Topic</span>
+            <select id="historyTopicSelect" style="max-width: 240px;">
+              <option value="">All topics</option>
+            </select>
+          </label>
+          <button id="retryWrongBtn" class="secondary">Retry needs work</button>
+          <button id="retryPartialBtn" class="secondary">Retry partial answers</button>
+          <button id="clearHistoryBtn" class="secondary">Clear history</button>
+        </div>
+        <div class="summary-list" id="historyList" style="max-height: 320px; overflow-y: auto;"></div>
+      </section>
+    </div>
+
+    <script>
+      const bankId = {{ bank_id|tojson }};
+      const imageBase = `/bank/${bankId}/images/`;
+
+      const topicSelect = document.getElementById("topicSelect");
+      const countInput = document.getElementById("countInput");
+      const startBtn = document.getElementById("startBtn");
+      const restartBtn = document.getElementById("restartBtn");
+      const sessionPanel = document.getElementById("sessionPanel");
+      const summaryPanel = document.getElementById("summaryPanel");
+      const progressBar = document.getElementById("progressBar");
+      const questionImages = document.getElementById("questionImages");
+      const answerImages = document.getElementById("answerImages");
+      const answerBox = document.getElementById("answerBox");
+      const revealBtn = document.getElementById("revealBtn");
+      const answerSection = document.getElementById("answerSection");
+      const answerUpload = document.getElementById("answerUpload");
+      const responseStatus = document.getElementById("responseStatus");
+      const summaryList = document.getElementById("summaryList");
+      const summaryStats = document.getElementById("summaryStats");
+      const historyList = document.getElementById("historyList");
+      const clearHistoryBtn = document.getElementById("clearHistoryBtn");
+      const retryWrongBtn = document.getElementById("retryWrongBtn");
+      const retryPartialBtn = document.getElementById("retryPartialBtn");
+      const historyTopicSelect = document.getElementById("historyTopicSelect");
+
+      const ratingButtons = Array.from(
+        answerSection.querySelectorAll("button[data-rating]")
+      );
+
+      let questions = [];
+      let current = 0;
+      let responses = [];
+      let sessionId = null;
+      const historyKey = `practiceHistory_${bankId}`;
+
+      function loadHistoryEntries() {
+        try {
+          const raw = window.localStorage?.getItem(historyKey);
+          if (!raw) return [];
+          const parsed = JSON.parse(raw);
+          return Array.isArray(parsed) ? parsed : [];
+        } catch (error) {
+          console.warn('Unable to load practice history', error);
+          return [];
+        }
+      }
+
+      function persistHistory(entries) {
+        try {
+          window.localStorage?.setItem(historyKey, JSON.stringify(entries));
+        } catch (error) {
+          console.warn('Unable to save practice history', error);
+        }
+      }
+
+      function appendToHistory(entry) {
+        const entries = loadHistoryEntries();
+        if (entry.question_id) {
+          for (let i = entries.length - 1; i >= 0; i -= 1) {
+            if (entries[i]?.question_id === entry.question_id) {
+              entries.splice(i, 1);
+            }
+          }
+        }
+        if (entry.rating === 'correct') {
+          persistHistory(entries);
+          renderHistory(entries);
+          return;
+        }
+        entries.unshift(entry);
+        while (entries.length > 200) {
+          entries.pop();
+        }
+        persistHistory(entries);
+        renderHistory(entries);
+      }
+
+      function clearHistory() {
+        try {
+          window.localStorage?.removeItem(historyKey);
+        } catch (error) {
+          console.warn('Unable to clear practice history', error);
+        }
+        renderHistory([]);
+      }
+
+      function updateTopicOptions(entries) {
+        if (!historyTopicSelect) return;
+        const current = historyTopicSelect.value;
+        const topics = Array.from(
+          new Set(
+            entries
+              .map((item) => item.topic || '')
+              .filter((topic) => topic && topic.trim().length)
+          )
+        ).sort((a, b) => a.localeCompare(b));
+
+        const existing = Array.from(historyTopicSelect.options)
+          .map((opt) => opt.value)
+          .filter(Boolean);
+        const hasSame = existing.length === topics.length && existing.every((val, idx) => val === topics[idx]);
+        if (hasSame) {
+          if (current && !topics.includes(current)) {
+            historyTopicSelect.value = '';
+          }
+          return;
+        }
+
+        historyTopicSelect.innerHTML = '';
+        const defaultOpt = document.createElement('option');
+        defaultOpt.value = '';
+        defaultOpt.textContent = 'All topics';
+        historyTopicSelect.appendChild(defaultOpt);
+        topics.forEach((topic) => {
+          const opt = document.createElement('option');
+          opt.value = topic;
+          opt.textContent = topic;
+          historyTopicSelect.appendChild(opt);
+        });
+        if (current && topics.includes(current)) {
+          historyTopicSelect.value = current;
+        }
+      }
+
+      function renderHistory(entries = loadHistoryEntries()) {
+        if (!historyList) return;
+        updateTopicOptions(entries);
+        historyList.textContent = '';
+        const selectedTopic = historyTopicSelect?.value || '';
+        const filtered = selectedTopic
+          ? entries.filter((entry) => (entry.topic || '') === selectedTopic)
+          : entries;
+
+        if (!filtered.length) {
+          const empty = document.createElement('div');
+          empty.className = 'summary-empty';
+          empty.textContent = 'No saved answers on this device yet.';
+          historyList.appendChild(empty);
+          return;
+        }
+        const frag = document.createDocumentFragment();
+        filtered.slice(0, 30).forEach((item) => {
+          const block = document.createElement('div');
+          block.className = 'summary-item';
+
+          const title = document.createElement('div');
+          title.className = 'summary-item__title';
+          title.textContent = `${item.question_id || 'Question'} · ${item.topic || ''}`.trim();
+
+          const ratingLine = document.createElement('div');
+          ratingLine.textContent = `Result: ${item.rating || 'n/a'}`;
+
+          const whenLine = document.createElement('div');
+          whenLine.style.color = 'var(--text-subtle)';
+          whenLine.style.fontSize = '0.85rem';
+          whenLine.textContent = item.timestamp ? new Date(item.timestamp).toLocaleString() : '';
+
+          block.appendChild(title);
+          block.appendChild(ratingLine);
+          if (whenLine.textContent) {
+            block.appendChild(whenLine);
+          }
+          if (item.answer_text) {
+            const answerLine = document.createElement('div');
+            answerLine.className = 'summary-item__notes';
+            answerLine.textContent = item.answer_text;
+            block.appendChild(answerLine);
+          }
+          frag.appendChild(block);
+        });
+        historyList.appendChild(frag);
+      }
+
+      function buildImageElements(container, paths) {
+        container.textContent = "";
+        if (!paths || !paths.length) {
+          const note = document.createElement("p");
+          note.textContent = "No images available.";
+          note.style.color = "var(--text-subtle)";
+          container.appendChild(note);
+          return;
+        }
+        paths.forEach((rel) => {
+          const img = document.createElement("img");
+          let normalized = rel || "";
+          if (normalized.startsWith("/")) normalized = normalized.slice(1);
+          if (normalized.startsWith("images/")) normalized = normalized.slice(7);
+          img.src = `${imageBase}${normalized}`;
+          img.alt = "Question image";
+          container.appendChild(img);
+        });
+      }
+
+      function updateProgress() {
+        progressBar.textContent = `Question ${current + 1} of ${questions.length}`;
+      }
+
+      function showQuestion() {
+        const q = questions[current];
+        if (!q) return;
+
+        updateProgress();
+        buildImageElements(questionImages, q.question_images);
+        buildImageElements(answerImages, q.answer_images);
+        answerImages.parentElement.classList.toggle(
+          "hidden",
+          !q.answer_images.length
+        );
+
+        answerBox.value = responses[current]?.answer || "";
+        answerSection.classList.add("hidden");
+        revealBtn.disabled = false;
+        revealBtn.textContent = "Reveal answer";
+        if (answerUpload) {
+          answerUpload.value = "";
+        }
+        if (responseStatus) {
+          responseStatus.textContent = "";
+          responseStatus.style.color = "var(--text-subtle)";
+        }
+      }
+
+      function createSessionId() {
+        if (window.crypto && typeof window.crypto.randomUUID === "function") {
+          return window.crypto.randomUUID();
+        }
+        return `sess-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+      }
+
+      function startSession() {
+        const topic = topicSelect.value;
+        const count = Math.max(1, Math.min(Number(countInput.value) || 8, 30));
+        sessionId = createSessionId();
+
+        fetch(
+          `/practice/${bankId}/session?count=${count}&topic=${encodeURIComponent(
+            topic
+          )}`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            questions = data;
+            current = 0;
+            responses = new Array(questions.length);
+            if (!questions.length) {
+              alert("No questions found for this selection.");
+              return;
+            }
+            sessionPanel.classList.remove("hidden");
+            summaryPanel.classList.add("hidden");
+            restartBtn.classList.remove("hidden");
+            if (responseStatus) {
+              responseStatus.textContent = "";
+            }
+            showQuestion();
+            renderHistory();
+          })
+          .catch((err) => {
+            console.error(err);
+            alert("Failed to load questions.");
+          });
+      }
+
+      function revealAnswer() {
+        answerSection.classList.remove("hidden");
+        revealBtn.disabled = true;
+      }
+
+      function persistResponse(question, rating, answer) {
+        if (!question) return Promise.resolve();
+        const form = new FormData();
+        form.append("question_id", question.id || "");
+        form.append("group_id", question.group_id || "");
+        form.append("topic", question.topic || "");
+        form.append("rating", rating);
+        form.append("answer_text", answer);
+        form.append("session_id", sessionId || "");
+        form.append("group_index", question.group_index ?? "");
+        form.append("part_number", question.part_number ?? "");
+        form.append("part_count", question.part_count ?? "");
+        form.append("points", question.points ?? "");
+
+        if (answerUpload && answerUpload.files && answerUpload.files[0]) {
+          form.append("attachment", answerUpload.files[0]);
+        }
+
+        if (responseStatus) {
+          responseStatus.textContent = "Saving response…";
+          responseStatus.style.color = "var(--text-subtle)";
+        }
+
+        return fetch(`/practice/${bankId}/response`, {
+          method: "POST",
+          body: form,
+        })
+          .then((res) => res.json().then((payload) => ({ res, payload })))
+          .then(({ res, payload }) => {
+            if (!res.ok || !payload?.success) {
+              throw new Error(payload?.error || "Failed to save response");
+            }
+            if (responseStatus) {
+              responseStatus.textContent = "Response saved.";
+              responseStatus.style.color = "var(--text-subtle)";
+            }
+          })
+          .catch((error) => {
+            console.error("Failed to persist response", error);
+            if (responseStatus) {
+              responseStatus.textContent = "Could not save response. Check your connection.";
+              responseStatus.style.color = "#f87171";
+            }
+          })
+          .finally(() => {
+            if (answerUpload) {
+              answerUpload.value = "";
+            }
+          });
+      }
+
+      function recordRating(rating) {
+        const answer = answerBox.value.trim();
+        const question = questions[current];
+        responses[current] = {
+          question,
+          answer,
+          rating,
+        };
+        persistResponse(question, rating, answer).catch(() => {});
+        appendToHistory({
+          question_id: question?.id || question?.question_id || '',
+          topic: question?.topic || '',
+          rating,
+          answer_text: answer,
+          timestamp: new Date().toISOString(),
+          points: question?.points ?? null,
+          question_images: question?.question_images || [],
+          answer_images: question?.answer_images || [],
+        });
+        if (current + 1 < questions.length) {
+          current += 1;
+          showQuestion();
+        } else {
+          showSummary();
+        }
+      }
+
+      function showSummary() {
+        sessionPanel.classList.add("hidden");
+        summaryPanel.classList.remove("hidden");
+        const totals = { correct: 0, partial: 0, wrong: 0 };
+        const listFrag = document.createDocumentFragment();
+
+        responses.forEach((entry, idx) => {
+          const { question, rating, answer } = entry || {};
+          if (!question) return;
+          if (rating && totals.hasOwnProperty(rating)) {
+            totals[rating] += 1;
+          }
+
+          const item = document.createElement("div");
+          item.className = "summary-item";
+          const badge = document.createElement("div");
+          badge.className = `badge-indicator ${rating || ""}`;
+          badge.textContent = rating
+            ? rating === "correct"
+              ? "✅ Correct"
+              : rating === "partial"
+              ? "🟠 Partial"
+              : "❌ Needs work"
+            : "Not rated";
+
+          const title = document.createElement("h4");
+          title.style.margin = "0 0 12px";
+          title.textContent = `Q${idx + 1} · ${question.topic}`;
+
+          const answerPara = document.createElement("p");
+          answerPara.style.whiteSpace = "pre-wrap";
+          answerPara.style.margin = "12px 0";
+          answerPara.style.color = "var(--text-subtle)";
+          answerPara.textContent = answer || "(no answer entered)";
+
+          const answerImgs = document.createElement("div");
+          answerImgs.className = "answer-images";
+          buildImageElements(answerImgs, question.answer_images);
+
+          item.appendChild(title);
+          item.appendChild(badge);
+          item.appendChild(answerPara);
+          item.appendChild(answerImgs);
+          listFrag.appendChild(item);
+        });
+
+        summaryList.textContent = "";
+        summaryList.appendChild(listFrag);
+        summaryStats.textContent = `Correct: ${totals.correct} · Partial: ${totals.partial} · Needs work: ${totals.wrong}`;
+      }
+
+      if (clearHistoryBtn) {
+        clearHistoryBtn.addEventListener('click', () => {
+          if (confirm('Clear all saved answers on this device?')) {
+            clearHistory();
+          }
+        });
+      }
+
+      historyTopicSelect?.addEventListener('change', () => {
+        renderHistory();
+      });
+
+      function queueFromHistory(targetRating) {
+        const selectedTopic = historyTopicSelect?.value || '';
+        const entries = loadHistoryEntries().filter((entry) => {
+          if (entry.rating !== targetRating) return false;
+          if (selectedTopic && (entry.topic || '') !== selectedTopic) return false;
+          return true;
+        });
+        if (!entries.length) {
+          alert('No matching questions found in saved history.');
+          return;
+        }
+
+        questions = entries.map((entry, index) => ({
+          id: entry.question_id,
+          question_images: entry.question_images || [],
+          answer_images: entry.answer_images || [],
+          topic: entry.topic || 'Review',
+          points: entry.points ?? 0,
+          part_number: index + 1,
+          part_count: entries.length,
+        }));
+        current = 0;
+        responses = new Array(questions.length);
+        sessionPanel.classList.remove('hidden');
+        summaryPanel.classList.add('hidden');
+        restartBtn.classList.remove('hidden');
+        showQuestion();
+      }
+
+      retryWrongBtn?.addEventListener('click', () => {
+        queueFromHistory('wrong');
+      });
+
+      retryPartialBtn?.addEventListener('click', () => {
+        queueFromHistory('partial');
+      });
+
+      renderHistory();
+
+      startBtn.addEventListener("click", startSession);
+      restartBtn.addEventListener("click", startSession);
+      revealBtn.addEventListener("click", revealAnswer);
+      ratingButtons.forEach((btn) =>
+        btn.addEventListener("click", () => recordRating(btn.dataset.rating))
+      );
+    </script>
+  </body>
+</html>

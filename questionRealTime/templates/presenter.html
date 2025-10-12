@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Question Live Presenter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/presenter.css') }}" />
+</head>
+<body>
+    <div class="page">
+        <header class="top-bar">
+            <div class="app-title">
+                <h1>Question Live Presenter</h1>
+                <p>Launch a question session and watch answers roll in.</p>
+            </div>
+            <form id="session-form" class="session-form" autocomplete="off">
+                <label for="bank-select">Question bank</label>
+                <select id="bank-select" name="bank" required>
+                    <option value="" disabled selected>Select a bank</option>
+                    {% for bank in banks %}
+                    <option value="{{ bank.id }}">{{ bank.label }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Start session</button>
+            </form>
+            <form method="post" action="{{ url_for('presenter_logout') }}" class="logout-form">
+                <button type="submit">Sign out</button>
+            </form>
+        </header>
+
+        <section id="session-info" class="session-info hidden">
+            <div class="info-card">
+                <h2>Students join at</h2>
+                <p class="join-url" id="join-url">—</p>
+                <p class="session-code">Session code: <span id="session-code">—</span></p>
+                <div class="qr-wrap">
+                    <img id="join-qr" alt="Join QR" src="" />
+                    <p>Scan QR or visit the link above.</p>
+                </div>
+            </div>
+            <div class="controls">
+                <button id="reveal-button" type="button" disabled>Reveal answer</button>
+                <button id="next-button" type="button" disabled>Next question</button>
+                <button id="reset-button" type="button">End session</button>
+            </div>
+        </section>
+
+        <section id="session-builder" class="session-builder hidden">
+            <header class="builder-header">
+                <div>
+                    <h2>Session builder</h2>
+                    <p>Select topics and queue specific questions before starting a session.</p>
+                </div>
+                <div class="builder-summary" id="builder-summary">No questions queued yet.</div>
+            </header>
+            <div class="builder-grid">
+                <aside class="builder-column topics">
+                    <header class="column-header">
+                        <h3>Topics</h3>
+                        <div class="column-actions">
+                            <button type="button" id="toggle-topics">Toggle all</button>
+                        </div>
+                    </header>
+                    <div id="topic-list" class="topic-list"></div>
+                </aside>
+                <section class="builder-column questions">
+                    <header class="column-header">
+                        <h3>Available questions</h3>
+                        <div class="column-actions">
+                            <button type="button" id="add-all-button">Add filtered</button>
+                        </div>
+                    </header>
+                    <div id="question-list" class="question-list"></div>
+                </section>
+                <section class="builder-column queue">
+                    <header class="column-header">
+                        <h3>Session queue</h3>
+                        <div class="column-actions">
+                            <button type="button" id="clear-selection">Clear</button>
+                        </div>
+                    </header>
+                    <div class="manual-builder">
+                        <button type="button" id="manual-question-toggle" class="manual-toggle">New manual question</button>
+                        <div id="manual-question-panel" class="manual-panel hidden">
+                            <div class="manual-field">
+                                <label for="manual-question-text">Question text</label>
+                                <textarea id="manual-question-text" rows="3" placeholder="Type or paste the question prompt"></textarea>
+                            </div>
+                            <div class="manual-field">
+                                <label>Question images</label>
+                                <div id="manual-question-drop" class="drop-zone" tabindex="0">
+                                    <span>Drop or paste images here</span>
+                                </div>
+                                <button type="button" id="manual-question-library" class="library-button">Add from saved images</button>
+                                <div id="manual-question-preview" class="drop-preview"></div>
+                            </div>
+                            <div class="manual-field">
+                                <label for="manual-answer-text">Answer (optional)</label>
+                                <textarea id="manual-answer-text" rows="3" placeholder="Add answer notes for reveal"></textarea>
+                            </div>
+                            <div class="manual-field">
+                                <label>Answer images (optional)</label>
+                                <div id="manual-answer-drop" class="drop-zone" tabindex="0">
+                                    <span>Drop or paste answer images</span>
+                                </div>
+                                <button type="button" id="manual-answer-library" class="library-button">Add from saved images</button>
+                                <div id="manual-answer-preview" class="drop-preview"></div>
+                            </div>
+                            <p id="manual-question-error" class="manual-error" role="alert"></p>
+                            <div class="manual-actions">
+                                <button type="button" id="manual-question-submit">Add to queue</button>
+                                <button type="button" id="manual-question-cancel" class="secondary">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                    <ol id="selected-questions" class="selected-questions"></ol>
+                </section>
+            </div>
+        </section>
+
+        <main id="main" class="main">
+            <section class="question-card" id="question-card" aria-live="polite">
+                <div class="meta">
+                    <span id="question-topic"></span>
+                    <span id="question-progress"></span>
+                </div>
+                <h2 id="question-text" class="question-text">Start a session to display questions.</h2>
+                <div id="question-images" class="question-images"></div>
+                <div id="answer-reveal" class="answer-reveal hidden">
+                    <h3>Answer</h3>
+                    <p id="answer-text"></p>
+                    <div id="answer-images" class="answer-images"></div>
+                </div>
+            </section>
+
+            <section class="response-board" id="response-board" aria-live="polite">
+                <h2>Live answers</h2>
+                <div class="board" id="answers-grid"></div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        window.__BANK_OPTIONS__ = {{ banks | tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='js/presenter.js') }}" defer></script>
+
+    <div id="manual-library-overlay" class="library-overlay hidden" role="dialog" aria-modal="true">
+        <div class="library-dialog">
+            <header class="library-header">
+                <h3>Saved images</h3>
+                <button type="button" id="manual-library-close" aria-label="Close">×</button>
+            </header>
+            <section id="manual-library-content" class="library-content">
+                <p>Loading images…</p>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

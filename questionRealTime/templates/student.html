@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join Live Question</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/student.css') }}" />
+</head>
+<body>
+    <div class="page">
+        <header>
+            <h1>Join the Live Question Session</h1>
+            <p id="status-message">Enter your name to get started.</p>
+        </header>
+
+        <section id="join-section" class="join-section">
+            <form id="join-form" autocomplete="off">
+                <label for="session-code">Session code</label>
+                <input id="session-code" name="session-code" type="text" maxlength="8" required />
+                <label for="student-name">Your name</label>
+                <input id="student-name" name="student-name" type="text" maxlength="40" required />
+                <button type="submit">Join session</button>
+            </form>
+        </section>
+
+        <main id="question-section" class="question-section hidden">
+            <div class="question-card">
+                <div class="meta">
+                    <span id="progress"></span>
+                    <span id="topic"></span>
+                </div>
+                <h2 id="question-text" class="question-text">Waiting for the teacher to start…</h2>
+                <div id="question-images" class="question-images"></div>
+            </div>
+
+            <form id="answer-form" class="answer-form hidden" autocomplete="off">
+                <label for="answer-input">Your answer</label>
+                <textarea id="answer-input" rows="3" required></textarea>
+                <div class="actions">
+                    <button type="submit">Send answer</button>
+                    <span id="answer-feedback" role="status"></span>
+                </div>
+            </form>
+
+            <section id="official-answer" class="official-answer hidden">
+                <h3>Official answer</h3>
+                <p id="answer-text"></p>
+                <div id="answer-images" class="answer-images"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/student.js') }}" defer></script>
+</body>
+</html>

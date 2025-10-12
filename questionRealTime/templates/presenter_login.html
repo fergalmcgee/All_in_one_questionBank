@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Presenter Sign-In</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/presenter_login.css') }}" />
+</head>
+<body>
+    <div class="page">
+        <section class="card">
+            <h1>Presenter access</h1>
+            <p class="subtitle">Enter the staff code to open the presenter controls.</p>
+            {% if error %}
+            <p class="error" role="alert">{{ error }}</p>
+            {% endif %}
+            <form method="post" action="{{ url_for('presenter_login') }}" autocomplete="off">
+                <label for="access_code">Access code</label>
+                <input id="access_code" name="access_code" type="password" required autofocus />
+                <button type="submit">Unlock presenter</button>
+            </form>
+        </section>
+    </div>
+</body>
+</html>

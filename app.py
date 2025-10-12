@@ -2,12 +2,14 @@ from flask import (
     Flask,
     abort,
     jsonify,
+    redirect,
     render_template,
     request,
     send_from_directory,
     url_for,
 )
 import os
+import re
 import random
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
@@ -15,10 +17,16 @@ from reportlab.lib.utils import ImageReader
 import io
 import json
 import tempfile
+from datetime import datetime
 from functools import lru_cache
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_SEARCH_PLACEHOLDER = "Search by concept, keyword or tag"
+DEFAULT_TITLE_NOTES = (
+    "Class should be your CS class NOT your AS class — e.g. CS1\n"
+    "Leave mark blank (Teachers use)"
+)
+REVIEW_STORAGE_DIR = os.path.join(BASE_DIR, 'review_logs')
 # Create a Flask application instance
 app = Flask(__name__)
 
@@ -28,32 +36,32 @@ QUESTION_BANKS = {
     "CSA2": {
         "label": "Computer Science A2",
         "json": "A2Questions.json",
-        "search_placeholder": "Search A2 CS topics — e.g. recursion, Turing machine, hashing",
-        "search_examples": ["recursion", "Turing machine", "hash table", "binary tree"],
+        "search_placeholder": "Search A2 CS topics — e.g. recursion, enumerated, floating point",
+        "search_examples": ["recursion", "enumerated", "floating point", "binary search"],
     },
     "CSAS": {
         "label": "Computer Science AS",
         "json": "ASQuestions.json",
-        "search_placeholder": "Try keywords like tracing, SQL joins, networking layers",
-        "search_examples": ["trace table", "SQL join", "OSI layer", "merge sort"],
+        "search_placeholder": "Look up AS topics like - SQL, Logic Gate, 2D array",
+        "search_examples": ["Logic Gate", "SQL", "Router", "2D array"],
     },
     "CSIG": {
         "label": "Computer Science IGCSE",
         "json": "IGTheory.json",
         "search_placeholder": "Look up IGCSE concepts — e.g. lossy, sensors, flowchart",
-        "search_examples": ["lossy compression", "sensor", "flowchart symbol", "binary shift"],
+        "search_examples": ["lossy compression", "sensor", "flowchart", "binary"],
     },
     "PHAS": {
         "label": "Physics AS",
         "json": "ASPhysicsQB.json",
-        "search_placeholder": "Search AS Physics — e.g. SHM, resistivity, Young's modulus",
-        "search_examples": ["simple harmonic", "resistivity", "Young's modulus", "photoelectric"],
+        "search_placeholder": "Search AS Physics — e.g. SHM, resistivity, acceleration",
+        "search_examples": ["SHM", "resistivity", "acceleration", "electromagnetic"],
     },
     "PHIG": {
         "label": "Physics IGCSE",
         "json": "IGPQ.json",
-        "search_placeholder": "Try GCSE ideas — e.g. momentum, refraction, circuit",
-        "search_examples": ["momentum", "refraction", "series circuit", "latent heat"],
+        "search_placeholder": "Try GCSE ideas — e.g. momentum, refraction, graph",
+        "search_examples": ["momentum", "refraction", "graph", "radiation"],
     },
     "PHA2": {
         "label": "Physics A2",
@@ -89,6 +97,32 @@ def get_bank_config(bank_id):
     return config
 
 
+
+def _natural_key(value):
+    if not value:
+        return []
+    if not isinstance(value, str):
+        value = str(value)
+    return [int(part) if part.isdigit() else part.lower() for part in re.split(r"(\d+)", value)]
+
+
+@lru_cache(maxsize=None)
+def get_question_lookup(bank_id):
+    data = load_questions_data(bank_id)
+    lookup = {}
+    fallback_index = 0
+    for topic, groups in data.items():
+        for idx, group in enumerate(groups, start=1):
+            group_key = group.get('group_id')
+            if not group_key:
+                fallback_index += 1
+                group_key = f"{topic}_{idx}_{fallback_index}"
+            for question in group.get('questions', []):
+                qid = question.get('question_id')
+                if qid and qid not in lookup:
+                    lookup[qid] = group_key
+    return lookup
+
 @lru_cache(maxsize=None)
 def load_questions_data(bank_id):
     config = get_bank_config(bank_id)
@@ -102,10 +136,130 @@ def load_questions_data(bank_id):
     return payload
 
 
+def _review_state_path(bank_id):
+    return os.path.join(REVIEW_STORAGE_DIR, f"{bank_id}.json")
+
+
+def _load_review_state(bank_id):
+    path = _review_state_path(bank_id)
+    if not os.path.exists(path):
+        return {"bank_id": bank_id, "groups": {}, "updated_at": None}
+    try:
+        with open(path, "r") as file:
+            data = json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {"bank_id": bank_id, "groups": {}, "updated_at": None}
+    if not isinstance(data, dict):
+        return {"bank_id": bank_id, "groups": {}, "updated_at": None}
+    if "groups" not in data or not isinstance(data["groups"], dict):
+        data["groups"] = {}
+    return data
+
+
+def _write_review_state(bank_id, groups):
+    os.makedirs(REVIEW_STORAGE_DIR, exist_ok=True)
+    path = _review_state_path(bank_id)
+    payload = {
+        "bank_id": bank_id,
+        "updated_at": datetime.utcnow().isoformat() + "Z",
+        "groups": groups,
+    }
+    tmp_path = f"{path}.tmp"
+    with open(tmp_path, "w") as file:
+        json.dump(payload, file, indent=2)
+    os.replace(tmp_path, path)
+
+
 @app.route('/bank/<bank_id>/images/<path:filename>')
 def serve_bank_image(bank_id, filename):
     config = get_bank_config(bank_id)
     return send_from_directory(config['images_dir'], filename)
+
+
+@app.route('/practice')
+def practice_root():
+    default_bank = next(iter(QUESTION_BANKS.keys()))
+    return redirect(url_for('practice_home', bank_id=default_bank))
+
+
+@app.route('/practice/<bank_id>')
+def practice_home(bank_id):
+    questions_data = load_questions_data(bank_id)
+    config = get_bank_config(bank_id)
+    topics = sorted(questions_data.keys())
+    available = [
+        {'id': key, 'label': info['label']}
+        for key, info in QUESTION_BANKS.items()
+    ]
+    return render_template(
+        'practice.html',
+        bank_id=bank_id,
+        bank_label=config['label'],
+        topics=topics,
+        available_banks=available,
+    )
+
+
+@app.route('/practice/<bank_id>/session')
+def practice_session(bank_id):
+    questions_data = load_questions_data(bank_id)
+    topic = request.args.get('topic')
+    count = int(request.args.get('count', 10))
+
+    question_pool = []
+
+    def extend_unique(target_list, items):
+        seen = set()
+        for item in target_list:
+            if item:
+                seen.add(item)
+        for item in items or []:
+            if item and item not in seen:
+                target_list.append(item)
+                seen.add(item)
+
+    for topic_name, groups in questions_data.items():
+        if topic and topic != topic_name:
+            continue
+        for group in groups:
+            questions = group.get('questions', []) or []
+            if not questions:
+                continue
+
+            question_ids = []
+            q_images = []
+            answer_images = []
+            total_points = 0
+
+            for question in questions:
+                qid = question.get('question_id')
+                if qid:
+                    question_ids.append(qid)
+                total_points += get_question_points(question)
+                extend_unique(q_images, question.get('images', []))
+                extend_unique(answer_images, question.get('answer_images', []))
+
+            if not q_images and not answer_images:
+                continue
+
+            primary_id = (
+                group.get('group_id')
+                or (question_ids[0] if question_ids else None)
+                or f"{topic_name}_group_{len(question_pool) + 1}"
+            )
+
+            question_pool.append({
+                'id': primary_id,
+                'group_id': group.get('group_id'),
+                'question_ids': question_ids,
+                'topic': topic_name,
+                'question_images': q_images,
+                'answer_images': answer_images,
+                'points': total_points,
+            })
+
+    random.shuffle(question_pool)
+    return jsonify(question_pool[:count])
 
 def get_question_points(question):
     if 'points' in question:
@@ -160,6 +314,7 @@ def build_template_context(bank_id, questions_data=None, additional_data=None):
         'available_banks': available,
         'search_placeholder': placeholder,
         'search_suggestions': suggestions,
+        'default_title_notes': DEFAULT_TITLE_NOTES,
     }
 
     if additional_data:
@@ -187,6 +342,9 @@ def _build_base_additional(bank_id):
         'search_url': url_for('search_questions', bank_id=bank_id),
         'notes_url': url_for('submit_note', bank_id=bank_id),
         'questions_api_base': questions_base,
+        'review_data_url': url_for('review_data', bank_id=bank_id),
+        'review_url': url_for('review_page', bank_id=bank_id),
+        'review_status_url': url_for('review_status', bank_id=bank_id),
     }
 
 
@@ -195,6 +353,104 @@ def bank_home(bank_id):
     questions_data = load_questions_data(bank_id)
     context = build_template_context(bank_id, questions_data, additional_data=_build_base_additional(bank_id))
     return render_template('index.html', **context)
+
+
+def _collect_review_groups(bank_id, questions_data=None):
+    if questions_data is None:
+        questions_data = load_questions_data(bank_id)
+
+    review_groups = []
+    for topic_name, groups in questions_data.items():
+        for group_index, group in enumerate(groups):
+            normalized_questions = []
+            for question in group.get('questions', []):
+                normalized_questions.append({
+                    'question_id': question.get('question_id'),
+                    'question_text': question.get('question_text', ''),
+                    'images': question.get('images', []),
+                    'answer_images': question.get('answer_images', []),
+                    'points': get_question_points(question),
+                })
+
+            review_groups.append({
+                'topic': topic_name,
+                'group_index': group_index,
+                'group_id': group.get('group_id'),
+                'tags': group.get('tags', []),
+                'questions': normalized_questions,
+            })
+
+    review_groups.sort(key=lambda item: (_natural_key(item['topic']), item['group_index']))
+    return review_groups
+
+
+@app.route('/bank/<bank_id>/review')
+def review_page(bank_id):
+    questions_data = load_questions_data(bank_id)
+    base_extra = _build_base_additional(bank_id)
+    context = build_template_context(
+        bank_id,
+        questions_data,
+        additional_data={
+            **base_extra,
+            'review_group_count': len(_collect_review_groups(bank_id, questions_data)),
+        },
+    )
+    return render_template('review.html', **context)
+
+
+@app.route('/bank/<bank_id>/review/data')
+def review_data(bank_id):
+    groups = _collect_review_groups(bank_id)
+    return jsonify({'bank_id': bank_id, 'groups': groups})
+
+
+@app.route('/bank/<bank_id>/review/status', methods=['GET', 'POST'])
+def review_status(bank_id):
+    if request.method == 'GET':
+        state = _load_review_state(bank_id)
+        return jsonify({
+            'bank_id': bank_id,
+            'entries': state.get('groups', {}),
+            'updated_at': state.get('updated_at'),
+        })
+
+    payload = request.get_json(silent=True) or {}
+    key = payload.get('key')
+    if not key:
+        return jsonify({'success': False, 'error': 'Missing entry key.'}), 400
+
+    status = payload.get('status')
+    notes = payload.get('notes') or ''
+    topic = payload.get('topic') or ''
+    group_id = payload.get('group_id') or None
+    label = payload.get('label') or group_id or ''
+
+    group_index = payload.get('group_index')
+    try:
+        group_index = int(group_index) if group_index is not None else None
+    except (TypeError, ValueError):
+        group_index = None
+
+    state = _load_review_state(bank_id)
+    groups = state.get('groups', {})
+
+    if status is None and not notes:
+        groups.pop(key, None)
+    else:
+        groups[key] = {
+            'topic': topic,
+            'group_index': group_index,
+            'group_id': group_id,
+            'label': label,
+            'status': status,
+            'notes': notes,
+            'updated_at': datetime.utcnow().isoformat() + 'Z',
+        }
+
+    _write_review_state(bank_id, groups)
+
+    return jsonify({'success': True, 'entries': groups})
 
 
 # Define the route for generating a PDF based on selected topics and points
@@ -275,7 +531,24 @@ def generate_pdf(bank_id):
         else:
             normalized_questions.append(q)
 
-    question_pdf_url, answer_pdf_url, warning_message = generate_pdfs(normalized_questions, bank_config)
+    title_page_enabled = request.form.get('title_page_enabled')
+    title_page_options = None
+    if title_page_enabled:
+        breakdown = collect_mark_breakdown(normalized_questions, bank_id)
+        notes_text = request.form.get('title_page_notes', '') or ''
+        notes_text = notes_text.strip() or DEFAULT_TITLE_NOTES
+        title_page_options = {
+            'title': (request.form.get('title_page_title') or bank_config['label']).strip() or bank_config['label'],
+            'subtitle': (request.form.get('title_page_subtitle') or '').strip(),
+            'date': (request.form.get('title_page_date') or '').strip(),
+            'notes': notes_text,
+            'total_points': total_points,
+            'breakdown': breakdown,
+        }
+
+    question_pdf_url, answer_pdf_url, warning_message = generate_pdfs(
+        normalized_questions, bank_config, title_page_options=title_page_options
+    )
 
     if is_async:
         return jsonify({
@@ -396,6 +669,30 @@ def generate_questions(questions_data, topics, points, exclude_unrelated, seed=N
             break
 
     return selected_questions
+
+
+
+def collect_mark_breakdown(normalized_questions, bank_id):
+    lookup = get_question_lookup(bank_id)
+    totals = {}
+    order = []
+    fallback_counter = 0
+
+    for item in normalized_questions:
+        question = item['question']
+        qid = question.get('question_id')
+        group_key = lookup.get(qid)
+        if not group_key:
+            fallback_counter += 1
+            group_key = f"auto_{fallback_counter}"
+        if group_key not in totals:
+            label = f"Q {len(order) + 1}"
+            totals[group_key] = {'label': label, 'total': 0}
+            order.append(group_key)
+        totals[group_key]['total'] += get_question_points(question)
+
+    return [totals[key] for key in order]
+
 
 # def generate_questions(topics, points, exclude_unrelated):
 #     selected_questions = []
@@ -603,7 +900,120 @@ def get_full_image_path(image_path, bank_config):
     return os.path.join(bank_config['base_dir'], normalized)
 
 
-def generate_pdfs(questions, bank_config, is_custom=False):
+
+
+def format_points(value):
+    if value is None:
+        return ''
+    try:
+        numeric = float(value)
+    except (TypeError, ValueError):
+        return str(value)
+    if numeric.is_integer():
+        return str(int(round(numeric)))
+    return str(numeric)
+
+
+def draw_marks_table(canvas_obj, breakdown, margin=60, bottom_margin=120):
+    if not breakdown:
+        return
+
+    width, height = letter
+    max_columns = 8
+    header_height = 24
+    body_height = 32
+    table_width = width - margin * 2
+    rows = [breakdown[i : i + max_columns] for i in range(0, len(breakdown), max_columns)]
+
+    y = bottom_margin + len(rows) * (header_height + body_height)
+    for row in rows:
+        columns = len(row) or 1
+        cell_width = table_width / columns
+        y -= header_height
+        for idx, entry in enumerate(row):
+            x = margin + idx * cell_width
+            canvas_obj.rect(x, y, cell_width, header_height, stroke=1, fill=0)
+            label = entry.get('label', '')
+            total = entry.get('total')
+            display = label
+            total_str = format_points(total)
+            if total_str:
+                display = f"{label} ({total_str})"
+            canvas_obj.setFont('Helvetica', 10)
+            canvas_obj.drawCentredString(x + cell_width / 2, y + header_height / 2 - 3, display)
+
+        body_y = y - body_height
+        for idx in range(columns):
+            x = margin + idx * cell_width
+            canvas_obj.rect(x, body_y, cell_width, body_height, stroke=1, fill=0)
+        y = body_y
+
+
+def draw_title_page(canvas_obj, bank_config, options):
+    width, height = letter
+    margin = 72
+    y = height - 90
+
+    title = (options.get('title') or bank_config['label']).strip()
+    canvas_obj.setFont('Helvetica-Bold', 26)
+    canvas_obj.drawCentredString(width / 2, y, title)
+    y -= 38
+
+    subtitle = (options.get('subtitle') or '').strip()
+    if subtitle:
+        canvas_obj.setFont('Helvetica', 20)
+        canvas_obj.drawCentredString(width / 2, y, subtitle)
+        y -= 32
+
+    date_text = (options.get('date') or '').strip()
+    if date_text:
+        canvas_obj.setFont('Helvetica', 14)
+        canvas_obj.drawCentredString(width / 2, y, date_text)
+        y -= 28
+
+    y -= 10
+    canvas_obj.setFont('Helvetica-Bold', 16)
+
+    def draw_line(label, line_length=260, extra_text=''):
+        nonlocal y
+        canvas_obj.drawString(margin, y, label)
+        line_start = margin + 65
+        line_end = min(line_start + line_length, width - margin)
+        canvas_obj.line(line_start, y - 6, line_end, y - 6)
+        if extra_text:
+            canvas_obj.drawString(line_end + 10, y, extra_text)
+        y -= 32
+
+    def draw_line_smaller(label, line_length=60, extra_text=''):
+        nonlocal y
+        canvas_obj.drawString(margin, y, label)
+        line_start = margin + 65
+        line_end = min(line_start + line_length, width - margin)
+        canvas_obj.line(line_start, y - 6, line_end, y - 6)
+        if extra_text:
+            canvas_obj.drawString(line_end + 10, y, extra_text)
+        y -= 32
+
+    draw_line('Name:')
+    draw_line_smaller('Class:')
+    total_points = options.get('total_points')
+    extra = f"/ {format_points(total_points)}" if total_points else ''
+    draw_line_smaller('Mark:', extra_text=extra)
+
+    notes = (options.get('notes') or DEFAULT_TITLE_NOTES).splitlines()
+    if notes:
+        canvas_obj.setFont('Helvetica', 12)
+        for note_line in notes:
+            canvas_obj.drawCentredString(width / 2, y, note_line.strip())
+            y -= 18
+        y -= 6
+
+    breakdown = options.get('breakdown') or []
+    if breakdown:
+        draw_marks_table(canvas_obj, breakdown, margin=margin, bottom_margin=120)
+
+
+def generate_pdfs(questions, bank_config, title_page_options=None, is_custom=False):
     question_filename = f"question_paper_{bank_config['id']}.pdf"
     answer_filename = f"answer_key_{bank_config['id']}.pdf"
     question_pdf_path = os.path.join(tempfile.gettempdir(), question_filename)
@@ -613,16 +1023,39 @@ def generate_pdfs(questions, bank_config, is_custom=False):
     p_answers = canvas.Canvas(answer_pdf_path, pagesize=letter)
     width, height = letter
 
+    if title_page_options:
+        draw_title_page(p_questions, bank_config, title_page_options)
+        p_questions.showPage()
+
+    group_lookup = get_question_lookup(bank_config['id'])
+    group_labels = {}
+    first_question_indices = {}
+    fallback_counter = 0
+
+    for idx, question_data in enumerate(questions):
+        question = question_data['question']
+        qid = question.get('question_id')
+        group_key = group_lookup.get(qid)
+        if not group_key:
+            fallback_counter += 1
+            group_key = f"auto_{fallback_counter}"
+        if group_key not in group_labels:
+            label = f"Question {len(group_labels) + 1}"
+            group_labels[group_key] = label
+            first_question_indices[idx] = label
+
     y_position_questions = height - 40
     y_position_answers = height - 40
-    question_counter = 1
     answer_counter = 1
 
-    for question_data in questions:
+    for idx, question_data in enumerate(questions):
         # Get the question object consistently whether it's random or custom
         question = question_data['question']
         
-        # Process question images
+        label = first_question_indices.get(idx)
+
+        image_entries = []
+        total_height = 0
         for image_path in question.get('images', []):
             full_image_path = get_full_image_path(image_path, bank_config)
             if os.path.exists(full_image_path):
@@ -630,34 +1063,35 @@ def generate_pdfs(questions, bank_config, is_custom=False):
                     img = ImageReader(full_image_path)
                     img_width, img_height = img.getSize()
 
-                    # Calculate scaling
                     max_width = width - 80
                     max_height = height - 80
                     width_scale = max_width / img_width
                     height_scale = max_height / img_height
-                    scale = min(width_scale, height_scale, 1.0)
+                    scale = min(width_scale * 0.9, height_scale * 0.9, 1.0)
                     scaled_width = img_width * scale
                     scaled_height = img_height * scale
-
-                    # New page if needed
-                    if y_position_questions - scaled_height - 20 < 50:
-                        p_questions.showPage()
-                        y_position_questions = height - 40
-
-                    # Add question number for first part
-                    question_id = get_question_id(question)
-                    if question_id[-1] == 'a' and image_path.endswith('a.png'):
-                        y_position_questions -=10
-                        p_questions.setFont("Helvetica", 12)
-                        p_questions.drawString(40, y_position_questions, str(question_counter))
-                        question_counter += 1
-                        y_position_questions -= 10
-
-                    p_questions.drawImage(img, 40, y_position_questions - scaled_height, 
-                                       width=scaled_width, height=scaled_height)
-                    y_position_questions -= (scaled_height )
+                    total_height += scaled_height
+                    image_entries.append((img, scaled_width, scaled_height))
                 except Exception as e:
                     print(f"Error processing question image {image_path}: {str(e)}")
+
+        if label:
+            if total_height and y_position_questions - (20 + total_height) < 50:
+                p_questions.showPage()
+                y_position_questions = height - 40
+            y_position_questions -= 10
+            p_questions.setFont("Helvetica-Bold", 12)
+            p_questions.drawString(40, y_position_questions, label)
+            y_position_questions -= 10
+
+        for img, scaled_width, scaled_height in image_entries:
+            if y_position_questions - scaled_height - 20 < 50:
+                p_questions.showPage()
+                y_position_questions = height - 40
+            p_questions.setFont("Helvetica", 12)
+            p_questions.drawImage(img, 40, y_position_questions - scaled_height, 
+                               width=scaled_width, height=scaled_height)
+            y_position_questions -= scaled_height
 
         # Process answer images
         for answer_image_path in question.get('answer_images', []):

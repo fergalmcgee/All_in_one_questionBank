@@ -4402,7 +4402,7 @@
             "question_text": "Identify two differences between special purpose registers and general purpose registers.",
             "images": [
               "images/questions23/CA_W23_13_9b.png",
-              "images/questions23/CA_W23_13_92.png"
+              "images/questions23/CA_W23_13_9b2.png"
             ],
             "answer_images": ["images/answers23/CA_W23_13_9bA.png"],
             "points": 2,

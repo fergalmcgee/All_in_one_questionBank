@@ -1,0 +1,2813 @@
+{
+  "subject": "Computer Science",
+  "topics": {
+    "Data Representation": [
+      {
+        "group_id": "DR_M25_12_1",
+        "tags": ["Number systems", "February/March 2025", "Paper 12"],
+        "questions": [
+          {
+            "question_id": "DR_M25_12_1a",
+            "question_text": "Complete the sentences about number systems. Use the items from the list. Some items will not be used and each item is used at most once. (Bases for binary/hex, 8-bit min/max, bits per hex digit, symbols A–F.)",
+            "images": ["images/questions25/DR_M25_12_1a.png"],
+            "answer_images": ["images/answers25/DR_M25_12_1aA.png"],
+            "points": 7,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "medium",
+            "tags": ["Part A", "Number systems"]
+          },
+          {
+            "question_id": "DR_M25_12_1b",
+            "question_text": "Add the two 8-bit binary numbers using binary addition. Give the answer in binary and show all working: 10011011 + 00010011.",
+            "images": ["images/questions25/DR_M25_12_1b.png"],
+            "answer_images": ["images/answers25/DR_M25_12_1bA.png"],
+            "points": 3,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "easy",
+            "tags": ["Part B", "Binary addition"]
+          },
+          {
+            "question_id": "DR_M25_12_1c",
+            "question_text": "Tick (✓) one box: correct definition of overflow in binary addition.",
+            "images": ["images/questions25/DR_M25_12_1c.png"],
+            "answer_images": ["images/answers25/DR_M25_12_1cA.png"],
+            "points": 1,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "easy",
+            "tags": ["Part C", "Overflow"]
+          }
+        ]
+      },
+      {
+        "group_id": "DR_M25_12_2",
+        "tags": ["Text, sound, and images", "Data storage and compression", "February/March 2025", "Paper 12"],
+        "questions": [
+          {
+            "question_id": "DR_M25_12_2a",
+            "question_text": "State what is meant by the colour depth of an image.",
+            "images": ["images/questions25/DR_M25_12_2a.png"],
+            "answer_images": ["images/answers25/DR_M25_12_2aA.png"],
+            "points": 1,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "easy",
+            "tags": ["Part A", "Images"]
+          },
+          {
+            "question_id": "DR_M25_12_2b",
+            "question_text": "Describe the relationship between the resolution of the image and the file size of the image.",
+            "images": ["images/questions25/DR_M25_12_2b.png"],
+            "answer_images": ["images/answers25/DR_M25_12_2bA.png"],
+            "points": 2,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "easy",
+            "tags": ["Part B", "Images"]
+          },
+          {
+            "question_id": "DR_M25_12_2c_i",
+            "question_text": "The image is compressed using lossless compression. Explain why lossless was chosen instead of lossy for this file to be downloaded and printed as a poster.",
+            "images": ["images/questions25/DR_M25_12_2c_i.png"],
+            "answer_images": ["images/answers25/DR_M25_12_2c_iA.png"],
+            "points": 3,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "medium",
+            "tags": ["Part C(i)", "Compression", "Lossless"]
+          },
+          {
+            "question_id": "DR_M25_12_2c_ii",
+            "question_text": "Identify one lossless method of compressing an image and describe the method.",
+            "images": ["images/questions25/DR_M25_12_2c_ii.png"],
+            "answer_images": ["images/answers25/DR_M25_12_2c_iiA.png"],
+            "points": 3,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "medium",
+            "tags": ["Part C(ii)", "Compression", "Lossless"]
+          }
+        ]
+      }
+    ],
+    "Data Transmission": [
+      {
+        "group_id": "DT_M25_12_2d",
+        "tags": ["Types and methods", "February/March 2025", "Paper 12"],
+        "questions": [
+          {
+            "question_id": "DT_M25_12_2d_i",
+            "question_text": "Explain how a file is broken down into packets and transmitted over a network.",
+            "images": ["images/questions25/DT_M25_12_2d_i.png"],
+            "answer_images": ["images/answers25/DT_M25_12_2d_iA.png"],
+            "points": 5,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "medium",
+            "tags": ["Part D(i)", "Packets"]
+          },
+          {
+            "question_id": "DT_M25_12_2d_ii",
+            "question_text": "Complete and annotate the diagram to show the difference between serial full-duplex transmission (between two computers) and parallel simplex transmission (between two computers).",
+            "images": ["images/questions25/DT_M25_12_2d_ii.png"],
+            "answer_images": ["images/answers25/DT_M25_12_2d_iiA.png"],
+            "points": 3,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "medium",
+            "tags": ["Part D(ii)", "Serial vs Parallel", "Duplex/Simplex"]
+          }
+        ]
+      }
+    ],
+    "Hardware": [
+      {
+        "group_id": "HW_M25_12_3",
+        "tags": ["Computer architecture", "February/March 2025", "Paper 12"],
+        "questions": [
+          {
+            "question_id": "HW_M25_12_3a",
+            "question_text": "Circle three registers that are found in the Von Neumann architecture.",
+            "images": ["images/questions25/HW_M25_12_3a.png"],
+            "answer_images": ["images/answers25/HW_M25_12_3aA.png"],
+            "points": 3,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "easy",
+            "tags": ["Part A", "Registers"]
+          },
+          {
+            "question_id": "HW_M25_12_3b",
+            "question_text": "State the purpose of the CPU in the computer.",
+            "images": ["images/questions25/HW_M25_12_3b.png"],
+            "answer_images": ["images/answers25/HW_M25_12_3bA.png"],
+            "points": 1,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "easy",
+            "tags": ["Part B", "CPU purpose"]
+          },
+          {
+            "question_id": "HW_M25_12_3c_i",
+            "question_text": "Computer A: 2.1 GHz quad-core; Computer B: 2.5 GHz dual-core; Computer C: 5.2 GHz single-core. Identify which computer is most likely to execute more instructions simultaneously and justify your answer.",
+            "images": ["images/questions25/HW_M25_12_3c_i.png"],
+            "answer_images": ["images/answers25/HW_M25_12_3c_iA.png"],
+            "points": 3,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "medium",
+            "tags": ["Part C(i)", "Cores", "Performance"]
+          },
+          {
+            "question_id": "HW_M25_12_3c_ii",
+            "question_text": "Explain why Computer C can execute more instructions per second than Computer B.",
+            "images": ["images/questions25/HW_M25_12_3c_ii.png"],
+            "answer_images": ["images/answers25/HW_M25_12_3c_iiA.png"],
+            "points": 2,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "easy",
+            "tags": ["Part C(ii)", "Clock speed"]
+          },
+          {
+            "question_id": "HW_M25_12_3d",
+            "question_text": "Define the term instruction set.",
+            "images": ["images/questions25/HW_M25_12_3d.png"],
+            "answer_images": ["images/answers25/HW_M25_12_3dA.png"],
+            "points": 1,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "easy",
+            "tags": ["Part D", "Instruction set"]
+          }
+        ]
+      }
+    ],
+    "Automated and Emerging Technologies": [
+      {
+        "group_id": "AET_M25_12_4",
+        "tags": ["Automated systems", "Sensors", "Embedded systems", "February/March 2025", "Paper 12"],
+        "questions": [
+          {
+            "question_id": "AET_M25_12_4a",
+            "question_text": "An ATM detects a person within 1 m and displays a welcome message. Identify an appropriate sensor for detecting a person.",
+            "images": ["images/questions25/AET_M25_12_4a.png"],
+            "answer_images": ["images/answers25/AET_M25_12_4aA.png"],
+            "points": 1,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "easy",
+            "tags": ["Part A(i)", "Sensors"]
+          },
+          {
+            "question_id": "AET_M25_12_4a_ii",
+            "question_text": "Describe the role of the microprocessor in detecting the person.",
+            "images": ["images/questions25/AET_M25_12_4a_ii.png"],
+            "answer_images": ["images/answers25/AET_M25_12_4a_iiA.png"],
+            "points": 3,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "medium",
+            "tags": ["Part A(ii)", "Microprocessor control"]
+          },
+          {
+            "question_id": "AET_M25_12_4b",
+            "question_text": "Describe features of the ATM that identify it as an embedded system.",
+            "images": ["images/questions25/AET_M25_12_4b.png"],
+            "answer_images": ["images/answers25/AET_M25_12_4bA.png"],
+            "points": 2,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "easy",
+            "tags": ["Part B", "Embedded systems"]
+          },
+          {
+            "question_id": "AET_M25_12_4c",
+            "question_text": "For users who are unable to see: identify one other input device and one other output device that can be built into the ATM.",
+            "images": ["images/questions25/AET_M25_12_4c.png"],
+            "answer_images": ["images/answers25/AET_M25_12_4cA.png"],
+            "points": 2,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "easy",
+            "tags": ["Part C", "Accessibility", "I/O devices"]
+          }
+        ]
+      },
+      {
+        "group_id": "AET_M25_12_6",
+        "tags": ["Artificial intelligence", "February/March 2025", "Paper 12"],
+        "questions": [
+          {
+            "question_id": "AET_M25_12_6a",
+            "question_text": "A search engine uses AI to identify relevant web pages. One characteristic of AI is the ability to learn. Identify three other characteristics of AI.",
+            "images": ["images/questions25/AET_M25_12_6a.png"],
+            "answer_images": ["images/answers25/AET_M25_12_6aA.png"],
+            "points": 3,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "medium",
+            "tags": ["Part A", "AI characteristics"]
+          },
+          {
+            "question_id": "AET_M25_12_6b",
+            "question_text": "Explain how machine learning is used by the search engine.",
+            "images": ["images/questions25/AET_M25_12_6b.png"],
+            "answer_images": ["images/answers25/AET_M25_12_6bA.png"],
+            "points": 3,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "medium",
+            "tags": ["Part B", "Machine learning"]
+          }
+        ]
+      }
+    ],
+    "Internet and Uses": [
+      {
+        "group_id": "IU_M25_12_5",
+        "tags": ["Internet vs. World Wide Web", "Cybersecurity", "February/March 2025", "Paper 12"],
+        "questions": [
+          {
+            "question_id": "IU_M25_12_5a",
+            "question_text": "NIC/MAC: Describe the other purposes of the network interface card (besides providing a MAC address).",
+            "images": ["images/questions25/IU_M25_12_5a.png"],
+            "answer_images": ["images/answers25/IU_M25_12_5aA.png"],
+            "points": 2,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "medium",
+            "tags": ["Part A(i)", "Networking hardware"]
+          },
+          {
+            "question_id": "IU_M25_12_5a_ii",
+            "question_text": "Identify three characteristics of a MAC address.",
+            "images": ["images/questions25/IU_M25_12_5a_ii.png"],
+            "answer_images": ["images/answers25/IU_M25_12_5a_iiA.png"],
+            "points": 3,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "easy",
+            "tags": ["Part A(ii)", "MAC address"]
+          },
+          {
+            "question_id": "IU_M25_12_5b_i",
+            "question_text": "Tick (✓) one box to identify a valid IPv4 address.",
+            "images": ["images/questions25/IU_M25_12_5b_i.png"],
+            "answer_images": ["images/answers25/IU_M25_12_5b_iA.png"],
+            "points": 1,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "easy",
+            "tags": ["Part B(i)", "IPv4"]
+          },
+          {
+            "question_id": "IU_M25_12_5b_ii",
+            "question_text": "Identify the device in a network that can automatically assign an IP address to a computer each time it connects.",
+            "images": ["images/questions25/IU_M25_12_5b_ii.png"],
+            "answer_images": ["images/answers25/IU_M25_12_5b_iiA.png"],
+            "points": 1,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "easy",
+            "tags": ["Part B(ii)", "DHCP"]
+          },
+          {
+            "question_id": "IU_M25_12_5c_i",
+            "question_text": "Define the term World Wide Web.",
+            "images": ["images/questions25/IU_M25_12_5c_i.png"],
+            "answer_images": ["images/answers25/IU_M25_12_5c_iA.png"],
+            "points": 1,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "easy",
+            "tags": ["Part C(i)", "WWW"]
+          },
+          {
+            "question_id": "IU_M25_12_5c_ii",
+            "question_text": "A URL includes the protocol HTTPS. Explain how HTTPS makes the transmission of data secure.",
+            "images": ["images/questions25/IU_M25_12_5c_ii.png"],
+            "answer_images": ["images/answers25/IU_M25_12_5c_iiA.png"],
+            "points": 4,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "medium",
+            "tags": ["Part C(ii)", "HTTPS", "Encryption"]
+          },
+          {
+            "question_id": "IU_M25_12_5c_iii",
+            "question_text": "Protocol is one part of a URL. Give the other two parts of a URL.",
+            "images": ["images/questions25/IU_M25_12_5c_iii.png"],
+            "answer_images": ["images/answers25/IU_M25_12_5c_iiiA.png"],
+            "points": 2,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "easy",
+            "tags": ["Part C(iii)", "URL structure"]
+          }
+        ]
+      }
+    ],
+    "Software": [
+      {
+        "group_id": "SW_M25_12_7",
+        "tags": ["Programming languages, translators, and IDEs", "February/March 2025", "Paper 12"],
+        "questions": [
+          {
+            "question_id": "SW_M25_12_7a",
+            "question_text": "Machine code is one low-level language. Identify one other low-level language and the translator needed for it.",
+            "images": ["images/questions25/SW_M25_12_7a.png"],
+            "answer_images": ["images/answers25/SW_M25_12_7aA.png"],
+            "points": 2,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "easy",
+            "tags": ["Part A", "Assemblers"]
+          },
+          {
+            "question_id": "SW_M25_12_7b",
+            "question_text": "A high-level language can be translated using a compiler or an interpreter. Describe advantages of using an interpreter instead of a compiler during development.",
+            "images": ["images/questions25/SW_M25_12_7b.png"],
+            "answer_images": ["images/answers25/SW_M25_12_7bA.png"],
+            "points": 4,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "medium",
+            "tags": ["Part B", "Interpreter vs compiler"]
+          },
+          {
+            "question_id": "SW_M25_12_7c",
+            "question_text": "IDEs provide translators. Identify three other common functions of an IDE.",
+            "images": ["images/questions25/SW_M25_12_7c.png"],
+            "answer_images": ["images/answers25/SW_M25_12_7cA.png"],
+            "points": 3,
+            "paper": "February/March 2025",
+            "component": 12,
+            "difficulty": "easy",
+            "tags": ["Part C", "IDE features"]
+          }
+        ]
+      }
+    ]
+  }
+}
+
+{
+  "subject": "Computer Science",
+  "topics": {
+    "Data Representation": [
+      {
+        "group_id": "DR_S25_11_1",
+        "tags": ["Data storage and compression", "Summer 2025", "Paper 11"],
+        "questions": [
+          {
+            "question_id": "DR_S25_11_1a",
+            "question_text": "Tick (✓) one box to show the smallest data storage unit.",
+            "images": ["images/questions25/DR_S25_11_1a.png"],
+            "answer_images": ["images/answers25/DR_S25_11_1aA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part A", "Units"]
+          },
+          {
+            "question_id": "DR_S25_11_1b",
+            "question_text": "State how many tebibytes (TiB) are equal to 2 pebibytes (PiB).",
+            "images": ["images/questions25/DR_S25_11_1b.png"],
+            "answer_images": ["images/answers25/DR_S25_11_1bA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part B", "Units", "Working space"]
+          },
+          {
+            "question_id": "DR_S25_11_1c_i",
+            "question_text": "Give the name of the process that is used to reduce the size of a file.",
+            "images": ["images/questions25/DR_S25_11_1c_i.png"],
+            "answer_images": ["images/answers25/DR_S25_11_1c_iA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part C(i)", "Compression"]
+          },
+          {
+            "question_id": "DR_S25_11_1c_ii",
+            "question_text": "One reason the size of a file may need reducing is so that it has a shorter transmission time. Give one other reason why the size of a file may need reducing.",
+            "images": ["images/questions25/DR_S25_11_1c_ii.png"],
+            "answer_images": ["images/answers25/DR_S25_11_1c_iiA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part C(ii)", "Compression"]
+          }
+        ]
+      },
+      {
+        "group_id": "DR_S25_11_2",
+        "tags": ["Number systems", "Summer 2025", "Paper 11"],
+        "questions": [
+          {
+            "question_id": "DR_S25_11_2a",
+            "question_text": "The ticket system has an output device that creates a paper ticket. Identify an appropriate output device to produce the paper ticket.",
+            "images": ["images/questions25/DR_S25_11_2a.png"],
+            "answer_images": ["images/answers25/DR_S25_11_2aA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part A", "I/O device"]
+          },
+          {
+            "question_id": "DR_S25_11_2b_i",
+            "question_text": "Two ticket numbers are 14B and 97A. Convert the two ticket numbers from hexadecimal to binary.",
+            "images": ["images/questions25/DR_S25_11_2b_i.png"],
+            "answer_images": ["images/answers25/DR_S25_11_2b_iA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "medium",
+            "tags": ["Part B(i)", "Hex ↔ Binary", "Working space"]
+          },
+          {
+            "question_id": "DR_S25_11_2b_ii",
+            "question_text": "Give two reasons why the ticket number is displayed as hexadecimal instead of binary.",
+            "images": ["images/questions25/DR_S25_11_2b_ii.png"],
+            "answer_images": ["images/answers25/DR_S25_11_2b_iiA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part B(ii)", "Hex benefits"]
+          },
+          {
+            "question_id": "DR_S25_11_2c_i",
+            "question_text": "Convert the two ticket numbers from hexadecimal to denary: 02C and 10B.",
+            "images": ["images/questions25/DR_S25_11_2c_i.png"],
+            "answer_images": ["images/answers25/DR_S25_11_2c_iA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "medium",
+            "tags": ["Part C(i)", "Hex ↔ Denary", "Working space"]
+          },
+          {
+            "question_id": "DR_S25_11_2c_ii",
+            "question_text": "Convert the two denary numbers into hexadecimal: 109 and 415.",
+            "images": ["images/questions25/DR_S25_11_2c_ii.png"],
+            "answer_images": ["images/answers25/DR_S25_11_2c_iiA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "medium",
+            "tags": ["Part C(ii)", "Denary ↔ Hex", "Working space"]
+          }
+        ]
+      },
+      {
+        "group_id": "DR_S25_11_3",
+        "tags": ["Text, sound, and images", "Summer 2025", "Paper 11"],
+        "questions": [
+          {
+            "question_id": "DR_S25_11_3",
+            "question_text": "An image is converted to binary to be represented by a computer. Complete the table with the missing terms and definitions about representing an image.",
+            "images": ["images/questions25/DR_S25_11_3.png"],
+            "answer_images": ["images/answers25/DR_S25_11_3A.png"],
+            "points": 4,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "medium",
+            "tags": ["Image representation", "Pixel", "Resolution", "Colour depth", "Metadata"]
+          }
+        ]
+      }
+    ],
+    "Data Transmission": [
+      {
+        "group_id": "DT_S25_11_4",
+        "tags": ["Types and methods", "Error detection", "Summer 2025", "Paper 11"],
+        "questions": [
+          {
+            "question_id": "DT_S25_11_4a",
+            "question_text": "The data is sent using serial full-duplex data transmission. Give two reasons why serial full-duplex is a suitable data transmission method for the data.",
+            "images": ["images/questions25/DT_S25_11_4a.png"],
+            "answer_images": ["images/answers25/DT_S25_11_4aA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part A(i)", "Serial", "Full-duplex"]
+          },
+          {
+            "question_id": "DT_S25_11_4a_ii",
+            "question_text": "Give one improvement that would be made to the data transmission if parallel transmission is used instead of serial transmission.",
+            "images": ["images/questions25/DT_S25_11_4a_ii.png"],
+            "answer_images": ["images/answers25/DT_S25_11_4a_iiA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part A(ii)", "Parallel"]
+          },
+          {
+            "question_id": "DT_S25_11_4b_i",
+            "question_text": "A checksum is used to check the data for errors after transmission. Describe the process of the checksum error detection method.",
+            "images": ["images/questions25/DT_S25_11_4b_i.png"],
+            "answer_images": ["images/answers25/DT_S25_11_4b_iA.png"],
+            "points": 5,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "medium",
+            "tags": ["Part B(i)", "Checksum"]
+          },
+          {
+            "question_id": "DT_S25_11_4b_ii",
+            "question_text": "Identify one other error detection method that could be used to check for errors in the data.",
+            "images": ["images/questions25/DT_S25_11_4b_ii.png"],
+            "answer_images": ["images/answers25/DT_S25_11_4b_iiA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part B(ii)", "Error detection"]
+          },
+          {
+            "question_id": "DT_S25_11_4c_i",
+            "question_text": "Packets are transmitted across the internet. Tick (✓) one box to show which item would not be included in a packet’s header.",
+            "images": ["images/questions25/DT_S25_11_4c_i.png"],
+            "answer_images": ["images/answers25/DT_S25_11_4c_iA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part C(i)", "Packet header"]
+          },
+          {
+            "question_id": "DT_S25_11_4c_ii",
+            "question_text": "The packets of data may need to be reordered when they arrive at the computer in the restaurant kitchen. Explain why the packets of data may need to be reordered.",
+            "images": ["images/questions25/DT_S25_11_4c_ii.png"],
+            "answer_images": ["images/answers25/DT_S25_11_4c_iiA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part C(ii)", "Packet switching", "Reordering"]
+          }
+        ]
+      },
+      {
+        "group_id": "DT_S25_11_6",
+        "tags": ["Encryption", "Summer 2025", "Paper 11"],
+        "questions": [
+          {
+            "question_id": "DT_S25_11_6a",
+            "question_text": "Complete the paragraph about asymmetric encryption using terms from the list (algorithm, plain text, cipher text, meaningless, public, private, readable/unreadable, etc.).",
+            "images": ["images/questions25/DT_S25_11_6a.png"],
+            "answer_images": ["images/answers25/DT_S25_11_6aA.png"],
+            "points": 8,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "medium",
+            "tags": ["Part A", "Asymmetric encryption", "Fill-in"]
+          },
+          {
+            "question_id": "DT_S25_11_6b",
+            "question_text": "Data can also be encrypted using symmetric encryption. Give one reason why a person would use asymmetric encryption instead of symmetric encryption.",
+            "images": ["images/questions25/DT_S25_11_6b.png"],
+            "answer_images": ["images/answers25/DT_S25_11_6bA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part B", "Encryption comparison"]
+          }
+        ]
+      }
+    ],
+    "Hardware": [
+      {
+        "group_id": "HW_S25_11_5",
+        "tags": ["Computer architecture", "Summer 2025", "Paper 11"],
+        "questions": [
+          {
+            "question_id": "HW_S25_11_5a",
+            "question_text": "Complete the table with the missing terms and definitions about processing data (CIR, ALU, instruction set, cache, accumulator).",
+            "images": ["images/questions25/HW_S25_11_5a.png"],
+            "answer_images": ["images/answers25/HW_S25_11_5aA.png"],
+            "points": 5,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "medium",
+            "tags": ["Part A", "CPU", "Registers"]
+          },
+          {
+            "question_id": "HW_S25_11_5b",
+            "question_text": "Identify the component in the CPU that is responsible for decoding an instruction.",
+            "images": ["images/questions25/HW_S25_11_5b.png"],
+            "answer_images": ["images/answers25/HW_S25_11_5bA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part B", "Control unit"]
+          },
+          {
+            "question_id": "HW_S25_11_5c",
+            "question_text": "Explain how the clock speed can affect the performance of a CPU.",
+            "images": ["images/questions25/HW_S25_11_5c.png"],
+            "answer_images": ["images/answers25/HW_S25_11_5cA.png"],
+            "points": 3,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "medium",
+            "tags": ["Part C", "Performance"]
+          }
+        ]
+      },
+      {
+        "group_id": "HW_S25_11_7",
+        "tags": ["Data storage", "Summer 2025", "Paper 11"],
+        "questions": [
+          {
+            "question_id": "HW_S25_11_7a",
+            "question_text": "Identify one other example of primary storage (besides RAM).",
+            "images": ["images/questions25/HW_S25_11_7a.png"],
+            "answer_images": ["images/answers25/HW_S25_11_7aA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part A", "Primary storage"]
+          },
+          {
+            "question_id": "HW_S25_11_7b",
+            "question_text": "Explain why RAM is an example of primary storage and not secondary storage.",
+            "images": ["images/questions25/HW_S25_11_7b.png"],
+            "answer_images": ["images/answers25/HW_S25_11_7bA.png"],
+            "points": 3,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "medium",
+            "tags": ["Part B", "Primary vs Secondary"]
+          },
+          {
+            "question_id": "HW_S25_11_7c",
+            "question_text": "Describe how virtual memory could be used in this process to stop the computer crashing when RAM becomes full.",
+            "images": ["images/questions25/HW_S25_11_7c.png"],
+            "answer_images": ["images/answers25/HW_S25_11_7cA.png"],
+            "points": 3,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "medium",
+            "tags": ["Part C", "Virtual memory"]
+          },
+          {
+            "question_id": "HW_S25_11_7d_i",
+            "question_text": "Give two features of solid-state (flash memory) storage.",
+            "images": ["images/questions25/HW_S25_11_7d_i.png"],
+            "answer_images": ["images/answers25/HW_S25_11_7d_iA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part D(i)", "Flash storage"]
+          },
+          {
+            "question_id": "HW_S25_11_7d_ii",
+            "question_text": "Give two examples of solid-state (flash memory) storage.",
+            "images": ["images/questions25/HW_S25_11_7d_ii.png"],
+            "answer_images": ["images/answers25/HW_S25_11_7d_iiA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part D(ii)", "Flash devices"]
+          }
+        ]
+      }
+    ],
+    "Automated and Emerging Technologies": [
+      {
+        "group_id": "AET_S25_11_8",
+        "tags": ["Robotics", "Summer 2025", "Paper 11"],
+        "questions": [
+          {
+            "question_id": "AET_S25_11_8a",
+            "question_text": "One characteristic of the robot is that it has a mechanical structure. Give one other characteristic of a robot.",
+            "images": ["images/questions25/AET_S25_11_8a.png"],
+            "answer_images": ["images/answers25/AET_S25_11_8aA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part A", "Robot characteristics"]
+          },
+          {
+            "question_id": "AET_S25_11_8b",
+            "question_text": "The robot has firmware. State what is meant by firmware.",
+            "images": ["images/questions25/AET_S25_11_8b.png"],
+            "answer_images": ["images/answers25/AET_S25_11_8bA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part B", "Firmware"]
+          },
+          {
+            "question_id": "AET_S25_11_8c",
+            "question_text": "Interrupts are generated when the robot is operating in the factory. Give two examples of interrupts that may be generated when the robot is in operation.",
+            "images": ["images/questions25/AET_S25_11_8c.png"],
+            "answer_images": ["images/answers25/AET_S25_11_8cA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part C", "Interrupts"]
+          },
+          {
+            "question_id": "AET_S25_11_8d",
+            "question_text": "Give two advantages to the workers in the factory of using robots to move the car parts.",
+            "images": ["images/questions25/AET_S25_11_8d.png"],
+            "answer_images": ["images/answers25/AET_S25_11_8dA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part D", "Impacts"]
+          },
+          {
+            "question_id": "AET_S25_11_8e",
+            "question_text": "The robots have the ability to automatically adapt their own processes. State the name of the ability described.",
+            "images": ["images/questions25/AET_S25_11_8e.png"],
+            "answer_images": ["images/answers25/AET_S25_11_8eA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part E", "Artificial intelligence"]
+          }
+        ]
+      }
+    ],
+    "Internet and Uses": [
+      {
+        "group_id": "IU_S25_11_9",
+        "tags": ["Cybersecurity", "Digital currency", "Summer 2025", "Paper 11"],
+        "questions": [
+          {
+            "question_id": "IU_S25_11_9a",
+            "question_text": "Each computer has an operating system. One function of the operating system is to manage memory. Describe the role of the operating system in managing memory.",
+            "images": ["images/questions25/IU_S25_11_9a.png"],
+            "answer_images": ["images/answers25/IU_S25_11_9aA.png"],
+            "points": 3,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "medium",
+            "tags": ["Part A", "OS memory management"]
+          },
+          {
+            "question_id": "IU_S25_11_9b_i",
+            "question_text": "Describe how the hacker would perform a brute-force attack.",
+            "images": ["images/questions25/IU_S25_11_9b_i.png"],
+            "answer_images": ["images/answers25/IU_S25_11_9b_iA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part B(i)", "Brute force"]
+          },
+          {
+            "question_id": "IU_S25_11_9b_ii",
+            "question_text": "Give three cyber security solutions that could be used to help prevent a brute-force attack from being successful.",
+            "images": ["images/questions25/IU_S25_11_9b_ii.png"],
+            "answer_images": ["images/answers25/IU_S25_11_9b_iiA.png"],
+            "points": 3,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part B(ii)", "Mitigations"]
+          },
+          {
+            "question_id": "IU_S25_11_9c_i",
+            "question_text": "State what is meant by a digital currency.",
+            "images": ["images/questions25/IU_S25_11_9c_i.png"],
+            "answer_images": ["images/answers25/IU_S25_11_9c_iA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part C(i)", "Digital currency"]
+          },
+          {
+            "question_id": "IU_S25_11_9c_ii",
+            "question_text": "The digital currency uses a process that involves a digital ledger. The ledger has time-stamped transactions that cannot be altered. Give the name of this process.",
+            "images": ["images/questions25/IU_S25_11_9c_ii.png"],
+            "answer_images": ["images/answers25/IU_S25_11_9c_iiA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 11,
+            "difficulty": "easy",
+            "tags": ["Part C(ii)", "Blockchain"]
+          }
+        ]
+      }
+    ]
+  }
+}
+
+    {
+    "subject": "Computer Science",
+    "topics": {
+        "Data Representation": [
+        {
+            "group_id": "DR_S25_12_1",
+            "tags": ["Number systems", "Summer 2025", "Paper 12"],
+            "questions": [
+            {
+                "question_id": "DR_S25_12_1a",
+                "question_text": "A computer stores data temporarily in random access memory (RAM). (a) RAM is one example of primary storage. Give one other example of primary storage.",
+                "images": ["images/questions25/DR_S25_12_1a.png"],
+                "answer_images": ["images/answers25/DR_S25_12_1aA.png"],
+                "points": 1,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "easy",
+                "tags": ["Part A", "Primary storage"]
+            },
+            {
+                "question_id": "DR_S25_12_1b",
+                "question_text": "(b) Give one reason why data is only stored temporarily in the RAM.",
+                "images": ["images/questions25/DR_S25_12_1b.png"],
+                "answer_images": ["images/answers25/DR_S25_12_1bA.png"],
+                "points": 1,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "easy",
+                "tags": ["Part B", "RAM characteristics"]
+            },
+            {
+                "question_id": "DR_S25_12_1c",
+                "question_text": "(c) The denary numbers 19 and 230 are converted to binary numbers to be stored in the RAM. Convert the two denary numbers to binary numbers.",
+                "images": ["images/questions25/DR_S25_12_1c.png"],
+                "answer_images": ["images/answers25/DR_S25_12_1cA.png"],
+                "points": 2,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "medium",
+                "tags": ["Part C", "Denary→Binary", "Conversions"]
+            },
+            {
+                "question_id": "DR_S25_12_1d",
+                "question_text": "(d) The hexadecimal numbers 35 and 8AD are converted to binary numbers to be stored in the RAM. Convert the two hexadecimal numbers to binary numbers.",
+                "images": ["images/questions25/DR_S25_12_1d.png"],
+                "answer_images": ["images/answers25/DR_S25_12_1dA.png"],
+                "points": 2,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "medium",
+                "tags": ["Part D", "Hex→Binary", "Conversions"]
+            },
+            {
+                "question_id": "DR_S25_12_1e",
+                "question_text": "(e) The 8-bit binary numbers 01100101 and 01110000 are stored in RAM. The binary numbers are added together. Add the two binary numbers using binary addition. Give your answer in binary. You must show all your working.",
+                "images": ["images/questions25/DR_S25_12_1e.png"],
+                "answer_images": ["images/answers25/DR_S25_12_1eA.png"],
+                "points": 3,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "medium",
+                "tags": ["Part E", "Binary addition"]
+            },
+            {
+                "question_id": "DR_S25_12_1f",
+                "question_text": "(f) An overflow occurs when two other 8-bit binary numbers are added together. Explain why the overflow error occurs.",
+                "images": ["images/questions25/DR_S25_12_1f.png"],
+                "answer_images": ["images/answers25/DR_S25_12_1fA.png"],
+                "points": 2,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "easy",
+                "tags": ["Part F", "Overflow"]
+            },
+            {
+                "question_id": "DR_S25_12_1g",
+                "question_text": "(g) The negative denary number −22 is stored in RAM. Negative denary numbers can be represented as binary using two’s complement. Give the two’s complement 8-bit binary integer that would be stored for the denary number −22. You must show all your working.",
+                "images": ["images/questions25/DR_S25_12_1g.png"],
+                "answer_images": ["images/answers25/DR_S25_12_1gA.png"],
+                "points": 2,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "medium",
+                "tags": ["Part G", "Two's complement"]
+            }
+            ]
+        },
+        {
+            "group_id": "DR_S25_12_2",
+            "tags": ["Text, sound, and images", "Data storage and compression", "Summer 2025", "Paper 12"],
+            "questions": [
+            {
+                "question_id": "DR_S25_12_2a",
+                "question_text": "A student has an image file stored on their computer. (a) The image file was taken by a digital camera. Tick (✓) one box to show whether a digital camera is an example of an input, output, process or storage device.",
+                "images": ["images/questions25/DR_S25_12_2a.png"],
+                "answer_images": ["images/answers25/DR_S25_12_2aA.png"],
+                "points": 1,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "easy",
+                "tags": ["Part A", "I/O devices"]
+            },
+            {
+                "question_id": "DR_S25_12_2b_i",
+                "question_text": "(b)(i) The size of the image file is 3072 bytes. Give the size of the image file in kibibytes (KiB).",
+                "images": ["images/questions25/DR_S25_12_2b_i.png"],
+                "answer_images": ["images/answers25/DR_S25_12_2b_iA.png"],
+                "points": 1,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "easy",
+                "tags": ["Part B(i)", "Units"]
+            },
+            {
+                "question_id": "DR_S25_12_2b_ii",
+                "question_text": "(b)(ii) State the number of nibbles in 1 byte.",
+                "images": ["images/questions25/DR_S25_12_2b_ii.png"],
+                "answer_images": ["images/answers25/DR_S25_12_2b_iiA.png"],
+                "points": 1,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "easy",
+                "tags": ["Part B(ii)", "Units"]
+            },
+            {
+                "question_id": "DR_S25_12_2c_i",
+                "question_text": "(c)(i) The image file has a colour depth of 32 bits. State what is meant by a colour depth of 32 bits.",
+                "images": ["images/questions25/DR_S25_12_2c_i.png"],
+                "answer_images": ["images/answers25/DR_S25_12_2c_iA.png"],
+                "points": 1,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "easy",
+                "tags": ["Part C(i)", "Colour depth"]
+            },
+            {
+                "question_id": "DR_S25_12_2c_ii",
+                "question_text": "(c)(ii) The colour depth of the image file is changed to 64 bits. Explain what effect this change has on the image file.",
+                "images": ["images/questions25/DR_S25_12_2c_ii.png"],
+                "answer_images": ["images/answers25/DR_S25_12_2c_iiA.png"],
+                "points": 2,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "medium",
+                "tags": ["Part C(ii)", "Colour depth effects"]
+            },
+            {
+                "question_id": "DR_S25_12_2d",
+                "question_text": "(d) The student uses lossless compression to compress the image file. Explain how the image file is compressed using lossless compression.",
+                "images": ["images/questions25/DR_S25_12_2d.png"],
+                "answer_images": ["images/answers25/DR_S25_12_2dA.png"],
+                "points": 3,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "medium",
+                "tags": ["Part D", "Lossless compression"]
+            }
+            ]
+        }
+        ],
+        "Software": [
+        {
+            "group_id": "SW_S25_12_3",
+            "tags": ["Programming languages, translators, and IDEs", "Summer 2025", "Paper 12"],
+            "questions": [
+            {
+                "question_id": "SW_S25_12_3a",
+                "question_text": "A programmer writes a program to store and sort all the data for the books in her home library. (a) The programmer uses a high-level language to write the program. One reason for writing the program using a high-level language is that it is easier to read and write. Give two other reasons why the programmer chose to use a high-level language.",
+                "images": ["images/questions25/SW_S25_12_3a.png"],
+                "answer_images": ["images/answers25/SW_S25_12_3aA.png"],
+                "points": 2,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "easy",
+                "tags": ["Part A", "High-level languages"]
+            },
+            {
+                "question_id": "SW_S25_12_3b_i",
+                "question_text": "(b)(i) The programmer uses an integrated development environment (IDE) to write the program. One function of the IDE is to provide a translator. Complete the statements about translators using terms from the list (e.g., compiler translates the whole code at once before executing it; produces an error report that displays all errors; interpreter translates and executes line by line; stops execution when an error is found, etc.).",
+                "images": ["images/questions25/SW_S25_12_3b_i.png"],
+                "answer_images": ["images/answers25/SW_S25_12_3b_iA.png"],
+                "points": 5,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "medium",
+                "tags": ["Part B(i)", "Translators", "Compiler vs interpreter"]
+            },
+            {
+                "question_id": "SW_S25_12_3b_ii",
+                "question_text": "(b)(ii) Give two other functions commonly found in an IDE. State the role of each function.",
+                "images": ["images/questions25/SW_S25_12_3b_ii.png"],
+                "answer_images": ["images/answers25/SW_S25_12_3b_iiA.png"],
+                "points": 4,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "medium",
+                "tags": ["Part B(ii)", "IDE functions"]
+            },
+            {
+                "question_id": "SW_S25_12_3c_i",
+                "question_text": "(c)(i) The programmer wants to print a list of all her books on paper. Identify a suitable type of printer that she could use to print this list.",
+                "images": ["images/questions25/SW_S25_12_3c_i.png"],
+                "answer_images": ["images/answers25/SW_S25_12_3c_iA.png"],
+                "points": 1,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "easy",
+                "tags": ["Part C(i)", "Printers"]
+            },
+            {
+                "question_id": "SW_S25_12_3c_ii",
+                "question_text": "(c)(ii) The programmer needs to connect the printer to her computer. The printer is on the same desk as her computer. Give a suitable method of data transmission that could be used to connect the computer to the printer. Explain your choice.",
+                "images": ["images/questions25/SW_S25_12_3c_ii.png"],
+                "answer_images": ["images/answers25/SW_S25_12_3c_iiA.png"],
+                "points": 6,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "medium",
+                "tags": ["Part C(ii)", "Connection methods"]
+            },
+            {
+                "question_id": "SW_S25_12_3c_iii",
+                "question_text": "(c)(iii) An even parity check is used to detect errors in the data after it has been transmitted to the printer. Describe how an even parity check detects an error.",
+                "images": ["images/questions25/SW_S25_12_3c_iii.png"],
+                "answer_images": ["images/answers25/SW_S25_12_3c_iiiA.png"],
+                "points": 4,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "medium",
+                "tags": ["Part C(iii)", "Error detection", "Parity"]
+            }
+            ]
+        }
+        ],
+        "Hardware": [
+        {
+            "group_id": "HW_S25_12_4",
+            "tags": ["Computer architecture", "Summer 2025", "Paper 12"],
+            "questions": [
+            {
+                "question_id": "HW_S25_12_4a",
+                "question_text": "An employee uses a computer that has a Von Neumann architecture to complete many different tasks. (a) The computer has a central processing unit (CPU). Complete the table of components in the CPU and their descriptions (control unit, ALU, cache, program counter, clock, buffer).",
+                "images": ["images/questions25/HW_S25_12_4a.png"],
+                "answer_images": ["images/answers25/HW_S25_12_4aA.png"],
+                "points": 6,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "medium",
+                "tags": ["Part A", "CPU components"]
+            },
+            {
+                "question_id": "HW_S25_12_4b",
+                "question_text": "(b) The computer is an example of a general purpose computer and not an embedded system. Explain why the computer is not an embedded system.",
+                "images": ["images/questions25/HW_S25_12_4b.png"],
+                "answer_images": ["images/answers25/HW_S25_12_4bA.png"],
+                "points": 2,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "easy",
+                "tags": ["Part B", "Embedded vs general purpose"]
+            }
+            ]
+        }
+        ],
+        "Internet and Uses": [
+        {
+            "group_id": "IU_S25_12_5",
+            "tags": ["Internet vs. World Wide Web", "Cybersecurity", "Summer 2025", "Paper 12"],
+            "questions": [
+            {
+                "question_id": "IU_S25_12_5a",
+                "question_text": "A hospital has computers and technology that it uses when caring for its patients. (a) One computer is an expert system that is used to help diagnose a patient’s illness. The doctor inputs the patient’s symptoms into an interface and a diagnosis is output. Describe how the expert system decides the diagnosis.",
+                "images": ["images/questions25/IU_S25_12_5a.png"],
+                "answer_images": ["images/answers25/IU_S25_12_5aA.png"],
+                "points": 3,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "medium",
+                "tags": ["Part A", "Expert systems"]
+            },
+            {
+                "question_id": "IU_S25_12_5b_i",
+                "question_text": "(b)(i) The hospital has a robot that is used to perform surgery. A doctor controls the robot from a different location to perform surgery on a patient. One feature of the robot is that it has electrical components. Give two examples of the electrical components of a robot.",
+                "images": ["images/questions25/IU_S25_12_5b_i.png"],
+                "answer_images": ["images/answers25/IU_S25_12_5b_iA.png"],
+                "points": 2,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "easy",
+                "tags": ["Part B(i)", "Robotics"]
+            },
+            {
+                "question_id": "IU_S25_12_5b_ii",
+                "question_text": "(b)(ii) Explain the advantages of using the robot to perform surgery.",
+                "images": ["images/questions25/IU_S25_12_5b_ii.png"],
+                "answer_images": ["images/answers25/IU_S25_12_5b_iiA.png"],
+                "points": 4,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "medium",
+                "tags": ["Part B(ii)", "Robotics advantages"]
+            },
+            {
+                "question_id": "IU_S25_12_5b_iii",
+                "question_text": "(b)(iii) Explain one disadvantage of using the robot to perform surgery.",
+                "images": ["images/questions25/IU_S25_12_5b_iii.png"],
+                "answer_images": ["images/answers25/IU_S25_12_5b_iiiA.png"],
+                "points": 2,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "easy",
+                "tags": ["Part B(iii)", "Robotics disadvantages"]
+            },
+            {
+                "question_id": "IU_S25_12_5c_i",
+                "question_text": "(c)(i) Patients use a web page to log into their account to pay for treatment. The patient enters the uniform resource locator (URL) for the web page into their browser and the web page is requested and displayed. Complete and annotate the diagram to show how the web page is requested for the patient.",
+                "images": ["images/questions25/IU_S25_12_5c_i.png"],
+                "answer_images": ["images/answers25/IU_S25_12_5c_iA.png"],
+                "points": 6,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "hard",
+                "tags": ["Part C(i)", "WWW request flow"]
+            },
+            {
+                "question_id": "IU_S25_12_5c_ii",
+                "question_text": "(c)(ii) A patient is making a payment through a secure connection. The secure connection is created using the secure socket layer (SSL) protocol. Explain how a secure connection is created using the SSL protocol.",
+                "images": ["images/questions25/IU_S25_12_5c_ii.png"],
+                "answer_images": ["images/answers25/IU_S25_12_5c_iiA.png"],
+                "points": 6,
+                "paper": "Summer 2025",
+                "component": 12,
+                "difficulty": "hard",
+                "tags": ["Part C(ii)", "SSL/TLS", "Cybersecurity"]
+            }
+            ]
+        }
+        ]
+    }
+    }
+
+{
+  "subject": "Computer Science",
+  "topics": {
+    "Data Representation": [
+      {
+        "group_id": "DR_S25_13_1",
+        "tags": ["Text, sound, and images", "Number systems", "Summer 2025", "Paper 13"],
+        "questions": [
+          {
+            "question_id": "DR_S25_13_1a",
+            "question_text": "A student records himself singing a song for his music project. The recorded sound is converted to binary to be processed by a computer. (a) Give one input device the student can use to record the song.",
+            "images": ["images/questions25/DR_S25_13_1a.png"],
+            "answer_images": ["images/answers25/DR_S25_13_1aA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "easy",
+            "tags": ["Part A", "Input devices", "Sound"]
+          },
+          {
+            "question_id": "DR_S25_13_1b",
+            "question_text": "(b) The student uses sound editing software to edit the recorded sound. Tick (✓) one box to show whether sound editing software is an example of application, security, system or utility software.",
+            "images": ["images/questions25/DR_S25_13_1b.png"],
+            "answer_images": ["images/answers25/DR_S25_13_1bA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "easy",
+            "tags": ["Part B", "Software types"]
+          },
+          {
+            "question_id": "DR_S25_13_1c_i",
+            "question_text": "(c)(i) Two binary numbers stored from the recording are 00011001 and 10110100. Convert the two binary numbers to denary numbers.",
+            "images": ["images/questions25/DR_S25_13_1c_i.png"],
+            "answer_images": ["images/answers25/DR_S25_13_1c_iA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "easy",
+            "tags": ["Part C(i)", "Binary→Denary"]
+          },
+          {
+            "question_id": "DR_S25_13_1c_ii",
+            "question_text": "(c)(ii) Convert the two binary numbers to hexadecimal numbers.",
+            "images": ["images/questions25/DR_S25_13_1c_ii.png"],
+            "answer_images": ["images/answers25/DR_S25_13_1c_iiA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "easy",
+            "tags": ["Part C(ii)", "Binary→Hex"]
+          },
+          {
+            "question_id": "DR_S25_13_1c_iii",
+            "question_text": "(c)(iii) A logical right shift of two places is performed on the binary number 10100100. Give the binary number that would be stored after the logical shift has taken place.",
+            "images": ["images/questions25/DR_S25_13_1c_iii.png"],
+            "answer_images": ["images/answers25/DR_S25_13_1c_iiiA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "easy",
+            "tags": ["Part C(iii)", "Logical shifts"]
+          },
+          {
+            "question_id": "DR_S25_13_1d",
+            "question_text": "(d) The two’s complement 8-bit binary integer 11001001 is also stored. Convert the two’s complement 8-bit binary integer to denary. Show all of your working.",
+            "images": ["images/questions25/DR_S25_13_1d.png"],
+            "answer_images": ["images/answers25/DR_S25_13_1dA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "medium",
+            "tags": ["Part D", "Two's complement"]
+          },
+          {
+            "question_id": "DR_S25_13_1e",
+            "question_text": "(e) The table contains terms and descriptions about the process of converting analogue sound to binary. Complete the table with the missing term and descriptions. (Terms include sample rate and sample resolution.)",
+            "images": ["images/questions25/DR_S25_13_1e.png"],
+            "answer_images": ["images/answers25/DR_S25_13_1eA.png"],
+            "points": 3,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "medium",
+            "tags": ["Part E", "Sound sampling", "Definitions"]
+          }
+        ]
+      }
+    ],
+    "Hardware": [
+      {
+        "group_id": "HW_S25_13_2",
+        "tags": ["Data storage", "Summer 2025", "Paper 13"],
+        "questions": [
+          {
+            "question_id": "HW_S25_13_2a",
+            "question_text": "A company employee is editing a video for the company’s website. Data is stored in the random access memory (RAM) when the video is edited. The RAM becomes full and pages of data are transmitted to a partitioned section of the secondary storage to stop the computer from crashing. (a) Give the name of the partitioned section of the secondary storage that is used in this process.",
+            "images": ["images/questions25/HW_S25_13_2a.png"],
+            "answer_images": ["images/answers25/HW_S25_13_2aA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "easy",
+            "tags": ["Part A", "Virtual memory"]
+          },
+          {
+            "question_id": "HW_S25_13_2b",
+            "question_text": "(b) The secondary storage is a hard disk drive (HDD). An HDD is an example of magnetic storage. One feature of magnetic storage is that it uses platters. Give three other features of magnetic storage.",
+            "images": ["images/questions25/HW_S25_13_2b.png"],
+            "answer_images": ["images/answers25/HW_S25_13_2bA.png"],
+            "points": 3,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "medium",
+            "tags": ["Part B", "Magnetic storage"]
+          },
+          {
+            "question_id": "HW_S25_13_2c",
+            "question_text": "(c) Give the reasons why an HDD is an example of secondary storage.",
+            "images": ["images/questions25/HW_S25_13_2c.png"],
+            "answer_images": ["images/answers25/HW_S25_13_2cA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "easy",
+            "tags": ["Part C", "Secondary storage"]
+          }
+        ]
+      },
+      {
+        "group_id": "HW_S25_13_3",
+        "tags": ["Computer architecture", "Summer 2025", "Paper 13"],
+        "questions": [
+          {
+            "question_id": "HW_S25_13_3a",
+            "question_text": "A computer with a Von Neumann architecture has several hardware components. (a) Complete the table with the missing terms and descriptions about computer hardware. (Includes MAC address, register, clock, control unit (CU), and the processing unit within the CPU that can fetch, decode and execute instructions.)",
+            "images": ["images/questions25/HW_S25_13_3a.png"],
+            "answer_images": ["images/answers25/HW_S25_13_3aA.png"],
+            "points": 5,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "medium",
+            "tags": ["Part A", "CPU & related terms"]
+          },
+          {
+            "question_id": "HW_S25_13_3b",
+            "question_text": "(b) Identify three registers that are used in the fetch stage of the fetch–decode–execute (FDE) cycle.",
+            "images": ["images/questions25/HW_S25_13_3b.png"],
+            "answer_images": ["images/answers25/HW_S25_13_3bA.png"],
+            "points": 3,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "easy",
+            "tags": ["Part B", "FDE registers"]
+          },
+          {
+            "question_id": "HW_S25_13_3c",
+            "question_text": "(c) Circle the two buses that are used in the fetch stage of the FDE cycle. (Options include: binary, control, denary, data, information, hardware, software.)",
+            "images": ["images/questions25/HW_S25_13_3c.png"],
+            "answer_images": ["images/answers25/HW_S25_13_3cA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "easy",
+            "tags": ["Part C", "Buses"]
+          }
+        ]
+      }
+    ],
+    "Software": [
+      {
+        "group_id": "SW_S25_13_4",
+        "tags": ["Types of software and interrupts", "Summer 2025", "Paper 13"],
+        "questions": [
+          {
+            "question_id": "SW_S25_13_4a",
+            "question_text": "A computer has an operating system. One function of the operating system is handling interrupts. (a) Describe the role of the operating system in handling interrupts.",
+            "images": ["images/questions25/SW_S25_13_4a.png"],
+            "answer_images": ["images/answers25/SW_S25_13_4aA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "medium",
+            "tags": ["Part A", "Interrupt handling"]
+          },
+          {
+            "question_id": "SW_S25_13_4b",
+            "question_text": "(b) Give two other functions of an operating system.",
+            "images": ["images/questions25/SW_S25_13_4b.png"],
+            "answer_images": ["images/answers25/SW_S25_13_4bA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "easy",
+            "tags": ["Part B", "OS functions"]
+          },
+          {
+            "question_id": "SW_S25_13_4c_i",
+            "question_text": "(c)(i) Hardware and software interrupts are two types of interrupt. Give one example of a hardware interrupt.",
+            "images": ["images/questions25/SW_S25_13_4c_i.png"],
+            "answer_images": ["images/answers25/SW_S25_13_4c_iA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "easy",
+            "tags": ["Part C(i)", "Hardware interrupt"]
+          },
+          {
+            "question_id": "SW_S25_13_4c_ii",
+            "question_text": "(c)(ii) Give one example of a software interrupt.",
+            "images": ["images/questions25/SW_S25_13_4c_ii.png"],
+            "answer_images": ["images/answers25/SW_S25_13_4c_iiA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "easy",
+            "tags": ["Part C(ii)", "Software interrupt"]
+          }
+        ]
+      }
+    ],
+    "Internet and Uses": [
+      {
+        "group_id": "IU_S25_13_5",
+        "tags": ["Internet vs. World Wide Web", "Cybersecurity", "Summer 2025", "Paper 13"],
+        "questions": [
+          {
+            "question_id": "IU_S25_13_5a",
+            "question_text": "An online company has a website that allows a user to buy products. The user types in the uniform resource locator (URL) for the website and this is sent to a domain name server (DNS). (a) Describe the role of the DNS.",
+            "images": ["images/questions25/IU_S25_13_5a.png"],
+            "answer_images": ["images/answers25/IU_S25_13_5aA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "medium",
+            "tags": ["Part A", "DNS"]
+          },
+          {
+            "question_id": "IU_S25_13_5b",
+            "question_text": "(b) The website asks a user to input their username and password to log into their account. The company want to make their login system more secure. Tick (✓) one box to show one other security method that could be added to make the login system more secure. (Options: access levels, firewall, spyware, two-step verification.)",
+            "images": ["images/questions25/IU_S25_13_5b.png"],
+            "answer_images": ["images/answers25/IU_S25_13_5bA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "easy",
+            "tags": ["Part B", "Authentication"]
+          },
+          {
+            "question_id": "IU_S25_13_5c_i",
+            "question_text": "(c)(i) The company uses a proxy server to keep the web server safe from distributed denial of service (DDoS) attacks. Complete and annotate a diagram to show how a DDoS attack is carried out on the web server.",
+            "images": ["images/questions25/IU_S25_13_5c_i.png"],
+            "answer_images": ["images/answers25/IU_S25_13_5c_iA.png"],
+            "points": 5,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "hard",
+            "tags": ["Part C(i)", "DDoS"]
+          },
+          {
+            "question_id": "IU_S25_13_5c_ii",
+            "question_text": "(c)(ii) Identify two tasks that can be performed by a proxy server that are not performed by a firewall.",
+            "images": ["images/questions25/IU_S25_13_5c_ii.png"],
+            "answer_images": ["images/answers25/IU_S25_13_5c_iiA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "medium",
+            "tags": ["Part C(ii)", "Proxy vs firewall"]
+          },
+          {
+            "question_id": "IU_S25_13_5d_i",
+            "question_text": "(d)(i) The company uses cookies to allow users to keep items in a shopping cart. The items remain in the cart after the user closes their web browser. Tick (✓) one box to show the type of cookie that is used for this process. (Options: dynamic, persistent, session, static.)",
+            "images": ["images/questions25/IU_S25_13_5d_i.png"],
+            "answer_images": ["images/answers25/IU_S25_13_5d_iA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "easy",
+            "tags": ["Part D(i)", "Cookies"]
+          },
+          {
+            "question_id": "IU_S25_13_5d_ii",
+            "question_text": "(d)(ii) Give three other ways that the company can use cookies.",
+            "images": ["images/questions25/IU_S25_13_5d_ii.png"],
+            "answer_images": ["images/answers25/IU_S25_13_5d_iiA.png"],
+            "points": 3,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "medium",
+            "tags": ["Part D(ii)", "Cookies uses"]
+          },
+          {
+            "question_id": "IU_S25_13_5d_iii",
+            "question_text": "(d)(iii) Cookies are stored by a web browser. Give two other functions of a web browser.",
+            "images": ["images/questions25/IU_S25_13_5d_iii.png"],
+            "answer_images": ["images/answers25/IU_S25_13_5d_iiiA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "easy",
+            "tags": ["Part D(iii)", "Web browser functions"]
+          }
+        ]
+      }
+    ],
+    "Automated and Emerging Technologies": [
+      {
+        "group_id": "AET_S25_13_6",
+        "tags": ["Automated systems", "Robotics", "Artificial intelligence", "Summer 2025", "Paper 13"],
+        "questions": [
+          {
+            "question_id": "AET_S25_13_6a",
+            "question_text": "A weather station uses automated systems to collect and analyse data about the weather. The automated system uses sensors. (a) Give one other component that would be part of the automated system.",
+            "images": ["images/questions25/AET_S25_13_6a.png"],
+            "answer_images": ["images/answers25/AET_S25_13_6aA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "easy",
+            "tags": ["Part A", "Automated systems"]
+          },
+          {
+            "question_id": "AET_S25_13_6b",
+            "question_text": "(b) One sensor that is part of the automated system is a temperature sensor. Give one other sensor that could be part of the automated system.",
+            "images": ["images/questions25/AET_S25_13_6b.png"],
+            "answer_images": ["images/answers25/AET_S25_13_6bA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "easy",
+            "tags": ["Part B", "Sensors"]
+          },
+          {
+            "question_id": "AET_S25_13_6c_i",
+            "question_text": "(c)(i) An alert is sent to an employee in the weather office if a temperature above 40 °C is detected. Explain how a temperature above 40 °C is detected for the alert.",
+            "images": ["images/questions25/AET_S25_13_6c_i.png"],
+            "answer_images": ["images/answers25/AET_S25_13_6c_iA.png"],
+            "points": 3,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "medium",
+            "tags": ["Part C(i)", "Threshold detection"]
+          },
+          {
+            "question_id": "AET_S25_13_6c_ii",
+            "question_text": "(c)(ii) The data for the alert is sent using serial simplex data transmission. Explain how the data is sent using serial simplex data transmission.",
+            "images": ["images/questions25/AET_S25_13_6c_ii.png"],
+            "answer_images": ["images/answers25/AET_S25_13_6c_iiA.png"],
+            "points": 3,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "medium",
+            "tags": ["Part C(ii)", "Data transmission"]
+          },
+          {
+            "question_id": "AET_S25_13_6d",
+            "question_text": "(d) Give two advantages to the weather station employees of using an automated weather system.",
+            "images": ["images/questions25/AET_S25_13_6d.png"],
+            "answer_images": ["images/answers25/AET_S25_13_6dA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "easy",
+            "tags": ["Part D", "Advantages"]
+          },
+          {
+            "question_id": "AET_S25_13_6e",
+            "question_text": "(e) Give one disadvantage to the weather station employees of using an automated weather system.",
+            "images": ["images/questions25/AET_S25_13_6e.png"],
+            "answer_images": ["images/answers25/AET_S25_13_6eA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "easy",
+            "tags": ["Part E", "Disadvantages"]
+          },
+          {
+            "question_id": "AET_S25_13_6f_i",
+            "question_text": "(f)(i) The automated weather system is upgraded and given machine learning capabilities. Machine learning is part of a branch of computer science. Identify the name of this branch of computer science.",
+            "images": ["images/questions25/AET_S25_13_6f_i.png"],
+            "answer_images": ["images/answers25/AET_S25_13_6f_iA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "easy",
+            "tags": ["Part F(i)", "AI"]
+          },
+          {
+            "question_id": "AET_S25_13_6f_ii",
+            "question_text": "(f)(ii) Explain how the machine learning capabilities can be used to predict future weather.",
+            "images": ["images/questions25/AET_S25_13_6f_ii.png"],
+            "answer_images": ["images/answers25/AET_S25_13_6f_iiA.png"],
+            "points": 3,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "medium",
+            "tags": ["Part F(ii)", "Machine learning"]
+          }
+        ]
+      }
+    ],
+    "Data Transmission": [
+      {
+        "group_id": "DT_S25_13_7",
+        "tags": ["Error detection", "Types and methods", "Summer 2025", "Paper 13"],
+        "questions": [
+          {
+            "question_id": "DT_S25_13_7a",
+            "question_text": "Data is sent from an employee’s computer to a server. The data is correct when it is sent, but an error is detected when the data is received. (a) Describe how an error can occur in the data during transmission.",
+            "images": ["images/questions25/DT_S25_13_7a.png"],
+            "answer_images": ["images/answers25/DT_S25_13_7aA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "medium",
+            "tags": ["Part A", "Transmission errors"]
+          },
+          {
+            "question_id": "DT_S25_13_7b",
+            "question_text": "(b) Methods of error detection and correction can be added to make sure that errors are identified after data is transmitted. Complete the statements about methods of error detection and correction using terms from the list (e.g., parity even/odd, parity bit, echo check, ARQ, acknowledgement, timeout, positive/negative).",
+            "images": ["images/questions25/DT_S25_13_7b.png"],
+            "answer_images": ["images/answers25/DT_S25_13_7bA.png"],
+            "points": 8,
+            "paper": "Summer 2025",
+            "component": 13,
+            "difficulty": "hard",
+            "tags": ["Part B", "Parity", "ARQ", "Echo check"]
+          }
+        ]
+      }
+    ]
+  }
+}
+
+{
+  "subject": "Computer Science",
+  "topics": {
+    "Algorithms, Programming, and Logic": [
+      {
+        "group_id": "APL_M25_22_1",
+        "tags": ["Algorithms", "March 2025", "Easy"],
+        "questions": [
+          {
+            "question_id": "APL_M25_22_1a",
+            "question_text": "Tick (✓) one box to complete this sentence. A standard method of solution used to find a piece of data in an array is a ...",
+            "images": ["images/questions25/APL_M25_22_1a.png"],
+            "answer_images": ["images/answers25/APL_M25_22_1aA.png"],
+            "points": 1,
+            "paper": "March 2025",
+            "component": 22,
+            "difficulty": "easy",
+            "tags": ["Multiple choice", "Linear search"]
+          }
+        ]
+      },
+      {
+        "group_id": "APL_M25_22_3",
+        "tags": ["Program lifecycle", "March 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "APL_M25_22_3a",
+            "question_text": "Four development life cycle stages and five descriptions are shown. Draw one line from each stage to the most appropriate description. Not all descriptions will be used.",
+            "images": ["images/questions25/APL_M25_22_3a.png"],
+            "answer_images": ["images/answers25/APL_M25_22_3aA.png"],
+            "points": 4,
+            "paper": "March 2025",
+            "component": 22,
+            "difficulty": "medium",
+            "tags": ["Lifecycle", "Matching"]
+          }
+        ]
+      },
+      {
+        "group_id": "APL_M25_22_4",
+        "tags": ["Validation and testing", "March 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "APL_M25_22_4a",
+            "question_text": "A presence check is a type of validation check. State the purpose of a presence check.",
+            "images": ["images/questions25/APL_M25_22_4a.png"],
+            "answer_images": ["images/answers25/APL_M25_22_4aA.png"],
+            "points": 1,
+            "paper": "March 2025",
+            "component": 22,
+            "difficulty": "easy",
+            "tags": ["Validation"]
+          },
+          {
+            "question_id": "APL_M25_22_4b_i",
+            "question_text": "A value input into a computer system must be an integer. Identify the validation check used to test whether the value input meets this requirement.",
+            "images": ["images/questions25/APL_M25_22_4b_i.png"],
+            "answer_images": ["images/answers25/APL_M25_22_4b_iA.png"],
+            "points": 1,
+            "paper": "March 2025",
+            "component": 22,
+            "difficulty": "easy",
+            "tags": ["Validation"]
+          },
+          {
+            "question_id": "APL_M25_22_4b_ii",
+            "question_text": "Write the pseudocode for an algorithm to input a number and check whether it is an integer. If it is an integer, accept it; otherwise output an error and re-input until valid.",
+            "images": ["images/questions25/APL_M25_22_4b_ii.png"],
+            "answer_images": ["images/answers25/APL_M25_22_4b_iiA.png"],
+            "points": 5,
+            "paper": "March 2025",
+            "component": 22,
+            "difficulty": "medium",
+            "tags": ["Pseudocode", "Input validation", "Iteration", "Selection"]
+          }
+        ]
+      },
+      {
+        "group_id": "APL_M25_22_5",
+        "tags": ["Validation and testing", "March 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "APL_M25_22_5a",
+            "question_text": "A program only accepts data that contains more than 9 characters. Complete the table by inserting the missing test data, types, and purposes.",
+            "images": ["images/questions25/APL_M25_22_5a.png"],
+            "answer_images": ["images/answers25/APL_M25_22_5aA.png"],
+            "points": 6,
+            "paper": "March 2025",
+            "component": 22,
+            "difficulty": "medium",
+            "tags": ["Test data", "Boundary/Normal/Abnormal"]
+          }
+        ]
+      },
+      {
+        "group_id": "APL_M25_22_6",
+        "tags": ["Pseudocode", "Debugging", "March 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "APL_M25_22_6a",
+            "question_text": "Given a pseudocode algorithm for inputting 1000 positive integers and computing highest, total, and average: identify five errors and suggest corrections (line-numbered).",
+            "images": ["images/questions25/APL_M25_22_6a.png", "images/questions25/APL_M25_22_6a2.png"],
+            "answer_images": ["images/answers25/APL_M25_22_6aA.png", "images/answers25/APL_M25_22_6aA2.png"],
+            "points": 5,
+            "paper": "March 2025",
+            "component": 22,
+            "difficulty": "medium",
+            "tags": ["Error finding", "Pseudocode"]
+          },
+          {
+            "question_id": "APL_M25_22_6b",
+            "question_text": "Write the pseudocode statement to output the average of the numbers, rounded to two decimal places.",
+            "images": ["images/questions25/APL_M25_22_6b.png"],
+            "answer_images": ["images/answers25/APL_M25_22_6bA.png"],
+            "points": 2,
+            "paper": "March 2025",
+            "component": 22,
+            "difficulty": "easy",
+            "tags": ["Rounding", "Output"]
+          },
+          {
+            "question_id": "APL_M25_22_6c",
+            "question_text": "Explain how to change the corrected algorithm so that it also finds the smallest number and outputs its value at the end. Any code used must be fully explained.",
+            "images": ["images/questions25/APL_M25_22_6c.png"],
+            "answer_images": ["images/answers25/APL_M25_22_6cA.png"],
+            "points": 4,
+            "paper": "March 2025",
+            "component": 22,
+            "difficulty": "medium",
+            "tags": ["Algorithm design", "Min tracking"]
+          }
+        ]
+      },
+      {
+        "group_id": "APL_M25_22_7",
+        "tags": ["Flowcharts", "Tracing", "March 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "APL_M25_22_7a",
+            "question_text": "Complete the trace table for the flowchart given the input: Y, 7, S, 9, Y, 5, M, 12, Y, 25, D, 5, N, 10, A, 6.",
+            "images": ["images/questions25/APL_M25_22_7a.png", "images/questions25/APL_M25_22_7a2.png"],
+            "answer_images": ["images/answers25/APL_M25_22_7aA.png"],
+            "points": 5,
+            "paper": "March 2025",
+            "component": 22,
+            "difficulty": "medium",
+            "tags": ["Trace table", "Arithmetic ops"]
+          },
+          {
+            "question_id": "APL_M25_22_7b",
+            "question_text": "State the purpose of the algorithm.",
+            "images": ["images/questions25/APL_M25_22_7b.png"],
+            "answer_images": ["images/answers25/APL_M25_22_7bA.png"],
+            "points": 1,
+            "paper": "March 2025",
+            "component": 22,
+            "difficulty": "easy",
+            "tags": ["Purpose"]
+          },
+          {
+            "question_id": "APL_M25_22_7c_i",
+            "question_text": "Explain how to change the algorithm so that lower-case 'y' for Answer and lower-case operators work correctly.",
+            "images": ["images/questions25/APL_M25_22_7c_i.png"],
+            "answer_images": ["images/answers25/APL_M25_22_7c_iA.png"],
+            "points": 3,
+            "paper": "March 2025",
+            "component": 22,
+            "difficulty": "medium",
+            "tags": ["Robustness", "Input handling"]
+          },
+          {
+            "question_id": "APL_M25_22_7c_ii",
+            "question_text": "Identify one more input-related error when the algorithm is run.",
+            "images": ["images/questions25/APL_M25_22_7c_ii.png"],
+            "answer_images": ["images/answers25/APL_M25_22_7c_iiA.png"],
+            "points": 1,
+            "paper": "March 2025",
+            "component": 22,
+            "difficulty": "easy",
+            "tags": ["Validation"]
+          }
+        ]
+      },
+      {
+        "group_id": "APL_M25_22_10",
+        "tags": ["Arrays", "Menu systems", "March 2025", "Hard"],
+        "questions": [
+          {
+            "question_id": "APL_M25_22_10a",
+            "question_text": "Write a program using arrays MemberID[] and Name[] to: provide a menu (new member/list/stop); validate menu input; input/validate a six-character unique membership code; store code and names in first available positions; list membership codes with first and last names; loop until stop.",
+            "images": ["images/questions25/APL_M25_22_10a.png", "images/questions25/APL_M25_22_10a2.png", "images/questions25/APL_M25_22_10a3.png"],
+            "answer_images": ["images/answers25/APL_M25_22_10aA.png", "images/answers25/APL_M25_22_10aA2.png", "images/answers25/APL_M25_22_10aA3.png"],
+            "points": 15,
+            "paper": "March 2025",
+            "component": 22,
+            "difficulty": "hard",
+            "tags": ["1D arrays", "2D arrays", "Validation", "Uniqueness check", "Menu", "Pseudocode"]
+          }
+        ]
+      }
+    ],
+    "Arrays and File Handling": [
+      {
+        "group_id": "AF_M25_22_2",
+        "tags": ["File operations (read/write)", "March 2025", "Easy"],
+        "questions": [
+          {
+            "question_id": "AF_M25_22_2a",
+            "question_text": "Tick (✓) one box to complete this sentence. The pseudocode to store a hotel name held in the variable Name to a text file is ...",
+            "images": ["images/questions25/AF_M25_22_2a.png"],
+            "answer_images": ["images/answers25/AF_M25_22_2aA.png"],
+            "points": 1,
+            "paper": "March 2025",
+            "component": 22,
+            "difficulty": "easy",
+            "tags": ["WRITEFILE", "Text files"]
+          }
+        ]
+      }
+    ],
+    "Databases": [
+      {
+        "group_id": "DB_M25_22_8",
+        "tags": ["Databases", "SQL", "March 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "DB_M25_22_8a",
+            "question_text": "State the number of fields and records in the MajorCity table shown.",
+            "images": ["images/questions25/DB_M25_22_8a.png"],
+            "answer_images": ["images/answers25/DB_M25_22_8aA.png"],
+            "points": 2,
+            "paper": "March 2025",
+            "component": 22,
+            "difficulty": "easy",
+            "tags": ["Table structure", "Counting"]
+          },
+          {
+            "question_id": "DB_M25_22_8b",
+            "question_text": "Identify the most suitable primary key field and give one reason.",
+            "images": ["images/questions25/DB_M25_22_8b.png"],
+            "answer_images": ["images/answers25/DB_M25_22_8bA.png"],
+            "points": 2,
+            "paper": "March 2025",
+            "component": 22,
+            "difficulty": "easy",
+            "tags": ["Primary key"]
+          },
+          {
+            "question_id": "DB_M25_22_8c",
+            "question_text": "Give the output from the SQL statement: SELECT City, Country, Population FROM MajorCity WHERE Continent = \"South America\" ORDER BY Population;",
+            "images": ["images/questions25/DB_M25_22_8c.png"],
+            "answer_images": ["images/answers25/DB_M25_22_8cA.png"],
+            "points": 3,
+            "paper": "March 2025",
+            "component": 22,
+            "difficulty": "medium",
+            "tags": ["SQL", "ORDER BY", "Filtering"]
+          },
+          {
+            "question_id": "DB_M25_22_8d",
+            "question_text": "Complete the SQL to list only the code, city, country and continent of all capital cities in the table.",
+            "images": ["images/questions25/DB_M25_22_8d.png"],
+            "answer_images": ["images/answers25/DB_M25_22_8dA.png"],
+            "points": 4,
+            "paper": "March 2025",
+            "component": 22,
+            "difficulty": "medium",
+            "tags": ["SQL", "SELECT", "WHERE"]
+          }
+        ]
+      }
+    ],
+    "Boolean Logic": [
+      {
+        "group_id": "BL_M25_22_9",
+        "tags": ["Logic gates", "Truth tables", "March 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "BL_M25_22_9a",
+            "question_text": "Draw a logic circuit for Z = (A NAND B) XOR (NOT (NOT B NAND C)). Each gate must have a maximum of two inputs. Do not simplify.",
+            "images": ["images/questions25/BL_M25_22_9a.png"],
+            "answer_images": ["images/answers25/BL_M25_22_9aA.png"],
+            "points": 5,
+            "paper": "March 2025",
+            "component": 22,
+            "difficulty": "hard",
+            "tags": ["Circuit drawing", "NAND", "XOR", "NOT"]
+          },
+          {
+            "question_id": "BL_M25_22_9b",
+            "question_text": "Complete the truth table from the given logic expression.",
+            "images": ["images/questions25/BL_M25_22_9b.png"],
+            "answer_images": ["images/answers25/BL_M25_22_9bA.png"],
+            "points": 4,
+            "paper": "March 2025",
+            "component": 22,
+            "difficulty": "medium",
+            "tags": ["Truth table"]
+          }
+        ]
+      }
+    ]
+  }
+}
+
+{
+  "subject": "Computer Science",
+  "topics": {
+    "Algorithms, Programming, and Logic": [
+      {
+        "group_id": "APL_S25_21_1",
+        "tags": ["Validation and testing", "Summer 2025", "Easy"],
+        "questions": [
+          {
+            "question_id": "APL_S25_21_1a",
+            "question_text": "Tick (✓✓) one box to identify the type of test to only check for the largest or smallest acceptable value.",
+            "images": ["images/questions25/APL_S25_21_1a.png"],
+            "answer_images": ["images/answers25/APL_S25_21_1aA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 21,
+            "difficulty": "easy",
+            "tags": ["Part A", "Testing", "Boundary/Extreme"]
+          }
+        ]
+      },
+      {
+        "group_id": "APL_S25_21_2",
+        "tags": ["Validation and testing", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "APL_S25_21_2a",
+            "question_text": "Four requirements for validating inputs and five types of validation check are given. Draw one line from each requirement to the most appropriate validation check. Not all validation checks will be used.",
+            "images": ["images/questions25/APL_S25_21_2a.png"],
+            "answer_images": ["images/answers25/APL_S25_21_2aA.png"],
+            "points": 4,
+            "paper": "Summer 2025",
+            "component": 21,
+            "difficulty": "medium",
+            "tags": ["Part A", "Validation checks"]
+          },
+          {
+            "question_id": "APL_S25_21_2b",
+            "question_text": "Identify and describe one verification check that could be applied when a new password is input into a system.",
+            "images": ["images/questions25/APL_S25_21_2b.png"],
+            "answer_images": ["images/answers25/APL_S25_21_2bA.png"],
+            "points": 3,
+            "paper": "Summer 2025",
+            "component": 21,
+            "difficulty": "medium",
+            "tags": ["Part B", "Verification"]
+          }
+        ]
+      }
+    ],
+    "Programming Concepts": [
+      {
+        "group_id": "PC_S25_21_3",
+        "tags": ["Iteration", "Arrays", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "PC_S25_21_3a",
+            "question_text": "The following pseudocode algorithm uses a count-controlled loop to read in 10 names and store them in Names[]. Rewrite the algorithm in pseudocode, using a condition-controlled loop instead of a count-controlled loop.",
+            "images": ["images/questions25/PC_S25_21_3a.png"],
+            "answer_images": ["images/answers25/PC_S25_21_3aA.png"],
+            "points": 4,
+            "paper": "Summer 2025",
+            "component": 21,
+            "difficulty": "medium",
+            "tags": ["Part A", "Iteration", "Input/output", "Arrays"]
+          }
+        ]
+      },
+      {
+        "group_id": "PC_S25_21_4",
+        "tags": ["String handling", "Selection", "Input/output", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "PC_S25_21_4a",
+            "question_text": "A telephone number with 13 characters is input. The first character is '+', followed by a 2-digit country code (e.g., +20xxxxxxxxxx). The algorithm includes checks for 44 (UK) and 20 (Egypt). Write pseudocode to input the telephone number, extract the 2-digit country code, output the matching country, or output 'Unknown' if there is no matching country.",
+            "images": ["images/questions25/PC_S25_21_4a.png"],
+            "answer_images": ["images/answers25/PC_S25_21_4aA.png"],
+            "points": 5,
+            "paper": "Summer 2025",
+            "component": 21,
+            "difficulty": "medium",
+            "tags": ["Part A", "String handling", "Selection"]
+          },
+          {
+            "question_id": "PC_S25_21_4b",
+            "question_text": "Explain how you could change the algorithm to repeatedly prompt for the telephone number until the number entered is 13 characters in length. Any code used must be fully explained.",
+            "images": ["images/questions25/PC_S25_21_4b.png"],
+            "answer_images": ["images/answers25/PC_S25_21_4bA.png"],
+            "points": 3,
+            "paper": "Summer 2025",
+            "component": 21,
+            "difficulty": "medium",
+            "tags": ["Part B", "Iteration", "Validation"]
+          }
+        ]
+      },
+      {
+        "group_id": "PC_S25_21_5",
+        "tags": ["Arithmetic, logical, and Boolean operations", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "PC_S25_21_5a",
+            "question_text": "Two library routines used in programming are MOD and DIV. State the purpose of each routine and give one example pseudocode statement for each.",
+            "images": ["images/questions25/PC_S25_21_5a.png"],
+            "answer_images": ["images/answers25/PC_S25_21_5aA.png"],
+            "points": 4,
+            "paper": "Summer 2025",
+            "component": 21,
+            "difficulty": "medium",
+            "tags": ["Part A", "MOD", "DIV", "Examples"]
+          }
+        ]
+      },
+      {
+        "group_id": "PC_S25_21_6",
+        "tags": ["Debugging", "Maintainable programs", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "PC_S25_21_6a",
+            "question_text": "An algorithm guesses game pseudocode is given. Identify the line numbers of the four errors and suggest a correction for each error.",
+            "images": ["images/questions25/PC_S25_21_6a.png"],
+            "answer_images": ["images/answers25/PC_S25_21_6aA.png"],
+            "points": 4,
+            "paper": "Summer 2025",
+            "component": 21,
+            "difficulty": "medium",
+            "tags": ["Part A", "Error identification", "Pseudocode"]
+          },
+          {
+            "question_id": "PC_S25_21_6b",
+            "question_text": "Identify one method to make the algorithm maintainable. Give an example.",
+            "images": ["images/questions25/PC_S25_21_6b.png"],
+            "answer_images": ["images/answers25/PC_S25_21_6bA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 21,
+            "difficulty": "easy",
+            "tags": ["Part B", "Maintainability"]
+          }
+        ]
+      }
+    ],
+    "Boolean Logic": [
+      {
+        "group_id": "BL_S25_21_7",
+        "tags": ["Logic gates", "Truth tables", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "BL_S25_21_7a",
+            "question_text": "Consider the logic expression: X = (A AND B) XOR (B OR NOT C). Draw a logic circuit for this expression. Each logic gate must have a maximum of two inputs. Do not simplify the expression.",
+            "images": ["images/questions25/BL_S25_21_7a.png"],
+            "answer_images": ["images/answers25/BL_S25_21_7aA.png"],
+            "points": 4,
+            "paper": "Summer 2025",
+            "component": 21,
+            "difficulty": "medium",
+            "tags": ["Part A", "Circuit drawing"]
+          },
+          {
+            "question_id": "BL_S25_21_7b",
+            "question_text": "Complete the truth table for the given logic expression.",
+            "images": ["images/questions25/BL_S25_21_7b.png"],
+            "answer_images": ["images/answers25/BL_S25_21_7bA.png"],
+            "points": 4,
+            "paper": "Summer 2025",
+            "component": 21,
+            "difficulty": "medium",
+            "tags": ["Part B", "Truth table"]
+          }
+        ]
+      }
+    ],
+    "Databases": [
+      {
+        "group_id": "DB_S25_21_8",
+        "tags": ["Databases", "SQL operations", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "DB_S25_21_8a",
+            "question_text": "A bus company table BUS is provided. Identify one appropriate data type for the field Return.",
+            "images": ["images/questions25/DB_S25_21_8a.png"],
+            "answer_images": ["images/answers25/DB_S25_21_8aA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 21,
+            "difficulty": "easy",
+            "tags": ["Part A", "Data types"]
+          },
+          {
+            "question_id": "DB_S25_21_8a_ii",
+            "question_text": "State the reason for the data type chosen for Return.",
+            "images": ["images/questions25/DB_S25_21_8a_ii.png"],
+            "answer_images": ["images/answers25/DB_S25_21_8a_iiA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 21,
+            "difficulty": "easy",
+            "tags": ["Part A", "Justification"]
+          },
+          {
+            "question_id": "DB_S25_21_8b",
+            "question_text": "Write the output from the SQL statement: SELECT RouteID, Destination, Time FROM BUS WHERE Driver = \"A Patel\";",
+            "images": ["images/questions25/DB_S25_21_8b.png"],
+            "answer_images": ["images/answers25/DB_S25_21_8bA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 21,
+            "difficulty": "medium",
+            "tags": ["Part B", "SQL output"]
+          },
+          {
+            "question_id": "DB_S25_21_8c",
+            "question_text": "Complete the SQL statement to display only the destination of the buses that have a return.",
+            "images": ["images/questions25/DB_S25_21_8c.png"],
+            "answer_images": ["images/answers25/DB_S25_21_8cA.png"],
+            "points": 3,
+            "paper": "Summer 2025",
+            "component": 21,
+            "difficulty": "medium",
+            "tags": ["Part C", "SQL SELECT/WHERE"]
+          }
+        ]
+      }
+    ],
+    "Programming Concepts": [
+      {
+        "group_id": "PC_S25_21_9",
+        "tags": ["Data types", "Procedures and functions", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "PC_S25_21_9a",
+            "question_text": "The variables A and B are used in a program. A holds a whole number and B holds text. Write pseudocode statements to declare the variables A and B.",
+            "images": ["images/questions25/PC_S25_21_9a.png"],
+            "answer_images": ["images/answers25/PC_S25_21_9aA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 21,
+            "difficulty": "easy",
+            "tags": ["Part A", "Declarations"]
+          },
+          {
+            "question_id": "PC_S25_21_9b",
+            "question_text": "The function Odds(X) returns 'Odd' if X is odd and 'Even' if X is even. Write pseudocode statements to define the function and call it using parameter A, storing the return value in variable B.",
+            "images": ["images/questions25/PC_S25_21_9b.png"],
+            "answer_images": ["images/answers25/PC_S25_21_9bA.png"],
+            "points": 6,
+            "paper": "Summer 2025",
+            "component": 21,
+            "difficulty": "medium",
+            "tags": ["Part B", "Functions", "Selection"]
+          }
+        ]
+      }
+    ],
+    "Algorithms, Programming, and Logic": [
+      {
+        "group_id": "APL_S25_21_10",
+        "tags": ["Flowcharts", "Validation and testing", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "APL_S25_21_10a",
+            "question_text": "A flowchart represents an algorithm to calculate grades. Complete the trace table for the algorithm using the input data: 21, 46, 63, 91, 12.",
+            "images": ["images/questions25/APL_S25_21_10a.png", "images/questions25/APL_S25_21_10a2.png"],
+            "answer_images": ["images/answers25/APL_S25_21_10aA.png"],
+            "points": 3,
+            "paper": "Summer 2025",
+            "component": 21,
+            "difficulty": "medium",
+            "tags": ["Part A", "Trace table"]
+          },
+          {
+            "question_id": "APL_S25_21_10b",
+            "question_text": "Explain how the flowchart can be changed to produce the correct output.",
+            "images": ["images/questions25/APL_S25_21_10b.png"],
+            "answer_images": ["images/answers25/APL_S25_21_10bA.png"],
+            "points": 4,
+            "paper": "Summer 2025",
+            "component": 21,
+            "difficulty": "medium",
+            "tags": ["Part B", "Flowchart correction"]
+          }
+        ]
+      }
+    ],
+    "Arrays and File Handling": [
+      {
+        "group_id": "AF_S25_21_11",
+        "tags": ["2D arrays", "Arrays", "Validation and testing", "Summer 2025", "Hard"],
+        "questions": [
+          {
+            "question_id": "AF_S25_21_11a",
+            "question_text": "1D array CompetitorName[] (25 competitors) and 2D array CompetitorScore[] (five events). Points[] stores totals. Write a program that: inputs valid scores (0–100) for each competitor/event; calculates highest points per event and outputs names of medal recipients; calculates highest total points for five events and outputs names of the competitors with the highest total.",
+            "images": ["images/questions25/AF_S25_21_11a.png", "images/questions25/AF_S25_21_11a2.png", "images/questions25/AF_S25_21_11a3.png"],
+            "answer_images": ["images/answers25/AF_S25_21_11aA.png","images/answers25/AF_S25_21_11aA2.png", "images/answers25/AF_S25_21_11aA3.png"],
+            "points": 15,
+            "paper": "Summer 2025",
+            "component": 21,
+            "difficulty": "hard",
+            "tags": ["Program design", "2D arrays", "Totals and maxima", "Input validation", "Output formatting"]
+          }
+        ]
+      }
+    ]
+  }
+}
+
+{
+  "subject": "Computer Science",
+  "topics": {
+    "Algorithms, Programming, and Logic": [
+      {
+        "group_id": "APL_S25_22_1",
+        "tags": ["Abstraction", "Summer 2025", "Easy"],
+        "questions": [
+          {
+            "question_id": "APL_S25_22_1a",
+            "question_text": "Tick (✓) one box to complete the description of abstraction. Abstraction is part of the analysis stage of the development life cycle. Abstraction means A testing the solution to the problem. B writing a program using program code. C defining the sub-systems that make up the problem. D removing details from the problem that are not relevant.",
+            "images": ["images/questions25/APL_S25_22_1a.png"],
+            "answer_images": ["images/answers25/APL_S25_22_1aA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 22,
+            "difficulty": "easy",
+            "tags": ["Multiple choice", "Program lifecycle", "Abstraction"]
+          }
+        ]
+      },
+      {
+        "group_id": "APL_S25_22_2",
+        "tags": ["Decomposition", "Summer 2025", "Easy"],
+        "questions": [
+          {
+            "question_id": "APL_S25_22_2a",
+            "question_text": "A fence measuring 2 metres in height and 20 metres in length needs painting. The area of the fence needs to be calculated so that enough paint for the job is purchased. After the task is decomposed, there are three component parts: input, process and output. Three component parts and four example descriptions are shown. Draw one line from each component part to the most appropriate relevant description. Not all descriptions will be used.",
+            "images": ["images/questions25/APL_S25_22_2a.png"],
+            "answer_images": ["images/answers25/APL_S25_22_2aA.png"],
+            "points": 3,
+            "paper": "Summer 2025",
+            "component": 22,
+            "difficulty": "easy",
+            "tags": ["Matching", "IPO (input/process/output)"]
+          }
+        ]
+      },
+      {
+        "group_id": "APL_S25_22_3",
+        "tags": ["Validation and testing", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "APL_S25_22_3a",
+            "question_text": "A range check is used to validate that the input temperature is an integer between –100 and 0, inclusive. Suggest suitable normal, abnormal, extreme and boundary test data to test if this validation check is working correctly.",
+            "images": ["images/questions25/APL_S25_22_3a.png"],
+            "answer_images": ["images/answers25/APL_S25_22_3aA.png"],
+            "points": 4,
+            "paper": "Summer 2025",
+            "component": 22,
+            "difficulty": "medium",
+            "tags": ["Test data", "Range check", "Normal/Abnormal/Extreme/Boundary"]
+          }
+        ]
+      },
+      {
+        "group_id": "APL_S25_22_4",
+        "tags": ["Verification", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "APL_S25_22_4a",
+            "question_text": "State one reason for using a verification check when inputting data.",
+            "images": ["images/questions25/APL_S25_22_4a.png"],
+            "answer_images": ["images/answers25/APL_S25_22_4aA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 22,
+            "difficulty": "easy",
+            "tags": ["Verification"]
+          },
+          {
+            "question_id": "APL_S25_22_4b",
+            "question_text": "Write the pseudocode for an algorithm to perform a double entry verification check, using the following criteria: • Input 10 numbers and store them in the array Numbers[] • Input the same 10 numbers again; as each number is input, compare it with its corresponding number in the array Numbers[] ◦ if the numbers match, move on to the next number ◦ if the numbers do not match, display both numbers and ask for the number to be re-entered ◦ store the re-entered number in the corresponding array location and move on to the next number. • When all the numbers have been checked, display a message to say the check has been completed. You do not need to declare any arrays or variables for this algorithm.",
+            "images": ["images/questions25/APL_S25_22_4b.png"],
+            "answer_images": ["images/answers25/APL_S25_22_4bA.png"],
+            "points": 6,
+            "paper": "Summer 2025",
+            "component": 22,
+            "difficulty": "medium",
+            "tags": ["Pseudocode", "Verification", "Arrays", "Iteration"]
+          }
+        ]
+      }
+    ],
+    "Arrays and File Handling": [
+      {
+        "group_id": "AF_S25_22_5",
+        "tags": ["1D arrays", "Debugging", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "AF_S25_22_5a",
+            "question_text": "This pseudocode algorithm should allow 500 names of people and their heights to be entered and stored in two one-dimensional (1D) arrays ... (full algorithm shown). (a) Identify the line numbers of five errors in the pseudocode and suggest a correction for each error.",
+            "images": ["images/questions25/AF_S25_22_5a.png", "images/questions25/AF_S25_22_5a2.png"],
+            "answer_images": ["images/answers25/AF_S25_22_5aA.png"],
+            "points": 5,
+            "paper": "Summer 2025",
+            "component": 22,
+            "difficulty": "medium",
+            "tags": ["Error identification", "Arrays", "Loops"]
+          },
+          {
+            "question_id": "AF_S25_22_5b",
+            "question_text": "(b) Write the pseudocode statement that will output the average height rounded to one decimal place.",
+            "images": ["images/questions25/AF_S25_22_5b.png"],
+            "answer_images": ["images/answers25/AF_S25_22_5bA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 22,
+            "difficulty": "easy",
+            "tags": ["Rounding", "Output"]
+          },
+          {
+            "question_id": "AF_S25_22_5c",
+            "question_text": "(c) Explain how you could change the corrected algorithm so that it will also: • find the height of the tallest person. • output the height of the tallest person at the end of the algorithm. Any program statements used must be fully explained.",
+            "images": ["images/questions25/AF_S25_22_5c.png"],
+            "answer_images": ["images/answers25/AF_S25_22_5cA.png"],
+            "points": 4,
+            "paper": "Summer 2025",
+            "component": 22,
+            "difficulty": "medium",
+            "tags": ["Algorithm design", "Max tracking", "Arrays"]
+          }
+        ]
+      }
+    ],
+    "Programming Concepts": [
+      {
+        "group_id": "PC_S25_22_6",
+        "tags": ["String handling", "Iteration", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "PC_S25_22_6a",
+            "question_text": "Given an algorithm that processes words (full pseudocode shown). (a) Complete the trace table for the algorithm, using the input data: 2, RACECAR, TREAT.",
+            "images": ["images/questions25/PC_S25_22_6a.png", "images/questions25/PC_S25_22_6a2.png"],
+            "answer_images": ["images/answers25/PC_S25_22_6aA.png"],
+            "points": 6,
+            "paper": "Summer 2025",
+            "component": 22,
+            "difficulty": "medium",
+            "tags": ["Trace table", "Strings", "Loops"]
+          },
+          {
+            "question_id": "PC_S25_22_6b",
+            "question_text": "(b) State the purpose of the algorithm on page 6.",
+            "images": ["images/questions25/PC_S25_22_6b.png"],
+            "answer_images": ["images/answers25/PC_S25_22_6bA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 22,
+            "difficulty": "easy",
+            "tags": ["Purpose"]
+          },
+          {
+            "question_id": "PC_S25_22_6c",
+            "question_text": "(c) Explain how the algorithm knows when all the letters in the word have been checked so that it can stop checking.",
+            "images": ["images/questions25/PC_S25_22_6c.png"],
+            "answer_images": ["images/answers25/PC_S25_22_6cA.png"],
+            "points": 3,
+            "paper": "Summer 2025",
+            "component": 22,
+            "difficulty": "medium",
+            "tags": ["Loop condition", "String indexing"]
+          }
+        ]
+      }
+    ],
+    "Algorithms, Programming, and Logic": [
+      {
+        "group_id": "APL_S25_22_7",
+        "tags": ["Flowcharts", "Validation and testing", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "APL_S25_22_7a",
+            "question_text": "The flowchart shows an algorithm that is used to input 50 numbers ... (range conditions given). (a) Complete the flowchart.",
+            "images": ["images/questions25/APL_S25_22_7a.png"],
+            "answer_images": ["images/answers25/APL_S25_22_7aA.png"],
+            "points": 6,
+            "paper": "Summer 2025",
+            "component": 22,
+            "difficulty": "medium",
+            "tags": ["Flowchart completion", "Input validation", "Averaging"]
+          },
+          {
+            "question_id": "APL_S25_22_7b",
+            "question_text": "(b) Explain how you would alter the flowchart in 7(a) so that it will individually store each accepted value as it is entered and then output all the numbers, one after the other, outside of the loop that inputs values.",
+            "images": ["images/questions25/APL_S25_22_7b.png"],
+            "answer_images": ["images/answers25/APL_S25_22_7bA.png"],
+            "points": 4,
+            "paper": "Summer 2025",
+            "component": 22,
+            "difficulty": "medium",
+            "tags": ["Flowchart modification", "Arrays", "Output"]
+          }
+        ]
+      }
+    ],
+    "Boolean Logic": [
+      {
+        "group_id": "BL_S25_22_8",
+        "tags": ["Logic gates", "Truth tables", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "BL_S25_22_8a",
+            "question_text": "Draw the symbol for an XOR logic gate and complete the truth table for it.",
+            "images": ["images/questions25/BL_S25_22_8a.png"],
+            "answer_images": ["images/answers25/BL_S25_22_8aA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 22,
+            "difficulty": "easy",
+            "tags": ["XOR gate", "Truth table"]
+          },
+          {
+            "question_id": "BL_S25_22_8b_i",
+            "question_text": "A crane will only move if the operator is present and either the ignition key is present, or the operator code is correct. (i) Write the logic expression for the crane moving, where X = 1 represents movement.",
+            "images": ["images/questions25/BL_S25_22_8b_i.png"],
+            "answer_images": ["images/answers25/BL_S25_22_8b_iA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 22,
+            "difficulty": "medium",
+            "tags": ["Logic expression", "Problem to logic"]
+          },
+          {
+            "question_id": "BL_S25_22_8b_ii",
+            "question_text": "(ii) Complete the truth table for the crane moving.",
+            "images": ["images/questions25/BL_S25_22_8b_ii.png"],
+            "answer_images": ["images/answers25/BL_S25_22_8b_iiA.png"],
+            "points": 4,
+            "paper": "Summer 2025",
+            "component": 22,
+            "difficulty": "medium",
+            "tags": ["Truth table"]
+          }
+        ]
+      }
+    ],
+    "Databases": [
+      {
+        "group_id": "DB_S25_22_9",
+        "tags": ["Databases", "SQL operations", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "DB_S25_22_9a",
+            "question_text": "A database table, CapitalCity, stores data about capital cities. (a) Complete the table by writing one appropriate field from CapitalCity for each data type. Each field must be different. Data types: Boolean, integer, real, text.",
+            "images": ["images/questions25/DB_S25_22_9a.png"],
+            "answer_images": ["images/answers25/DB_S25_22_9aA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 22,
+            "difficulty": "easy",
+            "tags": ["Field types", "Schema"]
+          },
+          {
+            "question_id": "DB_S25_22_9b",
+            "question_text": "(b) Complete the structured query language (SQL) statement to list only the name, country and population of all the cities in CapitalCity from the continent of Asia.",
+            "images": ["images/questions25/DB_S25_22_9b.png"],
+            "answer_images": ["images/answers25/DB_S25_22_9bA.png"],
+            "points": 4,
+            "paper": "Summer 2025",
+            "component": 22,
+            "difficulty": "medium",
+            "tags": ["SQL SELECT", "WHERE filter"]
+          }
+        ]
+      }
+    ],
+    "Programming Concepts": [
+      {
+        "group_id": "PC_S25_22_10",
+        "tags": ["Procedures and functions", "Maintainable programs", "Summer 2025", "Hard"],
+        "questions": [
+          {
+            "question_id": "PC_S25_22_10a",
+            "question_text": "A program is required to allow students to calculate the volume of a number of standard three-dimensional shapes (cuboid, triangular prism, sphere). It must: output a validated menu; input required dimensions; create one function for each shape using the given formulae and parameters; output the volume in the main program, rounded to two decimal places; repeat until the stop option is chosen. Use pseudocode or program code with comments. Declare all variables and constants; all I/O must contain suitable messages.",
+            "images": ["images/questions25/PC_S25_22_10a.png", "images/questions25/PC_S25_22_10a2.png", "images/questions25/PC_S25_22_10a3.png"],
+            "answer_images": ["images/answers25/PC_S25_22_10aA.png"],
+            "points": 15,
+            "paper": "Summer 2025",
+            "component": 22,
+            "difficulty": "hard",
+            "tags": ["Functions", "Menu loop", "Validation", "Constants", "Rounding", "Problem solving"]
+          }
+        ]
+      }
+    ]
+  }
+}
+
+{
+  "subject": "Computer Science",
+  "topics": {
+    "Algorithms, Programming, and Logic": [
+      {
+        "group_id": "APL_S25_23_1",
+        "tags": ["Flowcharts", "Quality control", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "APL_S25_23_1a",
+            "question_text": "Complete this flowchart for the biscuit weight check where biscuits between 16.2 g and 17.2 g inclusive increment PassCount, otherwise RejectCount, and stop when −1 is entered; then output totals.",
+            "images": ["images/questions25/APL_S25_23_1a.png"],
+            "answer_images": ["images/answers25/APL_S25_23_1aA.png"],
+            "points": 6,
+            "paper": "Summer 2025",
+            "component": 23,
+            "difficulty": "medium",
+            "tags": ["Part A", "Flowchart", "Selection", "Iteration"]
+          },
+          {
+            "question_id": "APL_S25_23_1b",
+            "question_text": "Explain how to alter the flowchart in 1(a) so that it calculates and outputs the average weight of only the biscuits that passed the weight check. Any statements or symbols used must be fully explained.",
+            "images": ["images/questions25/APL_S25_23_1b.png"],
+            "answer_images": ["images/answers25/APL_S25_23_1bA.png"],
+            "points": 4,
+            "paper": "Summer 2025",
+            "component": 23,
+            "difficulty": "medium",
+            "tags": ["Part B", "Flowchart modification", "Averaging"]
+          }
+        ]
+      }
+    ],
+    "Programming Concepts": [
+      {
+        "group_id": "PC_S25_23_2",
+        "tags": ["Arithmetic operators", "Summer 2025", "Easy"],
+        "questions": [
+          {
+            "question_id": "PC_S25_23_2a",
+            "question_text": "Three uses of arithmetic operators and four results are shown. Draw one line from each use (355 DIV 10, 355 / 10, 355 MOD 10) to the correct result. Not all results will be used.",
+            "images": ["images/questions25/PC_S25_23_2a.png"],
+            "answer_images": ["images/answers25/PC_S25_23_2aA.png"],
+            "points": 3,
+            "paper": "Summer 2025",
+            "component": 23,
+            "difficulty": "easy",
+            "tags": ["MOD", "DIV", "Division"]
+          }
+        ]
+      }
+    ],
+    "Algorithms, Programming, and Logic": [
+      {
+        "group_id": "APL_S25_23_3",
+        "tags": ["Pseudocode", "Sorting", "Procedures", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "APL_S25_23_3a",
+            "question_text": "Bubble sort pseudocode (descending) contains errors. Identify the line numbers of four errors and suggest a correction for each error.",
+            "images": ["images/questions25/APL_S25_23_3a.png"],
+            "answer_images": ["images/answers25/APL_S25_23_3aA.png"],
+            "points": 4,
+            "paper": "Summer 2025",
+            "component": 23,
+            "difficulty": "medium",
+            "tags": ["Part A", "Error identification", "Bubble sort"]
+          },
+          {
+            "question_id": "APL_S25_23_3b_i",
+            "question_text": "Complete PROCEDURE Swap with two parameters representing the indexes of the array elements to be swapped.",
+            "images": ["images/questions25/APL_S25_23_3b_i.png"],
+            "answer_images": ["images/answers25/APL_S25_23_3b_iA.png"],
+            "points": 4,
+            "paper": "Summer 2025",
+            "component": 23,
+            "difficulty": "medium",
+            "tags": ["Part B(i)", "Procedures", "Parameters"]
+          },
+          {
+            "question_id": "APL_S25_23_3b_ii",
+            "question_text": "Write the pseudocode to transfer control to PROCEDURE Swap in the main loop.",
+            "images": ["images/questions25/APL_S25_23_3b_ii.png"],
+            "answer_images": ["images/answers25/APL_S25_23_3b_iiA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 23,
+            "difficulty": "easy",
+            "tags": ["Part B(ii)", "Procedure call"]
+          },
+          {
+            "question_id": "APL_S25_23_3c",
+            "question_text": "Explain the difference between global variables and the variable declared inside PROCEDURE Swap.",
+            "images": ["images/questions25/APL_S25_23_3c.png"],
+            "answer_images": ["images/answers25/APL_S25_23_3cA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 23,
+            "difficulty": "easy",
+            "tags": ["Part C", "Scope", "Local vs global"]
+          }
+        ]
+      },
+      {
+        "group_id": "APL_S25_23_4",
+        "tags": ["Validation and testing", "Strings", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "APL_S25_23_4a_i",
+            "question_text": "An input must be an integer between 10 and 95 inclusive. State the type of validation check to test if the input meets this requirement.",
+            "images": ["images/questions25/APL_S25_23_4a_i.png"],
+            "answer_images": ["images/answers25/APL_S25_23_4a_iA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 23,
+            "difficulty": "easy",
+            "tags": ["Part A(i)", "Range check"]
+          },
+          {
+            "question_id": "APL_S25_23_4a_ii",
+            "question_text": "Suggest suitable abnormal and extreme test data for the range 10–95 inclusive and give a reason for each choice.",
+            "images": ["images/questions25/APL_S25_23_4a_ii.png"],
+            "answer_images": ["images/answers25/APL_S25_23_4a_iiA.png"],
+            "points": 4,
+            "paper": "Summer 2025",
+            "component": 23,
+            "difficulty": "medium",
+            "tags": ["Part A(ii)", "Test data"]
+          },
+          {
+            "question_id": "APL_S25_23_4b_i",
+            "question_text": "A password must contain at least 12 characters. State the type of validation check.",
+            "images": ["images/questions25/APL_S25_23_4b_i.png"],
+            "answer_images": ["images/answers25/APL_S25_23_4b_iA.png"],
+            "points": 1,
+            "paper": "Summer 2025",
+            "component": 23,
+            "difficulty": "easy",
+            "tags": ["Part B(i)", "Length check"]
+          },
+          {
+            "question_id": "APL_S25_23_4b_ii",
+            "question_text": "Write pseudocode to input a new password and ensure it contains at least 12 characters, re-inputting with an appropriate error message until valid.",
+            "images": ["images/questions25/APL_S25_23_4b_ii.png"],
+            "answer_images": ["images/answers25/APL_S25_23_4b_iiA.png"],
+            "points": 5,
+            "paper": "Summer 2025",
+            "component": 23,
+            "difficulty": "medium",
+            "tags": ["Part B(ii)", "Iteration", "Validation", "String length"]
+          }
+        ]
+      }
+    ],
+    "Databases": [
+      {
+        "group_id": "DB_S25_23_5",
+        "tags": ["Database design", "SQL operations", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "DB_S25_23_5a",
+            "question_text": "A store uses table COMPONENT for stock. Complete the table by giving appropriate data types (from: text, character, Boolean, integer, real, date/time) for the fields: ID, Name, Description, Price, NumberAvailable, MinimumLevel, ReOrdered, DateOrdered.",
+            "images": ["images/questions25/DB_S25_23_5a.png"],
+            "answer_images": ["images/answers25/DB_S25_23_5aA.png"],
+            "points": 4,
+            "paper": "Summer 2025",
+            "component": 23,
+            "difficulty": "medium",
+            "tags": ["Part A", "Field types"]
+          },
+          {
+            "question_id": "DB_S25_23_5b",
+            "question_text": "Complete the SQL to list only the unique identifier, component name and reorder date of all components that have been reordered.",
+            "images": ["images/questions25/DB_S25_23_5b.png"],
+            "answer_images": ["images/answers25/DB_S25_23_5bA.png"],
+            "points": 4,
+            "paper": "Summer 2025",
+            "component": 23,
+            "difficulty": "medium",
+            "tags": ["Part B", "SELECT", "WHERE"]
+          }
+        ]
+      }
+    ],
+    "Programming Concepts": [
+      {
+        "group_id": "PC_S25_23_6",
+        "tags": ["String handling", "Arrays", "Case statement", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "PC_S25_23_6a",
+            "question_text": "Complete the trace table for the given algorithm using input data: COMPUTER. The algorithm stores consonants of the word into Store[] and then outputs them.",
+            "images": ["images/questions25/PC_S25_23_6a.png", "images/questions25/PC_S25_23_6a2.png"],
+            "answer_images": ["images/answers25/PC_S25_23_6aA.png", "images/answers25/PC_S25_23_6aA2.png"],
+            "points": 5,
+            "paper": "Summer 2025",
+            "component": 23,
+            "difficulty": "medium",
+            "tags": ["Part A", "Trace table", "Cases", "Vowel removal"]
+          },
+          {
+            "question_id": "PC_S25_23_6b",
+            "question_text": "Describe the processes in the algorithm.",
+            "images": ["images/questions25/PC_S25_23_6b.png"],
+            "answer_images": ["images/answers25/PC_S25_23_6bA.png"],
+            "points": 3,
+            "paper": "Summer 2025",
+            "component": 23,
+            "difficulty": "easy",
+            "tags": ["Part B", "Algorithm explanation"]
+          }
+        ]
+      }
+    ],
+    "Boolean Logic": [
+      {
+        "group_id": "BL_S25_23_7",
+        "tags": ["Logic gates", "Truth tables", "Security system", "Summer 2025", "Medium"],
+        "questions": [
+          {
+            "question_id": "BL_S25_23_7a",
+            "question_text": "Draw the symbol for a NOR logic gate and complete its truth table.",
+            "images": ["images/questions25/BL_S25_23_7a.png"],
+            "answer_images": ["images/answers25/BL_S25_23_7aA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 23,
+            "difficulty": "easy",
+            "tags": ["Part A", "NOR", "Truth table"]
+          },
+          {
+            "question_id": "BL_S25_23_7b_i",
+            "question_text": "Given inputs L (light/dark), M (motion), S (sound). Alarm A sounds if it is dark and if either motion or sound (or both) are detected. Write the logic expression for A.",
+            "images": ["images/questions25/BL_S25_23_7b_i.png", "images/questions25/BL_S25_23_7b_i2.png"] ,
+            "answer_images": ["images/answers25/BL_S25_23_7b_iA.png"],
+            "points": 2,
+            "paper": "Summer 2025",
+            "component": 23,
+            "difficulty": "medium",
+            "tags": ["Part B(i)", "Logic expression"]
+          },
+          {
+            "question_id": "BL_S25_23_7b_ii",
+            "question_text": "Complete the truth table for the security system described in 7(b)(i).",
+            "images": ["images/questions25/BL_S25_23_7b_ii.png"],
+            "answer_images": ["images/answers25/BL_S25_23_7b_iiA.png"],
+            "points": 4,
+            "paper": "Summer 2025",
+            "component": 23,
+            "difficulty": "medium",
+            "tags": ["Part B(ii)", "Truth table"]
+          }
+        ]
+      }
+    ],
+    "Arrays and File Handling": [
+      {
+        "group_id": "AF_S25_23_8",
+        "tags": ["2D arrays", "Search", "Menu systems", "Summer 2025", "Hard"],
+        "questions": [
+          {
+            "question_id": "AF_S25_23_8a",
+            "question_text": "Write a program for a video library using 2D arrays Video[] (title, format, year (string), storage code) and Results[]. Requirements: initialise arrays (Video up to 10 000, Results up to 20); menu (add/search/stop) with input validation; add stores data in first available location; search by title, copy matched rows to Results[], continue to end; output Results[] or suitable message if none; return to menu until stop. Use pseudocode or code with comments; all I/O with suitable messages; assume declarations done.",
+            "images": ["images/questions25/AF_S25_23_8a.png", "images/questions25/AF_S25_23_8a2.png", "images/questions25/AF_S25_23_8a3.png"],
+            "answer_images": ["images/answers25/AF_S25_23_8aA.png", "images/answers25/AF_S25_23_8aA2.png", "images/answers25/AF_S25_23_8aA3.png"],
+            "points": 15,
+            "paper": "Summer 2025",
+            "component": 23,
+            "difficulty": "hard",
+            "tags": ["Program design", "2D arrays", "Linear search", "Initialisation", "Validation", "Output formatting"]
+          }
+        ]
+      }
+    ]
+  }
+}

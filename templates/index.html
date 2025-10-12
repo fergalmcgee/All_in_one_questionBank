@@ -32,8 +32,8 @@
           <h1 class="hero__title">{{ bank_label }}</h1>
           <p class="hero__subtitle">
             You can create your paper manually, search by keywords to find
-            questions, or use the random selector. Create polished workbooks,
-            worksheets, and test papers in minutes.
+            questions, or use the random selector. Create workbooks, worksheets,
+            and test papers in minutes.
           </p>
           <div class="hero__cta">
             <button
@@ -41,7 +41,7 @@
               class="btn btn--primary"
               onclick="activateManualTab()"
             >
-              Start creating
+              Start manual
             </button>
             <script>
               function activateManualTab() {
@@ -77,26 +77,11 @@
                 randomTabPanel.scrollIntoView({ behavior: "smooth" });
               }
             </script>
+            <a class="btn btn--ghost" href="{{ review_url }}">
+              Review image deck
+            </a>
           </div>
         </header>
-
-        <nav class="bank-switcher" aria-label="Select question bank">
-          <span class="bank-switcher__label">Switch bank</span>
-          <div class="bank-switcher__options">
-            {% for bank in available_banks %}
-            <a
-              href="{{ url_for('bank_home', bank_id=bank.id) }}"
-              class="bank-switcher__option {% if bank.id == bank_id %}is-active{% endif %}"
-              aria-current="{{ 'page' if bank.id == bank_id }}"
-            >
-              {{ bank.label }}
-            </a>
-            {% endfor %}
-          </div>
-          <a class="bank-switcher__landing" href="{{ url_for('index') }}"
-            >Back to bank overview</a
-          >
-        </nav>
 
         {% set topic_list = topics | list %}
         <aside class="stats-card glass" aria-label="Available points by topic">
@@ -119,6 +104,24 @@
           {% endif %}
         </aside>
       </div>
+
+      <nav class="bank-switcher" aria-label="Select question bank">
+        <span class="bank-switcher__label">Switch bank</span>
+        <div class="bank-switcher__options">
+          {% for bank in available_banks %}
+          <a
+            href="{{ url_for('bank_home', bank_id=bank.id) }}"
+            class="bank-switcher__option {% if bank.id == bank_id %}is-active{% endif %}"
+            aria-current="{{ 'page' if bank.id == bank_id }}"
+          >
+            {{ bank.label }}
+          </a>
+          {% endfor %}
+        </div>
+        <a class="bank-switcher__landing" href="{{ url_for('index') }}"
+          >Back to bank overview</a
+        >
+      </nav>
 
       <main class="workspace">
         <section class="module glass">
@@ -149,7 +152,7 @@
                 aria-controls="randomTab"
                 aria-selected="false"
               >
-                Smart randomiser
+                Random selection
               </button>
             </div>
 
@@ -217,6 +220,55 @@
                     aria-live="polite"
                   ></div>
                 </div>
+
+                <section class="title-page">
+                  <h3>Title page</h3>
+                  <label class="checkbox">
+                    <input
+                      type="checkbox"
+                      id="manual_title_page_enabled"
+                      name="title_page_enabled"
+                      value="1"
+                      checked
+                    />
+                    <span>Add a cover sheet to the question paper</span>
+                  </label>
+
+                  <div class="title-page__grid">
+                    <label class="title-page__field">
+                      <span>Paper title</span>
+                      <input
+                        type="text"
+                        name="title_page_title"
+                        placeholder="{{ bank_label }}"
+                      />
+                    </label>
+                    <label class="title-page__field">
+                      <span>Subtitle</span>
+                      <input
+                        type="text"
+                        name="title_page_subtitle"
+                        placeholder="e.g. IGCSE Paper 2 Test"
+                      />
+                    </label>
+                    <label class="title-page__field">
+                      <span>Date</span>
+                      <input
+                        type="text"
+                        name="title_page_date"
+                        placeholder="e.g. June 2024"
+                      />
+                    </label>
+                    <label class="title-page__field title-page__field--full">
+                      <span>Notes</span>
+                      <textarea
+                        name="title_page_notes"
+                        rows="2"
+                        placeholder="Class should be your subject class NOT your form class — e.g. CS1\nLeave mark blank (Teachers use)"
+                      ></textarea>
+                    </label>
+                  </div>
+                </section>
 
                 {% for topic in topics %}
                 <input type="hidden" name="topics" value="{{ topic }}" />
@@ -340,6 +392,55 @@
                   <span>Exclude unrelated questions</span>
                 </label>
 
+                <section class="title-page">
+                  <h3>Title page</h3>
+                  <label class="checkbox">
+                    <input
+                      type="checkbox"
+                      id="random_title_page_enabled"
+                      name="title_page_enabled"
+                      value="1"
+                      checked
+                    />
+                    <span>Add a cover sheet to the question paper</span>
+                  </label>
+
+                  <div class="title-page__grid">
+                    <label class="title-page__field">
+                      <span>Paper title</span>
+                      <input
+                        type="text"
+                        name="title_page_title"
+                        placeholder="{{ bank_label }}"
+                      />
+                    </label>
+                    <label class="title-page__field">
+                      <span>Subtitle</span>
+                      <input
+                        type="text"
+                        name="title_page_subtitle"
+                        placeholder="e.g. Unit Test"
+                      />
+                    </label>
+                    <label class="title-page__field">
+                      <span>Date</span>
+                      <input
+                        type="text"
+                        name="title_page_date"
+                        placeholder="e.g. June 2024"
+                      />
+                    </label>
+                    <label class="title-page__field title-page__field--full">
+                      <span>Notes</span>
+                      <textarea
+                        name="title_page_notes"
+                        rows="2"
+                        placeholder="Class should be your subject class NOT your form class — e.g. CS1\nLeave mark blank (Teachers use)"
+                      ></textarea>
+                    </label>
+                  </div>
+                </section>
+
                 <div class="form-actions">
                   <input
                     type="submit"
@@ -394,7 +495,7 @@
             <div class="module__label">Feedback loop</div>
             <h2 class="module__title">Log any issues or improvement ideas.</h2>
             <p class="module__caption">
-              Notes help keep the bank sharp for future cohorts.
+              Notes help keep the bank error free for paper accuracy.
             </p>
           </div>
           <form id="noteForm" class="form form--stacked">
@@ -627,7 +728,23 @@
             galleryTrigger.dataset.images = JSON.stringify(
               (group.questions || []).flatMap((q) => q.images || [])
             );
-            galleryTrigger.textContent = "🖼";
+            galleryTrigger.dataset.answers = JSON.stringify(
+              (group.questions || []).flatMap((q) => q.answer_images || [])
+            );
+            galleryTrigger.innerHTML = `
+              <svg
+                aria-hidden="true"
+                class="gallery-trigger__icon"
+                viewBox="0 0 24 24"
+                focusable="false"
+              >
+                <path
+                  d="M5 5.5A2.5 2.5 0 0 1 7.5 3h9A2.5 2.5 0 0 1 19 5.5v13a.5.5 0 0 1-.84.36l-4.05-3.89a1 1 0 0 0-1.36 0l-2.09 2a1 1 0 0 1-1.38 0L6.8 13.3a1 1 0 0 0-1.6.2L5 14v-8.5Z"
+                  fill="currentColor"
+                />
+                <circle cx="15.5" cy="8.5" r="1.5" fill="currentColor" />
+              </svg>
+            `;
 
             document
               .querySelectorAll(
@@ -650,6 +767,24 @@
                   group.group_id || `Group ${groupIndex + 1}`
                 }</div>
                 <button type="button" class="gallery-close" aria-label="Close">✕</button>
+              </div>
+              <div class="gallery-tabs" role="tablist">
+                <button
+                  type="button"
+                  class="gallery-tab is-active"
+                  data-gallery-tab="questions"
+                  aria-selected="true"
+                >
+                  Questions
+                </button>
+                <button
+                  type="button"
+                  class="gallery-tab"
+                  data-gallery-tab="answers"
+                  aria-selected="false"
+                >
+                  Answers
+                </button>
               </div>
               <div class="gallery-body"><div class="gallery-grid"></div></div>
             `;

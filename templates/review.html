@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ bank_label }} · Review Deck</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        --bg: #0a1120;
+        --panel: rgba(12, 20, 36, 0.92);
+        --panel-strong: rgba(16, 28, 48, 0.96);
+        --border: rgba(110, 168, 255, 0.2);
+        --accent: #60a5fa;
+        --accent-soft: rgba(96, 165, 250, 0.18);
+        --text-main: #f4f7ff;
+        --text-subtle: #b9c3d8;
+        --text-soft: #94a3c2;
+        --danger: #f87171;
+        --warning: #fb923c;
+        --success: #34d399;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: radial-gradient(
+            circle at top,
+            rgba(96, 165, 250, 0.16),
+            transparent 50%
+          ),
+          linear-gradient(180deg, #081021, #070d19);
+        color: var(--text-main);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        padding: 28px clamp(10px, 4vw, 32px) 48px;
+      }
+      header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: clamp(18px, 3vw, 28px);
+        box-shadow: 0 24px 70px rgba(6, 12, 24, 0.42);
+      }
+      header h1 {
+        margin: 0;
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+      }
+      .header-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        color: var(--text-subtle);
+        font-size: 0.95rem;
+      }
+      .bank-switch {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .bank-switch a {
+        text-decoration: none;
+        color: var(--text-subtle);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-size: 0.9rem;
+      }
+      .bank-switch a.is-active {
+        background: var(--accent-soft);
+        border-color: rgba(96, 165, 250, 0.4);
+        color: var(--text-main);
+      }
+      .layout {
+        display: grid;
+        gap: 22px;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+        align-items: start;
+      }
+      .panel {
+        background: var(--panel-strong);
+        border-radius: 18px;
+        border: 1px solid var(--border);
+        padding: clamp(18px, 3vw, 26px);
+        box-shadow: 0 18px 42px rgba(4, 10, 20, 0.46);
+      }
+      .stage-header {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+      .stage-header__titles {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .stage-header__group {
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+      .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .tag {
+        background: rgba(96, 165, 250, 0.16);
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 0.8rem;
+        color: var(--accent);
+      }
+      .media-columns {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 18px;
+      }
+      .media-column {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .media-column h3 {
+        margin: 0;
+        font-size: 1rem;
+        color: var(--text-subtle);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .media-block {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        padding: 12px;
+        background: rgba(8, 14, 26, 0.82);
+      }
+      .media-block__title {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        font-weight: 600;
+      }
+      .media-block__title span {
+        color: var(--text-soft);
+        font-size: 0.9rem;
+      }
+      .media-block__images {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .media-block__images img {
+        width: 100%;
+        max-height: 520px;
+        object-fit: contain;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(0, 0, 0, 0.45);
+      }
+      .media-block__images a {
+        color: var(--accent);
+        font-size: 0.85rem;
+        text-decoration: none;
+        align-self: flex-start;
+      }
+      .controls {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .status-buttons {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 12px;
+      }
+      .status-button {
+        padding: 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(12, 20, 32, 0.78);
+        color: var(--text-main);
+        font-weight: 600;
+        cursor: pointer;
+        text-align: left;
+        transition: border 0.18s ease, transform 0.18s ease, background 0.18s ease;
+      }
+      .status-button strong {
+        display: block;
+        font-size: 1.05rem;
+      }
+      .status-button span {
+        font-size: 0.85rem;
+        color: var(--text-subtle);
+      }
+      .status-button:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      .status-button.is-active {
+        border-color: rgba(96, 165, 250, 0.72);
+        background: rgba(96, 165, 250, 0.16);
+        transform: translateY(-1px);
+      }
+      .status-button[data-status="issue"] {
+        border-color: rgba(248, 113, 113, 0.24);
+      }
+      .status-button[data-status="missing"] {
+        border-color: rgba(251, 191, 36, 0.24);
+      }
+      .navigation-buttons {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .navigation-buttons button {
+        flex: 1 1 140px;
+        padding: 12px 16px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(18, 28, 46, 0.88);
+        color: var(--text-main);
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .navigation-buttons button:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+      textarea {
+        width: 100%;
+        min-height: 110px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(9, 16, 28, 0.92);
+        color: var(--text-main);
+        padding: 12px;
+        resize: vertical;
+        font: inherit;
+      }
+      .helper-text {
+        font-size: 0.85rem;
+        color: var(--text-subtle);
+      }
+      .summary {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-height: 40vh;
+        overflow-y: auto;
+        padding-right: 6px;
+      }
+      .summary-item {
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        padding: 12px;
+        background: rgba(9, 16, 28, 0.82);
+        display: grid;
+        gap: 6px;
+      }
+      .summary-item__title {
+        font-weight: 600;
+      }
+      .summary-item__notes {
+        color: var(--text-subtle);
+        white-space: pre-wrap;
+      }
+      .summary-empty {
+        padding: 14px;
+        border-radius: 12px;
+        border: 1px dashed rgba(255, 255, 255, 0.12);
+        color: var(--text-subtle);
+        text-align: center;
+      }
+      .hotkeys {
+        font-size: 0.85rem;
+        color: var(--text-subtle);
+      }
+      .hotkeys code {
+        padding: 2px 6px;
+        border-radius: 6px;
+        background: rgba(15, 24, 42, 0.8);
+        border: 1px solid rgba(96, 165, 250, 0.18);
+      }
+      @media (max-width: 1100px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body
+    data-review-data="{{ review_data_url }}"
+    data-review-status="{{ review_status_url }}"
+    data-image-base="{{ image_base_url }}"
+    data-bank-id="{{ bank_id }}"
+  >
+    <header>
+      <div>
+        <h1>{{ bank_label }} · Review Deck</h1>
+        <div class="header-meta" id="headerMeta">
+          <span id="progressCount">Preparing review…</span>
+          <span>{{ review_group_count }} groups detected</span>
+          <a
+            href="{{ url_for('bank_home', bank_id=bank_id) }}"
+            style="color: var(--accent); text-decoration: none;"
+          >
+            ← Back to builder
+          </a>
+        </div>
+      </div>
+      <nav class="bank-switch" aria-label="Switch question bank">
+        {% for bank in available_banks %}
+        <a
+          href="{{ url_for('review_page', bank_id=bank.id) }}"
+          class="{% if bank.id == bank_id %}is-active{% endif %}"
+        >
+          {{ bank.label }}
+        </a>
+        {% endfor %}
+      </nav>
+    </header>
+
+    <main class="layout">
+      <section class="panel" id="stagePanel" aria-live="polite">
+        <div class="stage-header">
+          <div class="stage-header__titles">
+            <div class="stage-header__group" id="groupTitle"></div>
+            <div class="tag-list" id="groupTags"></div>
+            <div class="helper-text" id="groupInfo"></div>
+          </div>
+          <div class="helper-text" id="questionCount"></div>
+        </div>
+
+        <div class="media-columns">
+          <div class="media-column">
+            <h3>Question images</h3>
+            <div id="questionMedia"></div>
+          </div>
+          <div class="media-column">
+            <h3>Answer images</h3>
+            <div id="answerMedia"></div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel controls" aria-label="Review controls">
+        <div class="status-buttons">
+          <button class="status-button" data-status="ok">
+            <strong>Looks good</strong>
+            <span>Shortcut: <code>G</code></span>
+          </button>
+          <button class="status-button" data-status="issue">
+            <strong>Wrong image</strong>
+            <span>Shortcut: <code>W</code></span>
+          </button>
+          <button class="status-button" data-status="missing">
+            <strong>Missing part</strong>
+            <span>Shortcut: <code>M</code></span>
+          </button>
+          <button class="status-button" data-status="skip">
+            <strong>Skip for now</strong>
+            <span>Shortcut: <code>S</code></span>
+          </button>
+        </div>
+
+        <label class="helper-text" for="notesBox">Optional notes</label>
+        <textarea id="notesBox" placeholder="Add context for issues or TODO items…"></textarea>
+
+        <div class="navigation-buttons">
+          <button type="button" id="prevBtn">← Previous</button>
+          <button type="button" id="nextBtn">Next →</button>
+        </div>
+
+        <div class="hotkeys">
+          <p style="margin: 0 0 6px">Keyboard</p>
+          <p style="margin: 0">
+            <code>G</code>/<code>W</code>/<code>M</code>/<code>S</code> mark status ·
+            <code>←</code>/<code>→</code> move · <code>Shift+R</code> reset status
+          </p>
+        </div>
+
+        <div>
+          <h3 style="margin: 18px 0 8px; font-size: 1rem;">Logged items</h3>
+          <div id="summaryContainer" class="summary"></div>
+          <div class="summary-empty" id="summaryEmpty">
+            Issues you record will appear here for export.
+          </div>
+          <button
+            type="button"
+            id="downloadBtn"
+            style="margin-top: 10px; width: 100%;"
+          >
+            Download review report
+          </button>
+        </div>
+      </aside>
+    </main>
+
+    <script>
+      const state = {
+        groups: [],
+        index: 0,
+        logs: new Map(),
+      };
+
+      const bodyEl = document.body;
+      const reviewDataUrl = bodyEl.dataset.reviewData;
+      const reviewStatusUrl = bodyEl.dataset.reviewStatus;
+      const imageBase = (bodyEl.dataset.imageBase || "").replace(/\/+$/, "");
+
+      const els = {
+        progressCount: document.getElementById("progressCount"),
+        groupTitle: document.getElementById("groupTitle"),
+        groupTags: document.getElementById("groupTags"),
+        groupInfo: document.getElementById("groupInfo"),
+        questionCount: document.getElementById("questionCount"),
+        questionMedia: document.getElementById("questionMedia"),
+        answerMedia: document.getElementById("answerMedia"),
+        statusButtons: Array.from(
+          document.querySelectorAll(".status-button[data-status]")
+        ),
+        notesBox: document.getElementById("notesBox"),
+        prevBtn: document.getElementById("prevBtn"),
+        nextBtn: document.getElementById("nextBtn"),
+        summaryContainer: document.getElementById("summaryContainer"),
+        summaryEmpty: document.getElementById("summaryEmpty"),
+        downloadBtn: document.getElementById("downloadBtn"),
+      };
+
+      function groupKey(group) {
+        return `${group.topic}::${group.group_index}`;
+      }
+
+      function resolvePath(p) {
+        if (!p) return "";
+        if (/^https?:\/\//i.test(p) || p.startsWith("data:")) {
+          return p;
+        }
+        let rel = p.replace(/^\/+/, "");
+        if (imageBase) {
+          if (rel.startsWith("images/")) {
+            rel = rel.slice("images/".length);
+          }
+          return `${imageBase}/${rel}`;
+        }
+        return `/${rel}`;
+      }
+
+      function renderTags(tags) {
+        els.groupTags.textContent = "";
+        if (!tags || !tags.length) return;
+        const frag = document.createDocumentFragment();
+        tags.forEach((tag) => {
+          const span = document.createElement("span");
+          span.className = "tag";
+          span.textContent = tag;
+          frag.appendChild(span);
+        });
+        els.groupTags.appendChild(frag);
+      }
+
+      function renderMedia(container, questions, key) {
+        container.textContent = "";
+        if (!questions.length) {
+          const empty = document.createElement("div");
+          empty.className = "summary-empty";
+          empty.textContent = "No questions detected for this group.";
+          container.appendChild(empty);
+          return;
+        }
+
+        const frag = document.createDocumentFragment();
+        questions.forEach((question, idx) => {
+          const block = document.createElement("div");
+          block.className = "media-block";
+
+          const title = document.createElement("div");
+          title.className = "media-block__title";
+          const idSpan = document.createElement("strong");
+          idSpan.textContent = question.question_id || "Unknown id";
+          const badge = document.createElement("span");
+          badge.textContent = `Part ${idx + 1}`;
+          title.appendChild(idSpan);
+          title.appendChild(badge);
+          block.appendChild(title);
+
+          if (question[key] && question[key].length) {
+            const list = document.createElement("div");
+            list.className = "media-block__images";
+            question[key].forEach((path) => {
+              const img = document.createElement("img");
+              img.src = resolvePath(path);
+              img.alt = `${question.question_id || "Question"} image`;
+              list.appendChild(img);
+
+              const link = document.createElement("a");
+              link.href = resolvePath(path);
+              link.target = "_blank";
+              link.rel = "noopener";
+              link.textContent = "Open in new tab";
+              list.appendChild(link);
+            });
+            block.appendChild(list);
+          } else {
+            const empty = document.createElement("div");
+            empty.className = "summary-empty";
+            empty.textContent =
+              key === "images"
+                ? "No question images recorded."
+                : "No answer images recorded.";
+            block.appendChild(empty);
+          }
+
+          if (question.question_text) {
+            const text = document.createElement("p");
+            text.textContent = question.question_text;
+            text.style.margin = "0";
+            text.style.color = "var(--text-subtle)";
+            block.appendChild(text);
+          }
+
+          frag.appendChild(block);
+        });
+
+        container.appendChild(frag);
+      }
+
+      function applyStatusUI(status) {
+        els.statusButtons.forEach((btn) => {
+          btn.classList.toggle(
+            "is-active",
+            status && btn.dataset.status === status
+          );
+        });
+      }
+
+      function summaryEntries() {
+        return Array.from(state.logs.values()).filter((entry) => {
+          if (!entry || !entry.status) return false;
+          if (entry.status === "ok" && !entry.notes) return false;
+          return entry.status !== "skip" || !!entry.notes;
+        });
+      }
+
+      function updateSummary() {
+        const entries = summaryEntries();
+        els.summaryContainer.textContent = "";
+        if (!entries.length) {
+          els.summaryEmpty.style.display = "block";
+          return;
+        }
+        els.summaryEmpty.style.display = "none";
+        const frag = document.createDocumentFragment();
+        entries.forEach((payload) => {
+          const item = document.createElement("div");
+          item.className = "summary-item";
+          const title = document.createElement("div");
+          title.className = "summary-item__title";
+          title.textContent = `${payload.topic} · ${payload.label}`;
+          const status = document.createElement("div");
+          status.textContent = `Status: ${payload.status}`;
+          item.appendChild(title);
+          item.appendChild(status);
+          if (payload.notes) {
+            const notes = document.createElement("div");
+            notes.className = "summary-item__notes";
+            notes.textContent = payload.notes;
+            item.appendChild(notes);
+          }
+          frag.appendChild(item);
+        });
+        els.summaryContainer.appendChild(frag);
+      }
+
+      function completedCount() {
+        let count = 0;
+        state.logs.forEach((entry) => {
+          if (!entry || !entry.status) return;
+          if (entry.status === "skip") return;
+          count += 1;
+        });
+        return count;
+      }
+
+      function updateProgressIndicator() {
+        if (!state.groups.length) {
+          els.progressCount.textContent = "No groups available.";
+          return;
+        }
+        const active = state.index + 1;
+        const total = state.groups.length;
+        const reviewed = completedCount();
+        els.progressCount.textContent = `Reviewing ${active} of ${total} · ${reviewed} saved`;
+      }
+
+      function persistStatus(group, status, notes) {
+        if (!reviewStatusUrl) return;
+        const payload = {
+          key: groupKey(group),
+          status: status === undefined ? null : status,
+          notes: notes || "",
+          topic: group.topic,
+          group_index: group.group_index,
+          group_id: group.group_id || null,
+          label: group.group_id || `Group ${group.group_index + 1}`,
+        };
+        fetch(reviewStatusUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+          },
+          body: JSON.stringify(payload),
+        }).catch((err) => console.error("Failed to persist review status", err));
+      }
+
+      function saveLog(group, status, notes) {
+        const key = groupKey(group);
+        const cleanStatus = status === undefined ? null : status;
+        const cleanNotes = notes ? notes.trim() : "";
+
+        if (cleanStatus === null && !cleanNotes) {
+          state.logs.delete(key);
+        } else {
+          state.logs.set(key, {
+            topic: group.topic,
+            group_index: group.group_index,
+            group_id: group.group_id || null,
+            label: group.group_id || `Group ${group.group_index + 1}`,
+            status: cleanStatus,
+            notes: cleanNotes,
+            questions: group.questions.map((q) => ({
+              question_id: q.question_id,
+              question_text: q.question_text,
+              question_images: q.images,
+              answer_images: q.answer_images,
+            })),
+          });
+        }
+
+        updateSummary();
+        updateProgressIndicator();
+        persistStatus(group, cleanStatus, cleanNotes);
+      }
+
+      function loadGroup(index) {
+        if (!state.groups.length) {
+          els.groupTitle.textContent = "No groups available";
+          els.groupInfo.textContent = "";
+          els.questionCount.textContent = "";
+          return;
+        }
+        if (index < 0) index = 0;
+        if (index >= state.groups.length) index = state.groups.length - 1;
+
+        state.index = index;
+        const group = state.groups[index];
+        const key = groupKey(group);
+        const stored = state.logs.get(key);
+
+        els.groupTitle.textContent = group.group_id
+          ? `${group.group_id}`
+          : `${group.topic} · Group ${group.group_index + 1}`;
+        els.groupInfo.textContent = `${group.topic} · Group ${
+          group.group_index + 1
+        } of ${state.groups.filter((g) => g.topic === group.topic).length}`;
+        els.questionCount.textContent = `${group.questions.length} parts captured`;
+
+        renderTags(group.tags || []);
+        renderMedia(els.questionMedia, group.questions, "images");
+        renderMedia(els.answerMedia, group.questions, "answer_images");
+
+        const status = stored ? stored.status : null;
+        const notes = stored ? stored.notes : "";
+        applyStatusUI(status);
+        els.notesBox.value = notes;
+
+        els.prevBtn.disabled = index === 0;
+        els.nextBtn.disabled = index === state.groups.length - 1;
+        updateProgressIndicator();
+      }
+
+      function findNextPending(startIndex) {
+        for (let i = startIndex; i < state.groups.length; i += 1) {
+          const group = state.groups[i];
+          const entry = state.logs.get(groupKey(group));
+          if (!entry || !entry.status || entry.status === "skip") {
+            return i;
+          }
+        }
+        return null;
+      }
+
+      function goTo(index) {
+        if (index < 0 || index >= state.groups.length) return;
+        loadGroup(index);
+      }
+
+      function handleStatusChange(status) {
+        const group = state.groups[state.index];
+        if (!group) return;
+        const notes = els.notesBox.value;
+        saveLog(group, status, notes);
+        applyStatusUI(status);
+
+        if (status !== "skip") {
+          const next = findNextPending(state.index + 1);
+          if (next !== null) {
+            loadGroup(next);
+          } else if (state.index < state.groups.length - 1) {
+            loadGroup(state.index + 1);
+          } else {
+            updateProgressIndicator();
+          }
+        }
+      }
+
+      function clearStatus() {
+        const group = state.groups[state.index];
+        if (!group) return;
+        els.notesBox.value = "";
+        saveLog(group, null, "");
+        applyStatusUI(null);
+      }
+
+      els.statusButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const status = btn.dataset.status;
+          if (!status) return;
+          handleStatusChange(status);
+        });
+      });
+
+      els.prevBtn.addEventListener("click", () => goTo(state.index - 1));
+      els.nextBtn.addEventListener("click", () => goTo(state.index + 1));
+
+      els.notesBox.addEventListener("blur", () => {
+        const group = state.groups[state.index];
+        if (!group) return;
+        const entry = state.logs.get(groupKey(group));
+        if (!entry || entry.status === null || entry.status === undefined) return;
+        saveLog(group, entry.status, els.notesBox.value);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.target === els.notesBox) {
+          return;
+        }
+        const key = event.key.toLowerCase();
+        if (key === "arrowright") {
+          event.preventDefault();
+          goTo(state.index + 1);
+        } else if (key === "arrowleft") {
+          event.preventDefault();
+          goTo(state.index - 1);
+        } else if (key === "g") {
+          event.preventDefault();
+          handleStatusChange("ok");
+        } else if (key === "w") {
+          event.preventDefault();
+          handleStatusChange("issue");
+        } else if (key === "m") {
+          event.preventDefault();
+          handleStatusChange("missing");
+        } else if (key === "s") {
+          event.preventDefault();
+          handleStatusChange("skip");
+        } else if (event.shiftKey && key === "r") {
+          event.preventDefault();
+          clearStatus();
+        }
+      });
+
+      function downloadReport() {
+        const payload = {
+          generated_at: new Date().toISOString(),
+          bank_id: bodyEl.dataset.bankId,
+          total_groups: state.groups.length,
+          reviewed: state.logs.size,
+          items: Array.from(state.logs.values()),
+        };
+        const blob = new Blob([JSON.stringify(payload, null, 2)], {
+          type: "application/json",
+        });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${bodyEl.dataset.bankId || "review"}-review-log.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+
+      els.downloadBtn.addEventListener("click", downloadReport);
+
+      function seedStored(entries) {
+        if (!entries) return;
+        Object.entries(entries).forEach(([key, entry]) => {
+          const group = state.groups.find((g) => groupKey(g) === key);
+          if (!group) return;
+          state.logs.set(key, {
+            topic: group.topic,
+            group_index: group.group_index,
+            group_id: group.group_id || null,
+            label:
+              entry.label || group.group_id || `Group ${group.group_index + 1}`,
+            status: entry.status || null,
+            notes: entry.notes || "",
+            questions: group.questions.map((q) => ({
+              question_id: q.question_id,
+              question_text: q.question_text,
+              question_images: q.images,
+              answer_images: q.answer_images,
+            })),
+          });
+        });
+        updateSummary();
+      }
+
+      function firstPendingIndex() {
+        const pending = findNextPending(0);
+        return pending === null ? 0 : pending;
+      }
+
+      Promise.all([
+        fetch(reviewDataUrl).then((res) => res.json()),
+        reviewStatusUrl
+          ? fetch(reviewStatusUrl)
+              .then((res) => res.json())
+              .catch((err) => {
+                console.error("Failed to load saved review state", err);
+                return null;
+              })
+          : Promise.resolve(null),
+      ])
+        .then(([dataPayload, statusPayload]) => {
+          if (!dataPayload || !Array.isArray(dataPayload.groups)) {
+            throw new Error("Unexpected review data response");
+          }
+          state.groups = dataPayload.groups;
+          if (statusPayload && statusPayload.entries) {
+            seedStored(statusPayload.entries);
+          }
+          if (!state.groups.length) {
+            els.progressCount.textContent = "No groups found.";
+            return;
+          }
+          updateSummary();
+          const startIndex = firstPendingIndex();
+          loadGroup(startIndex);
+        })
+        .catch((error) => {
+          console.error(error);
+          els.progressCount.textContent = "Failed to load review data.";
+          const notice = document.createElement("div");
+          notice.className = "summary-empty";
+          notice.textContent = "Unable to load review data. Check the console.";
+          els.questionMedia.appendChild(notice.cloneNode(true));
+          els.answerMedia.appendChild(notice);
+        });
+    </script>
+  </body>
+</html>
