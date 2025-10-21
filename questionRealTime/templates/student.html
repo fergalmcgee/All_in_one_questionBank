@@ -33,9 +33,18 @@
                 <div id="question-images" class="question-images"></div>
             </div>
 
+            <div class="drawing-tools">
+                <button id="open-drawing" type="button" class="drawing-button hidden">Draw on question</button>
+                <button id="drawing-engine-toggle" type="button" class="drawing-button secondary hidden" aria-live="polite"></button>
+                <div id="drawing-preview" class="drawing-preview hidden">
+                    <img id="drawing-preview-image" alt="Your drawing" />
+                    <button type="button" id="drawing-remove" class="drawing-remove">Remove drawing</button>
+                </div>
+            </div>
+
             <form id="answer-form" class="answer-form hidden" autocomplete="off">
                 <label for="answer-input">Your answer</label>
-                <textarea id="answer-input" rows="3" required></textarea>
+                <textarea id="answer-input" rows="3"></textarea>
                 <div class="actions">
                     <button type="submit">Send answer</button>
                     <span id="answer-feedback" role="status"></span>
@@ -48,6 +57,71 @@
                 <div id="answer-images" class="answer-images"></div>
             </section>
         </main>
+    </div>
+
+    <div id="drawing-overlay" class="drawing-overlay hidden" role="dialog" aria-modal="true">
+        <div class="drawing-dialog">
+            <header class="drawing-header">
+                <h2>Annotate the question</h2>
+                <div class="drawing-header-actions">
+                    <button type="button" id="drawing-mode-toggle" aria-label="Toggle drawing mode" title="Toggle drawing mode">🖊</button>
+                    <button type="button" id="drawing-undo" aria-label="Undo">Undo</button>
+                    <button type="button" id="drawing-clear">Clear</button>
+                    <button type="button" id="drawing-close" aria-label="Close">×</button>
+                </div>
+            </header>
+            <section class="drawing-content">
+                <div class="drawing-stage">
+                    <img id="drawing-background" alt="Question background" draggable="false" />
+                    <div id="drawing-background-html" class="drawing-background-html"></div>
+                    <canvas id="drawing-canvas"></canvas>
+                </div>
+                <button type="button" id="drawing-mode-toggle-floating" class="drawing-mode-fab" aria-label="Toggle drawing mode" title="Toggle drawing mode">🖊</button>
+            </section>
+            <footer class="drawing-footer">
+                <div class="drawing-brush">
+                    <label for="drawing-color">Brush</label>
+                    <input type="color" id="drawing-color" value="#1f2937" />
+                    <label for="drawing-size" class="visually-hidden">Brush size</label>
+                    <input type="range" id="drawing-size" min="2" max="18" value="6" />
+                </div>
+                <div class="drawing-footer-actions">
+                    <button type="button" id="drawing-save">Use drawing</button>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <div id="fabric-overlay" class="drawing-overlay hidden" role="dialog" aria-modal="true">
+        <div class="drawing-dialog">
+            <header class="drawing-header">
+                <h2>Annotate the question (beta)</h2>
+                <div class="drawing-header-actions">
+                    <button type="button" id="fabric-mode-toggle" aria-label="Toggle drawing mode" title="Toggle drawing mode">🖊</button>
+                    <button type="button" id="fabric-zoom-in" aria-label="Zoom in" title="Zoom in">＋</button>
+                    <button type="button" id="fabric-zoom-out" aria-label="Zoom out" title="Zoom out">－</button>
+                    <button type="button" id="fabric-undo" aria-label="Undo">Undo</button>
+                    <button type="button" id="fabric-clear">Clear</button>
+                    <button type="button" id="fabric-close" aria-label="Close">×</button>
+                </div>
+            </header>
+            <section class="drawing-content fabric-content">
+                <div class="fabric-stage">
+                    <canvas id="fabric-canvas"></canvas>
+                </div>
+            </section>
+            <footer class="drawing-footer">
+                <div class="drawing-brush">
+                    <label for="fabric-color">Brush</label>
+                    <input type="color" id="fabric-color" value="#1f2937" />
+                    <label for="fabric-size" class="visually-hidden">Brush size</label>
+                    <input type="range" id="fabric-size" min="2" max="18" value="6" />
+                </div>
+                <div class="drawing-footer-actions">
+                    <button type="button" id="fabric-save">Use drawing</button>
+                </div>
+            </footer>
+        </div>
     </div>
 
     <script src="{{ url_for('static', filename='js/student.js') }}" defer></script>

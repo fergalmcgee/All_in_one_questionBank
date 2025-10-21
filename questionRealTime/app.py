@@ -1,14 +1,16 @@
 from __future__ import annotations
 
+import base64
 import json
 import os
 import random
 import socket
 import string
+import re
 from datetime import datetime
 from functools import lru_cache
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Sequence
+from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
 from uuid import uuid4
 
 from flask import (
@@ -29,7 +31,7 @@ BANK_ROOT = BASE_DIR.parent
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.environ.get("QRT_SECRET_KEY", "qrt-presenter-dev-secret")
-PRESENTER_ACCESS_CODE = os.environ.get("QRT_PRESENTER_CODE", "cic2025")
+PRESENTER_ACCESS_CODE = os.environ.get("QRT_PRESENTER_CODE", "CIC2025Presenter")
 
 QUESTION_BANKS: Dict[str, Dict[str, Any]] = {
     "CSA2": {"label": "Computer Science A2", "json": "A2Questions.json"},
@@ -43,6 +45,7 @@ QUESTION_BANKS: Dict[str, Dict[str, Any]] = {
 ALLOWED_IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp"}
 USER_IMAGE_DIR = BASE_DIR / "UserImages"
 USER_IMAGE_DIR.mkdir(parents=True, exist_ok=True)
+TEMPLATE_STORAGE_PATH = BASE_DIR / "session_templates.json"
 
 
 class SessionState:
@@ -195,6 +198,211 @@ def _sanitize_image_list(value: Any) -> List[str]:
     return images
 
 
+def _read_template_store() -> Dict[str, Any]:
+    if not TEMPLATE_STORAGE_PATH.exists():
+        return {}
+    try:
+        with TEMPLATE_STORAGE_PATH.open("r", encoding="utf-8") as handle:
+            raw = json.load(handle)
+    except json.JSONDecodeError as exc:
+        abort(500, description=f"Template store is corrupted: {exc}")
+    except OSError as exc:
+        abort(500, description=f"Unable to read templates: {exc}")
+
+    if isinstance(raw, dict):
+        if isinstance(raw.get("templates"), dict):
+            return raw["templates"]
+        return {
+            key: value
+            for key, value in raw.items()
+            if isinstance(key, str) and isinstance(value, dict)
+        }
+
+    if isinstance(raw, list):
+        templates: Dict[str, Any] = {}
+        for item in raw:
+            if isinstance(item, dict):
+                template_id = item.get("id")
+                if isinstance(template_id, str):
+                    templates[template_id] = item
+        return templates
+
+    return {}
+
+
+def _write_template_store(templates: Dict[str, Any]) -> None:
+    payload = {"templates": templates}
+    tmp_path = TEMPLATE_STORAGE_PATH.with_name(f"{TEMPLATE_STORAGE_PATH.name}.tmp")
+    try:
+        with tmp_path.open("w", encoding="utf-8") as handle:
+            json.dump(payload, handle, indent=2)
+        tmp_path.replace(TEMPLATE_STORAGE_PATH)
+    except OSError as exc:
+        abort(500, description=f"Unable to save templates: {exc}")
+
+
+def _serialize_template(template_id: str, template: Dict[str, Any], *, include_details: bool = True) -> Dict[str, Any]:
+    queue = template.get("queue")
+    question_count = len(queue) if isinstance(queue, list) else 0
+    payload: Dict[str, Any] = {
+        "id": template_id,
+        "name": template.get("name") or "Untitled template",
+        "bank_id": template.get("bank_id"),
+        "question_count": question_count,
+        "created_at": template.get("created_at"),
+        "updated_at": template.get("updated_at"),
+    }
+    if include_details:
+        payload["queue"] = queue or []
+        payload["custom_questions"] = template.get("custom_questions") or {}
+        payload["topics"] = template.get("topics") or []
+    return payload
+
+
+def _get_template_record(template_id: str) -> Dict[str, Any]:
+    templates = _read_template_store()
+    record = templates.get(template_id)
+    if not isinstance(record, dict):
+        abort(404, description="Template not found")
+    return record
+
+
+def _sanitize_template_topics(topics: Any) -> List[str]:
+    if not isinstance(topics, list):
+        return []
+    sanitized: List[str] = []
+    for topic in topics:
+        if isinstance(topic, str):
+            value = topic.strip()
+            if value:
+                sanitized.append(value)
+    return sanitized
+
+
+def _normalize_custom_question_payload(raw: Dict[str, Any], default_id: str) -> Dict[str, Any]:
+    if not isinstance(raw, dict):
+        abort(400, description=f"Custom question payload for {default_id} is invalid")
+
+    normalized = dict(raw)
+    normalized["id"] = str(raw.get("id") or default_id)
+    question_text = raw.get("text") or ""
+    normalized["text"] = question_text.strip() if isinstance(question_text, str) else str(question_text)
+
+    answer_text = raw.get("answer_text")
+    if isinstance(answer_text, str):
+        normalized["answer_text"] = answer_text.strip()
+    elif answer_text is None:
+        normalized["answer_text"] = ""
+    else:
+        normalized["answer_text"] = str(answer_text).strip()
+
+    question_images = raw.get("question_images")
+    if isinstance(question_images, list):
+        normalized["question_images"] = [img for img in question_images if isinstance(img, str) and img]
+    else:
+        normalized["question_images"] = []
+
+    answer_images = raw.get("answer_images")
+    if isinstance(answer_images, list):
+        normalized["answer_images"] = [img for img in answer_images if isinstance(img, str) and img]
+    else:
+        normalized["answer_images"] = []
+
+    tags = raw.get("tags")
+    if isinstance(tags, list):
+        normalized["tags"] = [tag for tag in tags if isinstance(tag, str)]
+
+    return normalized
+
+
+def _normalize_template_queue(
+    bank_id: str,
+    queue_payload: Any,
+    custom_payload: Any,
+) -> Tuple[List[Dict[str, str]], Dict[str, Dict[str, Any]]]:
+    if not isinstance(queue_payload, list):
+        abort(400, description="queue must be an array")
+    if not queue_payload:
+        abort(400, description="queue must contain at least one item")
+
+    cache = _bank_entries(bank_id)
+    valid_questions = cache["id_lookup"]
+    custom_map: Dict[str, Any] = custom_payload if isinstance(custom_payload, dict) else {}
+
+    cleaned_queue: List[Dict[str, str]] = []
+    required_custom_ids: Set[str] = set()
+
+    for index, entry in enumerate(queue_payload):
+        if not isinstance(entry, dict):
+            abort(400, description=f"queue entry at position {index + 1} is invalid")
+        entry_type = entry.get("type")
+        entry_id = entry.get("id")
+        if entry_type == "bank":
+            if not entry_id or not isinstance(entry_id, str):
+                abort(400, description=f"queue entry {index + 1} is missing a question id")
+            if entry_id not in valid_questions:
+                abort(400, description=f"Question {entry_id} is not available in the bank")
+            cleaned_queue.append({"type": "bank", "id": entry_id})
+        elif entry_type == "custom":
+            if not entry_id or not isinstance(entry_id, str):
+                abort(400, description=f"Custom queue entry {index + 1} is missing an id")
+            if entry_id not in custom_map:
+                abort(400, description=f"Custom question data missing for {entry_id}")
+            required_custom_ids.add(entry_id)
+            cleaned_queue.append({"type": "custom", "id": entry_id})
+        else:
+            abort(400, description=f"Unsupported queue entry type: {entry_type}")
+
+    if not cleaned_queue:
+        abort(400, description="queue must contain at least one item")
+
+    cleaned_custom: Dict[str, Dict[str, Any]] = {}
+    for custom_id in required_custom_ids:
+        cleaned_custom[custom_id] = _normalize_custom_question_payload(custom_map[custom_id], custom_id)
+
+    return cleaned_queue, cleaned_custom
+
+
+def _save_data_url_image(data_url: str, *, prefix: str = "annotation-") -> str:
+    if not data_url.startswith("data:image"):
+        abort(400, description="Unsupported image format")
+    try:
+        header, encoded = data_url.split(",", 1)
+    except ValueError:
+        abort(400, description="Invalid image data")
+    mime_part = header.split(";")[0]
+    _, _, mime = mime_part.partition(":")
+    extension = {
+        "image/png": ".png",
+        "image/jpeg": ".jpg",
+        "image/jpg": ".jpg",
+        "image/webp": ".webp",
+    }.get(mime, ".png")
+    try:
+        binary = base64.b64decode(encoded)
+    except (base64.binascii.Error, ValueError):
+        abort(400, description="Could not decode image data")
+
+    filename = f"{prefix}{uuid4().hex}{extension}"
+    path = USER_IMAGE_DIR / filename
+    try:
+        with path.open("wb") as handle:
+            handle.write(binary)
+    except OSError as exc:
+        abort(500, description=f"Could not save drawing: {exc}")
+    return filename
+
+
+def _normalize_answer_text(text: str, *, max_length: int = 280) -> str:
+    if not text:
+        return ""
+    compact = re.sub(r"\s+", " ", text)
+    compact = compact.strip()
+    if max_length and len(compact) > max_length:
+        compact = compact[:max_length].rstrip()
+    return compact
+
+
 def _resolve_image(bank_id: str, reference: str) -> Optional[str]:
     if not reference:
         return None
@@ -203,6 +411,16 @@ def _resolve_image(bank_id: str, reference: str) -> Optional[str]:
     if reference.startswith("/"):
         return reference
     return url_for("serve_bank_asset", bank_id=bank_id, filename=reference)
+
+
+def _delete_session_annotations(session_code: str) -> None:
+    pattern = f"annotation-{session_code}-*"
+    for path in USER_IMAGE_DIR.glob(pattern):
+        try:
+            if path.is_file():
+                path.unlink()
+        except OSError:
+            continue
 
 
 def _generate_code(length: int = 4) -> str:
@@ -369,6 +587,7 @@ def session_api() -> Any:
             abort(400, description="code is required")
         session = SESSIONS.pop(code, None)
         if session:
+            _delete_session_annotations(session.code)
             return jsonify({"ok": True})
         abort(404, description="Session not found or already removed")
 
@@ -411,22 +630,34 @@ def session_responses() -> Any:
 
     if request.method == "DELETE":
         _require_presenter()
+        response_id = (data.get("response_id") or "").strip()
+        if response_id:
+            before = len(session.responses)
+            session.responses = [entry for entry in session.responses if entry.get("id") != response_id]
+            if len(session.responses) != before:
+                return jsonify(_session_state(session, view="presenter"))
+            abort(404, description="Response not found")
         session.responses = []
         return jsonify(_session_state(session, view="presenter"))
 
     name = (data.get("name") or "").strip()
-    answer = (data.get("answer") or "").strip()
+    answer_raw = data.get("answer") or ""
+    answer = _normalize_answer_text(answer_raw)
+    drawing_url = (data.get("drawing_url") or "").strip()
 
-    if not name or not answer:
-        abort(400, description="Name and answer are required")
+    if not name:
+        abort(400, description="Name is required")
+    if not answer and not drawing_url:
+        abort(400, description="Provide an answer or a drawing")
 
-    session.responses.append(
-        {
-            "name": name,
-            "answer": answer,
-            "submitted_at": datetime.utcnow().isoformat(),
-        }
-    )
+    response_entry = {
+        "id": uuid4().hex,
+        "name": name,
+        "answer": answer,
+        "drawing_url": drawing_url or None,
+        "submitted_at": datetime.utcnow().isoformat(),
+    }
+    session.responses.append(response_entry)
     return jsonify({"ok": True})
 
 
@@ -445,6 +676,68 @@ def session_goto() -> Any:
     session.revealed = False
     session.responses = []
     return jsonify(_session_state(session, view="presenter"))
+
+
+@app.route("/api/templates", methods=["GET", "POST"])
+def templates_collection() -> Any:
+    _require_presenter()
+    if request.method == "GET":
+        bank_filter = request.args.get("bank_id")
+        templates = _read_template_store()
+        items: List[Dict[str, Any]] = []
+        for template_id, record in templates.items():
+            if not isinstance(record, dict):
+                continue
+            if bank_filter and record.get("bank_id") != bank_filter:
+                continue
+            items.append(_serialize_template(template_id, record))
+        items.sort(key=lambda item: item.get("updated_at") or "", reverse=True)
+        return jsonify({"templates": items})
+
+    data = request.get_json(silent=True) or {}
+    name = (data.get("name") or "").strip()
+    if not name:
+        abort(400, description="name is required")
+    bank_id = data.get("bank_id")
+    if not bank_id or not isinstance(bank_id, str):
+        abort(400, description="bank_id is required")
+
+    queue, cleaned_custom = _normalize_template_queue(bank_id, data.get("queue"), data.get("custom_questions"))
+    topics = _sanitize_template_topics(data.get("topics"))
+
+    timestamp = datetime.utcnow().isoformat()
+    template_id = uuid4().hex
+    record = {
+        "name": name,
+        "bank_id": bank_id,
+        "queue": queue,
+        "custom_questions": cleaned_custom,
+        "topics": topics,
+        "created_at": timestamp,
+        "updated_at": timestamp,
+    }
+
+    templates = _read_template_store()
+    templates[template_id] = record
+    _write_template_store(templates)
+
+    return jsonify({"template": _serialize_template(template_id, record)}), 201
+
+
+@app.route("/api/templates/<template_id>", methods=["GET", "DELETE"])
+def template_detail(template_id: str) -> Any:
+    _require_presenter()
+    if request.method == "GET":
+        record = _get_template_record(template_id)
+        return jsonify({"template": _serialize_template(template_id, record)})
+
+    templates = _read_template_store()
+    if template_id not in templates:
+        abort(404, description="Template not found")
+
+    templates.pop(template_id)
+    _write_template_store(templates)
+    return jsonify({"ok": True})
 
 
 @app.route("/bank-assets/<bank_id>/<path:filename>")
@@ -477,12 +770,17 @@ def bank_outline(bank_id: str) -> Any:
             }
         text = question.get("question_text") or question.get("prompt") or "Question"
         summary[topic]["question_count"] += 1
+        preview_image = None
+        images = question.get("images") if isinstance(question.get("images"), list) else []
+        if images:
+            preview_image = _resolve_image(bank_id, images[0])
         summary[topic]["questions"].append(
             {
                 "id": question_id,
                 "text": text,
-                "has_images": bool(question.get("images")),
+                "has_images": bool(images),
                 "tags": question.get("tags", []),
+                "preview_image": preview_image,
             }
         )
 
@@ -497,6 +795,45 @@ def bank_outline(bank_id: str) -> Any:
                 "label": bank_meta.get("label", bank_id),
             },
             "topics": topics,
+        }
+    )
+
+
+@app.get("/api/bank/<bank_id>/question/<question_id>")
+def bank_question_detail(bank_id: str, question_id: str) -> Any:
+    _require_presenter()
+    cache = _bank_entries(bank_id)
+    entry = cache["id_lookup"].get(question_id)
+    if not entry:
+        abort(404, description="Question not found")
+
+    cloned = _clone_entry(entry)
+    question = cloned.get("question", {})
+    images = []
+    for ref in question.get("images", []) or []:
+        if isinstance(ref, str):
+            resolved = _resolve_image(bank_id, ref)
+            if resolved:
+                images.append(resolved)
+
+    answer_images = []
+    for ref in question.get("answer_images", []) or []:
+        if isinstance(ref, str):
+            resolved = _resolve_image(bank_id, ref)
+            if resolved:
+                answer_images.append(resolved)
+
+    return jsonify(
+        {
+            "id": question.get("question_id"),
+            "topic": cloned.get("topic"),
+            "group_id": cloned.get("group_id"),
+            "text": question.get("question_text"),
+            "prompt": question.get("prompt"),
+            "tags": question.get("tags", []),
+            "images": images,
+            "answer_text": question.get("answer_text"),
+            "answer_images": answer_images,
         }
     )
 
@@ -550,6 +887,21 @@ def presenter_user_images() -> Any:
             }
         )
     return jsonify({"images": items})
+
+
+@app.post("/api/student/upload-drawing")
+def student_upload_drawing() -> Any:
+    data = request.get_json(silent=True) or {}
+    code = data.get("code")
+    image_data = data.get("image")
+    session = _get_session(code)
+
+    if not image_data or not isinstance(image_data, str):
+        abort(400, description="image data is required")
+
+    filename = _save_data_url_image(image_data, prefix=f"annotation-{session.code}-")
+    url = url_for("serve_user_image", filename=filename)
+    return jsonify({"url": url, "filename": filename})
 
 
 def _build_join_url(session_code: str) -> str:

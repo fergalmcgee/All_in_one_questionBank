@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+  </head>
+  <body>
+    <input type="file" id="imageLoader" accept="image/*" />
+    <button id="saveBtn">Save Image</button>
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <script>
+      const canvas = new fabric.Canvas("canvas", {
+        isDrawingMode: true,
+      });
+
+      canvas.freeDrawingBrush.width = 3;
+      canvas.freeDrawingBrush.color = "red";
+
+      // Load image
+      document
+        .getElementById("imageLoader")
+        .addEventListener("change", function (e) {
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            fabric.Image.fromURL(event.target.result, function (img) {
+              img.scaleToWidth(canvas.width);
+              canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+            });
+          };
+          reader.readAsDataURL(e.target.files[0]);
+        });
+
+      // Enable pinch zoom
+      canvas.on("touch:gesture", function (e) {
+        if (e.e.touches && e.e.touches.length == 2) {
+          canvas.isDrawingMode = false;
+          let point = new fabric.Point(e.self.x, e.self.y);
+          if (e.self.state == "start") {
+            canvas.zoomStartScale = canvas.getZoom();
+          }
+          let delta = canvas.zoomStartScale * e.self.scale;
+          canvas.zoomToPoint(point, delta);
+        }
+      });
+
+      canvas.on("touch:drag", function (e) {
+        if (e.e.touches && e.e.touches.length == 2) {
+          let delta = new fabric.Point(
+            e.self.x - canvas.lastX,
+            e.self.y - canvas.lastY
+          );
+          canvas.relativePan(delta);
+        }
+        canvas.lastX = e.self.x;
+        canvas.lastY = e.self.y;
+      });
+
+      // Save image
+      document.getElementById("saveBtn").addEventListener("click", function () {
+        const dataURL = canvas.toDataURL({
+          format: "png",
+          quality: 1,
+        });
+        const link = document.createElement("a");
+        link.download = "annotated-image.png";
+        link.href = dataURL;
+        link.click();
+      });
+    </script>
+  </body>
+</html>

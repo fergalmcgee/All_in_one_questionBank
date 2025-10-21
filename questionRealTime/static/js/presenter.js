@@ -41,12 +41,41 @@
     const manualLibraryOverlay = document.getElementById('manual-library-overlay');
     const manualLibraryContent = document.getElementById('manual-library-content');
     const manualLibraryClose = document.getElementById('manual-library-close');
+    const templateControls = document.getElementById('template-controls');
+    const templateNameInput = document.getElementById('template-name');
+    const templateSaveButton = document.getElementById('template-save-button');
+    const templateSelect = document.getElementById('template-select');
+    const templateLoadButton = document.getElementById('template-load-button');
+    const templateDeleteButton = document.getElementById('template-delete-button');
+    const templateFeedback = document.getElementById('template-feedback');
+    const questionSearchInput = document.getElementById('question-search');
+    const questionSearchClear = document.getElementById('question-search-clear');
+    const previewOverlay = document.getElementById('question-preview-overlay');
+    const previewTitle = document.getElementById('question-preview-title');
+    const previewBody = document.getElementById('question-preview-body');
+    const previewClose = document.getElementById('question-preview-close');
+    const timerPanel = document.getElementById('timer-panel');
+    const timerDisplay = document.getElementById('timer-display');
+    const timerMinutesInput = document.getElementById('timer-minutes');
+    const timerSecondsInput = document.getElementById('timer-seconds');
+    const timerStartButton = document.getElementById('timer-start');
+    const timerResetButton = document.getElementById('timer-reset');
 
     const POLL_INTERVAL = 2500;
     const SESSION_CODE_STORAGE_KEY = 'qrt_active_session_code';
     const responsePositions = new Map();
-    let pollTimer = null;
-    let activeSessionCode = null;
+let pollTimer = null;
+let activeSessionCode = null;
+let responseZCounter = 1;
+const dragState = {
+    key: null,
+    offsetX: 0,
+    offsetY: 0,
+};
+let timerInterval = null;
+let timerRemaining = 0;
+let timerRunning = false;
+let timerTarget = null;
 
     const builderState = {
         bankId: null,
@@ -54,7 +83,30 @@
         selectedTopics: new Set(),
         questionLookup: new Map(),
         queue: [],
-        customQuestions: new Map()
+        customQuestions: new Map(),
+        searchTerm: ''
+    };
+
+    const bankLabelMap = new Map();
+    if (Array.isArray(window.__BANK_OPTIONS__)) {
+        window.__BANK_OPTIONS__.forEach((bank) => {
+            if (bank && bank.id) {
+                bankLabelMap.set(bank.id, bank.label || bank.id);
+            }
+        });
+    }
+
+    const templateState = {
+        templates: [],
+        busy: false
+    };
+
+    const questionPreviewCache = new Map();
+    const previewState = {
+        open: false,
+        loading: false,
+        questionId: null,
+        lastFocus: null
     };
 
     bankSelect.addEventListener('change', async (event) => {
@@ -81,10 +133,144 @@
         toggleAllTopics();
     });
 
+    if (questionSearchInput) {
+        questionSearchInput.addEventListener('input', (event) => {
+            builderState.searchTerm = event.target.value;
+            renderBuilder();
+        });
+    }
+
+    if (questionSearchClear) {
+        questionSearchClear.addEventListener('click', () => {
+            builderState.searchTerm = '';
+            if (questionSearchInput) {
+                questionSearchInput.value = '';
+                questionSearchInput.focus();
+            }
+            renderBuilder();
+        });
+    }
+
     if (logoutForm) {
         logoutForm.addEventListener('submit', () => {
             localStorage.removeItem(SESSION_CODE_STORAGE_KEY);
             activeSessionCode = null;
+        });
+    }
+
+    if (templateNameInput) {
+        templateNameInput.addEventListener('input', () => {
+            setTemplateFeedbackMessage('');
+        });
+    }
+
+    if (templateSelect) {
+        templateSelect.addEventListener('change', () => {
+            setTemplateFeedbackMessage('');
+            updateTemplateActionState();
+        });
+    }
+
+    if (templateSaveButton) {
+        templateSaveButton.addEventListener('click', async () => {
+            if (!builderState.bankId && bankSelect && bankSelect.value) {
+                builderState.bankId = bankSelect.value;
+            }
+            if (!builderState.bankId) {
+                setTemplateFeedbackMessage('Select a question bank before saving a template.', 'error');
+                return;
+            }
+            if (builderState.queue.length === 0) {
+                setTemplateFeedbackMessage('Add at least one question before saving a template.', 'error');
+                return;
+            }
+            const name = templateNameInput ? templateNameInput.value.trim() : '';
+            if (!name) {
+                setTemplateFeedbackMessage('Enter a name for the template.', 'error');
+                if (templateNameInput) {
+                    templateNameInput.focus();
+                }
+                return;
+            }
+
+            setTemplateBusy(true);
+            try {
+                const payload = createTemplatePayload(name);
+                if (!payload.bank_id) {
+                    throw new Error('bank_id is required');
+                }
+                const response = await fetch('/api/templates', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) {
+                    const message = await extractErrorMessage(response, 'Unable to save template.');
+                    throw new Error(message);
+                }
+                const data = await response.json();
+                if (templateNameInput) {
+                    templateNameInput.value = '';
+                }
+                const newId = data && data.template ? data.template.id : null;
+                await refreshTemplates(newId || undefined, { silent: true });
+                if (templateSelect && newId) {
+                    templateSelect.value = newId;
+                }
+                setTemplateFeedbackMessage('Template saved.', 'success');
+            } catch (error) {
+                console.error('Unable to save template', error);
+                setTemplateFeedbackMessage(error.message || 'Unable to save template.', 'error');
+            } finally {
+                setTemplateBusy(false);
+            }
+        });
+    }
+
+    if (templateLoadButton) {
+        templateLoadButton.addEventListener('click', async () => {
+            const templateId = templateSelect ? templateSelect.value : '';
+            if (!templateId) {
+                setTemplateFeedbackMessage('Select a template to load.', 'error');
+                return;
+            }
+            await applyTemplate(templateId);
+        });
+    }
+
+    if (templateDeleteButton) {
+        templateDeleteButton.addEventListener('click', async () => {
+            const templateId = templateSelect ? templateSelect.value : '';
+            if (!templateId) {
+                setTemplateFeedbackMessage('Select a template to delete.', 'error');
+                return;
+            }
+            const template = findTemplate(templateId);
+            const templateName = template ? template.name : 'this template';
+            if (!window.confirm(`Delete ${templateName}? This cannot be undone.`)) {
+                return;
+            }
+            setTemplateBusy(true);
+            setTemplateFeedbackMessage('');
+            try {
+                const response = await fetch(`/api/templates/${encodeURIComponent(templateId)}`, {
+                    method: 'DELETE'
+                });
+                if (!response.ok) {
+                    const message = await extractErrorMessage(response, 'Unable to delete template.');
+                    throw new Error(message);
+                }
+                await refreshTemplates(undefined, { silent: true });
+                if (templateSelect) {
+                    templateSelect.value = '';
+                }
+                setTemplateFeedbackMessage('Template deleted.', 'success');
+            } catch (error) {
+                console.error('Unable to delete template', error);
+                setTemplateFeedbackMessage(error.message || 'Unable to delete template.', 'error');
+            } finally {
+                setTemplateBusy(false);
+            }
         });
     }
 
@@ -171,6 +357,57 @@
             }
         });
     }
+
+    if (previewClose) {
+        previewClose.addEventListener('click', closeQuestionPreview);
+    }
+
+    if (previewOverlay) {
+        previewOverlay.addEventListener('click', (event) => {
+            if (event.target === previewOverlay) {
+                closeQuestionPreview();
+            }
+        });
+        previewOverlay.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeQuestionPreview();
+            }
+        });
+    }
+
+    if (timerStartButton) {
+        timerStartButton.addEventListener('click', toggleTimer);
+    }
+
+    if (timerResetButton) {
+        timerResetButton.addEventListener('click', resetTimer);
+    }
+
+    [timerMinutesInput, timerSecondsInput].forEach((input) => {
+        if (!input) {
+            return;
+        }
+        input.addEventListener('input', () => {
+            if (input === timerMinutesInput) {
+                const value = clampNumber(parseInt(input.value, 10), 0, 99);
+                input.value = Number.isFinite(value) ? value.toString() : '';
+            } else {
+                const value = clampNumber(parseInt(input.value, 10), 0, 59);
+                input.value = Number.isFinite(value) ? value.toString().padStart(2, '0') : '';
+            }
+            if (!timerRunning) {
+                timerRemaining = 0;
+                updateTimerDisplay();
+                timerPanel?.classList.remove('timer-running', 'timer-finished');
+                timerStartButton.textContent = 'Start';
+            }
+        });
+        input.addEventListener('focus', () => {
+            input.select();
+        });
+    });
+
+    updateTimerDisplay();
 
     setupDropZone(manualQuestionDrop, manualState.questionImages, manualQuestionPreview);
     setupDropZone(manualAnswerDrop, manualState.answerImages, manualAnswerPreview);
@@ -273,7 +510,6 @@
                 event.preventDefault();
             }
         });
-        zone.addEventListener('click', () => input.click());
         zone.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') {
                 zone.classList.remove('active');
@@ -703,31 +939,118 @@
     function updateResponses(responses) {
         const existingKeys = new Set();
         responses.forEach((response) => {
-            const key = `${response.name}-${response.answer}-${response.submitted_at || ''}`;
-            existingKeys.add(key);
-            if (!responsePositions.has(key)) {
-                responsePositions.set(key, randomPosition());
+            const fallbackKey = `${response.name}-${response.answer}-${response.drawing_url || ''}-${response.submitted_at || ''}`;
+            const responseId = response.id || fallbackKey;
+            existingKeys.add(responseId);
+            if (!responsePositions.has(responseId)) {
+                responsePositions.set(responseId, randomPosition());
             }
 
-            let card = board.querySelector(`[data-key="${CSS.escape(key)}"]`);
+            let card = board.querySelector(`[data-key="${CSS.escape(responseId)}"]`);
             if (!card) {
                 card = document.createElement('article');
                 card.className = 'response-card';
-                card.dataset.key = key;
-                card.innerHTML = `
-                    <h4>${escapeHtml(response.name || 'Student')}</h4>
-                    <p>${escapeHtml(response.answer || '')}</p>
-                `;
+                card.dataset.key = responseId;
+                card.dataset.responseId = responseId;
+                const title = document.createElement('h4');
+                title.className = 'response-name';
+                card.appendChild(title);
+
+                const text = document.createElement('p');
+                text.className = 'response-text';
+                card.appendChild(text);
+
+                const drawing = document.createElement('img');
+                drawing.className = 'response-drawing hidden';
+                drawing.alt = 'Student drawing';
+                card.appendChild(drawing);
+
+                const dismissButton = document.createElement('button');
+                dismissButton.type = 'button';
+                dismissButton.className = 'response-dismiss';
+                dismissButton.setAttribute('aria-label', 'Remove response');
+                dismissButton.innerHTML = '&times;';
+                dismissButton.addEventListener('pointerdown', (event) => {
+                    event.stopPropagation();
+                });
+                dismissButton.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    deleteResponse(responseId, card, dismissButton);
+                });
+                card.appendChild(dismissButton);
+
+                attachCardInteractions(card);
                 board.appendChild(card);
             }
+            card.style.zIndex = card.style.zIndex || `${responseZCounter++}`;
 
-            let position = responsePositions.get(key);
-            if (!position || typeof position.top !== 'number' || typeof position.left !== 'number') {
-                position = { top: parseFloat(position?.top) || 10, left: parseFloat(position?.left) || 10 };
-                responsePositions.set(key, position);
+            const nameEl = card.querySelector('.response-name');
+            const textEl = card.querySelector('.response-text');
+            const drawingEl = card.querySelector('.response-drawing');
+            const dismissBtn = card.querySelector('.response-dismiss');
+
+            card.dataset.responseId = responseId;
+            if (dismissBtn) {
+                dismissBtn.disabled = false;
             }
-            card.style.top = `${position.top}%`;
-            card.style.left = `${position.left}%`;
+
+            if (nameEl) {
+                nameEl.textContent = response.name || 'Student';
+            }
+            if (textEl) {
+                const answerText = response.answer || '';
+                textEl.textContent = answerText;
+                textEl.classList.toggle('hidden', !answerText);
+            }
+            if (drawingEl) {
+                if (response.drawing_url) {
+                    const handleLoad = () => {
+                        adjustDrawingSizing(card, drawingEl);
+                        ensureCardWithinBounds(card, responseId);
+                    };
+                    drawingEl.onload = handleLoad;
+                    drawingEl.src = response.drawing_url;
+                    drawingEl.dataset.src = response.drawing_url;
+                    drawingEl.classList.remove('hidden');
+                    if (drawingEl.complete) {
+                        handleLoad();
+                    }
+                } else {
+                    drawingEl.removeAttribute('src');
+                    drawingEl.removeAttribute('data-src');
+                    drawingEl.classList.add('hidden');
+                    drawingEl.onload = null;
+                    resetDrawingSizing(card, drawingEl);
+                }
+            }
+
+            const hasDrawing = Boolean(response.drawing_url);
+            const hasText = Boolean(response.answer);
+            card.classList.toggle('has-drawing', hasDrawing);
+            card.classList.toggle('has-text', hasText);
+            card.classList.toggle('drawing-only', hasDrawing && !hasText);
+
+            let position = responsePositions.get(responseId);
+            let top = 0;
+            let left = 0;
+            if (position && typeof position.top === 'number' && typeof position.left === 'number') {
+                top = position.top;
+                left = position.left;
+            } else if (position) {
+                top = parseFloat(position.top) || 0;
+                left = parseFloat(position.left) || 0;
+            }
+
+            if (!position || Number.isNaN(top) || Number.isNaN(left)) {
+                position = randomPosition();
+                top = position.top;
+                left = position.left;
+                responsePositions.set(responseId, position);
+            }
+
+            card.style.top = `${top}px`;
+            card.style.left = `${left}px`;
+            ensureCardWithinBounds(card, responseId);
         });
 
         Array.from(board.children).forEach((child) => {
@@ -739,29 +1062,181 @@
         });
     }
 
-    function randomPosition() {
-        const existing = Array.from(responsePositions.values());
-        let attempt = 0;
-        while (attempt < 25) {
-            const top = 5 + Math.random() * 85;
-            const left = 5 + Math.random() * 85;
-            const tooClose = existing.some((pos) => {
-                const posTop = typeof pos.top === 'number' ? pos.top : parseFloat(pos.top);
-                const posLeft = typeof pos.left === 'number' ? pos.left : parseFloat(pos.left);
-                if (Number.isNaN(posTop) || Number.isNaN(posLeft)) {
-                    return false;
-                }
-                return Math.abs(posTop - top) < 12 && Math.abs(posLeft - left) < 16;
-            });
-            if (!tooClose) {
-                return { top, left };
-            }
-            attempt += 1;
-        }
+    function getResponseCardDimensions() {
+        const styles = getComputedStyle(document.documentElement);
         return {
-            top: 10 + Math.random() * 80,
-            left: 10 + Math.random() * 80
+            width: parseInt(styles.getPropertyValue('--response-card-width'), 10) || 240,
+            height: parseInt(styles.getPropertyValue('--response-card-min-height'), 10) || 210,
+            imageHeight: parseInt(styles.getPropertyValue('--response-card-image-height'), 10) || 150,
         };
+    }
+
+    function adjustDrawingSizing(card, drawingEl) {
+        if (!card || !drawingEl) {
+            return;
+        }
+        const naturalWidth = drawingEl.naturalWidth;
+        const naturalHeight = drawingEl.naturalHeight;
+        if (!naturalWidth || !naturalHeight) {
+            resetDrawingSizing(card, drawingEl);
+            return;
+        }
+
+        const { width: cardWidth, imageHeight: maxImageHeight } = getResponseCardDimensions();
+        const maxImageWidth = cardWidth - 30;
+
+        const widthScale = maxImageWidth / naturalWidth;
+        const heightScale = maxImageHeight / naturalHeight;
+        let scale = Math.min(1, widthScale, heightScale);
+
+        let targetWidth = naturalWidth * scale;
+        let targetHeight = naturalHeight * scale;
+
+        const minWidth = maxImageWidth * 0.55;
+        if (targetWidth < minWidth) {
+            scale = minWidth / targetWidth;
+            targetWidth *= scale;
+            targetHeight *= scale;
+            const clampScale = Math.min(maxImageWidth / targetWidth, maxImageHeight / targetHeight, 1);
+            targetWidth *= clampScale;
+            targetHeight *= clampScale;
+        }
+
+        drawingEl.style.width = `${Math.round(targetWidth)}px`;
+        drawingEl.style.height = `${Math.round(targetHeight)}px`;
+        card.style.width = `${cardWidth}px`;
+        card.style.minHeight = `${Math.max(cardWidth * 0.7, targetHeight + 70)}px`;
+    }
+
+    function resetDrawingSizing(card, drawingEl) {
+        if (drawingEl) {
+            drawingEl.style.removeProperty('width');
+            drawingEl.style.removeProperty('height');
+            drawingEl.style.removeProperty('max-width');
+            drawingEl.style.removeProperty('max-height');
+        }
+        if (card) {
+            card.style.removeProperty('width');
+        }
+    }
+
+    function randomPosition() {
+        const boardWidth = board.clientWidth || 700;
+        const boardHeight = board.clientHeight || 520;
+        const { width: cardWidth, height: cardHeight } = getResponseCardDimensions();
+        const padding = 12;
+        const maxLeft = Math.max(padding, boardWidth - cardWidth - padding);
+        const maxTop = Math.max(padding, boardHeight - cardHeight - padding);
+        const left = padding + Math.random() * (maxLeft - padding);
+        const top = padding + Math.random() * (maxTop - padding);
+        return { top, left };
+    }
+
+    function ensureCardWithinBounds(card, key) {
+        const width = board.clientWidth;
+        const height = board.clientHeight;
+        if (!width || !height) {
+            return;
+        }
+        const padding = 12;
+        let top = parseFloat(card.style.top) || 0;
+        let left = parseFloat(card.style.left) || 0;
+        const maxTop = Math.max(padding, height - card.offsetHeight - padding);
+        const maxLeft = Math.max(padding, width - card.offsetWidth - padding);
+        top = Math.min(Math.max(top, padding), maxTop);
+        left = Math.min(Math.max(left, padding), maxLeft);
+        card.style.top = `${top}px`;
+        card.style.left = `${left}px`;
+        responsePositions.set(key, { top, left });
+    }
+
+    function deleteResponse(responseId, card, triggerButton) {
+        if (!responseId || !activeSessionCode) {
+            return;
+        }
+        if (card) {
+            card.classList.add('response-card-removing');
+        }
+        const button =
+            triggerButton ||
+            (card ? card.querySelector('.response-dismiss') : null);
+        if (button) {
+            button.disabled = true;
+        }
+        fetch('/api/session/responses', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ code: activeSessionCode, response_id: responseId }),
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Failed to delete response');
+                }
+                return response.json();
+            })
+            .then((data) => {
+                if (data && typeof renderState === 'function') {
+                    renderState(data);
+                }
+            })
+            .catch((error) => {
+                console.error('Unable to delete response', error);
+                if (card) {
+                    card.classList.remove('response-card-removing');
+                }
+                if (button) {
+                    button.disabled = false;
+                }
+            });
+    }
+
+    function attachCardInteractions(card) {
+        if (card.dataset.dragBound === '1') {
+            return;
+        }
+        card.dataset.dragBound = '1';
+        card.addEventListener('pointerdown', (event) => {
+            const key = card.dataset.key;
+            if (!key) {
+                return;
+            }
+            bringCardToFront(card);
+            card.setPointerCapture(event.pointerId);
+            card.style.cursor = 'grabbing';
+            const rect = card.getBoundingClientRect();
+            dragState.key = key;
+            dragState.offsetX = event.clientX - rect.left;
+            dragState.offsetY = event.clientY - rect.top;
+        });
+
+        card.addEventListener('pointermove', (event) => {
+            if (dragState.key !== card.dataset.key) {
+                return;
+            }
+            event.preventDefault();
+            const boardRect = board.getBoundingClientRect();
+            const left = event.clientX - boardRect.left - dragState.offsetX;
+            const top = event.clientY - boardRect.top - dragState.offsetY;
+            card.style.top = `${top}px`;
+            card.style.left = `${left}px`;
+            ensureCardWithinBounds(card, dragState.key);
+        });
+
+        const endDrag = () => {
+            if (!dragState.key) {
+                return;
+            }
+            card.style.cursor = 'grab';
+            dragState.key = null;
+        };
+
+        card.addEventListener('pointerup', endDrag);
+        card.addEventListener('pointercancel', endDrag);
+        card.addEventListener('lostpointercapture', endDrag);
+    }
+
+    function bringCardToFront(card) {
+        card.style.zIndex = `${responseZCounter++}`;
     }
 
     function escapeHtml(value) {
@@ -809,23 +1284,53 @@
         if (!builderState.outline) {
             return [];
         }
-        const treatAsAll = builderState.selectedTopics.size === 0;
+        if (builderState.selectedTopics.size === 0) {
+            return [];
+        }
+        const searchTerm = builderState.searchTerm.trim().toLowerCase();
         const filtered = [];
         builderState.outline.topics.forEach((topic) => {
-            if (!treatAsAll && !builderState.selectedTopics.has(topic.topic)) {
+            if (!builderState.selectedTopics.has(topic.topic)) {
                 return;
             }
             topic.questions.forEach((question) => {
-                filtered.push({
-                    id: question.id,
-                    text: question.text,
-                    has_images: question.has_images,
-                    tags: question.tags || [],
-                    topic: topic.topic,
-                });
+                if (!question.id) {
+                    return;
+                }
+                const info = builderState.questionLookup.get(question.id);
+                if (!info) {
+                    return;
+                }
+                if (searchTerm) {
+                    const haystack = info.searchHaystack || createSearchHaystack(info);
+                    if (!haystack.includes(searchTerm)) {
+                        return;
+                    }
+                }
+                filtered.push(info);
             });
         });
         return filtered;
+    }
+
+    function createSearchHaystack(details) {
+        if (!details) {
+            return '';
+        }
+        const parts = [];
+        if (details.text) {
+            parts.push(String(details.text));
+        }
+        if (details.topic) {
+            parts.push(String(details.topic));
+        }
+        if (Array.isArray(details.tags) && details.tags.length) {
+            parts.push(details.tags.join(' '));
+        }
+        if (details.id) {
+            parts.push(String(details.id));
+        }
+        return parts.join(' ').toLowerCase();
     }
 
     function queueContainsBankQuestion(questionId) {
@@ -853,6 +1358,10 @@
                 builderState.bankId = bankId;
                 builderState.outline = data;
                 builderState.questionLookup = new Map();
+                if (!keepExisting) {
+                    builderState.searchTerm = '';
+                    questionPreviewCache.clear();
+                }
 
                 data.topics.forEach((topic) => {
                     topic.questions.forEach((question) => {
@@ -863,28 +1372,35 @@
                                 topic: topic.topic,
                                 has_images: question.has_images,
                                 tags: question.tags || [],
+                                preview_image: question.preview_image || null,
+                                searchHaystack: createSearchHaystack({
+                                    id: question.id,
+                                    text: question.text,
+                                    tags: question.tags,
+                                    topic: topic.topic
+                                })
                             });
                         }
                     });
                 });
 
-                if (keepExisting && previousTopics) {
-                    const restored = [...previousTopics].filter((topic) => topicNames.has(topic));
-                    builderState.selectedTopics = new Set(restored.length ? restored : topicNames);
-                } else {
-                    builderState.selectedTopics = new Set(topicNames);
-                }
+        if (keepExisting && previousTopics) {
+            const restored = [...previousTopics].filter((topic) => topicNames.has(topic));
+            builderState.selectedTopics = new Set(restored);
+        } else {
+            builderState.selectedTopics = new Set();
+        }
 
-                if (keepExisting) {
-                    builderState.queue = previousQueue.filter((item) => {
-                        if (item.type === 'custom') {
-                            return builderState.customQuestions.has(item.id);
-                        }
-                        return builderState.questionLookup.has(item.id);
-                    });
-                } else {
-                    builderState.queue = previousQueue.filter((item) => item.type === 'custom' && builderState.customQuestions.has(item.id));
+        if (keepExisting) {
+            builderState.queue = previousQueue.filter((item) => {
+                if (item.type === 'custom') {
+                    return builderState.customQuestions.has(item.id);
                 }
+                return builderState.questionLookup.has(item.id);
+            });
+        } else {
+            builderState.queue = previousQueue.filter((item) => item.type === 'custom' && builderState.customQuestions.has(item.id));
+        }
 
                 renderBuilder();
                 showSessionBuilder();
@@ -896,6 +1412,13 @@
     }
 
     function renderBuilder() {
+        if (questionSearchInput) {
+            questionSearchInput.value = builderState.searchTerm;
+            questionSearchInput.disabled = !builderState.outline;
+        }
+        if (questionSearchClear) {
+            questionSearchClear.disabled = !builderState.searchTerm;
+        }
         if (!builderState.outline) {
             topicList.innerHTML = '';
             questionList.innerHTML = '';
@@ -903,6 +1426,7 @@
             builderSummary.textContent = 'No questions queued yet.';
             addAllButton.disabled = true;
             clearSelectionButton.disabled = true;
+            syncTemplateControls();
             return;
         }
 
@@ -911,6 +1435,7 @@
         renderSelectedQuestions();
         updateBuilderSummary();
         updateBuilderControls();
+        syncTemplateControls();
     }
 
     function renderTopics() {
@@ -947,22 +1472,53 @@
             questionList.appendChild(info);
             return;
         }
+        if (builderState.selectedTopics.size === 0) {
+            const empty = document.createElement('p');
+            empty.className = 'empty-state';
+            empty.textContent = 'Select at least one topic to load questions. Search is limited to chosen topics.';
+            questionList.appendChild(empty);
+            return;
+        }
 
         const questions = getFilteredQuestions();
         if (!questions.length) {
             const empty = document.createElement('p');
             empty.className = 'empty-state';
-            empty.textContent = 'No questions match the current topic filters.';
+            empty.textContent = builderState.searchTerm.trim()
+                ? 'No questions match the current search within the selected topics.'
+                : 'No questions found for the selected topics.';
             questionList.appendChild(empty);
             return;
         }
 
         questions.forEach((question) => {
-            if (!question.id) {
-                return;
-            }
             const item = document.createElement('article');
             item.className = 'question-item';
+
+            const body = document.createElement('div');
+            body.className = 'question-item-body';
+
+            const previewButton = document.createElement('button');
+            previewButton.type = 'button';
+            previewButton.className = 'question-preview-trigger';
+            if (question.preview_image) {
+                previewButton.style.backgroundImage = `url(${question.preview_image})`;
+            } else {
+                previewButton.classList.add('no-image');
+                const fallbackLabel = document.createElement('span');
+                fallbackLabel.textContent = 'Text only';
+                previewButton.appendChild(fallbackLabel);
+            }
+            const srPreview = document.createElement('span');
+            srPreview.className = 'visually-hidden';
+            srPreview.textContent = `Preview ${question.text}`;
+            previewButton.appendChild(srPreview);
+            previewButton.addEventListener('click', () => {
+                openQuestionPreview(question.id);
+            });
+
+            const content = document.createElement('div');
+            content.className = 'question-content';
 
             const header = document.createElement('header');
             header.textContent = question.text;
@@ -977,15 +1533,22 @@
             }
             meta.textContent = metaParts.join(' · ');
 
-            const button = document.createElement('button');
+            content.append(header, meta);
+            body.append(previewButton, content);
+
+            const actions = document.createElement('div');
+            actions.className = 'question-actions';
+            const addButton = document.createElement('button');
+            addButton.type = 'button';
             const alreadySelected = queueContainsBankQuestion(question.id);
-            button.textContent = alreadySelected ? 'Added' : 'Add to queue';
-            button.disabled = alreadySelected;
-            button.addEventListener('click', () => {
+            addButton.textContent = alreadySelected ? 'Added' : 'Add to queue';
+            addButton.disabled = alreadySelected;
+            addButton.addEventListener('click', () => {
                 addQuestionToQueue(question.id);
             });
+            actions.append(addButton);
 
-            item.append(header, meta, button);
+            item.append(body, actions);
             questionList.appendChild(item);
         });
     }
@@ -1060,36 +1623,478 @@
         });
     }
 
+    function openQuestionPreview(questionId) {
+        if (!previewOverlay || !previewBody || !builderState.bankId || !questionId) {
+            return;
+        }
+        previewState.lastFocus = document.activeElement && typeof document.activeElement.focus === 'function'
+            ? document.activeElement
+            : null;
+        previewState.open = true;
+        previewState.loading = true;
+        previewState.questionId = questionId;
+        previewOverlay.classList.remove('hidden');
+        previewOverlay.setAttribute('tabindex', '-1');
+        if (typeof previewOverlay.focus === 'function') {
+            try {
+                previewOverlay.focus({ preventScroll: true });
+            } catch (error) {
+                previewOverlay.focus();
+            }
+        }
+        previewBody.innerHTML = '<p class="preview-loading">Loading question…</p>';
+        if (previewTitle) {
+            previewTitle.textContent = 'Question preview';
+        }
+
+        const cached = questionPreviewCache.get(questionId);
+        if (cached) {
+            previewState.loading = false;
+            renderQuestionPreview(cached);
+            focusPreviewClose();
+            return;
+        }
+
+        fetch(`/api/bank/${encodeURIComponent(builderState.bankId)}/question/${encodeURIComponent(questionId)}`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Failed to load question preview');
+                }
+                return response.json();
+            })
+            .then((data) => {
+                questionPreviewCache.set(questionId, data);
+                if (previewState.questionId === questionId) {
+                    previewState.loading = false;
+                    renderQuestionPreview(data);
+                }
+            })
+            .catch((error) => {
+                console.error('Unable to load question preview', error);
+                if (previewState.questionId === questionId && previewBody) {
+                    previewState.loading = false;
+                    previewBody.innerHTML = '<p class="preview-loading">Unable to load question preview.</p>';
+                }
+            })
+            .finally(() => {
+                focusPreviewClose();
+            });
+    }
+
+    function renderQuestionPreview(data) {
+        if (!previewBody) {
+            return;
+        }
+        previewBody.innerHTML = '';
+
+        const fragment = document.createDocumentFragment();
+        const questionText = data && (data.text || data.prompt) ? data.text || data.prompt : '';
+        const titleText = questionText || 'Question preview';
+        if (previewTitle) {
+            previewTitle.textContent = titleText;
+        }
+
+        if (questionText) {
+            const textBlock = document.createElement('div');
+            textBlock.className = 'preview-text';
+            textBlock.textContent = questionText;
+            fragment.appendChild(textBlock);
+        }
+
+        const tagValues = [];
+        if (data && data.topic) {
+            tagValues.push(`Topic: ${data.topic}`);
+        }
+        if (data && Array.isArray(data.tags)) {
+            data.tags.forEach((tag) => {
+                if (tag) {
+                    tagValues.push(tag);
+                }
+            });
+        }
+        if (tagValues.length) {
+            const tagWrap = document.createElement('div');
+            tagWrap.className = 'preview-tags';
+            tagValues.forEach((value) => {
+                const badge = document.createElement('span');
+                badge.className = 'preview-tag';
+                badge.textContent = value;
+                tagWrap.appendChild(badge);
+            });
+            fragment.appendChild(tagWrap);
+        }
+
+        if (data && Array.isArray(data.images) && data.images.length) {
+            const imageHeading = document.createElement('h4');
+            imageHeading.textContent = 'Question images';
+            fragment.appendChild(imageHeading);
+
+            const gallery = document.createElement('div');
+            gallery.className = 'preview-gallery';
+            data.images.forEach((src, index) => {
+                if (!src) {
+                    return;
+                }
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = `Question image ${index + 1}`;
+                gallery.appendChild(img);
+            });
+            fragment.appendChild(gallery);
+        }
+
+        const hasAnswerImages = data && Array.isArray(data.answer_images) && data.answer_images.length;
+        if ((data && data.answer_text) || hasAnswerImages) {
+            const answerSection = document.createElement('section');
+            answerSection.className = 'preview-answer';
+            const answerHeading = document.createElement('h4');
+            answerHeading.textContent = 'Answer';
+            answerSection.appendChild(answerHeading);
+
+            if (data && data.answer_text) {
+                const answerText = document.createElement('div');
+                answerText.className = 'preview-text';
+                answerText.textContent = data.answer_text;
+                answerSection.appendChild(answerText);
+            }
+
+            if (hasAnswerImages) {
+                const answerGallery = document.createElement('div');
+                answerGallery.className = 'preview-gallery';
+                data.answer_images.forEach((src, index) => {
+                    if (!src) {
+                        return;
+                    }
+                    const img = document.createElement('img');
+                    img.src = src;
+                    img.alt = `Answer image ${index + 1}`;
+                    answerGallery.appendChild(img);
+                });
+                answerSection.appendChild(answerGallery);
+            }
+
+            fragment.appendChild(answerSection);
+        }
+
+        if (!fragment.hasChildNodes()) {
+            const fallback = document.createElement('p');
+            fallback.className = 'preview-loading';
+            fallback.textContent = 'No preview available for this question.';
+            previewBody.appendChild(fallback);
+            return;
+        }
+
+        previewBody.appendChild(fragment);
+    }
+
+    function closeQuestionPreview() {
+        if (!previewOverlay) {
+            return;
+        }
+        previewState.open = false;
+        previewState.loading = false;
+        previewState.questionId = null;
+        previewOverlay.classList.add('hidden');
+        previewOverlay.removeAttribute('tabindex');
+        if (previewState.lastFocus && typeof previewState.lastFocus.focus === 'function') {
+            try {
+                previewState.lastFocus.focus({ preventScroll: true });
+            } catch (error) {
+                previewState.lastFocus.focus();
+            }
+        }
+        previewState.lastFocus = null;
+    }
+
+    function focusPreviewClose() {
+        if (previewOverlay && !previewOverlay.classList.contains('hidden') && previewClose) {
+            try {
+                previewClose.focus({ preventScroll: true });
+            } catch (error) {
+                previewClose.focus();
+            }
+        }
+    }
+
     function updateBuilderSummary() {
         if (!builderState.outline) {
             builderSummary.textContent = 'Select a question bank to begin building a session.';
             return;
         }
         const totalTopicsAvailable = builderState.outline.topics.length;
-        const topicCount = builderState.selectedTopics.size || totalTopicsAvailable;
+        const selectedTopicCount = builderState.selectedTopics.size;
         const queued = builderState.queue.length;
+        const topicSummary = `Topics selected: ${selectedTopicCount} of ${totalTopicsAvailable}`;
         if (queued === 0) {
-            builderSummary.textContent = `Topics selected: ${topicCount} of ${totalTopicsAvailable}`;
+            builderSummary.textContent = topicSummary;
         } else {
-            builderSummary.textContent = `${queued} queued question${queued === 1 ? '' : 's'} · Topics selected: ${topicCount}`;
+            builderSummary.textContent = `${queued} queued question${queued === 1 ? '' : 's'} · ${topicSummary}`;
         }
     }
 
     function updateBuilderControls() {
         const filtered = getFilteredQuestions();
         const hasSelectable = filtered.some((question) => !queueContainsBankQuestion(question.id));
-        addAllButton.disabled = !builderState.outline || !hasSelectable;
+        addAllButton.disabled = !builderState.outline || builderState.selectedTopics.size === 0 || !hasSelectable;
         clearSelectionButton.disabled = builderState.queue.length === 0;
-        toggleTopicsButton.disabled = !builderState.outline;
+        toggleTopicsButton.disabled = !builderState.outline || !builderState.outline.topics.length;
         if (builderState.outline) {
             const totalTopics = builderState.outline.topics.length;
             const selectedCount = builderState.selectedTopics.size;
             const allSelected = selectedCount === totalTopics;
             const noneSelected = selectedCount === 0;
-            toggleTopicsButton.textContent = allSelected ? 'Uncheck all' : noneSelected ? 'Check all' : 'Toggle all';
+            toggleTopicsButton.textContent = noneSelected ? 'Select all' : allSelected ? 'Clear all' : 'Toggle all';
         } else {
             toggleTopicsButton.textContent = 'Toggle all';
         }
+    }
+
+    function setTemplateBusy(state) {
+        templateState.busy = Boolean(state);
+        if (templateControls) {
+            templateControls.classList.toggle('is-busy', templateState.busy);
+        }
+        syncTemplateControls();
+    }
+
+    function syncTemplateControls() {
+        if (templateNameInput) {
+            templateNameInput.disabled = templateState.busy;
+        }
+        if (templateSaveButton) {
+            const canSave = !templateState.busy && builderState.bankId && builderState.queue.length > 0;
+            templateSaveButton.disabled = !canSave;
+        }
+        if (templateSelect) {
+            templateSelect.disabled = templateState.busy;
+        }
+        updateTemplateActionState();
+    }
+
+    function updateTemplateActionState() {
+        const hasSelection = Boolean(templateSelect && templateSelect.value);
+        if (templateLoadButton) {
+            templateLoadButton.disabled = templateState.busy || !hasSelection;
+        }
+        if (templateDeleteButton) {
+            templateDeleteButton.disabled = templateState.busy || !hasSelection;
+        }
+    }
+
+    function setTemplateFeedbackMessage(message, tone = 'info') {
+        if (!templateFeedback) {
+            return;
+        }
+        if (!message) {
+            templateFeedback.textContent = '';
+            templateFeedback.classList.add('hidden');
+            templateFeedback.removeAttribute('data-tone');
+            return;
+        }
+        templateFeedback.textContent = message;
+        templateFeedback.dataset.tone = tone;
+        templateFeedback.classList.remove('hidden');
+    }
+
+    function templateOptionLabel(template) {
+        const parts = [];
+        const name = template && template.name ? template.name : 'Template';
+        parts.push(name);
+        if (template && template.bank_id) {
+            const bankLabel = bankLabelMap.get(template.bank_id) || template.bank_id;
+            if (bankLabel) {
+                parts.push(bankLabel);
+            }
+        }
+        const questionCount =
+            typeof template.question_count === 'number'
+                ? template.question_count
+                : Array.isArray(template.queue)
+                    ? template.queue.length
+                    : 0;
+        if (questionCount) {
+            parts.push(`${questionCount} question${questionCount === 1 ? '' : 's'}`);
+        }
+        return parts.join(' · ');
+    }
+
+    function renderTemplateOptions(preselectId) {
+        if (!templateSelect) {
+            return;
+        }
+        const previous = typeof preselectId === 'string' ? preselectId : templateSelect.value;
+        templateSelect.innerHTML = '';
+        const placeholder = document.createElement('option');
+        placeholder.value = '';
+        placeholder.textContent = templateState.templates.length ? 'Select a template…' : 'No templates saved yet';
+        templateSelect.appendChild(placeholder);
+
+        templateState.templates.forEach((template) => {
+            if (!template || !template.id) {
+                return;
+            }
+            const option = document.createElement('option');
+            option.value = template.id;
+            option.textContent = templateOptionLabel(template);
+            templateSelect.appendChild(option);
+        });
+
+        if (previous && templateSelect.querySelector(`option[value="${CSS.escape(previous)}"]`)) {
+            templateSelect.value = previous;
+        } else {
+            templateSelect.value = '';
+        }
+        updateTemplateActionState();
+    }
+
+    async function refreshTemplates(preselectId, { silent = false } = {}) {
+        if (!templateSelect) {
+            return;
+        }
+        try {
+            const response = await fetch('/api/templates');
+            if (!response.ok) {
+                const message = await extractErrorMessage(response, 'Unable to load templates.');
+                throw new Error(message);
+            }
+            const data = await response.json();
+            templateState.templates = Array.isArray(data.templates) ? data.templates : [];
+            renderTemplateOptions(preselectId);
+            if (!silent) {
+                setTemplateFeedbackMessage('');
+            }
+        } catch (error) {
+            console.error('Unable to load templates', error);
+            templateState.templates = [];
+            renderTemplateOptions();
+            if (!silent) {
+                setTemplateFeedbackMessage(error.message || 'Unable to load templates.', 'error');
+            }
+        }
+    }
+
+    function findTemplate(templateId) {
+        return templateState.templates.find((template) => template && template.id === templateId) || null;
+    }
+
+    function cloneTemplateValue(value) {
+        try {
+            return JSON.parse(JSON.stringify(value));
+        } catch (error) {
+            return value;
+        }
+    }
+
+    function createTemplatePayload(name) {
+        const queue = builderState.queue.map((entry) => ({ type: entry.type, id: entry.id }));
+        const custom = {};
+        builderState.customQuestions.forEach((value, key) => {
+            const cloned = cloneTemplateValue(value) || {};
+            if (cloned && typeof cloned === 'object' && !cloned.id) {
+                cloned.id = key;
+            }
+            custom[key] = cloned;
+        });
+        const bankId = builderState.bankId || (bankSelect ? bankSelect.value : null);
+        return {
+            name,
+            bank_id: bankId,
+            queue,
+            custom_questions: custom,
+            topics: Array.from(builderState.selectedTopics),
+        };
+    }
+
+    async function applyTemplate(templateId) {
+        const template = findTemplate(templateId);
+        if (!template) {
+            setTemplateFeedbackMessage('Selected template was not found.', 'error');
+            return;
+        }
+
+        setTemplateBusy(true);
+        setTemplateFeedbackMessage('');
+        try {
+            if (bankSelect && bankSelect.value !== template.bank_id) {
+                bankSelect.value = template.bank_id;
+            }
+            if (builderState.bankId !== template.bank_id || !builderState.outline) {
+                await loadOutline(template.bank_id);
+            }
+            if (!builderState.outline) {
+                throw new Error('Question bank outline is unavailable.');
+            }
+
+            const topicNames = new Set(builderState.outline.topics.map((topic) => topic.topic));
+            const templateTopics = Array.isArray(template.topics)
+                ? template.topics.filter((topic) => topicNames.has(topic))
+                : [];
+            builderState.selectedTopics = new Set(templateTopics);
+
+            builderState.customQuestions = new Map();
+            const custom = template.custom_questions && typeof template.custom_questions === 'object' ? template.custom_questions : {};
+            Object.entries(custom).forEach(([key, value]) => {
+                if (!value) {
+                    return;
+                }
+                const cloned = cloneTemplateValue(value);
+                if (cloned && typeof cloned === 'object') {
+                    if (!cloned.id) {
+                        cloned.id = key;
+                    }
+                    builderState.customQuestions.set(key, cloned);
+                }
+            });
+
+            builderState.queue = [];
+            const entries = Array.isArray(template.queue) ? template.queue : [];
+            entries.forEach((entry) => {
+                if (!entry || typeof entry !== 'object') {
+                    return;
+                }
+                const entryId = entry.id;
+                if (entry.type === 'custom' && builderState.customQuestions.has(entryId)) {
+                    builderState.queue.push({ type: 'custom', id: entryId });
+                } else if (entry.type === 'bank' && builderState.questionLookup.has(entryId)) {
+                    builderState.queue.push({ type: 'bank', id: entryId });
+                }
+            });
+
+            renderBuilder();
+
+            const missingCount = entries.length - builderState.queue.length;
+            if (missingCount > 0) {
+                setTemplateFeedbackMessage(
+                    `Template loaded with ${missingCount} unavailable question${missingCount === 1 ? '' : 's'} removed.`,
+                    'warning'
+                );
+            } else if (builderState.queue.length > 0) {
+                setTemplateFeedbackMessage('Template loaded.', 'success');
+            } else {
+                setTemplateFeedbackMessage('Template loaded, but no questions were available.', 'warning');
+            }
+        } catch (error) {
+            console.error('Unable to apply template', error);
+            setTemplateFeedbackMessage(error.message || 'Unable to load template.', 'error');
+        } finally {
+            setTemplateBusy(false);
+        }
+    }
+
+    async function extractErrorMessage(response, fallback) {
+        const text = await response.text();
+        if (!text) {
+            return fallback;
+        }
+        try {
+            const data = JSON.parse(text);
+            if (data && typeof data === 'object') {
+                return data.description || data.error || fallback;
+            }
+        } catch (error) {
+            // ignore parse errors
+        }
+        return text;
     }
 
     function toggleTopic(topic, isChecked) {
@@ -1169,18 +2174,28 @@
         builderState.questionLookup = new Map();
         builderState.queue = [];
         builderState.customQuestions = new Map();
+        builderState.searchTerm = '';
         topicList.innerHTML = '';
         questionList.innerHTML = '';
         selectedList.innerHTML = '';
         builderSummary.textContent = 'No questions queued yet.';
         addAllButton.disabled = true;
         clearSelectionButton.disabled = true;
+        if (questionSearchInput) {
+            questionSearchInput.value = '';
+            questionSearchInput.disabled = true;
+        }
+        if (questionSearchClear) {
+            questionSearchClear.disabled = true;
+        }
         resetManualForm();
         manualState.open = false;
         renderManualPanel();
     }
 
     async function bootstrap() {
+        await refreshTemplates(undefined, { silent: true });
+        syncTemplateControls();
         const storedCode = localStorage.getItem(SESSION_CODE_STORAGE_KEY);
         if (!storedCode) {
             return;
@@ -1233,5 +2248,109 @@
         }
     }
 
+    function toggleTimer() {
+        if (timerRunning) {
+            pauseTimer();
+            return;
+        }
+        if (timerRemaining <= 0) {
+            timerRemaining = getTimerInputSeconds();
+        }
+        if (timerRemaining <= 0) {
+            flashTimerPanel();
+            return;
+        }
+        startTimer();
+    }
+
+    function startTimer() {
+        timerTarget = Date.now() + timerRemaining * 1000;
+        timerRunning = true;
+        timerPanel?.classList.remove('timer-finished');
+        timerPanel?.classList.add('timer-running');
+        timerStartButton.textContent = 'Pause';
+        if (timerInterval) {
+            window.clearInterval(timerInterval);
+        }
+        timerInterval = window.setInterval(() => {
+            const remaining = Math.max(0, Math.round((timerTarget - Date.now()) / 1000));
+            if (remaining !== timerRemaining) {
+                timerRemaining = remaining;
+                updateTimerDisplay();
+            }
+            if (timerRemaining <= 0) {
+                finishTimer();
+            }
+        }, 250);
+    }
+
+    function pauseTimer() {
+        if (timerInterval) {
+            window.clearInterval(timerInterval);
+            timerInterval = null;
+        }
+        if (timerTarget) {
+            timerRemaining = Math.max(0, Math.round((timerTarget - Date.now()) / 1000));
+        }
+        timerRunning = false;
+        timerTarget = null;
+        timerPanel?.classList.remove('timer-running');
+        timerStartButton.textContent = timerRemaining > 0 ? 'Resume' : 'Start';
+        updateTimerDisplay();
+    }
+
+    function finishTimer() {
+        pauseTimer();
+        timerRemaining = 0;
+        updateTimerDisplay();
+        timerPanel?.classList.add('timer-finished');
+        timerStartButton.textContent = 'Start';
+    }
+
+    function resetTimer() {
+        pauseTimer();
+        timerRemaining = 0;
+        timerPanel?.classList.remove('timer-running', 'timer-finished');
+        timerStartButton.textContent = 'Start';
+        updateTimerDisplay();
+    }
+
+    function updateTimerDisplay() {
+        const total = timerRemaining > 0 ? timerRemaining : getTimerInputSeconds();
+        const mins = Math.floor(total / 60)
+            .toString()
+            .padStart(2, '0');
+        const secs = (total % 60)
+            .toString()
+            .padStart(2, '0');
+        if (timerDisplay) {
+            timerDisplay.textContent = `${mins}:${secs}`;
+        }
+    }
+
+    function getTimerInputSeconds() {
+        const mins = clampNumber(parseInt(timerMinutesInput?.value, 10), 0, 99) || 0;
+        const secs = clampNumber(parseInt(timerSecondsInput?.value, 10), 0, 59) || 0;
+        return mins * 60 + secs;
+    }
+
+    function flashTimerPanel() {
+        if (!timerPanel) {
+            return;
+        }
+        timerPanel.classList.add('timer-finished');
+        window.setTimeout(() => {
+            timerPanel.classList.remove('timer-finished');
+        }, 1200);
+    }
+
+    function clampNumber(value, min, max) {
+        if (!Number.isFinite(value)) {
+            return undefined;
+        }
+        return Math.min(Math.max(value, min), max);
+    }
+
+    syncTemplateControls();
     bootstrap();
 })();

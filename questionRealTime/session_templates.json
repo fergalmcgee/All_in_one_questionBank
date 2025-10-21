@@ -1,0 +1,38 @@
+{
+  "templates": {
+    "90262eb6b2434048a123584b7323e6b9": {
+      "name": "for CS5 Thursday23rdOct25",
+      "bank_id": "CSIG",
+      "queue": [
+        {
+          "type": "bank",
+          "id": "APL_W24_22_3a"
+        },
+        {
+          "type": "bank",
+          "id": "AL_W23_21_5a"
+        },
+        {
+          "type": "bank",
+          "id": "APL_W24_21_6a"
+        },
+        {
+          "type": "bank",
+          "id": "APL_W24_23_6b"
+        },
+        {
+          "type": "bank",
+          "id": "APL_W24_23_6c"
+        }
+      ],
+      "custom_questions": {},
+      "topics": [
+        "Lifcycle",
+        "Programming Concepts",
+        "Algorithms & Errors"
+      ],
+      "created_at": "2025-10-21T14:38:02.321699",
+      "updated_at": "2025-10-21T14:38:02.321699"
+    }
+  }
+}

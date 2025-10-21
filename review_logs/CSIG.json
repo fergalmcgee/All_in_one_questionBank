@@ -1,6 +1,6 @@
 {
   "bank_id": "CSIG",
-  "updated_at": "2025-10-11T15:17:47.110190Z",
+  "updated_at": "2025-10-13T13:36:53.668541Z",
   "groups": {
     "Algorithms & Errors::0": {
       "topic": "Algorithms & Errors",
@@ -343,6 +343,357 @@
       "status": "ok",
       "notes": "",
       "updated_at": "2025-10-11T15:17:47.110138Z"
+    },
+    "Big Programming Question::0": {
+      "topic": "Big Programming Question",
+      "group_index": 0,
+      "group_id": "AF_S25_23_8",
+      "label": "AF_S25_23_8",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:07:59.937982Z"
+    },
+    "Big Programming Question::1": {
+      "topic": "Big Programming Question",
+      "group_index": 1,
+      "group_id": "PC_S25_22_10",
+      "label": "PC_S25_22_10",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:25:00.685857Z"
+    },
+    "Big Programming Question::2": {
+      "topic": "Big Programming Question",
+      "group_index": 2,
+      "group_id": "AF_S25_21_11",
+      "label": "AF_S25_21_11",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:25:06.293951Z"
+    },
+    "Big Programming Question::3": {
+      "topic": "Big Programming Question",
+      "group_index": 3,
+      "group_id": "APL_M25_22_10",
+      "label": "APL_M25_22_10",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:25:07.155636Z"
+    },
+    "Big Programming Question::4": {
+      "topic": "Big Programming Question",
+      "group_index": 4,
+      "group_id": "AF_W24_23_12",
+      "label": "AF_W24_23_12",
+      "status": "missing",
+      "notes": "seem to be missing images here",
+      "updated_at": "2025-10-13T13:26:10.976706Z"
+    },
+    "Big Programming Question::5": {
+      "topic": "Big Programming Question",
+      "group_index": 5,
+      "group_id": "AFH_W24_21_11",
+      "label": "AFH_W24_21_11",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:26:33.995131Z"
+    },
+    "Big Programming Question::6": {
+      "topic": "Big Programming Question",
+      "group_index": 6,
+      "group_id": "PR_W23_23_10",
+      "label": "PR_W23_23_10",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:26:35.382454Z"
+    },
+    "Big Programming Question::7": {
+      "topic": "Big Programming Question",
+      "group_index": 7,
+      "group_id": "PR_S23_22_12",
+      "label": "PR_S23_22_12",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:26:36.425073Z"
+    },
+    "Big Programming Question::8": {
+      "topic": "Big Programming Question",
+      "group_index": 8,
+      "group_id": "APL_S24_23_9",
+      "label": "APL_S24_23_9",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:26:40.938909Z"
+    },
+    "Big Programming Question::9": {
+      "topic": "Big Programming Question",
+      "group_index": 9,
+      "group_id": "APL_S24_22_11",
+      "label": "APL_S24_22_11",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:26:44.682446Z"
+    },
+    "Big Programming Question::10": {
+      "topic": "Big Programming Question",
+      "group_index": 10,
+      "group_id": "PC_S24_21_10",
+      "label": "PC_S24_21_10",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:26:45.860899Z"
+    },
+    "Big Programming Question::11": {
+      "topic": "Big Programming Question",
+      "group_index": 11,
+      "group_id": "AFH_M24_22_11",
+      "label": "AFH_M24_22_11",
+      "status": "missing",
+      "notes": "missing the text areas",
+      "updated_at": "2025-10-13T13:27:14.698256Z"
+    },
+    "Big Programming Question::12": {
+      "topic": "Big Programming Question",
+      "group_index": 12,
+      "group_id": "PR_S23_23_11",
+      "label": "PR_S23_23_11",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:27:22.016014Z"
+    },
+    "Big Programming Question::13": {
+      "topic": "Big Programming Question",
+      "group_index": 13,
+      "group_id": "PR_S23_21_11",
+      "label": "PR_S23_21_11",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:27:25.677047Z"
+    },
+    "Big Programming Question::14": {
+      "topic": "Big Programming Question",
+      "group_index": 14,
+      "group_id": "PR_W23_22_11",
+      "label": "PR_W23_22_11",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:27:28.299854Z"
+    },
+    "Big Programming Question::15": {
+      "topic": "Big Programming Question",
+      "group_index": 15,
+      "group_id": "PR_W23_21_10",
+      "label": "PR_W23_21_10",
+      "status": "missing",
+      "notes": "missing images",
+      "updated_at": "2025-10-13T13:27:45.984711Z"
+    },
+    "Boolean Logic::0": {
+      "topic": "Boolean Logic",
+      "group_index": 0,
+      "group_id": "BL_S25_23_7",
+      "label": "BL_S25_23_7",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:04.133504Z"
+    },
+    "Boolean Logic::1": {
+      "topic": "Boolean Logic",
+      "group_index": 1,
+      "group_id": "BL_S25_22_8",
+      "label": "BL_S25_22_8",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:15.943698Z"
+    },
+    "Boolean Logic::2": {
+      "topic": "Boolean Logic",
+      "group_index": 2,
+      "group_id": "BL_S25_21_7",
+      "label": "BL_S25_21_7",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:19.526616Z"
+    },
+    "Boolean Logic::3": {
+      "topic": "Boolean Logic",
+      "group_index": 3,
+      "group_id": "BL_M25_22_9",
+      "label": "BL_M25_22_9",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:21.781892Z"
+    },
+    "Boolean Logic::4": {
+      "topic": "Boolean Logic",
+      "group_index": 4,
+      "group_id": "BL_W24_23_8",
+      "label": "BL_W24_23_8",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:23.383940Z"
+    },
+    "Boolean Logic::5": {
+      "topic": "Boolean Logic",
+      "group_index": 5,
+      "group_id": "BL_W24_23_3",
+      "label": "BL_W24_23_3",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:25.044304Z"
+    },
+    "Boolean Logic::6": {
+      "topic": "Boolean Logic",
+      "group_index": 6,
+      "group_id": "BL_W24_22_9",
+      "label": "BL_W24_22_9",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:26.677437Z"
+    },
+    "Boolean Logic::7": {
+      "topic": "Boolean Logic",
+      "group_index": 7,
+      "group_id": "BL_W24_21_7",
+      "label": "BL_W24_21_7",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:28.961399Z"
+    },
+    "Boolean Logic::8": {
+      "topic": "Boolean Logic",
+      "group_index": 8,
+      "group_id": "APL_W24_21_2",
+      "label": "APL_W24_21_2",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:30.750660Z"
+    },
+    "Boolean Logic::9": {
+      "topic": "Boolean Logic",
+      "group_index": 9,
+      "group_id": "BL_S24_23_2",
+      "label": "BL_S24_23_2",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:32.154842Z"
+    },
+    "Boolean Logic::10": {
+      "topic": "Boolean Logic",
+      "group_index": 10,
+      "group_id": "BL_S24_22_8",
+      "label": "BL_S24_22_8",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:33.221150Z"
+    },
+    "Boolean Logic::11": {
+      "topic": "Boolean Logic",
+      "group_index": 11,
+      "group_id": "BL_S24_22_2",
+      "label": "BL_S24_22_2",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:34.058147Z"
+    },
+    "Boolean Logic::12": {
+      "topic": "Boolean Logic",
+      "group_index": 12,
+      "group_id": "BL_S24_21_8",
+      "label": "BL_S24_21_8",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:35.801885Z"
+    },
+    "Boolean Logic::13": {
+      "topic": "Boolean Logic",
+      "group_index": 13,
+      "group_id": "BL_M24_22_7",
+      "label": "BL_M24_22_7",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:36.670852Z"
+    },
+    "Boolean Logic::14": {
+      "topic": "Boolean Logic",
+      "group_index": 14,
+      "group_id": "BL_S23_23_8",
+      "label": "BL_S23_23_8",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:37.341934Z"
+    },
+    "Boolean Logic::15": {
+      "topic": "Boolean Logic",
+      "group_index": 15,
+      "group_id": "BL_S23_22_8",
+      "label": "BL_S23_22_8",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:42.393197Z"
+    },
+    "Boolean Logic::16": {
+      "topic": "Boolean Logic",
+      "group_index": 16,
+      "group_id": "BL_S23_22_2",
+      "label": "BL_S23_22_2",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:43.370673Z"
+    },
+    "Boolean Logic::17": {
+      "topic": "Boolean Logic",
+      "group_index": 17,
+      "group_id": "BL_S23_21_9",
+      "label": "BL_S23_21_9",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:44.625606Z"
+    },
+    "Boolean Logic::18": {
+      "topic": "Boolean Logic",
+      "group_index": 18,
+      "group_id": "BL_W23_23_6",
+      "label": "BL_W23_23_6",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:46.426423Z"
+    },
+    "Boolean Logic::19": {
+      "topic": "Boolean Logic",
+      "group_index": 19,
+      "group_id": "BL_W23_22_9",
+      "label": "BL_W23_22_9",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:47.488320Z"
+    },
+    "Boolean Logic::20": {
+      "topic": "Boolean Logic",
+      "group_index": 20,
+      "group_id": "BL_W23_22_1",
+      "label": "BL_W23_22_1",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:50.694674Z"
+    },
+    "Boolean Logic::21": {
+      "topic": "Boolean Logic",
+      "group_index": 21,
+      "group_id": "BL_W23_21_7",
+      "label": "BL_W23_21_7",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:52.409567Z"
+    },
+    "Boolean Logic::22": {
+      "topic": "Boolean Logic",
+      "group_index": 22,
+      "group_id": "BL_W23_21_1",
+      "label": "BL_W23_21_1",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T13:36:53.667847Z"
     }
   }
 }

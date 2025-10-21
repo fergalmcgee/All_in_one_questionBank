@@ -70,6 +70,11 @@
                             <button type="button" id="add-all-button">Add filtered</button>
                         </div>
                     </header>
+                    <div class="question-search" role="search">
+                        <label class="visually-hidden" for="question-search">Search questions</label>
+                        <input id="question-search" type="search" placeholder="Search question text or tags" autocomplete="off" />
+                        <button type="button" id="question-search-clear" class="secondary">Clear</button>
+                    </div>
                     <div id="question-list" class="question-list"></div>
                 </section>
                 <section class="builder-column queue">
@@ -79,6 +84,24 @@
                             <button type="button" id="clear-selection">Clear</button>
                         </div>
                     </header>
+                    <div class="template-controls" id="template-controls">
+                        <div class="template-row">
+                            <label class="visually-hidden" for="template-name">Template name</label>
+                            <input id="template-name" type="text" placeholder="Template name" autocomplete="off" />
+                            <button type="button" id="template-save-button">Save</button>
+                        </div>
+                        <div class="template-row">
+                            <label class="visually-hidden" for="template-select">Saved templates</label>
+                            <select id="template-select">
+                                <option value="">Select a template…</option>
+                            </select>
+                            <div class="template-row-buttons">
+                                <button type="button" id="template-load-button">Load</button>
+                                <button type="button" id="template-delete-button" class="secondary">Delete</button>
+                            </div>
+                        </div>
+                        <p class="template-feedback hidden" id="template-feedback" role="status" aria-live="polite"></p>
+                    </div>
                     <div class="manual-builder">
                         <button type="button" id="manual-question-toggle" class="manual-toggle">New manual question</button>
                         <div id="manual-question-panel" class="manual-panel hidden">
@@ -120,9 +143,29 @@
 
         <main id="main" class="main">
             <section class="question-card" id="question-card" aria-live="polite">
-                <div class="meta">
-                    <span id="question-topic"></span>
-                    <span id="question-progress"></span>
+                <div class="question-header">
+                    <div class="meta">
+                        <span id="question-topic"></span>
+                        <span id="question-progress"></span>
+                    </div>
+                    <section class="timer-panel" id="timer-panel" aria-label="Countdown timer">
+                        <div class="timer-display" id="timer-display">00:00</div>
+                        <div class="timer-inputs">
+                            <label>
+                                <span class="visually-hidden">Minutes</span>
+                                <input id="timer-minutes" type="number" min="0" max="99" placeholder="mm" />
+                            </label>
+                            <span class="timer-separator">:</span>
+                            <label>
+                                <span class="visually-hidden">Seconds</span>
+                                <input id="timer-seconds" type="number" min="0" max="59" placeholder="ss" />
+                            </label>
+                        </div>
+                        <div class="timer-buttons">
+                            <button type="button" id="timer-start">Start</button>
+                            <button type="button" id="timer-reset">Reset</button>
+                        </div>
+                    </section>
                 </div>
                 <h2 id="question-text" class="question-text">Start a session to display questions.</h2>
                 <div id="question-images" class="question-images"></div>
@@ -144,6 +187,18 @@
         window.__BANK_OPTIONS__ = {{ banks | tojson }};
     </script>
     <script src="{{ url_for('static', filename='js/presenter.js') }}" defer></script>
+
+    <div id="question-preview-overlay" class="preview-overlay hidden" role="dialog" aria-modal="true">
+        <div class="preview-dialog">
+            <header class="preview-header">
+                <h3 id="question-preview-title">Question preview</h3>
+                <button type="button" id="question-preview-close" aria-label="Close">×</button>
+            </header>
+            <section id="question-preview-body" class="preview-body">
+                <p class="preview-loading">Loading question…</p>
+            </section>
+        </div>
+    </div>
 
     <div id="manual-library-overlay" class="library-overlay hidden" role="dialog" aria-modal="true">
         <div class="library-dialog">

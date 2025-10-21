@@ -1,6 +1,6 @@
 {
   "bank_id": "CSAS",
-  "updated_at": "2025-10-11T15:38:27.304699Z",
+  "updated_at": "2025-10-13T12:31:17.098698Z",
   "groups": {
     "1. Information and media::0": {
       "topic": "1. Information and media",
@@ -226,6 +226,114 @@
       "status": "missing",
       "notes": "Something wrong with this one",
       "updated_at": "2025-10-11T15:38:27.304627Z"
+    },
+    "2. Coms::0": {
+      "topic": "2. Coms",
+      "group_index": 0,
+      "group_id": "NT_S24_13_5",
+      "label": "NT_S24_13_5",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T08:10:05.608910Z"
+    },
+    "2. Coms::1": {
+      "topic": "2. Coms",
+      "group_index": 1,
+      "group_id": "NS_S24_12_3",
+      "label": "NS_S24_12_3",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T08:10:37.200502Z"
+    },
+    "2. Coms::2": {
+      "topic": "2. Coms",
+      "group_index": 2,
+      "group_id": "NT_S24_11_8",
+      "label": "NT_S24_11_8",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T08:10:43.274898Z"
+    },
+    "2. Coms::3": {
+      "topic": "2. Coms",
+      "group_index": 3,
+      "group_id": "NS_S24_11_5",
+      "label": "NS_S24_11_5",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T08:10:59.613624Z"
+    },
+    "2. Coms::4": {
+      "topic": "2. Coms",
+      "group_index": 4,
+      "group_id": "IDN_W21_12_3",
+      "label": "IDN_W21_12_3",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T08:11:10.800890Z"
+    },
+    "2. Coms::5": {
+      "topic": "2. Coms",
+      "group_index": 5,
+      "group_id": "NW_W21_11_8",
+      "label": "NW_W21_11_8",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T08:56:13.651704Z"
+    },
+    "2. Coms::6": {
+      "topic": "2. Coms",
+      "group_index": 6,
+      "group_id": "NW_S21_11_4",
+      "label": "NW_S21_11_4",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T08:57:04.879596Z"
+    },
+    "2. Coms::7": {
+      "topic": "2. Coms",
+      "group_index": 7,
+      "group_id": "CCN_W22_13_7",
+      "label": "CCN_W22_13_7",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T08:57:38.734956Z"
+    },
+    "2. Coms::8": {
+      "topic": "2. Coms",
+      "group_index": 8,
+      "group_id": "LAN_W22_12_10",
+      "label": "LAN_W22_12_10",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T08:58:09.548296Z"
+    },
+    "2. Coms::9": {
+      "topic": "2. Coms",
+      "group_index": 9,
+      "group_id": "NET_W22_11_8",
+      "label": "NET_W22_11_8",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T08:59:04.753601Z"
+    },
+    "2. Coms::10": {
+      "topic": "2. Coms",
+      "group_index": 10,
+      "group_id": "CC_S22_13_8",
+      "label": "CC_S22_13_8",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T12:31:11.245004Z"
+    },
+    "2. Coms::11": {
+      "topic": "2. Coms",
+      "group_index": 11,
+      "group_id": "ND_S22_12_9",
+      "label": "ND_S22_12_9",
+      "status": "ok",
+      "notes": "",
+      "updated_at": "2025-10-13T12:31:17.097886Z"
     }
   }
 }
