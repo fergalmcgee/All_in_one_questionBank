@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/papesbdy/questionBank
+    - /bin/rsync -a --delete --exclude='.git' ./ $DEPLOYPATH/
