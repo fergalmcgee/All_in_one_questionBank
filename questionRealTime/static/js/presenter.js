@@ -48,6 +48,11 @@
     const templateLoadButton = document.getElementById('template-load-button');
     const templateDeleteButton = document.getElementById('template-delete-button');
     const templateFeedback = document.getElementById('template-feedback');
+    const quickScrollTopButton = document.getElementById('quick-scroll-top');
+    const quickScrollQuestionButton = document.getElementById('quick-scroll-question');
+    const quickScrollAnswersButton = document.getElementById('quick-scroll-answers');
+    const responseBoardSection = document.getElementById('response-board');
+    const questionCardSection = document.getElementById('question-card');
     const questionSearchInput = document.getElementById('question-search');
     const questionSearchClear = document.getElementById('question-search-clear');
     const previewOverlay = document.getElementById('question-preview-overlay');
@@ -64,18 +69,74 @@
     const POLL_INTERVAL = 2500;
     const SESSION_CODE_STORAGE_KEY = 'qrt_active_session_code';
     const responsePositions = new Map();
-let pollTimer = null;
-let activeSessionCode = null;
-let responseZCounter = 1;
-const dragState = {
-    key: null,
-    offsetX: 0,
-    offsetY: 0,
-};
-let timerInterval = null;
-let timerRemaining = 0;
-let timerRunning = false;
-let timerTarget = null;
+    const expandedState = {
+        card: null,
+        responseId: null,
+        previous: null,
+    };
+    const BOARD_EXPANDED_CLASS = 'board-expanded';
+    const CODE_KEYWORDS = [
+        'def ',
+        'for ',
+        'while ',
+        'if ',
+        'elif ',
+        'else:',
+        'return',
+        'class ',
+        'print(',
+        'import ',
+        'from ',
+        'function ',
+        'var ',
+        'let ',
+        'const ',
+        '=>',
+        'BEGIN',
+        'END',
+        'IF ',
+        'ELSE',
+        'THEN',
+        'WHILE ',
+        'FOR ',
+        'REPEAT',
+        'UNTIL'
+    ];
+
+    function isLikelyCodeAnswer(text) {
+        if (!text) {
+            return false;
+        }
+        if (text.includes('\t')) {
+            return true;
+        }
+        if (text.includes('    ')) {
+            return true;
+        }
+        const lines = text.split(/\r?\n/);
+        let indentedLines = 0;
+        for (const line of lines) {
+            if (/^\s{2,}/.test(line)) {
+                indentedLines += 1;
+                if (indentedLines >= 2) {
+                    return true;
+                }
+            }
+        }
+        return CODE_KEYWORDS.some((keyword) => text.includes(keyword));
+    }
+    let pollTimer = null;
+    let activeSessionCode = null;
+    let responseZCounter = 1;
+    const dragState = {
+        key: null,
+        offsetX: 0,
+        offsetY: 0,
+    };
+    let timerInterval = null;
+    let timerRemaining = 0;
+    let timerRunning = false;
+    let timerTarget = null;
 
     const builderState = {
         bankId: null,
@@ -155,6 +216,28 @@ let timerTarget = null;
         logoutForm.addEventListener('submit', () => {
             localStorage.removeItem(SESSION_CODE_STORAGE_KEY);
             activeSessionCode = null;
+        });
+    }
+
+    if (quickScrollTopButton) {
+        quickScrollTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    if (quickScrollQuestionButton) {
+        quickScrollQuestionButton.addEventListener('click', () => {
+            if (questionCardSection) {
+                questionCardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    }
+
+    if (quickScrollAnswersButton) {
+        quickScrollAnswersButton.addEventListener('click', () => {
+            if (responseBoardSection) {
+                responseBoardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         });
     }
 
@@ -965,6 +1048,26 @@ let timerTarget = null;
                 drawing.alt = 'Student drawing';
                 card.appendChild(drawing);
 
+                const expandButton = document.createElement('button');
+                expandButton.type = 'button';
+                expandButton.className = 'response-expand';
+                expandButton.setAttribute('aria-label', 'Expand answer card');
+                expandButton.setAttribute('title', 'Expand');
+                expandButton.setAttribute('aria-pressed', 'false');
+                expandButton.innerHTML = '&#x26F6;';
+                expandButton.addEventListener('pointerdown', (event) => {
+                    event.stopPropagation();
+                });
+                expandButton.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    if (card.classList.contains('response-card-expanded')) {
+                        collapseExpandedCard({ focusButton: true });
+                    } else {
+                        expandResponseCard(card);
+                    }
+                });
+                card.appendChild(expandButton);
+
                 const dismissButton = document.createElement('button');
                 dismissButton.type = 'button';
                 dismissButton.className = 'response-dismiss';
@@ -987,24 +1090,41 @@ let timerTarget = null;
             const nameEl = card.querySelector('.response-name');
             const textEl = card.querySelector('.response-text');
             const drawingEl = card.querySelector('.response-drawing');
+            const expandBtn = card.querySelector('.response-expand');
             const dismissBtn = card.querySelector('.response-dismiss');
 
             card.dataset.responseId = responseId;
             if (dismissBtn) {
                 dismissBtn.disabled = false;
             }
+            if (expandBtn) {
+                expandBtn.disabled = false;
+                updateExpandToggleButton(card, card.classList.contains('response-card-expanded'));
+            }
 
             if (nameEl) {
                 nameEl.textContent = response.name || 'Student';
             }
+            let hasText = false;
             if (textEl) {
                 const answerText = response.answer || '';
+                hasText = Boolean(answerText);
+                const codeLike = hasText && isLikelyCodeAnswer(answerText);
                 textEl.textContent = answerText;
-                textEl.classList.toggle('hidden', !answerText);
+                textEl.classList.toggle('hidden', !hasText);
+                textEl.classList.toggle('response-text-code', Boolean(codeLike));
             }
             if (drawingEl) {
                 if (response.drawing_url) {
                     const handleLoad = () => {
+                        if (card.classList.contains('response-card-expanded')) {
+                            drawingEl.style.removeProperty('width');
+                            drawingEl.style.removeProperty('height');
+                            drawingEl.style.removeProperty('max-width');
+                            drawingEl.style.removeProperty('max-height');
+                            ensureCardWithinBounds(card, responseId);
+                            return;
+                        }
                         adjustDrawingSizing(card, drawingEl);
                         ensureCardWithinBounds(card, responseId);
                     };
@@ -1025,7 +1145,6 @@ let timerTarget = null;
             }
 
             const hasDrawing = Boolean(response.drawing_url);
-            const hasText = Boolean(response.answer);
             card.classList.toggle('has-drawing', hasDrawing);
             card.classList.toggle('has-text', hasText);
             card.classList.toggle('drawing-only', hasDrawing && !hasText);
@@ -1033,33 +1152,50 @@ let timerTarget = null;
             let position = responsePositions.get(responseId);
             let top = 0;
             let left = 0;
-            if (position && typeof position.top === 'number' && typeof position.left === 'number') {
-                top = position.top;
-                left = position.left;
-            } else if (position) {
-                top = parseFloat(position.top) || 0;
-                left = parseFloat(position.left) || 0;
-            }
+            if (card.classList.contains('response-card-expanded')) {
+                card.style.top = '0';
+                card.style.left = '0';
+            } else {
+                if (position && typeof position.top === 'number' && typeof position.left === 'number') {
+                    top = position.top;
+                    left = position.left;
+                } else if (position) {
+                    top = parseFloat(position.top) || 0;
+                    left = parseFloat(position.left) || 0;
+                }
 
-            if (!position || Number.isNaN(top) || Number.isNaN(left)) {
-                position = randomPosition();
-                top = position.top;
-                left = position.left;
-                responsePositions.set(responseId, position);
-            }
+                if (!position || Number.isNaN(top) || Number.isNaN(left)) {
+                    position = randomPosition();
+                    top = position.top;
+                    left = position.left;
+                    responsePositions.set(responseId, position);
+                }
 
-            card.style.top = `${top}px`;
-            card.style.left = `${left}px`;
-            ensureCardWithinBounds(card, responseId);
+                card.style.top = `${top}px`;
+                card.style.left = `${left}px`;
+                ensureCardWithinBounds(card, responseId);
+            }
         });
 
         Array.from(board.children).forEach((child) => {
             const key = child.dataset.key;
             if (!existingKeys.has(key)) {
+                if (expandedState.card === child) {
+                    collapseExpandedCard();
+                }
                 responsePositions.delete(key);
                 board.removeChild(child);
             }
         });
+
+        if (expandedState.card && !board.contains(expandedState.card)) {
+            collapseExpandedCard();
+        } else if (!expandedState.card) {
+            board.classList.remove(BOARD_EXPANDED_CLASS);
+        }
+        if (expandedState.card) {
+            board.classList.add(BOARD_EXPANDED_CLASS);
+        }
     }
 
     function getResponseCardDimensions() {
@@ -1133,6 +1269,9 @@ let timerTarget = null;
     }
 
     function ensureCardWithinBounds(card, key) {
+        if (!card || card.classList.contains('response-card-expanded')) {
+            return;
+        }
         const width = board.clientWidth;
         const height = board.clientHeight;
         if (!width || !height) {
@@ -1150,9 +1289,116 @@ let timerTarget = null;
         responsePositions.set(key, { top, left });
     }
 
+    function updateExpandToggleButton(card, expanded) {
+        const button = card ? card.querySelector('.response-expand') : null;
+        if (!button) {
+            return;
+        }
+        button.setAttribute('aria-pressed', expanded ? 'true' : 'false');
+        button.setAttribute('title', expanded ? 'Collapse' : 'Expand');
+        button.setAttribute('aria-label', expanded ? 'Collapse answer card' : 'Expand answer card');
+        button.innerHTML = expanded ? '&#x2921;' : '&#x26F6;';
+        button.classList.toggle('active', expanded);
+    }
+
+    function expandResponseCard(card) {
+        if (!card || expandedState.card === card) {
+            return;
+        }
+        if (expandedState.card) {
+            collapseExpandedCard();
+        }
+        const previous = {
+            top: card.style.top || '',
+            left: card.style.left || '',
+            width: card.style.width || '',
+            minHeight: card.style.minHeight || '',
+            height: card.style.height || '',
+            zIndex: card.style.zIndex || '',
+            cursor: card.style.cursor || '',
+            overflow: card.style.overflow || '',
+        };
+        expandedState.card = card;
+        expandedState.responseId = card.dataset.responseId || null;
+        expandedState.previous = previous;
+        card.classList.add('response-card-expanded');
+        card.setAttribute('aria-expanded', 'true');
+        card.style.top = '0';
+        card.style.left = '0';
+        card.style.width = '';
+        card.style.minHeight = '';
+        card.style.height = '';
+        card.style.zIndex = '9999';
+        card.style.cursor = 'default';
+        card.style.overflow = 'auto';
+        board.classList.add(BOARD_EXPANDED_CLASS);
+        responseZCounter = Math.max(responseZCounter, 10000);
+        updateExpandToggleButton(card, true);
+        document.addEventListener('keydown', handleExpandedKeydown);
+    }
+
+    function collapseExpandedCard(options = {}) {
+        const { focusButton = false } = options;
+        const card = expandedState.card;
+        if (!card) {
+            return;
+        }
+        const previous = expandedState.previous || {};
+        const responseId = expandedState.responseId;
+        card.classList.remove('response-card-expanded');
+        card.removeAttribute('aria-expanded');
+        card.style.top = previous.top ?? '';
+        card.style.left = previous.left ?? '';
+        card.style.width = previous.width ?? '';
+        card.style.minHeight = previous.minHeight ?? '';
+        card.style.height = previous.height ?? '';
+        card.style.zIndex = previous.zIndex ?? '';
+        card.style.cursor = previous.cursor || 'grab';
+        card.style.overflow = previous.overflow ?? '';
+        board.classList.remove(BOARD_EXPANDED_CLASS);
+        updateExpandToggleButton(card, false);
+        document.removeEventListener('keydown', handleExpandedKeydown);
+        expandedState.card = null;
+        expandedState.responseId = null;
+        expandedState.previous = null;
+        if (responseId) {
+            if (previous.top && previous.left) {
+                const top = parseFloat(previous.top);
+                const left = parseFloat(previous.left);
+                if (!Number.isNaN(top) && !Number.isNaN(left)) {
+                    responsePositions.set(responseId, { top, left });
+                }
+            }
+            ensureCardWithinBounds(card, responseId);
+        }
+        if (focusButton) {
+            const button = card.querySelector('.response-expand');
+            if (button && typeof button.focus === 'function') {
+                try {
+                    button.focus({ preventScroll: true });
+                } catch (error) {
+                    button.focus();
+                }
+            }
+        }
+        const drawingEl = card.querySelector('.response-drawing');
+        if (drawingEl && drawingEl.complete) {
+            adjustDrawingSizing(card, drawingEl);
+        }
+    }
+
+    function handleExpandedKeydown(event) {
+        if (event.key === 'Escape' && expandedState.card) {
+            collapseExpandedCard({ focusButton: true });
+        }
+    }
+
     function deleteResponse(responseId, card, triggerButton) {
         if (!responseId || !activeSessionCode) {
             return;
+        }
+        if (expandedState.card === card) {
+            collapseExpandedCard();
         }
         if (card) {
             card.classList.add('response-card-removing');
@@ -1196,6 +1442,9 @@ let timerTarget = null;
         }
         card.dataset.dragBound = '1';
         card.addEventListener('pointerdown', (event) => {
+            if (card.classList.contains('response-card-expanded')) {
+                return;
+            }
             const key = card.dataset.key;
             if (!key) {
                 return;
@@ -1210,6 +1459,9 @@ let timerTarget = null;
         });
 
         card.addEventListener('pointermove', (event) => {
+            if (card.classList.contains('response-card-expanded')) {
+                return;
+            }
             if (dragState.key !== card.dataset.key) {
                 return;
             }
@@ -1236,6 +1488,9 @@ let timerTarget = null;
     }
 
     function bringCardToFront(card) {
+        if (card.classList.contains('response-card-expanded')) {
+            return;
+        }
         card.style.zIndex = `${responseZCounter++}`;
     }
 
@@ -2230,6 +2485,7 @@ let timerTarget = null;
 
     function cleanupUi() {
         stopPolling();
+        collapseExpandedCard();
         sessionInfo.classList.add('hidden');
         questionTextEl.textContent = 'Start a session to display questions.';
         questionTextEl.classList.remove('hidden');

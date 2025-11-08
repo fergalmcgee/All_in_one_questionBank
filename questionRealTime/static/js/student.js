@@ -1,9 +1,11 @@
 (function () {
     const statusMessage = document.getElementById('status-message');
+    const initialStatusMessage = statusMessage ? statusMessage.textContent : '';
     const joinSection = document.getElementById('join-section');
     const joinForm = document.getElementById('join-form');
     const nameInput = document.getElementById('student-name');
     const questionSection = document.getElementById('question-section');
+    const studentNameBanner = document.getElementById('student-name-banner');
     const sessionCodeInput = document.getElementById('session-code');
     const questionText = document.getElementById('question-text');
     const questionImages = document.getElementById('question-images');
@@ -112,9 +114,55 @@
         '/static/vendor/fabric.5.3.0.min.js'
     ];
 
-    const savedName = localStorage.getItem(NAME_STORAGE_KEY);
-    if (savedName) {
-        nameInput.value = savedName;
+    function sanitizeStudentName(value) {
+        if (typeof value !== 'string') {
+            return '';
+        }
+        return value.replace(/[^A-Za-z '\-]/g, '');
+    }
+
+    function normalizeStudentName(value) {
+        const sanitized = sanitizeStudentName(value);
+        return sanitized.replace(/\s+/g, ' ').trim();
+    }
+
+    function isValidStudentName(value) {
+        if (!value) {
+            return false;
+        }
+        return /^[A-Za-z][A-Za-z '\-]{0,39}$/.test(value);
+    }
+
+    const savedNameRaw = localStorage.getItem(NAME_STORAGE_KEY);
+    if (savedNameRaw) {
+        const normalizedSavedName = normalizeStudentName(savedNameRaw);
+        if (normalizedSavedName) {
+            if (normalizedSavedName !== savedNameRaw) {
+                localStorage.setItem(NAME_STORAGE_KEY, normalizedSavedName);
+            }
+            nameInput.value = normalizedSavedName;
+        } else {
+            localStorage.removeItem(NAME_STORAGE_KEY);
+        }
+    }
+
+    if (nameInput) {
+        nameInput.addEventListener('input', (event) => {
+            const sanitized = sanitizeStudentName(event.target.value);
+            if (sanitized !== event.target.value) {
+                event.target.value = sanitized;
+                if (typeof event.target.setSelectionRange === 'function') {
+                    const pos = sanitized.length;
+                    event.target.setSelectionRange(pos, pos);
+                }
+            }
+            if (!joined && statusMessage) {
+                const normalized = normalizeStudentName(event.target.value);
+                if (normalized && isValidStudentName(normalized) && initialStatusMessage) {
+                    statusMessage.textContent = initialStatusMessage;
+                }
+            }
+        });
     }
 
     const params = new URLSearchParams(window.location.search);
@@ -145,21 +193,24 @@
     joinForm.addEventListener('submit', (event) => {
         event.preventDefault();
         const code = sessionCodeInput.value.trim();
-        const name = nameInput.value.trim();
+        const normalizedName = normalizeStudentName(nameInput.value);
         if (!code) {
             sessionCodeInput.focus();
             return;
         }
-        if (!name) {
+        if (!isValidStudentName(normalizedName)) {
+            statusMessage.textContent = 'Use letters A-Z only for your name (spaces, hyphens, and apostrophes are ok).';
             nameInput.focus();
             return;
         }
+        nameInput.value = normalizedName;
         joined = true;
         activeSessionCode = code;
-        localStorage.setItem(NAME_STORAGE_KEY, name);
+        localStorage.setItem(NAME_STORAGE_KEY, normalizedName);
         if (!sessionCodeInput.readOnly) {
             localStorage.setItem(SESSION_CODE_STORAGE_KEY, code);
         }
+        setStudentNameBanner(normalizedName);
         joinSection.classList.add('hidden');
         questionSection.classList.remove('hidden');
         statusMessage.textContent = 'You are in! Waiting for the next question.';
@@ -167,6 +218,10 @@
         startPolling();
         updateDrawingAvailability();
     });
+
+    if (answerInput) {
+        answerInput.addEventListener('keydown', handleAnswerInputKeydown);
+    }
 
     function updateDrawingEngineToggleLabel() {
         if (!drawingEngineToggle) {
@@ -401,11 +456,16 @@
         if (!joined || respondedThisQuestion || !activeSessionCode) {
             return;
         }
-        const answer = answerInput.value.trim();
-        const name = nameInput.value.trim();
-        if (!name) {
+        const normalizedName = normalizeStudentName(nameInput.value);
+        if (!isValidStudentName(normalizedName)) {
+            answerFeedback.textContent = 'Update your name to use letters A-Z only (spaces, hyphens, and apostrophes are ok).';
+            nameInput.focus();
             return;
         }
+        nameInput.value = normalizedName;
+        localStorage.setItem(NAME_STORAGE_KEY, normalizedName);
+        setStudentNameBanner(normalizedName);
+        const answer = answerInput.value.trim();
         if (!answer && !drawingData) {
             answerFeedback.textContent = 'Add some text or include a drawing before sending.';
             answerInput.focus();
@@ -414,7 +474,7 @@
 
         setFormDisabled(true);
         try {
-            const payload = { name, answer, code: activeSessionCode };
+            const payload = { name: normalizedName, answer, code: activeSessionCode };
             if (drawingData) {
                 payload.drawing_url = drawingData.url;
             }
@@ -445,6 +505,109 @@
         }
         updateDrawingAvailability();
         updateDrawingControls();
+    }
+
+    function handleAnswerInputKeydown(event) {
+        if (event.key !== 'Tab') {
+            return;
+        }
+        const target = event.target;
+        if (!(target && typeof target.selectionStart === 'number')) {
+            return;
+        }
+        event.preventDefault();
+
+        const indent = '\t';
+        const value = target.value;
+        const start = target.selectionStart;
+        const end = target.selectionEnd;
+        const hasSelection = start !== end;
+        const selectionText = value.slice(start, end);
+        const isMultiLineSelection = hasSelection && selectionText.includes('\n');
+
+        if (event.shiftKey) {
+            if (isMultiLineSelection) {
+                const blockStart = value.lastIndexOf('\n', start - 1) + 1;
+                let blockEnd = value.indexOf('\n', end);
+                if (blockEnd === -1) {
+                    blockEnd = value.length;
+                }
+                const block = value.slice(blockStart, blockEnd).split('\n');
+                const updated = block.map((line) => {
+                    if (line.startsWith(indent)) {
+                        return line.slice(indent.length);
+                    }
+                    if (line.startsWith('    ')) {
+                        return line.slice(4);
+                    }
+                    if (line.startsWith('\t')) {
+                        return line.slice(1);
+                    }
+                    return line;
+                });
+                const updatedBlock = updated.join('\n');
+                target.value = value.slice(0, blockStart) + updatedBlock + value.slice(blockEnd);
+                target.selectionStart = blockStart;
+                target.selectionEnd = blockStart + updatedBlock.length;
+                return;
+            }
+
+            const lineStart = value.lastIndexOf('\n', start - 1) + 1;
+            const firstChars = value.slice(lineStart, lineStart + indent.length);
+            let removal = 0;
+            if (firstChars === indent) {
+                removal = indent.length;
+            } else if (value.startsWith('    ', lineStart)) {
+                removal = 4;
+            } else if (value.startsWith('\t', lineStart)) {
+                removal = 1;
+            }
+            if (removal > 0) {
+                const before = value.slice(0, lineStart);
+                const after = value.slice(lineStart + removal);
+                target.value = before + after;
+                const newPos = Math.max(lineStart, start - removal);
+                target.selectionStart = newPos;
+                target.selectionEnd = hasSelection ? Math.max(newPos, end - removal) : newPos;
+            }
+            return;
+        }
+
+        if (isMultiLineSelection) {
+            const blockStart = value.lastIndexOf('\n', start - 1) + 1;
+            let blockEnd = value.indexOf('\n', end);
+            if (blockEnd === -1) {
+                blockEnd = value.length;
+            }
+            const block = value.slice(blockStart, blockEnd).split('\n');
+            const updated = block.map((line) => indent + line);
+            const updatedBlock = updated.join('\n');
+            target.value = value.slice(0, blockStart) + updatedBlock + value.slice(blockEnd);
+            target.selectionStart = blockStart;
+            target.selectionEnd = blockStart + updatedBlock.length;
+            return;
+        }
+
+        const before = value.slice(0, start);
+        const after = value.slice(end);
+        target.value = before + indent + after;
+        const newPos = start + indent.length;
+        target.selectionStart = newPos;
+        target.selectionEnd = newPos;
+    }
+
+    function setStudentNameBanner(name) {
+        if (!studentNameBanner) {
+            return;
+        }
+        const displayName = normalizeStudentName(name);
+        if (displayName) {
+            studentNameBanner.textContent = displayName;
+            studentNameBanner.classList.remove('hidden');
+        } else {
+            studentNameBanner.textContent = '';
+            studentNameBanner.classList.add('hidden');
+        }
     }
 
     function startPolling() {
@@ -2106,6 +2269,7 @@
         respondedThisQuestion = false;
         sessionCodeInput.readOnly = false;
         sessionCodeInput.removeAttribute('aria-readonly');
+        setStudentNameBanner('');
         resetDrawingState();
         updateDrawingAvailability();
     }

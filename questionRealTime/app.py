@@ -46,6 +46,7 @@ ALLOWED_IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp"}
 USER_IMAGE_DIR = BASE_DIR / "UserImages"
 USER_IMAGE_DIR.mkdir(parents=True, exist_ok=True)
 TEMPLATE_STORAGE_PATH = BASE_DIR / "session_templates.json"
+NAME_PATTERN = re.compile(r"^[A-Za-z][A-Za-z '\-]{0,39}$")
 
 
 class SessionState:
@@ -393,14 +394,36 @@ def _save_data_url_image(data_url: str, *, prefix: str = "annotation-") -> str:
     return filename
 
 
-def _normalize_answer_text(text: str, *, max_length: int = 280) -> str:
-    if not text:
+def _normalize_answer_text(text: Any, *, max_length: int = 2000) -> str:
+    if text is None:
         return ""
-    compact = re.sub(r"\s+", " ", text)
-    compact = compact.strip()
-    if max_length and len(compact) > max_length:
-        compact = compact[:max_length].rstrip()
-    return compact
+    if not isinstance(text, str):
+        text = str(text)
+
+    normalized = text.replace("\r\n", "\n").replace("\r", "\n")
+    normalized = normalized.replace("\u00a0", " ")
+
+    lines = [line.rstrip() for line in normalized.split("\n")]
+    normalized = "\n".join(lines).strip("\n")
+
+    if max_length and len(normalized) > max_length:
+        normalized = normalized[:max_length].rstrip()
+
+    return normalized
+
+
+def _validate_student_name(raw: Any) -> str:
+    if not isinstance(raw, str):
+        abort(400, description="Name must be a string")
+    name = raw.strip()
+    if not name:
+        abort(400, description="Name is required")
+    normalized = re.sub(r"\s+", " ", name)
+    if len(normalized) > 40:
+        abort(400, description="Name is too long")
+    if not NAME_PATTERN.fullmatch(normalized):
+        abort(400, description="Name must use English letters only and may include spaces, hyphens, or apostrophes")
+    return normalized
 
 
 def _resolve_image(bank_id: str, reference: str) -> Optional[str]:
@@ -640,13 +663,11 @@ def session_responses() -> Any:
         session.responses = []
         return jsonify(_session_state(session, view="presenter"))
 
-    name = (data.get("name") or "").strip()
+    name = _validate_student_name(data.get("name"))
     answer_raw = data.get("answer") or ""
     answer = _normalize_answer_text(answer_raw)
     drawing_url = (data.get("drawing_url") or "").strip()
 
-    if not name:
-        abort(400, description="Name is required")
     if not answer and not drawing_url:
         abort(400, description="Provide an answer or a drawing")
 

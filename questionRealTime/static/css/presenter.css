@@ -1070,14 +1070,52 @@ button:not(:disabled):hover {
   font-size: 1rem;
 }
 
-.response-card p {
+.response-card .response-text {
   margin: 0;
   font-size: 0.95rem;
-  white-space: pre-line;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.45;
+  max-height: 8.5rem;
+  overflow: hidden;
 }
 
 .response-card .response-text.hidden {
   display: none;
+}
+
+.response-expand {
+  position: absolute;
+  top: 0.45rem;
+  right: 2.4rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #0f172a;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.response-expand:hover,
+.response-expand:focus {
+  background: rgba(15, 23, 42, 0.12);
+  color: #0f172a;
+  outline: none;
+}
+
+.response-expand:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.response-expand.active {
+  background: rgba(56, 189, 248, 0.18);
 }
 
 .response-dismiss {
@@ -1136,6 +1174,130 @@ button:not(:disabled):hover {
 
 .response-card.drawing-only h4 {
   margin-bottom: 0.25rem;
+}
+
+.response-card.response-card-expanded {
+  top: 0 !important;
+  left: 0 !important;
+  width: calc(100% - 1.4rem) !important;
+  max-width: none;
+  min-height: calc(100% - 1.4rem) !important;
+  height: calc(100% - 1.4rem) !important;
+  padding: 1.35rem 1.35rem 1.1rem;
+  cursor: default;
+  animation: none;
+  overflow: auto;
+  box-shadow: 0 18px 28px rgba(15, 23, 42, 0.35);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.response-card.response-card-expanded .response-expand {
+  background: rgba(56, 189, 248, 0.18);
+}
+
+.response-card.response-card-expanded .response-name {
+  font-size: 1.35rem;
+}
+
+.response-card.response-card-expanded .response-text {
+  font-size: 2.25rem;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  max-height: none;
+  overflow: visible;
+}
+
+.response-card .response-text-code {
+  font-family: "JetBrains Mono", "Fira Code", "SFMono-Regular", Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  white-space: pre;
+  overflow-x: auto;
+  overflow-y: hidden;
+  tab-size: 4;
+  -moz-tab-size: 4;
+  max-height: 8.5rem;
+}
+
+.response-card.response-card-expanded .response-text-code {
+  font-size: 1.2rem;
+  line-height: 1.55;
+  white-space: pre;
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: none;
+}
+
+.response-card.response-card-expanded .response-drawing {
+  max-width: 100%;
+  max-height: calc(100% - 7rem);
+}
+
+.board.board-expanded .response-card {
+  transition: opacity 0.2s ease;
+}
+
+.board.board-expanded .response-card:not(.response-card-expanded) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.board.board-expanded .response-card.response-card-expanded {
+  opacity: 1;
+}
+
+.quick-nav {
+  position: fixed;
+  right: clamp(1rem, 3vw, 1.75rem);
+  bottom: clamp(1rem, 3vw, 1.75rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  z-index: 12000;
+}
+
+.quick-nav-button {
+  border: none;
+  border-radius: 999px;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  color: #0f172a;
+  background: rgba(248, 250, 252, 0.9);
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.quick-nav-button:hover,
+.quick-nav-button:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.3);
+  background: rgba(248, 250, 252, 1);
+  outline: none;
+}
+
+.quick-nav-button:active {
+  transform: translateY(0);
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.25);
+}
+
+.quick-nav-button span {
+  display: block;
+}
+
+@media (max-width: 780px) {
+  .quick-nav {
+    right: 50%;
+    transform: translateX(50%);
+    bottom: 1.1rem;
+    flex-direction: row;
+  }
 }
 
 @keyframes pop-in {
